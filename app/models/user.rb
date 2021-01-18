@@ -5,4 +5,10 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_one_attached :avatar
+  # Manager side
+  has_one :manager
+  has_one :company, through: :manager
+
+  # Freelancer side
+  has_one :profile
 end
