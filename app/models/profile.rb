@@ -7,6 +7,8 @@ class Profile < ApplicationRecord
   has_many :ratings
   has_many :conversations
   has_many :profile_attachments
+  # [BE CAREFUL]: Not scoped to a specific manager
+  has_many :notes
 
   def average_rating
     ratings.pluck(:value).sum.to_f / ratings.size
