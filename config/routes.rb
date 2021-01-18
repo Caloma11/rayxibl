@@ -24,9 +24,9 @@ Rails.application.routes.draw do
   end
 
   resources :job_applications, only: %i[] do
-    patch "reject", as: :reject_application
-    patch "accept", as: :reject_application
-    patch "hide", as: :reject_application
-    patch "show", as: :reject_application
+    patch "reject", as: :reject
+    patch "accept", as: :accept
+    patch "hide", as: :hide
+    patch "show", as: :show
   end
 end
