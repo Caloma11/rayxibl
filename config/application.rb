@@ -31,5 +31,9 @@ module Flxibl
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+    config.generators.assets = false
+    config.generators.stylesheets = false
+    config.generators.skip_routes = true
+    config.generators.helper = false
   end
 end
