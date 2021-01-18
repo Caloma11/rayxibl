@@ -6,4 +6,8 @@ class Manager < ApplicationRecord
   has_many :booked_profiles, through: :bookings, class_name: "Profile", source: :profile
   has_many :conversations
   has_many :jobs
+
+  def network
+    company.joins(:profiles).profiles
+  end
 end
