@@ -7,4 +7,5 @@ class Manager < ApplicationRecord
   has_many :conversations
   # Reminder: Not scoped to a specific profile
   has_many :notes
+  has_many :jobs
 end

@@ -6,6 +6,7 @@ class Profile < ApplicationRecord
   has_many :managers, through: :companies
   has_many :ratings
   has_many :conversations
+  has_many :profile_attachments
 
   def average_rating
     ratings.pluck(:value).sum.to_f / ratings.size
