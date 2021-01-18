@@ -32,6 +32,9 @@ Rails.application.configure do
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :amazon
 
+  # Use :letter_opener for mail
+  config.action_mailer.delivery_method = :letter_opener
+
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
 
