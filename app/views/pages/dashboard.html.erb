@@ -1,1 +1,18 @@
-<%= render partial: "#{current_user.role}_dashboard" %>
+<div id="dashboardPage">
+  <div class="dashboard-header">
+    <h1>Hello <%= current_user.first_name %></h1>
+    <%= image_tag "icons/person.svg", alt: "person icon" %>
+  </div>
+
+  <%= render partial: "#{current_user.role}_dashboard" %>
+
+  <div class="bookings">
+    <div class="booking-header">
+      <h3>Current bookings</h3>
+      <%= link_to "View all", "#" %>
+    </div>
+    <div class="booking-cards">
+      <h4>TODO: Show booking cards here</h4>
+    </div>
+  </div>
+</div>
