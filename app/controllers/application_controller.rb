@@ -1,12 +1,10 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   before_action :authenticate_user!
-
   after_action :verify_authorized, except: :index, unless: :skip_pundit?
   after_action :verify_policy_scoped, only: :index, unless: :skip_pundit?
 
   include Pundit
-
 
   # rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
   # def user_not_authorized
@@ -15,7 +13,7 @@ class ApplicationController < ActionController::Base
   # end
 
   def configure_permitted_parameters
-    devise_parameter_sanitizer.permit(:sign_up, keys: [])
+    devise_parameter_sanitizer.permit(:sign_up, keys: %i[role])
     devise_parameter_sanitizer.permit(:account_update, keys: [])
   end
 
