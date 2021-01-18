@@ -33,7 +33,7 @@ Rails.application.configure do
   config.active_storage.service = :amazon
 
   # Use :letter_opener for mail
-  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.delivery_method = :letter_opener_web
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
