@@ -15,5 +15,9 @@
     <% unless user_signed_in? %>
       <%= link_to "SIGN OUT BUTTON", destroy_user_session_path, method: :delete %>
     <% end %>
+
+    <% if user_signed_in? %>
+      <%= render partial: "shared/navbar" %>
+    <% end %>
   </body>
 </html>
