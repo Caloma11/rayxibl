@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_18_044448) do
+ActiveRecord::Schema.define(version: 2021_01_18_045200) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,26 @@ ActiveRecord::Schema.define(version: 2021_01_18_044448) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "manager_id", null: false
+    t.bigint "profile_id", null: false
+    t.string "title"
+    t.text "description"
+    t.time "start_time"
+    t.time "end_time"
+    t.integer "duration"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.boolean "billable"
+    t.integer "price"
+    t.integer "total_price"
+    t.integer "price_type"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["manager_id"], name: "index_bookings_on_manager_id"
+    t.index ["profile_id"], name: "index_bookings_on_profile_id"
+  end
+
   create_table "companies", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -51,6 +71,15 @@ ActiveRecord::Schema.define(version: 2021_01_18_044448) do
     t.index ["profile_id"], name: "index_connections_on_profile_id"
   end
 
+  create_table "conversations", force: :cascade do |t|
+    t.bigint "manager_id", null: false
+    t.bigint "profile_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["manager_id"], name: "index_conversations_on_manager_id"
+    t.index ["profile_id"], name: "index_conversations_on_profile_id"
+  end
+
   create_table "managers", force: :cascade do |t|
     t.bigint "company_id", null: false
     t.bigint "user_id", null: false
@@ -59,6 +88,18 @@ ActiveRecord::Schema.define(version: 2021_01_18_044448) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["company_id"], name: "index_managers_on_company_id"
     t.index ["user_id"], name: "index_managers_on_user_id"
+  end
+
+  create_table "messages", force: :cascade do |t|
+    t.bigint "booking_id"
+    t.bigint "user_id", null: false
+    t.bigint "conversation_id", null: false
+    t.text "content"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["booking_id"], name: "index_messages_on_booking_id"
+    t.index ["conversation_id"], name: "index_messages_on_conversation_id"
+    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "profiles", force: :cascade do |t|
@@ -86,9 +127,16 @@ ActiveRecord::Schema.define(version: 2021_01_18_044448) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "bookings", "managers"
+  add_foreign_key "bookings", "profiles"
   add_foreign_key "connections", "companies"
   add_foreign_key "connections", "profiles"
+  add_foreign_key "conversations", "managers"
+  add_foreign_key "conversations", "profiles"
   add_foreign_key "managers", "companies"
   add_foreign_key "managers", "users"
+  add_foreign_key "messages", "bookings"
+  add_foreign_key "messages", "conversations"
+  add_foreign_key "messages", "users"
   add_foreign_key "profiles", "users"
 end

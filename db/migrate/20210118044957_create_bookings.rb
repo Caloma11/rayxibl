@@ -8,8 +8,8 @@ class CreateBookings < ActiveRecord::Migration[6.0]
       t.time :start_time
       t.time :end_time
       t.integer :duration
-      t.date_time :start_date
-      t.date_time :end_date
+      t.datetime :start_date
+      t.datetime :end_date
       t.boolean :billable
       t.integer :price
       t.integer :total_price
