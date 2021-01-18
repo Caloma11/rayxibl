@@ -3,5 +3,5 @@ class Booking < ApplicationRecord
   belongs_to :profile
   has_many_attached :attachments
 
-  validates :title, :description, :price, :price_type, :attachments, presence: true
+  validates :title, :description, :price, :price_type, presence: true
 end
