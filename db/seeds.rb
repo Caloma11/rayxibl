@@ -9,9 +9,9 @@ def remove_everything!
   Note.destroy_all
   Rating.destroy_all
   Connection.destroy_all
-  Company.destroy_all
   Booking.destroy_all
   Manager.destroy_all
+  Company.destroy_all
   Profile.destroy_all
   User.destroy_all
 end
