@@ -25,13 +25,15 @@ user_manager = User.create!(
   email: "manager@test.com",
   password: "123123",
   first_name: "Man",
-  last_name: "Ager"
+  last_name: "Ager",
+  role: 0
 )
 user_lancer = User.create!(
   email: "freelancer@test.com",
   password: "123123",
   first_name: "Free",
-  last_name: "Lancer"
+  last_name: "Lancer",
+  role: 1
 )
 puts "[END] - Creating users"
 

@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  include Users::Constants
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -11,4 +13,6 @@ class User < ApplicationRecord
 
   # Freelancer side
   has_one :profile
+
+  enum role: ROLES
 end
