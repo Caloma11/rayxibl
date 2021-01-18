@@ -7,6 +7,8 @@ class Manager < ApplicationRecord
   has_many :conversations
   has_many :jobs
 
+  accepts_nested_attributes_for :company
+
   def network
     company.joins(:profiles).profiles
   end
