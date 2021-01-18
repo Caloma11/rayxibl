@@ -1,6 +1,30 @@
+<h1>Create profile</h1>
+
+<h2>1. Personal details</h2>
+
 <%= simple_form_for @profile do |f| %>
-  <%= f.input :profession %>
+
+  <%= f.simple_fields_for :user do |ff| %>
+    <%= ff.input :first_name %>
+    <%= ff.input :last_name %>
+  <% end %>
+
   <%= f.input :location %>
+
+  <h2>2. Professional details:</h2>
+
+  <%= f.input :profession %>
+  <h3>MISSING EXPERTISE</h3>
+  <h3>input for skills [_________]</h3>
   <%= f.input :overview %>
+
+  <h2>3. Links and documents</h2>
+
+  <%= f.simple_fields_for :profile_attachment do |paf| %>
+    <%= paf.input :title %>
+    <%= paf.input :url %>
+    <%= link_to "+ Add another link", "#" %>
+  <% end %>
+</br>
   <%= f.submit %>
 <% end %>
