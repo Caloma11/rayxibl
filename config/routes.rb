@@ -1,10 +1,13 @@
 Rails.application.routes.draw do
+
+  root to: "pages#home"
+
   if Rails.env.development?
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
-  devise_for :users
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  devise_for :users, controllers: { confirmations: 'confirmations' }
+
   get "/dashboard", to: "pages#dashboard"
   resources :bookings, only: %i[show]
   resources :jobs, only: %i[index show new create] do
@@ -33,4 +36,5 @@ Rails.application.routes.draw do
     patch "hide", as: :hide
     patch "show", as: :show
   end
+
 end
