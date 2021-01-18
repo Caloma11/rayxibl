@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_18_045613) do
+ActiveRecord::Schema.define(version: 2021_01_18_045745) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,6 +78,19 @@ ActiveRecord::Schema.define(version: 2021_01_18_045613) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["manager_id"], name: "index_conversations_on_manager_id"
     t.index ["profile_id"], name: "index_conversations_on_profile_id"
+  end
+
+  create_table "jobs", force: :cascade do |t|
+    t.bigint "manager_id", null: false
+    t.string "location"
+    t.string "profession"
+    t.string "expertise"
+    t.text "description"
+    t.string "rate"
+    t.datetime "expiration_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["manager_id"], name: "index_jobs_on_manager_id"
   end
 
   create_table "managers", force: :cascade do |t|
@@ -162,6 +175,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_045613) do
   add_foreign_key "connections", "profiles"
   add_foreign_key "conversations", "managers"
   add_foreign_key "conversations", "profiles"
+  add_foreign_key "jobs", "managers"
   add_foreign_key "managers", "companies"
   add_foreign_key "managers", "users"
   add_foreign_key "messages", "bookings"
