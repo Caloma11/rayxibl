@@ -1,5 +1,5 @@
 module Users
   module Constants
-    ROLES = %w[manager freelancer]
+    ROLES = %w[manager freelancer].freeze
   end
 end
