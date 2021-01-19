@@ -25,6 +25,8 @@ Rails.application.routes.draw do
     resources :conversations, only: %i[create]
   end
 
+  resources :connections, only: %i[destroy]
+
   resources :managers, only: %i[index show new create]
   resources :conversations, only: %i[index show] do
     resources :messages, only: %i[create]
