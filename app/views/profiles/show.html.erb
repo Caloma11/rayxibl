@@ -5,7 +5,7 @@
       <% if @profile.user.avatar.attached? %>
         <%= image_tag @profile.user.avatar, alt: "alttext", class: "profileAvatar" %>
       <% else %>
-        <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar" %>
+        <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar", height: 64, width: 64 %>
       <% end %>
       <div class="profileHeaderRight">
         <h2><%= @profile.user.display_name %></h2>
@@ -30,7 +30,7 @@
 
     <div class="profileSection">
       <h3>Experience Level</h3>
-      <p><%= @profile.expertise.capitalize %></p>
+      <p><%= @profile.expertise&.capitalize %></p>
     </div>
 
     <div class="profileSection">
