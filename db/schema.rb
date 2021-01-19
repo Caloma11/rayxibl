@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_01_18_094253) do
+ActiveRecord::Schema.define(version: 2021_01_18_094457) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -94,12 +94,12 @@ ActiveRecord::Schema.define(version: 2021_01_18_094253) do
     t.bigint "manager_id", null: false
     t.string "location"
     t.string "profession"
-    t.string "expertise"
     t.text "description"
     t.string "rate"
     t.datetime "expiration_date"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "expertise"
     t.index ["manager_id"], name: "index_jobs_on_manager_id"
   end
 
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_094253) do
     t.string "overview"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "expertise"
     t.index ["user_id"], name: "index_profiles_on_user_id"
   end
 
@@ -178,6 +179,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_094253) do
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+    t.integer "role"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

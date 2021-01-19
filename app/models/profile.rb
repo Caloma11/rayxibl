@@ -1,4 +1,6 @@
 class Profile < ApplicationRecord
+  include Profiles::Constants
+
   belongs_to :user
   has_many :connections
   has_many :companies, through: :connections
@@ -9,6 +11,8 @@ class Profile < ApplicationRecord
   has_many :profile_attachments
   # [BE CAREFUL]: Not scoped to a specific manager
   has_many :notes
+
+  enum expertise: EXPERTISES
 
   validates :profession, :location, :overview, presence: true
 
