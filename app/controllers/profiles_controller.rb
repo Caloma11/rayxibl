@@ -1,6 +1,15 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: :show
 
+  def index
+    if params[:network]
+      skip_policy_scope
+      @profiles = current_user.manager.network.includes(user: [:avatar_attachment])
+    else
+      @profiles = policy_scope(Profile).includes(user: [:avatar_attachment])
+    end
+  end
+
   def new
     @profile = Profile.new
     authorize @profile
@@ -37,7 +46,7 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:profession, :location, :overview, :expertise)
+    params.require(:profile).permit(:profession, :location, :overview, :expertise, :skill_list)
   end
 
   def link_params

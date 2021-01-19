@@ -18,7 +18,7 @@
 
   <%= f.input :expertise, collection: Profile::EXPERTISES, label: "Experience level:"%>
 
-  <h3>input for skills [_________]</h3>
+  <%= f.input :skill_list, label: "Key skills (max 5, comma separated)" %>
   <%= f.input :overview, label: "Professinal summary:", as: :text  %>
 
   <h2>3. Links and documents</h2>

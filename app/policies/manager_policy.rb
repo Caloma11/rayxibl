@@ -5,6 +5,10 @@ class ManagerPolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    user.manager? && record == user.manager
+  end
+
   def create?
     user && !user.manager && !user.profile
   end

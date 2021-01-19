@@ -1,0 +1,47 @@
+<div id="manager-show">
+  <div class="header">
+    <%= link_to :back do %>
+      <%= image_tag "icons/back.svg", alt: "back button" %>
+    <% end %>
+    <h3>Profile</h3>
+  </div>
+
+  <section class="profile-section">
+    <div class="profile">
+      <div>
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar.service_url, alt: "user avatar", width: 64, height: 64 %>
+        <% else %>
+          <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "user avatar", width: 64, height: 64 %>
+        <% end %>
+        <h3><%= current_user.display_name %></h3>
+        <p><%= current_user.company.name %></p>
+      </div>
+      <%= link_to "Edit", "#" %>
+    </div>
+  </section>
+
+  <section class="company-section">
+    <div class="field">
+      <label for="company_name">Company name</label>
+      <input type="text" readonly disabled value="<%= current_user.company.name %>" />
+      <%= link_to "Edit", "#" %>
+    </div>
+
+    <div class="field">
+      <label for="company_name">Job title</label>
+      <input type="text" readonly disabled value="<%= current_user.manager.job_title %>" />
+      <%= link_to "Edit", "#" %>
+    </div>
+  </section>
+
+  <section class="team-members">
+    <h2>Your team</h2>
+    <p>Team members</p>
+    <div class="members">
+      <% current_user.company.managers.except_me(current_user.manager).each do |manager| %>
+        <%= render partial: "managers/card", locals: { manager: manager } %>
+      <% end %>
+    </div>
+  </section>
+</div>

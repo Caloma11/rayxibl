@@ -6,6 +6,11 @@ class ManagersController < ApplicationController
       .where(connections: { profile_id: current_user.profile.id })
   end
 
+  def show
+    @manager = current_user.manager
+    authorize @manager
+  end
+
   def new
     @manager = Manager.new
     authorize @manager
