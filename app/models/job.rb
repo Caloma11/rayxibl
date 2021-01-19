@@ -5,4 +5,6 @@ class Job < ApplicationRecord
   has_many :job_applications
 
   validates :location, :profession, :expertise, :description, :rate, :expiration_date, presence: true
+
+  scope :active, -> { where("expiration_date > :today", today: Date.today) }
 end
