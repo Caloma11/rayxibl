@@ -1,0 +1,16 @@
+<div class="jobs-index">
+  <div class="header">
+    <%= render partial: "shared/back_link", locals: { text: "Job posts" } %>
+  </div>
+
+  <section class="filter">
+    <input type="text" placeholder="Search" />
+    <button>sort by</button>
+  </section>
+
+  <section class="jobs">
+    <% @jobs.each do |job| %>
+      <%= render partial: "jobs/card", locals: { job: job } %>
+    <% end %>
+  </section>
+</div>
