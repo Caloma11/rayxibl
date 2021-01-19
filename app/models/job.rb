@@ -1,4 +1,6 @@
 class Job < ApplicationRecord
+  acts_as_taggable_on :skills
+
   belongs_to :manager
   has_many :job_applications
 

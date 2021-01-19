@@ -1,6 +1,8 @@
 class Profile < ApplicationRecord
   include Profiles::Constants
 
+  acts_as_taggable_on :skills
+
   belongs_to :user
   has_many :connections
   has_many :companies, through: :connections
