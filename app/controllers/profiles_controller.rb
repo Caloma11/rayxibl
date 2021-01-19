@@ -10,6 +10,9 @@ class ProfilesController < ApplicationController
     end
   end
 
+  def show
+  end
+
   def new
     @profile = Profile.new
     authorize @profile
@@ -41,7 +44,7 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile = Profile.find(params[:id])
+    @profile = Profile.includes(user: [:avatar_attachment]).find(params[:id])
     authorize @profile
   end
 
