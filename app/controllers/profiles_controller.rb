@@ -1,4 +1,13 @@
 class ProfilesController < ApplicationController
+  def index
+    if params[:network]
+      skip_policy_scope
+      @profiles = current_user.manager.network.includes(user: [:avatar_attachment])
+    else
+      @profiles = policy_scope(Profile).includes(user: [:avatar_attachment])
+    end
+  end
+
   def new
     @profile = Profile.new
     authorize @profile
