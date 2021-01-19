@@ -12,4 +12,5 @@ class Manager < ApplicationRecord
 
   accepts_nested_attributes_for :company
 
+  scope :except_me, ->(my_id) { joins(:company).where.not(id: my_id) }
 end
