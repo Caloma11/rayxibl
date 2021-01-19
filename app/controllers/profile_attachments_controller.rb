@@ -5,7 +5,7 @@ class ProfileAttachmentsController < ApplicationController
 
   def download
     data = URI.open(@profile_attachment.attachment.service_url).read
-    send_data data, disposition: 'attachment', filename: profile_attachment.title, type: @profile_attachment.attachment.blob.content_type
+    send_data data, disposition: 'attachment', filename: @profile_attachment.title, type: @profile_attachment.attachment.blob.content_type
   end
 
   private

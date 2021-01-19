@@ -1,48 +1,52 @@
-<h1>My profile</h1>
-<div class="profileHeader flex">
-  <% if @profile.user.avatar.attached? %>
-    <%= image_tag @profile.user.avatar, alt: "alttext", class: "profileAvatar" %>
-  <% else %>
-    <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar" %>
-  <% end %>
-  <div class="profileHeaderRight">
-    <h2><%= current_user.display_name %></h2>
-    <p><%= current_user.email %></p>
-  </div>
-</div>
+<div class="flex w-100 justify-content-center">
+  <div class="container">
+    <h1>My profile</h1>
+    <div class="profileHeader flex">
+      <% if @profile.user.avatar.attached? %>
+        <%= image_tag @profile.user.avatar, alt: "alttext", class: "profileAvatar" %>
+      <% else %>
+        <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar" %>
+      <% end %>
+      <div class="profileHeaderRight">
+        <h2><%= current_user.display_name %></h2>
+        <p><%= current_user.email %></p>
+      </div>
+    </div>
 
-<div class="profileSection">
-  <h3>Job title</h3>
-  <p><%= @profile.profession %></p>
-</div>
+    <div class="profileSection">
+      <h3>Job title</h3>
+      <p><%= @profile.profession %></p>
+    </div>
 
-<div class="profileSection">
-  <h3>Location</h3>
-  <p><%= @profile.location&.capitalize %></p>
-</div>
+    <div class="profileSection">
+      <h3>Location</h3>
+      <p><%= @profile.location&.capitalize %></p>
+    </div>
 
-<div class="profileSection">
-  <h3>Skills</h3>
-  <p>This, That, Thing, Thong, Pung</p>
-</div>
+    <div class="profileSection">
+      <h3>Skills</h3>
+      <p>This, That, Thing, Thong, Pung</p>
+    </div>
 
-<div class="profileSection">
-  <h3>Experience Level</h3>
-  <p><%= @profile.expertise.capitalize %></p>
-</div>
+    <div class="profileSection">
+      <h3>Experience Level</h3>
+      <p><%= @profile.expertise.capitalize %></p>
+    </div>
 
-<div class="profileSection">
-  <h3>About you</h3>
-  <p><%= @profile.overview %></p>
-</div>
+    <div class="profileSection">
+      <h3>About you</h3>
+      <p><%= @profile.overview %></p>
+    </div>
 
-<% @profile.profile_attachments.each do |pa| %>
-  <div class="profileSection">
-    <h3><%= pa.title %></h3>
-    <% if pa.attachment.attached? %>
-      <%= link_to "Download", download_attachment_path(pa), method: :post  %>
-    <% else %>
-      <%= link_to pa.url, pa.url  %>
+    <% @profile.profile_attachments.each do |pa| %>
+      <div class="profileSection">
+        <h3><%= pa.title %></h3>
+        <% if pa.attachment.attached? %>
+          <%= link_to "Download", download_attachment_path(pa), method: :post  %>
+        <% else %>
+          <%= link_to pa.url, pa.url, target: :_blank  %>
+        <% end %>
+      </div>
     <% end %>
   </div>
-<% end %>
+</div>
