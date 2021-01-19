@@ -175,7 +175,6 @@ ActiveRecord::Schema.define(version: 2021_01_18_094457) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "first_name"
     t.string "last_name"
-    t.integer "role"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
