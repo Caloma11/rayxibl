@@ -37,4 +37,5 @@ Rails.application.routes.draw do
     patch "show", as: :show
   end
 
+  post "download_attachment/:id", to: "profile_attachments#download", as: :download_attachment
 end
