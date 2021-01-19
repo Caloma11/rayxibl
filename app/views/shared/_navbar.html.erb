@@ -1,7 +1,7 @@
 <div>
   <% navbar_links(current_user).each do |link| %>
     <div>
-      <%= link_to "#" do %>
+      <%= link_to link[:url] do %>
         <%= image_tag link[:icon], alt: link[:text] %>
         <span><%= link[:text] %></span>
       <% end %>
