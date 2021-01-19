@@ -19,4 +19,10 @@ class User < ApplicationRecord
   def display_name
     "#{first_name} #{last_name}"
   end
+
+  def find_connection(user)
+    Connection.find_by(company: user.manager&.company, profile: self.profile) ||
+    Connection.find_by(company: self.manager&.company, profile: user.profile) ||
+    false
+  end
 end

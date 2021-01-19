@@ -11,6 +11,7 @@ class ProfilesController < ApplicationController
   end
 
   def show
+    @connection = current_user.find_connection(@profile.user)
   end
 
   def new
