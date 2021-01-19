@@ -30,7 +30,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:profession, :location, :overview, :expertise)
+    params.require(:profile).permit(:profession, :location, :overview, :expertise, :skill_list)
   end
 
   def link_params
