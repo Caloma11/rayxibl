@@ -4,6 +4,22 @@
 
 .flex {
 	display: flex;
+
+	&.flex-column {
+		flex-direction: column;
+	}
+}
+
+.items-center {
+	align-items: center;
+}
+
+.justify-content-start {
+	justify-content: flex-start;
+}
+
+.justify-content-between {
+	justify-content: space-between;
 }
 
 .justify-content-center {
@@ -12,4 +28,12 @@
 
 .list-style-none {
 	list-style: none;
+}
+
+.shadow {
+	box-shadow: 0px 0px 16px 4px rgba(50, 42, 91, 0.08);
+}
+
+.rounded-lg {
+	border-radius: 16px;
 }
