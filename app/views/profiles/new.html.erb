@@ -26,9 +26,6 @@
   <%= f.simple_fields_for :profile_links do |paf| %>
     <%= paf.input :title, input_html: {name: "profile[profile_links][][title]"} %>
     <%= paf.input :url, placeholder: "https://", input_html: {name: "profile[profile_links][][url]"} %>
-
-    <%= paf.input :title, input_html: {name: "profile[profile_links][][title]"} %>
-    <%= paf.input :url, placeholder: "https://", input_html: {name: "profile[profile_links][][url]"} %>
     <%= link_to "+ Add another link", "#" %>
   <% end %>
 
