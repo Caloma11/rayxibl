@@ -83,7 +83,7 @@ ActiveRecord::Schema.define(version: 2021_01_18_094457) do
   create_table "job_applications", force: :cascade do |t|
     t.bigint "job_id", null: false
     t.bigint "profile_id", null: false
-    t.integer "status"
+    t.integer "status", default: 0
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["job_id"], name: "index_job_applications_on_job_id"
@@ -175,10 +175,14 @@ ActiveRecord::Schema.define(version: 2021_01_18_094457) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "first_name"
     t.string "last_name"
+    t.integer "role"
     t.string "confirmation_token"
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
+<<<<<<< HEAD
     t.integer "role"
+=======
+>>>>>>> master
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

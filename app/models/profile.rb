@@ -14,6 +14,8 @@ class Profile < ApplicationRecord
 
   enum expertise: EXPERTISES
 
+  validates :profession, :location, :overview, presence: true
+
   def average_rating
     ratings.pluck(:value).sum.to_f / ratings.size
   end

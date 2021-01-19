@@ -6,10 +6,10 @@ class Manager < ApplicationRecord
   has_many :booked_profiles, through: :bookings, class_name: "Profile", source: :profile
   has_many :conversations
   has_many :jobs
+  has_many :network, through: :company, source: :profiles, class_name: "Profile"
+
+  validates :job_title, presence: true
 
   accepts_nested_attributes_for :company
 
-  def network
-    company.joins(:profiles).profiles
-  end
 end
