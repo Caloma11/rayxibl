@@ -6,6 +6,7 @@
 <% if user_signed_in? %>
   <h3>You are logged in as: <%= current_user.first_name %> <%= current_user.last_name %></h3>
   <p><%= current_user.email %></p>
+  <%= link_to "My profile", profile_path(current_user.profile) if current_user.freelancer?%>
 <% end %>
 
 <% if user_signed_in? %>
