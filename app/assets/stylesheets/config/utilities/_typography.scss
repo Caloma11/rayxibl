@@ -6,6 +6,10 @@
 .textWhite {
 	color: white;
 }
+
+.textGray {
+	color: $gray;
+}
 // End of text color
 
 // Text sizing
@@ -25,4 +29,8 @@
 
 .text-start {
 	text-align: start;
+}
+
+.bold {
+	font-weight: 700;
 }
