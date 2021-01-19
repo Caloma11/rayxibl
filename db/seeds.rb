@@ -46,7 +46,7 @@ puts ">> Creating 10 dummy managers"
   user = User.create!(
     email: "random_manager_#{i}@test.com",
     password: "123123",
-    first_name: "User_#{i}",
+    first_name: "Manager_#{i}",
     last_name: "LastName_#{i}",
     role: 0
   )
@@ -61,7 +61,7 @@ puts ">> Creating 10 dummy freelancers"
   user = User.create!(
     email: "random_lancer_#{i}@test.com",
     password: "123123",
-    first_name: "User_#{i}",
+    first_name: "Lancer_#{i}",
     last_name: "LastName_#{i}",
     role: 1
   )
