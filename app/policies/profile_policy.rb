@@ -5,6 +5,10 @@ class ProfilePolicy < ApplicationPolicy
     end
   end
 
+  def show?
+    true
+  end
+
   def create?
     user && !user.manager && !user.profile
   end
