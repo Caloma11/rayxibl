@@ -1,10 +1,18 @@
 <div class="profiles-index" style="margin-top: 20%;">
-  <div class="switch">
+  <section class="switch">
     <%= link_to "My network", profiles_path(network: true), class: "#{'active' if params[:network]}" %>
     <%= link_to "Everyone", profiles_path %>
-  </div>
+  </section>
 
-  <section>
+  <section class="filter">
+    <input type="text" placeholder="Search" />
+    <div>
+      <button>filter</button>
+      <button>sort by</button>
+    </div>
+  </section>
+
+  <section class="cards">
     <% if params[:network] %>
       <% if @profiles.size.positive? %>
         <% @profiles.each do |profile| %>
