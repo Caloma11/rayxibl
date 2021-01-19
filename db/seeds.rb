@@ -30,6 +30,7 @@ user_manager = User.create!(
   last_name: "Ager",
   role: 0
 )
+user_manager.confirm
 user_lancer = User.create!(
   email: "freelancer@test.com",
   password: "123123",
@@ -37,6 +38,38 @@ user_lancer = User.create!(
   last_name: "Lancer",
   role: 1
 )
+user_lancer.confirm
+dummy_freelancers = []
+dummy_managers = []
+puts ">> Creating 10 dummy managers"
+10.times do |i|
+  user = User.create!(
+    email: "random_manager_#{i}@test.com",
+    password: "123123",
+    first_name: "User_#{i}",
+    last_name: "LastName_#{i}",
+    role: 0
+  )
+
+  user.confirm
+
+  dummy_managers << user
+end
+
+puts ">> Creating 10 dummy freelancers"
+10.times do |i|
+  user = User.create!(
+    email: "random_lancer_#{i}@test.com",
+    password: "123123",
+    first_name: "User_#{i}",
+    last_name: "LastName_#{i}",
+    role: 1
+  )
+
+  user.confirm
+
+  dummy_freelancers << user
+end
 puts "[END] - Creating users"
 
 puts "[BEGIN] - Creating a company"
@@ -47,29 +80,50 @@ google = Company.create!(
 google.logo.attach(io: google_logo, filename: "logo.png", content_type: "image/png")
 puts "[END] - Creating a company"
 
-puts "[BEGIN] - Creating a manager"
+puts "[BEGIN] - Creating managers"
 manager = Manager.create!(
   user: user_manager,
   job_title: "CEO",
   company: google
 )
-puts "[END] - Creating a manager"
+dummy_managers.each do |dm|
+  Manager.create!(
+    user: dm,
+    job_title: "Financial",
+    company: google
+  )
+end
+puts "[END] - Creating managers"
 
-puts "[BEGIN] - Creating a freelancer profile"
+puts "[BEGIN] - Creating freelancer profiles"
 profile = Profile.create!(
   user: user_lancer,
   profession: "Web developer",
   location: "Bali, Indonesia",
   overview: "An aspiring developer"
 )
-puts "[END] - Creating a freelancer profile"
+dummy_freelancers.each do |df|
+  Profile.create!(
+    user: df,
+    profession: "Financial something",
+    location: "Heaven",
+    overview: "Yeah i getcha"
+  )
+end
+puts "[END] - Creating freelancer profiles"
 
-puts "[BEGIN] - Creating a connection"
+puts "[BEGIN] - Creating connections"
 connection = Connection.create!(
   company: google,
   profile: profile
 )
-puts "[END] - Creating a connection"
+dummy_freelancers.each do |df|
+  Connection.create!(
+    company: google,
+    profile: df.profile
+  )
+end
+puts "[END] - Creating connections"
 
 puts "[BEGIN] - Creating a note"
 note = Note.create!(
