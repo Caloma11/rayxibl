@@ -10,6 +10,8 @@ class Profile < ApplicationRecord
   # [BE CAREFUL]: Not scoped to a specific manager
   has_many :notes
 
+  validates :profession, :location, :overview, presence: true
+
   def average_rating
     ratings.pluck(:value).sum.to_f / ratings.size
   end

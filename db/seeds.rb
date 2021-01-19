@@ -1,3 +1,5 @@
+require "open-uri"
+
 puts "[BEGIN] - Seeding started"
 
 def remove_everything!
@@ -38,7 +40,11 @@ user_lancer = User.create!(
 puts "[END] - Creating users"
 
 puts "[BEGIN] - Creating a company"
-google = Company.create!(name: "Google")
+google_logo = URI.open("https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png")
+google = Company.create!(
+  name: "Google"
+)
+google.logo.attach(io: google_logo, filename: "logo.png", content_type: "image/png")
 puts "[END] - Creating a company"
 
 puts "[BEGIN] - Creating a manager"

@@ -7,4 +7,6 @@ class Manager < ApplicationRecord
   has_many :conversations
   has_many :jobs
   has_many :network, through: :company, source: :profiles, class_name: "Profile"
+
+  validates :job_title, presence: true
 end
