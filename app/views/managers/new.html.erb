@@ -1,0 +1,7 @@
+<%= simple_form_for @manager do |f| %>
+  <%= f.input :job_title %>
+  <%= f.simple_fields_for :company_attributes do |ff| %>
+    <%= ff.input :name, label: "Your company name:" %>
+  <% end %>
+  <%= f.submit %>
+<% end %>
