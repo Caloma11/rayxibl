@@ -38,7 +38,7 @@
       <p><%= @profile.overview %></p>
     </div>
 
-    <% @profile.profile_attachments.each do |pa| %>
+    <% @profile.profile_attachments.includes(:attachment_attachment).each do |pa| %>
       <div class="profileSection">
         <h3><%= pa.title %></h3>
         <% if pa.attachment.attached? %>
