@@ -1,0 +1,46 @@
+<div class="job-show">
+  <div class="header">
+    <%= render partial: "shared/back_link", locals: { text: "Job details" } %>
+  </div>
+
+  <section class="flex justify-content-between">
+    <% if @job.company.logo.attached? %>
+      <%= image_tag @job.company.logo.service_url, alt: "#{@job.company.name}'s logo", width: 64, height: 64 %>
+    <% else %>
+      <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "dummy company logo", width: 64, height: 64 %>
+    <% end %>
+    <div>
+      <h5><%= @job.profession %></h5>
+      <p><%= @job.company.name %></p>
+    </div>
+    <p>TODO: Job status to be added</p>
+  </section>
+
+  <section>
+    <div class="mb-3">
+      <button>Description</button>
+      <button>Applicants (<%= @job.job_applications.count %>)</button>
+    </div>
+    <div class="mb-3">
+      <% @job.skill_list.each do |skill| %>
+        <span class="pill"><%= skill %></span>
+      <% end %>
+    </div>
+  </section>
+
+  <section class="details">
+    <div class="flex">
+      <p class="mb-0 bold textGray">Location</p>
+      <p class="mb-0 ml-3 textGray"><%= @job.location %></p>
+    </div>
+    <div class="flex">
+      <p class="mb-0 bold textGray">Expertise</p>
+      <p class="mb-0 ml-3 textGray"><%= @job.expertise %></p>
+    </div>
+    <div class="flex">
+      <p class="mb-0 bold textGray">Rate</p>
+      <p class="mb-0 ml-3 textGray"><%= @job.rate %></p>
+    </div>
+    <p><%= @job.description %></p>
+  </section>
+</div>

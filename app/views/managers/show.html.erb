@@ -1,9 +1,6 @@
 <div id="manager-show">
   <div class="header">
-    <%= link_to :back do %>
-      <%= image_tag "icons/back.svg", alt: "back button" %>
-    <% end %>
-    <h3>Profile</h3>
+    <%= render partial: "shared/back_link", locals: { text: "Profile" } %>
   </div>
 
   <section class="profile-section">
