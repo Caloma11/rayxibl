@@ -1,4 +1,6 @@
 class ProfilesController < ApplicationController
+  before_action :set_profile, only: :show
+
   def index
     if params[:network]
       skip_policy_scope
@@ -30,13 +32,18 @@ class ProfilesController < ApplicationController
       # Update user
       current_user.update(user_params[:profile_user])
 
-      redirect_to root_path
+      redirect_to profile_path(@profile)
     else
       render 'new'
     end
   end
 
   private
+
+  def set_profile
+    @profile = Profile.find(params[:id])
+    authorize @profile
+  end
 
   def profile_params
     params.require(:profile).permit(:profession, :location, :overview, :expertise, :skill_list)
