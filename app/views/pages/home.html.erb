@@ -1,4 +1,12 @@
-<h1>Homepage</h1>
+<h1>This</h1>
+<h2>is</h2>
+<h3>the</h3>
+<h4>home</h4>
+<h5>page</h5>
+<% if user_signed_in? %>
+  <h3>You are logged in as: <%= current_user.first_name %> <%= current_user.last_name %></h3>
+  <p><%= current_user.email %></p>
+<% end %>
 
 <% if user_signed_in? %>
   <%= link_to "Log out", destroy_user_session_path, method: :delete %>
