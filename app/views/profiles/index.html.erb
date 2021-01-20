@@ -22,14 +22,16 @@
     <% if params[:network] %>
       <% if @profiles.size.positive? %>
         <% @profiles.each do |profile| %>
-          <%= render partial: "profiles/card", locals: { profile: profile, invitation: false } %>
+          <% conversation ||= current_user.conversation_with(profile.user) %>
+          <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation } %>
         <% end %>
       <% else %>
         <h2>You don't have any freelancers in your network</h2>
       <% end %>
     <% else %>
       <% @profiles.each do |profile| %>
-        <%= render partial: "profiles/card", locals: { profile: profile, invitation: true } %>
+        <% conversation ||= current_user.conversation_with(profile.user) %>
+        <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation } %>
       <% end %>
     <% end %>
   </section>

@@ -1,19 +1,28 @@
 <div class="profile-card">
-  <div>
+  <div class="top">
+    <button class="action"><%= image_tag "icons/calendar", alt: "calendar", class: "icon" %></button>
     <% if profile.user.avatar.attached? %>
       <%= image_tag profile.user.avatar.service_url, alt: "profile avatar", width: 64, height: 64 %>
     <% else %>
       <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "profile avatar", height: 64, width: 64 %>
     <% end %>
+    <button class="action"><%= image_tag "icons/more", alt: "more", class: "icon" %></button>
+  </div>
+  <div class="bottom">
     <div class="text-group">
-      <h3><%= profile.user.display_name %></h3>
-      <h5><%= profile.profession %></h5>
-      <% if invitation %>
-        <%= link_to "Invite", "#" %>
-      <% end %>
+      <h3 class="name"><%= profile.user.display_name %></h3>
+      <h5 class="profession"><%= profile.profession %></h5>
+      <p class="location"><%= profile.location %></p>
     </div>
-    <%= link_to profile_path(profile) do %>
-      <%= image_tag "icons/right-arrow.svg", alt: "Right arrow" %>
+
+    <% if conversation %>
+      <%= link_to conversation_path(conversation) do %>
+        <%= image_tag "icons/message", alt: "message" %> Message
+      <% end %>
+    <% else %>
+      <%= link_to profile_conversations_path(profile, conversation: { profile_id: profile.id }), method: :post do %>
+        <%= image_tag "icons/message", alt: "message" %> Message
+      <% end %>
     <% end %>
   </div>
 </div>
