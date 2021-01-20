@@ -1,5 +1,4 @@
 // Graphical variables
-@import "config/fonts";
 @import "config/colors";
 @import "config/utilities/index";
 
@@ -9,4 +8,8 @@
 
 body {
 	margin: 0;
+}
+
+* {
+	font-family: "Montserrat", sans-serif;
 }
