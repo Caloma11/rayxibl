@@ -49,9 +49,9 @@
     </div>
 
 
+    <h3>LINKS</h3>
     <% @profile.profile_attachments.includes(:attachment_attachment).each do |pa| %>
       <div class="profileSection">
-        <h3><%= pa.title %></h3>
         <% if pa.attachment.attached? %>
           <%= link_to "Download", download_attachment_path(pa), method: :post  %>
         <% else %>
