@@ -1,7 +1,14 @@
 <%= simple_form_for @manager do |f| %>
   <%= f.input :job_title %>
-  <%= f.simple_fields_for :company_attributes do |ff| %>
-    <%= ff.input :name, label: "Your company name:" %>
+  <% if current_user.invited_by&.manager %>
+    <%= f.simple_fields_for :company_attributes do |ff| %>
+      <%= ff.input :name, label: "Your company name:", input_html: { value: current_user.invited_by.manager.company.name, disabled: true } %>
+    <% end %>
+    <%= f.association :company, input_html: { value: current_user.invited_by.manager.company.id }, as: :hidden %>
+  <% else %>
+    <%= f.simple_fields_for :company_attributes do |ff| %>
+      <%= ff.input :name, label: "Your company name:" %>
+    <% end %>
   <% end %>
   <%= f.submit %>
 <% end %>
