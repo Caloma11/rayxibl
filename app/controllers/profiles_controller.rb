@@ -6,9 +6,9 @@ class ProfilesController < ApplicationController
 
     if params[:network]
       skip_policy_scope
-      @profiles = current_user.manager.network.includes(user: [:avatar_attachment])
+      @profiles = current_user.manager.network.includes(user: [avatar_attachment: :blob])
     else
-      @profiles = policy_scope(Profile).includes(user: [:avatar_attachment])
+      @profiles = policy_scope(Profile).includes(user: [avatar_attachment: :blob])
     end
   end
 
