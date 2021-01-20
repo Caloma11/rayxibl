@@ -5,6 +5,11 @@ module ApplicationHelper
       text: "Dashboard",
       icon: "icons/dashboard",
       url: ROUTES.dashboard_path
+    },
+    {
+      text: "Inbox",
+      icon: "icons/inbox",
+      url: ROUTES.conversations_path
     }
   ]
   MANAGER_NAVBAR_LINKS = [
