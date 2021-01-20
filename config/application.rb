@@ -35,5 +35,9 @@ module Flxibl
     config.generators.stylesheets = false
     config.generators.skip_routes = true
     config.generators.helper = false
+
+    # Unobstrusive JS with turbolinks remote forms
+    config.action_view.embed_authenticity_token_in_remote_forms = true
+
   end
 end

@@ -100,14 +100,16 @@ profile = Profile.create!(
   user: user_lancer,
   profession: "Web developer",
   location: "Bali, Indonesia",
-  overview: "An aspiring developer"
+  overview: "An aspiring developer",
+  expertise: Profile::EXPERTISES.sample
 )
 dummy_freelancers.each do |df|
   Profile.create!(
     user: df,
     profession: "Financial something",
     location: "Heaven",
-    overview: "Yeah i getcha"
+    overview: "Yeah i getcha",
+    expertise: Profile::EXPERTISES.sample
   )
 end
 puts "[END] - Creating freelancer profiles"

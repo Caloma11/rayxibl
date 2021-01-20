@@ -10,6 +10,10 @@
 	}
 }
 
+.flex-grow-1 {
+  flex-grow: 1;
+}
+
 .items-center {
 	align-items: center;
 }
@@ -40,4 +44,8 @@
 
 .rounded-lg {
 	border-radius: 16px;
+}
+
+.rounded-circle {
+  border-radius: 50%;
 }
