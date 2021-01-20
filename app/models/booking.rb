@@ -7,4 +7,5 @@ class Booking < ApplicationRecord
 
   validates :title, :description, :price, :price_type, presence: true
   enum price_type: PRICE_TYPES
+  enum status: STATUSES
 end
