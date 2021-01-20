@@ -7,6 +7,29 @@
   margin-top: 0;
 }
 
+.ml-0 {
+  margin-left: 0;
+}
+
+.mr-0 {
+  margin-right: 0;
+}
+
+.mb-2 {
+  margin-bottom: 8px;
+}
+
+.mx-0 {
+  @extend .ml-0;
+  @extend .mr-0;
+}
+
+.my-0 {
+  @extend .mb-0;
+  @extend .mt-0;
+}
+
+
 .noMargin {
 	margin: 0;
 }
@@ -28,6 +51,11 @@
 	margin-bottom: 16px;
 }
 
+.mx-3 {
+  @extend .ml-3;
+  @extend .mr-3;
+}
+
 .mt-2 {
 	margin-top: 12px;
 }
@@ -36,10 +64,6 @@
 	margin-left: 16px;
 }
 
-.my-0 {
-  @extend .mb-0;
-  @extend .mt-0;
-}
 
 // Padding
 .pl-0 {
