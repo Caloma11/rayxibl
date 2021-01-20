@@ -16,7 +16,7 @@ class ConversationsController < ApplicationController
     @manager = current_user.manager
     @conversation.manager = @manager
     authorize @conversation
-    binding.pry
+
     if @conversation.save
       redirect_to conversation_path(@conversation)
     else
