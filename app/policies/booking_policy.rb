@@ -6,7 +6,7 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def show?
-    record.manager = user.manager
+    record.manager == user.manager
   end
 
   def create?
