@@ -10,7 +10,7 @@
 <div class="container">
   <div class="profileHeader flex">
     <% if @profile.user.avatar.attached? %>
-      <%= image_tag @profile.user.avatar, alt: "alttext", class: "profileAvatar rounded-circle" %>
+      <%= image_tag @profile.user.avatar, alt: "alttext", class: "profileAvatar rounded-circle", height: 64, width: 64  %>
     <% else %>
       <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 64, width: 64 %>
     <% end %>
