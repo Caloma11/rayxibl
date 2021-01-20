@@ -23,4 +23,11 @@
 			}
 		}
 	}
+
+	.cards {
+		@extend .px-3;
+
+		display: grid;
+		grid-template-columns: auto auto;
+	}
 }

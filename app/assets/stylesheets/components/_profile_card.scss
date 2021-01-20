@@ -1,0 +1,42 @@
+.profile-card {
+	@extend .p-3;
+
+	border-right: 1px solid #f4f6f9;
+	border-bottom: 1px solid #f4f6f9;
+
+	.top {
+		@extend .flex, .items-start, .justify-content-between;
+
+		.action {
+			.icon {
+				height: 24px;
+				width: 24px;
+			}
+		}
+	}
+
+	.bottom {
+		@extend .text-center;
+
+		.text-group {
+			.name {
+				@extend .mt-2, .mb-3;
+
+				font-size: 16px;
+			}
+
+			.profession {
+				@extend .m-0;
+
+				font-size: 14px;
+				text-transform: uppercase;
+			}
+
+			.location {
+				@extend .m-0;
+
+				font-size: 12px;
+			}
+		}
+	}
+}
