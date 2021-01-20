@@ -56,7 +56,7 @@
       <% if pa.attachment.attached? %>
         <%= link_to "Download", download_attachment_path(pa), method: :post  %>
       <% else %>
-        <%= link_to pa.url, pa.url, target: :_blank  %>
+        <%= link_to sanitize_url(pa.url), sanitize_url(pa.url), target: :_blank  %>
       <% end %>
     </div>
   <% end %>

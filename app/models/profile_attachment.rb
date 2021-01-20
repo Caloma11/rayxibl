@@ -4,4 +4,5 @@ class ProfileAttachment < ApplicationRecord
 
   validates :title, presence: true
   validates :url, presence: true, unless: Proc.new { |pa| pa.attachment.attached? }
+
 end

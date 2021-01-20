@@ -37,4 +37,14 @@ module ApplicationHelper
 
     [*SHARED_NAVBAR_LINKS, *links]
   end
+
+  def sanitize_url(url)
+    is_value_falsy = url == "" || url.nil?
+    if is_value_falsy
+      nil
+    else
+      URI(url).scheme ? url : "https://#{url}"
+    end
+  end
+
 end
