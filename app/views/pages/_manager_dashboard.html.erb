@@ -7,3 +7,13 @@
     <h4>TODO: Show job cards here</h4>
   </div>
 </div>
+
+<div class="manager-dashboard-actions">
+  <div class="flex items-center">
+    <%= link_to "Email invite", new_user_invitation_path  %>
+    <%= image_tag "icons/mail", alt: "Invite a freelancer" %>
+  </div>
+  <%= link_to "CSV upload", "#" %>
+  <%= link_to "Browse flxibl", profiles_path %>
+  <%= link_to "Post a job", "#" %>
+</div>
