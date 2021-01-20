@@ -101,7 +101,7 @@ profile = Profile.create!(
   profession: "Web developer",
   location: "Bali, Indonesia",
   overview: "An aspiring developer",
-  expertise: Profile.expertises.keys.sample
+  expertise: Profile::EXPERTISES.sample
 )
 dummy_freelancers.each do |df|
   Profile.create!(
@@ -109,7 +109,7 @@ dummy_freelancers.each do |df|
     profession: "Financial something",
     location: "Heaven",
     overview: "Yeah i getcha",
-    expertise: Profile.expertises.keys.sample
+    expertise: Profile::EXPERTISES.sample
   )
 end
 puts "[END] - Creating freelancer profiles"
