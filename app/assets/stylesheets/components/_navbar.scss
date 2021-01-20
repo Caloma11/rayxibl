@@ -1,0 +1,12 @@
+nav.navbar {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 40px;
+
+	a.nav-link {
+		img.nav-icon {
+			height: 32px;
+			width: 32px;
+		}
+	}
+}
