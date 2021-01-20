@@ -28,7 +28,7 @@ class BookingsController < ApplicationController
   private
 
   def set_booking
-    @booking = Booking.find(params[:id])
+    @booking = Booking.includes(attachments_attachments: :blob).find(params[:id])
   end
 
   def set_profile
@@ -36,7 +36,7 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit( :title,
+    params.require(:booking).permit(:title,
                                      :description,
                                      :start_time,
                                      :end_time,
@@ -45,7 +45,8 @@ class BookingsController < ApplicationController
                                      :end_date,
                                      :billable,
                                      :price,
-                                     :price_type
+                                     :price_type,
+                                     attachments: []
                                     )
   end
 end

@@ -14,5 +14,16 @@
     <% end %>
     <p><strong><% @booking.billable? ? "Billable" : "Non-billable" %></strong></p>
     <p><strong>Price:</strong> $<%= @booking.price %> - <%= @booking.price_type %></p>
+    <div>
+      <% if @booking.attachments.attached? %>
+        <% @booking.attachments.each do |attachment| %>
+          <div>
+            <%= link_to booking_download_attachment_path(attachment), method: :post do %>
+              <%= attachment.blob.filename %>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
   </div>
 </div>
