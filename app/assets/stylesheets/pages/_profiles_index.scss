@@ -1,0 +1,26 @@
+.profiles-index {
+	.head {
+		@extend .flex, .justify-content-between, .px-3, .mt-3;
+
+		button {
+			img {
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
+
+	.switch {
+		a.btn {
+			line-height: 22px;
+			padding: 8px 24px;
+
+			img {
+				@extend .mr-1;
+
+				height: 18px;
+				width: 18px;
+			}
+		}
+	}
+}

@@ -1,13 +1,16 @@
 button,
-a.btn {
+a {
 	@extend .no-decoration;
-
-	text-transform: uppercase;
-	font-weight: 500;
 	border: none;
-	border-radius: $radius-md;
-	color: $dark-gray;
-	padding: 8px 16px;
+	background: transparent;
+
+	&.btn {
+		text-transform: uppercase;
+		font-weight: 500;
+		border-radius: $radius-md;
+		color: $dark-gray;
+		padding: 8px 16px;
+	}
 
 	&.btn-primary {
 		color: #fff;
