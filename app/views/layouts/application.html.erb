@@ -11,6 +11,7 @@
   </head>
 
   <body>
+    <%= render 'shared/flashes' %>
     <%= yield %>
     <% if user_signed_in? %>
       <%= link_to "SIGN OUT BUTTON", destroy_user_session_path, method: :delete %>
