@@ -11,7 +11,11 @@
 }
 
 .flex-grow-1 {
-  flex-grow: 1;
+	flex-grow: 1;
+}
+
+.items-start {
+	align-items: flex-start;
 }
 
 .items-center {
@@ -47,7 +51,7 @@
 }
 
 .rounded-circle {
-  border-radius: 50%;
+	border-radius: 50%;
 }
 
 .text-center {
