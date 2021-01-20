@@ -12,7 +12,7 @@ class ProfilesController < ApplicationController
 
   def show
     @connection = current_user.find_connection(@profile.user)
-    @notes = current_user.manager.notes_of(@profile) if current_user.manager?
+    @notes = current_user.manager.notes_of(@profile).includes([:manager]) if current_user.manager?
   end
 
   def new

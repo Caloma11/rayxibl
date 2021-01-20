@@ -16,7 +16,7 @@ class Manager < ApplicationRecord
   scope :except_me, ->(my_id) { joins(:company).where.not(id: my_id) }
 
   def notes_of(profile)
-    return [] unless profile
+    return Note.none unless profile
     company.notes.where(profile: profile)
   end
 
