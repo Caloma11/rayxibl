@@ -1,0 +1,18 @@
+<h1 class="text-center">Booking #<%= "%03d" % @booking.id %></h1>
+<div class="flex w-100 justify-content-center">
+  <div class="bookingCard">
+    <h2>You've booked <%= @booking.profile.user.display_name %> for <em><%= @booking.title %></em></h2>
+    <div class="flex items-center">
+      <h3 class="mr-3">Booking description:</h3>
+      <p><%= @booking.description %></p>
+
+    </div>
+    <% if @booking.duration %>
+      <p><%= @booking.duration %> hours per day</p>
+    <% else %>
+      <p>From <%= @booking.start_time.strftime("%l:%M %p %Z") %> to <%= @booking.end_time.strftime("%l:%M %p %Z") %>, between <%= @booking.start_date.strftime("%e %b %Y") %> and <%= @booking.end_date.strftime("%e %b %Y") %></p>
+    <% end %>
+    <p><strong><% @booking.billable? ? "Billable" : "Non-billable" %></strong></p>
+    <p><strong>Price:</strong> $<%= @booking.price %> - <%= @booking.price_type %></p>
+  </div>
+</div>
