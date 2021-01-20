@@ -1,2 +1,19 @@
-<h1>Conversations#index</h1>
-<p>Find me in app/views/conversations/index.html.erb</p>
+<div class="convo-index">
+  <div class="flex justify-content-between items-center">
+    <%= link_to "Back", :back %>
+    <p>INBOX</p>
+    <p>Something</p>
+  </div>
+
+  <div>
+    <button>My network</button>
+    <button>Everyone</button>
+  </div>
+
+  <div>
+    <% @conversations.each do |conversation| %>
+      <% other_person ||= conversation.other_person(current_user) %>
+      <%= render partial: "conversations/snippet", locals: { conversation: conversation, other_person: other_person } %>
+    <% end %>
+  </div>
+</div>

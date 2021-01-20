@@ -1,7 +1,7 @@
 class ConversationsController < ApplicationController
   def index
     skip_policy_scope
-    @conversations = current_user.manager? ? current_user.manager.conversations : current_user.profile.conversations
+    @conversations = current_user.manager? ? current_user.manager.conversations.by_latest_message : current_user.profile.conversations.by_latest_message
   end
 
   def show
