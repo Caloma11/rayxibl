@@ -5,6 +5,13 @@ class Conversation < ApplicationRecord
 
   validates :manager, uniqueness: { scope: :profile }
 
+  scope :by_latest_message, -> {
+    joins(:messages)
+    .includes([:messages, profile: { user: :avatar_attachment }])
+    .order("messages.created_at DESC")
+    .distinct
+  }
+
   def other_person(user)
     @other_person ||= user == manager.user ? profile.user : manager.user
   end
