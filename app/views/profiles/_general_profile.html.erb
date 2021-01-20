@@ -1,64 +1,101 @@
 <div class="generalProfile">
 
-<div class="profileNav flex">
-  <h2><</h2>
-  <h1><%= @profile.user.display_name %></h1>
-  <% if @connection %>
-    <%= link_to "Add Note", "#" %>
-  <% end %>
-</div>
-<div class="container">
-  <div class="profileHeader flex">
-    <% if @profile.user.avatar.attached? %>
-      <%= image_tag @profile.user.avatar, alt: "alttext", class: "profileAvatar rounded-circle", height: 64, width: 64  %>
-    <% else %>
-      <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 64, width: 64 %>
+  <div class="profileNav flex">
+    <h2><</h2>
+    <h1><%= @profile.user.display_name %></h1>
+    <% if @connection %>
+      <%= link_to "Add Note", "#writeYourNote" %>
     <% end %>
-    <div class="profileHeaderRight">
-      <h2><%= @profile.user.display_name %></h2>
-      <p><%= @profile.profession %></p>
-      <p><%= @profile.location %></p>
-    </div>
   </div>
-
-  <div class="profileActions flex">
-    <% if current_user.manager? %>
-      <% if @connection %>
-        <%= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
-        <%= link_to "Book", "#", class: "mr-3" %>
+  <div class="container">
+    <div class="profileHeader flex">
+      <% if @profile.user.avatar.attached? %>
+        <%= image_tag @profile.user.avatar, alt: "alttext", class: "profileAvatar rounded-circle", height: 64, width: 64  %>
       <% else %>
-        <%= link_to "Add to your network", profile_connections_path(@profile), class: "mr-3", method: :post %>
+        <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 64, width: 64 %>
       <% end %>
-      <%= link_to "Message", "#" %>
-    <% end %>
-  </div>
+      <div class="profileHeaderRight">
+        <h2><%= @profile.user.display_name %></h2>
+        <p><%= @profile.profession %></p>
+        <p><%= @profile.location %></p>
+      </div>
+    </div>
+
+    <div class="profileActions flex">
+      <% if current_user.manager? %>
+        <% if @connection %>
+          <%= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
+          <%= link_to "Book", "#", class: "mr-3" %>
+        <% else %>
+          <%= link_to "Add to your network", profile_connections_path(@profile), class: "mr-3", method: :post %>
+        <% end %>
+        <%= link_to "Message", "#" %>
+      <% end %>
+    </div>
 
 
-  <div class="profileSection">
-    <h3>Skills</h3>
-    <p>This, That, Thing, Thong, Pung</p>
-  </div>
-
-  <div class="profileSection">
-    <h3>About</h3>
-    <p><%= @profile.overview %></p>
-  </div>
-
-  <div class="profileSection">
-    <h3>Experience Level</h3>
-    <p><%= @profile.expertise&.capitalize %></p>
-  </div>
-
-
-  <% @profile.profile_attachments.includes(:attachment_attachment).each do |pa| %>
     <div class="profileSection">
-      <h3><%= pa.title %></h3>
-      <% if pa.attachment.attached? %>
-        <%= link_to "Download", download_attachment_path(pa), method: :post  %>
-      <% else %>
-        <%= link_to sanitize_url(pa.url), sanitize_url(pa.url), target: :_blank  %>
-      <% end %>
+      <h3>Skills</h3>
+      <p><%= @profile.skill_list %></p>
     </div>
-  <% end %>
-</div>
+
+    <div class="profileSection">
+      <h3>About</h3>
+      <p><%= @profile.overview %></p>
+    </div>
+
+    <div class="profileSection">
+      <h3>Experience Level</h3>
+      <p><%= @profile.expertise&.capitalize %></p>
+    </div>
+
+
+    <% @profile.profile_attachments.includes(:attachment_attachment).each do |pa| %>
+      <div class="profileSection">
+        <h3><%= pa.title %></h3>
+        <% if pa.attachment.attached? %>
+          <%= link_to "Download", download_attachment_path(pa), method: :post  %>
+        <% else %>
+          <%= link_to sanitize_url(pa.url), sanitize_url(pa.url), target: :_blank  %>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if @connection && current_user.manager? %>
+      <div class="profileSection">
+        <h3>Internal Notes</h3>
+        <% @notes.each do |note| %>
+          <div class="noteCard p-3 mb-3" style="border: 1px solid gray; border-radius: 4px;">
+            <div class="noteCardHeader flex" style="border-bottom: 1px solid lightgray;">
+              <div class="noteCardHeaderRight flex flex-grow-1">
+                <% if note.manager.user.avatar.attached? %>
+                  <%= image_tag note.manager.user.avatar, alt: "alttext", class: "profileAvatar rounded-circle", height: 32, width: 32  %>
+                <% else %>
+                  <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 32, width: 32 %>
+                <% end %>
+                <div class="ml-3">
+                  <h2 class="my-0"><%= note.manager.user.display_name %></h2>
+                  <p><%= note.created_at.strftime("%e %b %Y") %></p>
+                </div>
+              </div>
+              <div class="noteCardHeaderLeft">
+                <p class="my-0" style="transform: rotate(90deg); font-size: 32px">...</p>
+              </div>
+            </div>
+            <div class="noteCardBody">
+              <p><%= note.content %></p>
+            </div>
+          </div>
+        <% end %>
+      </div>
+
+      <div id="writeYourNote">
+        <h4>Write your note: <em style="color: gray">( Only visible to you )</em></h4>
+        <%= simple_form_for [@profile, Note.new], remote: true do |f| %>
+          <%= f.input :content, as: :text %>
+          <%= f.submit %>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
 </div>
