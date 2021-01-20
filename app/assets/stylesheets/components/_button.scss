@@ -1,0 +1,22 @@
+button,
+a.btn {
+	@extend .no-decoration;
+
+	border-radius: $radius-md;
+	color: $dark-gray;
+	padding: 8px 16px;
+
+	&.btn-primary {
+		color: #fff;
+		background: $dark-blue-gradient;
+	}
+
+	&.btn-white {
+		background: #ffffff;
+		box-shadow: 0px 2px 10px rgba(50, 51, 94, 0.17);
+	}
+
+	&.btn-float {
+		background: transparent;
+	}
+}
