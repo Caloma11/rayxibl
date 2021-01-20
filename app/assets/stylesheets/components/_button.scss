@@ -2,6 +2,7 @@ button,
 a.btn {
 	@extend .no-decoration;
 
+	border: none;
 	border-radius: $radius-md;
 	color: $dark-gray;
 	padding: 8px 16px;
