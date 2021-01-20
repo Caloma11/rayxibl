@@ -22,6 +22,7 @@
       <%= f.input :billable, as: :radio_buttons, input_html:{class: "mb-2"} %>
       <%= f.input :price, input_html:{class: "mb-2"} %>
       <%= f.input :price_type, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2"} %>
+      <%= f.input :attachments, as: :file, input_html: { multiple: true } %>
       <%= f.submit %>
     <% end %>
   </div>
