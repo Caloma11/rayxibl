@@ -26,9 +26,9 @@
           <%= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
           <%= link_to "Book", new_profile_booking_path(@profile), class: "mr-3" %>
         <% else %>
-          <%= link_to "Add to your network", profile_connections_path(@profile), class: "mr-3", method: :post %>
+          <%= link_to "Add to your network", profile_connections_path(@profile), class: "mr-3 btn btn-primary", method: :post %>
         <% end %>
-        <%= link_to "Message", "#" %>
+        <%= link_to "Message", "#", class: "btn btn-white" %>
       <% end %>
     </div>
 
@@ -55,7 +55,7 @@
         <% if pa.attachment.attached? %>
           <%= link_to "Download", download_attachment_path(pa), method: :post  %>
         <% else %>
-          <%= link_to sanitize_url(pa.url), sanitize_url(pa.url), target: :_blank  %>
+          <%= link_to pa.title, sanitize_url(pa.url), target: :_blank, class: "btn btn-secondary"  %>
         <% end %>
       </div>
     <% end %>
