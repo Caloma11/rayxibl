@@ -5,6 +5,7 @@ a {
 	background: transparent;
 
 	&.btn {
+		display: block;
 		text-transform: uppercase;
 		font-weight: 500;
 		border-radius: $radius-md;
