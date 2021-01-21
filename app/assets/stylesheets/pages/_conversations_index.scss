@@ -1,0 +1,11 @@
+.convo-index {
+	#conversations {
+		.convo-snippet {
+			.time {
+				@extend .semi-bold;
+
+				font-size: 12px;
+			}
+		}
+	}
+}

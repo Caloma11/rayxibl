@@ -14,10 +14,10 @@
     <% end %>
   </section>
 
-  <div>
+  <section id="conversations" class="mx-3">
     <% @conversations.each do |conversation| %>
       <% other_person ||= conversation.other_person(current_user) %>
       <%= render partial: "conversations/snippet", locals: { conversation: conversation, other_person: other_person } %>
     <% end %>
-  </div>
+  </section>
 </div>
