@@ -19,6 +19,8 @@ class Profile < ApplicationRecord
   validates :profession, :location, :overview, presence: true
 
   def average_rating
+    return 0 if ratings.size.zero?
+
     ratings.pluck(:value).sum.to_f / ratings.size
   end
 end
