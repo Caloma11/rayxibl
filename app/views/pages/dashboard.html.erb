@@ -20,8 +20,14 @@
       <%= link_to "View all", "#" %>
     </div>
     <div class="booking-cards">
-      <% current_user.manager.bookings.includes(profile: [user: :avatar_attachment]).each do |booking| %>
-        <%= render partial: "bookings/card", locals: { booking: booking } %>
+      <% if current_user.freelancer? %>
+        <% current_user.profile.bookings.includes(profile: [user: :avatar_attachment]).each do |booking| %>
+          <%= render partial: "bookings/freelancer_card", locals: { booking: booking } %>
+        <% end %>
+      <% else %>
+        <% current_user.manager.bookings.includes(profile: [user: :avatar_attachment]).each do |booking| %>
+          <%= render partial: "bookings/manager_card", locals: { booking: booking } %>
+        <% end %>
       <% end %>
     </div>
   </section>
