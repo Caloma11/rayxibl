@@ -5,7 +5,7 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    @conversation = Conversation.find(params[:id])
+    @conversation = Conversation.includes(messages: [:user]).find(params[:id])
     authorize @conversation
     @other_person = @conversation.other_person(current_user)
     @message = Message.new
