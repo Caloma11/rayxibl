@@ -6,7 +6,7 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
-  devise_for :users, controllers: { confirmations: 'confirmations' }
+  devise_for :users, controllers: { confirmations: 'confirmations', invitations: 'users/invitations' }
 
   get "/dashboard", to: "pages#dashboard"
   resources :bookings, only: %i[show]
