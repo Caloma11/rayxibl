@@ -18,7 +18,18 @@ class Profile < ApplicationRecord
 
   validates :profession, :location, :overview, presence: true
 
+  after_create :connect_with_inviter
+
   def average_rating
-    ratings.pluck(:value).sum.to_f / ratings.size
+    return 0 if ratings.size.zero?
+
+    ratings.count(:value).to_f / ratings.size
+  end
+
+  private
+
+  def connect_with_inviter
+    return unless user.invited_by
+    Connection.create!(profile: self, company: user.invited_by.company)
   end
 end

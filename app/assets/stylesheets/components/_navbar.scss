@@ -1,7 +1,11 @@
 nav.navbar {
+	position: sticky;
+	bottom: 0;
+	background: white;
 	display: flex;
 	justify-content: space-between;
-	padding: 20px 40px;
+	padding: 10px 40px;
+	border-top: 1px solid #f4f6f9;
 
 	a.nav-link {
 		img.nav-icon {

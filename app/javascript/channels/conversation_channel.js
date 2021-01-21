@@ -3,13 +3,14 @@ import consumer from "./consumer";
 const initConversationCable = () => {
 	const messagesContainer = document.getElementById("messages");
 	if (messagesContainer) {
-		const id = messagesContainer.dataset.conversationId;
-
+		const { conversationId, currentUserId } = messagesContainer.dataset;
 		consumer.subscriptions.create(
-			{ channel: "ConversationChannel", id: id },
+			{ channel: "ConversationChannel", id: conversationId },
 			{
 				received(data) {
-					messagesContainer.insertAdjacentHTML("beforeend", data);
+					if (data.sender_id != currentUserId) {
+						messagesContainer.insertAdjacentHTML("beforeend", data.partial);
+					}
 				}
 			}
 		);

@@ -33,12 +33,17 @@
 	@extend .mt-0;
 }
 
-.noMargin {
+.noMargin,
+.m-0 {
 	margin: 0;
 }
 
 .mt-3 {
 	margin-top: 16px;
+}
+
+.mr-1 {
+	margin-right: 4px;
 }
 
 .mr-3 {
@@ -63,6 +68,10 @@
 	margin-top: 12px;
 }
 
+.ml-1 {
+	margin-left: 4px;
+}
+
 .ml-3 {
 	margin-left: 16px;
 }
@@ -76,6 +85,10 @@
 }
 
 // Padding
+.pt-3 {
+	padding-top: 16px;
+}
+
 .pl-0 {
 	padding-left: 0;
 }

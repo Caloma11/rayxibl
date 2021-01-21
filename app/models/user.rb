@@ -3,7 +3,7 @@ class User < ApplicationRecord
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
 
   has_one_attached :avatar
@@ -24,5 +24,13 @@ class User < ApplicationRecord
     Connection.find_by(company: user.manager&.company, profile: self.profile) ||
     Connection.find_by(company: self.manager&.company, profile: user.profile) ||
     false
+  end
+
+  def conversation_with(other)
+    if manager?
+      Conversation.find_by(manager: manager, profile: other.profile)
+    else
+      Conversation.find_by(manager: other.manager, profile: profile)
+    end
   end
 end

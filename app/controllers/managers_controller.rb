@@ -30,6 +30,6 @@ class ManagersController < ApplicationController
   private
 
   def manager_params
-    params.require(:manager).permit(:job_title, company_attributes: {})
+    params.require(:manager).permit(:job_title, :company_id, company_attributes: {})
   end
 end
