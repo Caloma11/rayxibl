@@ -25,4 +25,12 @@ class User < ApplicationRecord
     Connection.find_by(company: self.manager&.company, profile: user.profile) ||
     false
   end
+
+  def conversation_with(other)
+    if manager?
+      Conversation.find_by(manager: manager, profile: other.profile)
+    else
+      Conversation.find_by(manager: other.manager, profile: profile)
+    end
+  end
 end

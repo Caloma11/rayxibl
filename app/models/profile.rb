@@ -21,7 +21,9 @@ class Profile < ApplicationRecord
   after_create :connect_with_inviter
 
   def average_rating
-    ratings.pluck(:value).sum.to_f / ratings.size
+    return 0 if ratings.size.zero?
+
+    ratings.count(:value).to_f / ratings.size
   end
 
   private
