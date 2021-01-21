@@ -1,10 +1,17 @@
-<div>
-  <% navbar_links(current_user).each do |link| %>
-    <div>
-      <%= link_to link[:url] do %>
-        <%= image_tag link[:icon], alt: link[:text] %>
-        <span><%= link[:text] %></span>
+<nav class="navbar">
+  <% if user_signed_in? %>
+    <% if current_user.manager? %>
+      <% NavbarLinks::MANAGER_NAVBAR_LINKS.each do |link| %>
+        <%= link_to link[:url] do %>
+          <%= image_tag link[:icon], alt: link[:text] %>
+        <% end %>
       <% end %>
-    </div>
+    <% else %>
+      <% NavbarLinks::FREELANCER_NAVBAR_LINKS.each do |link| %>
+        <%= link_to link[:url], class: "nav-link" do %>
+          <%= image_tag link[:icon], alt: link[:text], class: "nav-icon" %>
+        <% end %>
+      <% end %>
+    <% end %>
   <% end %>
-</div>
+</nav>

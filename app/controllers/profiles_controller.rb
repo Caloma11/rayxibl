@@ -2,6 +2,8 @@ class ProfilesController < ApplicationController
   before_action :set_profile, only: :show
 
   def index
+    redirect_to dashboard_path if current_user.freelancer?
+
     if params[:network]
       skip_policy_scope
       @profiles = current_user.manager.network.includes(user: [:avatar_attachment])

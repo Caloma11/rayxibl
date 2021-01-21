@@ -2,7 +2,7 @@
   <h1>My profile</h1>
   <div class="profileHeader flex">
     <% if current_user.avatar.attached? %>
-      <%= image_tag current_user.avatar, alt: "alttext", class: "profileAvatar rounded-circle" , height: 64, width: 64  %>
+      <%= image_tag current_user.avatar, alt: "alttext", class: "avatar avatar-square huge" , height: 64, width: 64  %>
     <% else %>
       <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 64, width: 64 %>
     <% end %>

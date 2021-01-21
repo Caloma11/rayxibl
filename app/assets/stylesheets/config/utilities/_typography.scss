@@ -10,6 +10,10 @@
 .textGray {
 	color: $gray;
 }
+
+.textBlack {
+	color: black;
+}
 // End of text color
 
 // Text sizing
@@ -33,4 +37,8 @@
 
 .bold {
 	font-weight: 700;
+}
+
+.no-decoration {
+	text-decoration: none;
 }
