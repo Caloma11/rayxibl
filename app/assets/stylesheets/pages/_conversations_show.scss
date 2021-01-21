@@ -2,4 +2,14 @@
 	#messages {
 		@extend .px-3;
 	}
+
+	#new_message {
+		@extend .pt-3, .px-3;
+
+		border-top: 1px solid rgba(18, 18, 23, 0.1);
+
+		#message_content {
+			width: 90%;
+		}
+	}
 }
