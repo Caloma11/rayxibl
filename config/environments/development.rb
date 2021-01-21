@@ -2,7 +2,7 @@ Rails.application.configure do
   ActiveSupport::LogSubscriber.colorize_logging = true
   # Settings specified here will take precedence over those in config/application.rb.
 
-
+  config.hosts << /.*.ngrok.io/
   # Define host for email links:
   config.action_mailer.default_url_options = { :host => "http://localhost:3000" }
 
