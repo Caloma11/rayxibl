@@ -27,10 +27,33 @@
 
 .profileButtons {
   .btn-lg {
-    display: block;
     flex-grow: 1;
     border-radius: 8px;
     text-align: center;
+  }
+
+  a {
+    img {
+      @extend .mr-2;
+      height: 32px;
+      width: 32px;
+    }
+
+    a::first-child {
+      color: white;
+    }
+
+    &:visited {
+      color: inherit;
+    }
+
+    p {
+
+    } letter-spacing: 2px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }
 
