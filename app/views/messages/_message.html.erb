@@ -1,4 +1,7 @@
 <div class="message-container <%= user_is_author ? "right" : "left" %>" id="message-<%= message.id %>">
-  <p><%= message.content %></p>
+  <div class="message-wrapper">
+    <p class="content"><%= message.content %></p>
+    <div class="triangle"></div>
+  </div>
   <span class="time"><%= message.created_at.strftime("%I:%M %p") %></span>
 </div>
