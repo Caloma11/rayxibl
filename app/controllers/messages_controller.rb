@@ -7,10 +7,6 @@ class MessagesController < ApplicationController
     authorize @message
 
     if @message.save
-      ConversationChannel.broadcast_to(
-        @conversation,
-        render_to_string(partial: "message", locals: { message: @message })
-      )
       redirect_to conversation_path(@conversation, anchor: "message-#{@message.id}")
     else
       render "conversations/show"

@@ -20,15 +20,13 @@
     </div>
   </section>
 
-  <section class="mt-2" id="messages" data-conversation-id="<%= @conversation.id %>">
+  <section class="mt-2" id="messages" data-current-user-id="<%= current_user.id %>" data-conversation-id="<%= @conversation.id %>">
     <% @conversation.messages.each do |message| %>
-      <%= render partial: "messages/message", locals: { message: message } %>
+      <%= render partial: "messages/message", locals: { message: message, user_is_author: message.user == current_user } %>
     <% end %>
   </section>
 
-  <section>
-    <%= simple_form_for [@conversation, @message], remote: true do |f| %>
-      <%= f.input :content, as: :string, label: false, placeholder: "Type a message..." %>
-    <% end %>
-  </section>
+  <%= simple_form_for [@conversation, @message], remote: true do |f| %>
+    <%= f.input :content, as: :string, label: false, placeholder: "Type a message...", input_html: { class: "rounded-pill" } %>
+  <% end %>
 </div>
