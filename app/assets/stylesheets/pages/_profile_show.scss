@@ -3,7 +3,8 @@
   height: 40vh;
   background-position: center;
   background-size: cover;
-  position: relative;
+  // position: absolute;
+  top: 0;
 }
 
 .profileHeader {
@@ -11,19 +12,26 @@
   @extend .justify-content-between;
   @extend .items-center;
   @extend .p-3;
-  position: absolute;
-  bottom: 24px;
+  position: relative;
   width: 100%;
   background-color: white;
-  bottom: -64px;
   border-top-right-radius: 40px;
   box-sizing: border-box;
+  bottom: 32px;
   h1 {
-    font-size: 32px;
+    font-size: 24px;
     @extend .mb-0;
     @extend .mt-2;
   }
+}
 
+.profileButtons {
+  .btn-lg {
+    display: block;
+    flex-grow: 1;
+    border-radius: 8px;
+    text-align: center;
+  }
 }
 
 // For the bottom left rounded corner of the banner
@@ -32,15 +40,16 @@
   content: "";
   position: absolute;
   background-color: transparent;
-  bottom: 134px;
+  // bottom: 134px;
+  top: -64px;
   left: 0px;
-  height: 63px;
+  height: 64px;
   width: 39px;
   border-bottom-left-radius: 58px;
   box-shadow: -3px 28px 0px -1px white;
 }
 
 .profileButtons {
-  @extend .mt-5;
   @extend .p-3;
+  @extend .pt-0;
 }
