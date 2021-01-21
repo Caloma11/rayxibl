@@ -3,7 +3,6 @@
   height: 40vh;
   background-position: center;
   background-size: cover;
-  // border-bottom-left-radius: 140px;
   position: relative;
 }
 
@@ -39,4 +38,9 @@
   width: 39px;
   border-bottom-left-radius: 58px;
   box-shadow: -3px 28px 0px -1px white;
+}
+
+.profileButtons {
+  @extend .mt-5;
+  @extend .p-3;
 }

@@ -7,7 +7,7 @@
     <div class="profileHeader">
       <div class="profileHeaderRight">
         <h1><%= @profile.user.display_name %></h1>
-        <p><%= @profile.profession %>, <%= @profile.location %></p>
+        <p class="textGray"><%= @profile.profession %>, <%= @profile.location %></p>
       </div>
       <div class="profileHeaderLeft">
         ***** (14)
@@ -16,31 +16,27 @@
   </div>
 
 
-  <div class="profileButtons">
-    <% if @connection %>
-      <%= link_to "Add Note", "#writeYourNote" %>
-    <% else %>
-      <%= link_to "+Add", "#"  %>
-    <% end %>
-  </div>
+    <%# if @connection %>
+      <%#= link_to "Add Note", "#writeYourNote" %>
+    <%# else %>
+      <%#= link_to "+Add", "#"  %>
+    <%# end %>
 
-  <div class="profileNav flex">
-  </div>
-  <div class="container">
-
-
-    <div class="profileActions flex">
-      <% if current_user.manager? %>
-        <% if @connection %>
-          <%= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
-          <%= link_to "Book", new_profile_booking_path(@profile), class: "mr-3" %>
-        <% else %>
-          <%= link_to "Add to your network", profile_connections_path(@profile), class: "mr-3 btn btn-primary", method: :post %>
-        <% end %>
-        <%= link_to "Message", "#", class: "btn btn-white" %>
+  <div class="profileButtons flex justify-content-between p-3 pt-0">
+    <% if current_user.manager? %>
+      <% if @connection %>
+        <%#= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
+        <%= link_to "Book", new_profile_booking_path(@profile), class: "mr-3", class: "btn btn-primary" %>
+      <% else %>
+        <%= link_to "Add +", profile_connections_path(@profile), class: "mr-3 btn btn-primary", method: :post %>
       <% end %>
-    </div>
+      <%= link_to "Message", "#", class: "btn btn-white" %>
+  <% end %>
 
+  </div>
+
+
+  <div class="container">
 
     <div class="profileSection">
       <h3>Skills</h3>
