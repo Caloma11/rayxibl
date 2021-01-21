@@ -1,12 +1,16 @@
 <div class="job-card shadow rounded-lg p-1 flex justify-content-between">
   <div class="flex">
-    <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659650_1280.png" width="64" height="64" />
+    <% if job.company.logo.attached? %>
+      <%= image_tag job.company.logo.service_url, alt: "company logo", width: 64, height: 64, class: "mr-3 p-2" %>
+    <% else %>
+      <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659650_1280.png" alt="company logo" width="64" height="64" class="mr-3 p-2" />
+    <% end %>
     <div class="job-text flex flex-column justify-content-center">
       <h3 class="noMargin"><%= job.profession %></h3>
       <p class="noMargin"><%= pluralize(job.job_applications.count, 'applicant') %></p>
     </div>
   </div>
-  <div class="job-actions flex items-center ml-3">
+  <div class="job-actions flex items-center mx-3">
     <%= link_to job_path(job) do %>
       <%= image_tag "icons/right-arrow", alt: "right arrow" %>
     <% end %>

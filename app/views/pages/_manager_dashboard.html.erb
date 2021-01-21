@@ -1,19 +1,24 @@
-<div class="active-jobs">
-  <div class="active-job-header">
-    <h3>Active job posts</h3>
-    <%= link_to "View all", "#" %>
-  </div>
-  <div class="active-job-cards">
-    <h4>TODO: Show job cards here</h4>
-  </div>
-</div>
-
 <div class="manager-dashboard-actions">
   <div class="flex items-center">
-    <%= link_to "Email invite", new_user_invitation_path  %>
-    <%= image_tag "icons/mail", alt: "Invite a freelancer" %>
+    <%= link_to new_user_invitation_path, class: "flex items-center" do %>
+      Email invite
+      <%= image_tag "icons/mail", alt: "Invite a freelancer" %>
+    <% end %>
   </div>
-  <%= link_to "CSV upload", "#" %>
   <%= link_to "Browse flxibl", profiles_path %>
-  <%= link_to "Post a job", "#" %>
 </div>
+
+<section>
+  <div class="active-jobs">
+    <div class="flex justify-content-between items-center">
+      <h3>Active job posts</h3>
+      <%= link_to "View all", jobs_path(manager_id: current_user.manager.id) %>
+    </div>
+
+    <div>
+      <% current_user.manager.jobs.order(:created_at).limit(3).each do |job| %>
+        <%= render partial: "jobs/card", locals: { job: job } %>
+      <% end %>
+    </div>
+  </div>
+</section>
