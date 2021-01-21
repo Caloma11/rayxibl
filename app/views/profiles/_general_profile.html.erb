@@ -1,24 +1,33 @@
 <div class="generalProfile">
 
-  <div class="profileNav flex">
-    <h1><%= @profile.user.display_name %></h1>
-    <% if @connection %>
-      <%= link_to "Add Note", "#writeYourNote" %>
-    <% end %>
-  </div>
-  <div class="container">
-    <div class="profileHeader flex">
-      <% if @profile.user.avatar.attached? %>
-        <%= image_tag @profile.user.avatar, alt: "alttext", class: "avatar avatar-square", height: 64, width: 64  %>
-      <% else %>
-        <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 64, width: 64 %>
-      <% end %>
+  <div class="profileBanner" style="background-image: url(<%= avatar_url(@profile) %>)">
+    <div class="mask">
+
+    </div>
+    <div class="profileHeader">
       <div class="profileHeaderRight">
-        <h2><%= @profile.user.display_name %></h2>
-        <p><%= @profile.profession %></p>
-        <p><%= @profile.location %></p>
+        <h1><%= @profile.user.display_name %></h1>
+        <p><%= @profile.profession %>, <%= @profile.location %></p>
+      </div>
+      <div class="profileHeaderLeft">
+        ***** (14)
       </div>
     </div>
+  </div>
+
+
+  <div class="profileButtons">
+    <% if @connection %>
+      <%= link_to "Add Note", "#writeYourNote" %>
+    <% else %>
+      <%= link_to "+Add", "#"  %>
+    <% end %>
+  </div>
+
+  <div class="profileNav flex">
+  </div>
+  <div class="container">
+
 
     <div class="profileActions flex">
       <% if current_user.manager? %>

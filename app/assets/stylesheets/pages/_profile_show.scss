@@ -1,0 +1,42 @@
+.profileBanner {
+  @extend .w-100;
+  height: 40vh;
+  background-position: center;
+  background-size: cover;
+  // border-bottom-left-radius: 140px;
+  position: relative;
+}
+
+.profileHeader {
+  @extend .flex;
+  @extend .justify-content-between;
+  @extend .items-center;
+  @extend .p-3;
+  position: absolute;
+  bottom: 24px;
+  width: 100%;
+  background-color: white;
+  bottom: -64px;
+  border-top-right-radius: 40px;
+  box-sizing: border-box;
+  h1 {
+    font-size: 32px;
+    @extend .mb-0;
+    @extend .mt-2;
+  }
+
+}
+
+// For the bottom left rounded corner of the banner
+// https://itnext.io/how-to-make-a-fancy-inverted-border-radius-in-css-5db048a53f95
+.profileHeader::before {
+  content: "";
+  position: absolute;
+  background-color: transparent;
+  bottom: 134px;
+  left: 0px;
+  height: 63px;
+  width: 39px;
+  border-bottom-left-radius: 58px;
+  box-shadow: -3px 28px 0px -1px white;
+}
