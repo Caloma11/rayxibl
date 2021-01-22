@@ -1,24 +1,12 @@
-# README
+# Future TODO List
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+- In `/profiles`, AJAXify the tab switch (My network & Everyone buttons)
+- When pressing "add to network" (user plus icon) in `/profiles`, AJAXify it so that it gets added instantly in the "My network" section
 
-Things you may want to cover:
+  More on point 2 (nice to have behaviours):
 
-* Ruby version
+  - It should not disappear right away in the "Everyone" section
+  - Newly added person should show up when switching to "My network"
+  - When switching back to "Everyone" tab, person should already disappear
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+- As a freelancer, when you're already in the network of a company, you don't see their job postings under `/jobs` anymore

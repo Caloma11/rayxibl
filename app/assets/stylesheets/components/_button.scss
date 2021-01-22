@@ -13,6 +13,11 @@ a {
 		padding: 8px 16px;
 	}
 
+  &.btn-lg {
+    @extend .btn;
+    padding: 16px 32px;
+  }
+
 	&.btn-primary {
 		color: #fff;
 		background: $dark-blue-gradient;

@@ -28,6 +28,47 @@
 		@extend .px-3;
 
 		display: grid;
-		grid-template-columns: auto auto;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.action-button {
+		@extend .flex, .justify-content-end, .mr-3;
+
+		position: sticky;
+		bottom: 80px;
+		right: 24px;
+
+		.actions {
+			background: rgba(20, 15, 38, 0.5);
+			backdrop-filter: blur(100px);
+			width: 200px;
+			padding: 12px 24px;
+			border-radius: 15px;
+			position: absolute;
+			right: 0;
+			bottom: 80px;
+
+			.action-link {
+				color: white;
+				text-transform: uppercase;
+				border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+				padding: 8px 0;
+			}
+		}
+
+		.trigger {
+			@extend .rounded-circle, .flex, .justify-content-center, .items-center;
+
+			width: 50px;
+			height: 50px;
+			background: rgba(20, 15, 38, 0.5);
+			backdrop-filter: blur(100px);
+			font-size: 40px;
+			color: white;
+
+			.toggler {
+				transform: rotate(45deg);
+			}
+		}
 	}
 }

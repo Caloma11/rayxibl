@@ -23,8 +23,7 @@ class Profile < ApplicationRecord
 
   def average_rating
     return 0 if ratings.size.zero?
-
-    ratings.count(:value).to_f / ratings.size
+    ratings.pluck(:value).sum.to_f / ratings.size
   end
 
   private
