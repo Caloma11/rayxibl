@@ -7,9 +7,13 @@ class ConnectionsController < ApplicationController
     @connection = Connection.new(profile: @profile, company: @company)
     authorize @connection
     if @connection.save
-      redirect_to profile_path(@profile)
+      last_url = Rails.application.routes.recognize_path(request.referrer)
+      if last_url[:action] == "index" && last_url[:controller] == "profiles"
+        redirect_to profiles_path
+      else
+        redirect_to profile_path(@profile)
+      end
     else
-      binding.pry
       render 'profiles/show'
     end
   end

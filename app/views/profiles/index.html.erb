@@ -1,4 +1,4 @@
-<div class="profiles-index">
+<div class="profiles-index relative">
   <section class="head">
     <button>
       <%= image_tag "icons/search.svg", alt: "search" %>
@@ -23,7 +23,8 @@
       <% if @profiles.size.positive? %>
         <% @profiles.each do |profile| %>
           <% conversation ||= current_user.conversation_with(profile.user) %>
-          <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation } %>
+          <% connection ||= current_user.find_connection(profile.user) %>
+          <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation, add_to_network: !connection.present? } %>
         <% end %>
       <% else %>
         <h2>You don't have any freelancers in your network</h2>
@@ -31,8 +32,12 @@
     <% else %>
       <% @profiles.each do |profile| %>
         <% conversation ||= current_user.conversation_with(profile.user) %>
-        <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation } %>
+        <% connection ||= current_user.find_connection(profile.user) %>
+        <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation, add_to_network: !connection.present? } %>
       <% end %>
+
+      <%= javascript_pack_tag "components/ActionButton" %>
     <% end %>
   </section>
 </div>
+
