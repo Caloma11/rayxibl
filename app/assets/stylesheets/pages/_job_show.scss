@@ -1,6 +1,6 @@
 .job-show {
 	section {
-		&.applicant-avatars {
+		.applicant-avatars {
 			@extend .flex, .justify-content-center;
 
 			.small-avatar {
