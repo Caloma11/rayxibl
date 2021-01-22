@@ -1,19 +1,34 @@
 <div class="job-show">
-  <div class="header">
-    <%= render partial: "shared/back_link", locals: { text: "Job details" } %>
+  <div class="mx-3 pt-3 flex justify-content-between items-center">
+    <div class="flex items-center">
+      <%= link_to :back do %>
+        <%= image_tag "icons/left-arrow.svg", alt: "back link", width: 16, height: 16 %>
+      <% end %>
+      <div class="flex items-center ml-3">
+        <% if @job.company.logo.attached? %>
+          <%= image_tag @job.company.logo.service_url, alt: "company logo", width: 40, height: 40 %>
+        <% else %>
+          <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "company logo", width: 40, height: 40 %>
+        <% end %>
+        <div class="ml-3">
+          <h3 class="m-0"><%= @job.profession %></h3>
+          <p class="m-0"><%= @job.company.name %></p>
+        </div>
+      </div>
+    </div>
+    <%= image_tag "icons/more.svg", alt: "more", width: 24, height: 24 %>
   </div>
 
-  <section class="flex justify-content-between">
-    <% if @job.company.logo.attached? %>
-      <%= image_tag @job.company.logo.service_url, alt: "#{@job.company.name}'s logo", width: 64, height: 64 %>
-    <% else %>
-      <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "dummy company logo", width: 64, height: 64 %>
+  <section class="applicant-avatars">
+    <% @job.job_applications.includes(profile: [user: :avatar_attachment]).limit(5).each do |ja| %>
+      <%= render partial: "profiles/small_avatar", locals: { profile: ja.profile } %>
     <% end %>
-    <div>
-      <h5><%= @job.profession %></h5>
-      <p><%= @job.company.name %></p>
+    <% last_application ||= @job.job_applications.last %>
+    <div class="small-avatar">
+      <div class="last-avatar" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= avatar_url(last_application.profile) %>');">
+        + <%= @job.job_applications.count - 5 %>
+      </div>
     </div>
-    <p>TODO: Job status to be added</p>
   </section>
 
   <section>
