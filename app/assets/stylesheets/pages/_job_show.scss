@@ -35,5 +35,21 @@
 				}
 			}
 		}
+
+		&.text-block {
+			@extend .pt-3;
+
+			& > p {
+				@extend .mb-1, .mt-0;
+
+				color: #3b3b4d;
+			}
+
+			.skills {
+				.subtitle {
+					color: $light-black;
+				}
+			}
+		}
 	}
 }

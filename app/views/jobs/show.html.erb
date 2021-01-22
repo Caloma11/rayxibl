@@ -39,23 +39,21 @@
     </div>
   </section>
 
-  <section>
-    <p>Maximum budget <%= @job.rate %></p>
+  <section class="text-block mx-3 uppercase">
+    <p>Maximum budget <%= @job.rate %> <%= @job.price_type %></p>
+    <p><%= @job.start_date.strftime("%d %b") %> - <%= @job.end_date.strftime("%d %b") %>, <%= @job.start_time.strftime("%H:%M") %> - <%= @job.end_time.strftime("%H:%M") %></p>
+    <p><%= @job.location %></p>
+    <div class="skills">
+      <p class="subtitle">Key Skills</p>
+      <div class="skill-pills">
+        <% @job.skill_list.each do |skill| %>
+          <div class="skill-pill"><%= skill %></div>
+        <% end %>
+      </div>
+    </div>
   </section>
 
-  <section class="details">
-    <div class="flex">
-      <p class="mb-0 bold textGray">Location</p>
-      <p class="mb-0 ml-3 textGray"><%= @job.location %></p>
-    </div>
-    <div class="flex">
-      <p class="mb-0 bold textGray">Expertise</p>
-      <p class="mb-0 ml-3 textGray"><%= @job.expertise %></p>
-    </div>
-    <div class="flex">
-      <p class="mb-0 bold textGray">Rate</p>
-      <p class="mb-0 ml-3 textGray"><%= @job.rate %></p>
-    </div>
+  <section class="mx-3">
     <p><%= @job.description %></p>
   </section>
 </div>
