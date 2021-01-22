@@ -35,8 +35,9 @@
         <% connection ||= current_user.find_connection(profile.user) %>
         <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation, add_to_network: !connection.present? } %>
       <% end %>
+
+      <%= javascript_pack_tag "components/ActionButton" %>
     <% end %>
   </section>
 </div>
 
-<%= javascript_pack_tag "components/ActionButton" %>

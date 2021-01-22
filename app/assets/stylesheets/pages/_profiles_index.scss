@@ -32,10 +32,10 @@
 	}
 
 	.action-button {
-		@extend .flex, .justify-content-end;
+		@extend .flex, .justify-content-end, .mr-3;
 
 		position: sticky;
-		bottom: 40px;
+		bottom: 80px;
 		right: 24px;
 
 		.actions {
