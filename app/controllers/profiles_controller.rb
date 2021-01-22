@@ -7,6 +7,11 @@ class ProfilesController < ApplicationController
     if params[:network]
       skip_policy_scope
       @profiles = current_user.manager.network.includes(user: [avatar_attachment: :blob])
+    elsif params[:job_id]
+      @profiles = policy_scope(Profile)
+                    .joins(job_applications: :job)
+                    .includes(user: { avatar_attachment: :blob })
+                    .where(job_applications: { job_id: params[:job_id] })
     else
       @profiles = policy_scope(Profile).includes(user: [avatar_attachment: :blob])
     end
