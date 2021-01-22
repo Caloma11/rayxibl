@@ -20,18 +20,27 @@
   </div>
 
   <section class="mx-3">
-    <%= link_to profiles_path(job_id: @job.id), class: "btn btn-secondary my-3" do %>
-      <div class="flex justify-content-center items-center">
-        <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
-        <span class="textWhite">View applicants (<%= @job.job_applications.count %>)</span>
-      </div>
+    <% if current_user.manager? %>
+      <%= link_to profiles_path(job_id: @job.id), class: "btn btn-secondary my-3" do %>
+        <div class="flex justify-content-center items-center">
+          <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
+          <span class="textWhite">View applicants (<%= @job.job_applications.count %>)</span>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to job_job_applications_path(@job, job_application: { profile_id: current_user.profile.id }), method: :post, class: "btn btn-secondary my-3" do %>
+        <div class="flex justify-content-center items-center">
+          <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
+          <span class="textWhite">Apply</span>
+        </div>
+      <% end %>
     <% end %>
     <div class="applicant-avatars">
       <% @job.job_applications.includes(profile: [user: :avatar_attachment]).limit(5).each do |ja| %>
         <%= render partial: "profiles/small_avatar", locals: { profile: ja.profile } %>
       <% end %>
       <% last_application ||= @job.job_applications.last %>
-      <% if last_application %>
+      <% if last_application && (@job.job_applications.count - 5).positive? %>
         <div class="small-avatar">
           <div class="last-avatar" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= avatar_url(last_application.profile) %>');">
             + <%= @job.job_applications.count - 5 %>
