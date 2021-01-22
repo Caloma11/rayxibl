@@ -40,15 +40,7 @@
   </section>
 
   <section>
-    <div class="mb-3">
-      <button>Description</button>
-      <button>Applicants (<%= @job.job_applications.count %>)</button>
-    </div>
-    <div class="mb-3">
-      <% @job.skill_list.each do |skill| %>
-        <span class="pill"><%= skill %></span>
-      <% end %>
-    </div>
+    <p>Maximum budget <%= @job.rate %></p>
   </section>
 
   <section class="details">
