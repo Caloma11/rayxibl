@@ -40,10 +40,10 @@
     <% end %>
     <div class="flex items-center justify-content-center mt-3">
       <% profile.average_rating.to_i.times do %>
-        <%= image_tag "icons/colored-rating.svg", alt: "rating" %>
+        <%= image_tag "icons/colored-rating.svg", alt: "rating", class: "star" %>
       <% end %>
       <% (5 - profile.average_rating.to_i).times do %>
-        <%= image_tag "icons/rating.svg", alt: "rating" %>
+        <%= image_tag "icons/rating.svg", alt: "rating", class: "star" %>
       <% end %>
       <span class="rating-size">(<%= profile.ratings.size %>)</span>
     </div>
