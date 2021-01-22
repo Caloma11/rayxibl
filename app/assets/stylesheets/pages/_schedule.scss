@@ -1,0 +1,26 @@
+#calendar-page {
+	#calendar {
+		.calendarContainer {
+			display: flex;
+
+			p {
+				margin: 0;
+			}
+
+			.week {
+				background: lightblue;
+				height: 80px;
+				display: flex;
+
+				&.profile {
+					background: rgb(120, 120, 196);
+				}
+
+				.day {
+					border: 2px solid red;
+					padding: 16px;
+				}
+			}
+		}
+	}
+}
