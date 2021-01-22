@@ -1,0 +1,18 @@
+<div class="booking-card shadow rounded-lg p-1 flex justify-content-between mb-3">
+  <div class="flex">
+    <% if booking.profile.user.avatar.attached? %>
+      <%= image_tag booking.profile.user.avatar.service_url, alt: "company logo", width: 64, height: 64, class: "mr-3 p-2" %>
+    <% else %>
+      <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659650_1280.png" alt="company logo" width="64" height="64" class="mr-3 p-2" />
+    <% end %>
+    <div class="booking-text flex flex-column justify-content-center">
+      <h3 class="noMargin"><%= booking.title %></h3>
+      <p class="noMargin"><%= booking.profile.user.display_name %></p>
+    </div>
+  </div>
+  <div class="booking-actions flex items-center mx-3">
+    <%= link_to booking_path(booking) do %>
+      <%= image_tag "icons/right-arrow", alt: "right arrow" %>
+    <% end %>
+  </div>
+</div>

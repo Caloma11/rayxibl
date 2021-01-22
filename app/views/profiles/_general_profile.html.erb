@@ -1,41 +1,61 @@
 <div class="generalProfile">
 
-  <div class="profileNav flex">
-    <h1><%= @profile.user.display_name %></h1>
-    <% if @connection %>
-      <%= link_to "Add Note", "#writeYourNote" %>
-    <% end %>
+  <div class="profileBanner" style="background-image: url(<%= avatar_url(@profile) %>)">
+
   </div>
-  <div class="container">
-    <div class="profileHeader flex">
-      <% if @profile.user.avatar.attached? %>
-        <%= image_tag @profile.user.avatar, alt: "alttext", class: "avatar avatar-square", height: 64, width: 64  %>
-      <% else %>
-        <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 64, width: 64 %>
-      <% end %>
-      <div class="profileHeaderRight">
-        <h2><%= @profile.user.display_name %></h2>
-        <p><%= @profile.profession %></p>
-        <p><%= @profile.location %></p>
+  <div class="profileHeader">
+    <div class="profileHeaderRight">
+      <h1><%= @profile.user.display_name %></h1>
+      <p class="textGray"><%= @profile.profession %>, <%= @profile.location %></p>
+    </div>
+    <div class="profileHeaderLeft">
+      <div class="flex items-center justify-content-center mt-3">
+        <% @profile.average_rating.to_i.times do %>
+          <%= image_tag "icons/colored-rating.svg", alt: "rating" %>
+        <% end %>
+        <% (5 - @profile.average_rating.to_i).times do %>
+          <%= image_tag "icons/rating.svg", alt: "rating" %>
+        <% end %>
+        <span class="rating-size">(<%= @profile.ratings.size %>)</span>
       </div>
     </div>
+  </div>
 
-    <div class="profileActions flex">
-      <% if current_user.manager? %>
-        <% if @connection %>
-          <%= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
-          <%= link_to "Book", new_profile_booking_path(@profile), class: "mr-3" %>
-        <% else %>
-          <%= link_to "Add to your network", profile_connections_path(@profile), class: "mr-3 btn btn-primary", method: :post %>
+  <div class="profileButtons flex justify-content-around p-3 pt-0">
+    <% if current_user.manager? %>
+      <% if @connection %>
+        <%#= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
+        <%= link_to new_profile_booking_path(@profile), class: "mr-3", class: "btn-lg px-0 btn-primary" do %>
+          <%= image_tag "icons/schedule.svg", alt: "Book user" %>
+          <p class="textWhite">BOOK</p>
         <% end %>
-        <%= link_to "Message", "#", class: "btn btn-white" %>
+      <% else %>
+        <%= link_to profile_connections_path(@profile), class: "mr-3 btn-lg px-0 btn-primary", method: :post  do %>
+          <%= image_tag "icons/user-plus.svg", alt: "Add user" %>
+          <p class="textWhite">ADD</p>
+        <% end %>
       <% end %>
-    </div>
+      <div class="spacer">
 
+      </div>
+      <%= link_to "#", class: "btn-lg px-0 btn-white" do %>
+        <%= image_tag "icons/message.svg", alt: "Messafe" %>
+        <p>MESSAGE</p>
+      <% end %>
+  <% end %>
+
+  </div>
+
+
+  <div class="container">
 
     <div class="profileSection">
-      <h3>Skills</h3>
-      <p><%= @profile.skill_list %></p>
+      <h3 class="textGray">Key kills</h3>
+      <div class="flex justify-content-between">
+        <% @profile.skill_list.each do |skill| %>
+          <span><%= skill %></span>
+        <% end %>
+      </div>
     </div>
 
     <div class="profileSection">

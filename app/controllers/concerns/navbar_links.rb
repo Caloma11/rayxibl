@@ -2,19 +2,19 @@ module NavbarLinks
   ROUTES = Rails.application.routes.url_helpers
   MANAGER_NAVBAR_LINKS = [
     {
-      icon: "icons/dashboard",
+      icon: "icons/dashboard.svg",
       url: ROUTES.dashboard_path
     },
     {
-      icon: "icons/schedule",
+      icon: "icons/schedule.svg",
       url: "#"
     },
     {
-      icon: "icons/people",
+      icon: "icons/people.svg",
       url: ROUTES.profiles_path
     },
     {
-      icon: "icons/inbox",
+      icon: "icons/inbox.svg",
       url: ROUTES.conversations_path
     }
   ].freeze
@@ -22,22 +22,22 @@ module NavbarLinks
   FREELANCER_NAVBAR_LINKS = [
     {
       text: "Dashboard",
-      icon: "icons/dashboard",
+      icon: "icons/dashboard.svg",
       url: ROUTES.dashboard_path
     },
     {
       text: "Inbox",
-      icon: "icons/inbox",
+      icon: "icons/inbox.svg",
       url: ROUTES.conversations_path
     },
     {
       text: "Clients",
-      icon: "icons/people",
+      icon: "icons/people.svg",
       url: ROUTES.managers_path
     },
     {
       text: "Gigs",
-      icon: "icons/gigs",
+      icon: "icons/gigs.svg",
       url: "#"
     }
   ].freeze
