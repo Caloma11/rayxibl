@@ -2,11 +2,11 @@
   <div class="top">
     <% if add_to_network %>
       <%= link_to profile_connections_path(profile), method: :post, class: "action" do %>
-        <%= image_tag "icons/person-add", alt: "connection add", class: "icon" %>
+        <%= image_tag "icons/person-add.svg", alt: "connection add", class: "icon" %>
       <% end %>
     <% else %>
       <%= link_to "#", class: "action" do %>
-        <%= image_tag "icons/calendar", alt: "calendar", class: "icon" %>
+        <%= image_tag "icons/calendar.svg", alt: "calendar", class: "icon" %>
       <% end %>
     <% end %>
     <% if profile.user.avatar.attached? %>
