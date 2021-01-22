@@ -1,21 +1,17 @@
 .profile-card {
 	border-bottom: 1px solid #f4f6f9;
-	padding-top: 16px;
-	padding-bottom: 16px;
-
-	&:nth-child(even) {
-		padding-left: 16px;
-	}
+	padding: 16px;
 
 	&:nth-child(odd) {
 		border-right: 1px solid#f4f6f9;
-		padding-right: 16px;
 	}
 
 	.top {
 		@extend .flex, .items-start, .justify-content-between;
 
 		.action {
+			padding: 0;
+
 			.icon {
 				height: 24px;
 				width: 24px;
