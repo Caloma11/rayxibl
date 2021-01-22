@@ -37,4 +37,8 @@ input[type="submit"] {
 	&.btn-float {
 		background: transparent;
 	}
+
+	&[disabled] {
+		filter: grayscale(80%);
+	}
 }

@@ -28,11 +28,20 @@
         </div>
       <% end %>
     <% else %>
-      <%= link_to job_job_applications_path(@job, job_application: { profile_id: current_user.profile.id }), method: :post, class: "btn btn-secondary my-3" do %>
-        <div class="flex justify-content-center items-center">
-          <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
-          <span class="textWhite">Apply</span>
-        </div>
+      <% if JobApplication.find_by(job: @job, profile: current_user.profile) %>
+        <button disabled class="btn btn-secondary my-3">
+          <div class="flex justify-content-center items-center">
+            <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
+            <span class="textWhite">You have already applied to this job</span>
+          </div>
+        </button>
+      <% else %>
+        <%= link_to job_job_applications_path(@job, job_application: { profile_id: current_user.profile.id }), method: :post, class: "btn btn-secondary my-3" do %>
+          <div class="flex justify-content-center items-center">
+            <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
+            <span class="textWhite">Apply</span>
+          </div>
+        <% end %>
       <% end %>
     <% end %>
     <div class="applicant-avatars">
