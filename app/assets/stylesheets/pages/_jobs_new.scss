@@ -1,0 +1,37 @@
+.jobs-new {
+	section {
+		.icon {
+			width: 16px;
+			height: 16px;
+
+			&.more {
+				width: 24px;
+				height: 24px;
+			}
+		}
+
+		&.content {
+			#new_job {
+				.separator {
+					@extend .pt-3;
+
+					border-top: 1px solid #f4f6f9;
+				}
+
+				button[type="submit"] {
+					@extend .w-100;
+
+					img {
+						height: 24px;
+					}
+
+					span {
+						@extend .ml-3;
+
+						font-size: 16px;
+					}
+				}
+			}
+		}
+	}
+}
