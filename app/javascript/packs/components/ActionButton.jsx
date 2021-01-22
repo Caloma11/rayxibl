@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ReactDOM from "react-dom";
+import crossSvg from "../images/cross.svg";
 
 const ActionButton = () => {
 	const [open, setOpen] = useState(false);
@@ -25,11 +26,7 @@ const ActionButton = () => {
 			)}
 
 			<button className="trigger" onClick={handleClick}>
-				<img
-					className="toggler"
-					src="/assets/icons/cross.svg"
-					alt="action button"
-				/>
+				<img className="toggler" src={crossSvg} alt="action button" />
 			</button>
 		</div>
 	);
