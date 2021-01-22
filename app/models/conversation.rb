@@ -8,7 +8,7 @@ class Conversation < ApplicationRecord
   scope :by_latest_message, -> {
     joins(:messages)
     .includes([:messages, profile: { user: :avatar_attachment }])
-    .order("messages.created_at DESC")
+    .order("messages.created_at")
     .distinct
   }
 

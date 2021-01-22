@@ -12,7 +12,11 @@
 }
 
 .textBlack {
-	color: black;
+	color: $black;
+}
+
+.textLightBlack {
+	color: $light-black;
 }
 // End of text color
 
@@ -33,6 +37,10 @@
 
 .text-start {
 	text-align: start;
+}
+
+.semi-bold {
+	font-weight: 500;
 }
 
 .bold {

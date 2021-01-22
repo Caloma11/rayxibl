@@ -5,15 +5,19 @@
     <p>Something</p>
   </div>
 
-  <div>
-    <button>My network</button>
-    <button>Everyone</button>
-  </div>
+  <section class="switch flex justify-content-between p-3 my-3" style="background-color: #F9FBFE;">
+    <%= link_to conversations_path(network: true), class: "flex items-center btn #{params[:network] ? 'btn-white' : 'btn-transparent'}" do %>
+      <%= image_tag "icons/person-check", alt: "in network" %> My network
+    <% end %>
+    <%= link_to conversations_path, class: "flex items-center btn #{params[:network] ? 'btn-transparent' : 'btn-white'}" do %>
+      <%= image_tag "icons/people", alt: "everyone" %> Everyone
+    <% end %>
+  </section>
 
-  <div>
+  <section id="conversations" class="mx-3">
     <% @conversations.each do |conversation| %>
       <% other_person ||= conversation.other_person(current_user) %>
       <%= render partial: "conversations/snippet", locals: { conversation: conversation, other_person: other_person } %>
     <% end %>
-  </div>
+  </section>
 </div>
