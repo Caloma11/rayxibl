@@ -1,12 +1,12 @@
 <div class="profile-card">
   <div class="top">
-    <button class="action"><%= image_tag "icons/calendar", alt: "calendar", class: "icon" %></button>
+    <button class="action"><%= image_tag "icons/calendar.svg", alt: "calendar", class: "icon" %></button>
     <% if profile.user.avatar.attached? %>
       <%= image_tag profile.user.avatar.service_url, alt: "profile avatar", width: 64, height: 64 %>
     <% else %>
       <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "profile avatar", height: 64, width: 64 %>
     <% end %>
-    <button class="action"><%= image_tag "icons/more", alt: "more", class: "icon" %></button>
+    <button class="action"><%= image_tag "icons/more.svg", alt: "more", class: "icon" %></button>
   </div>
   <div class="bottom">
     <div class="text-group">
@@ -17,19 +17,19 @@
 
     <% if conversation %>
       <%= link_to conversation_path(conversation), class: "btn btn-white mt-3" do %>
-        <%= image_tag "icons/message", alt: "message" %> Message
+        <%= image_tag "icons/message.svg", alt: "message" %> Message
       <% end %>
     <% else %>
       <%= link_to profile_conversations_path(profile, conversation: { profile_id: profile.id }), method: :post, class: "btn btn-white mt-3" do %>
-        <%= image_tag "icons/message", alt: "message" %> Message
+        <%= image_tag "icons/message.svg", alt: "message" %> Message
       <% end %>
     <% end %>
     <div class="flex items-center justify-content-center mt-3">
       <% profile.average_rating.to_i.times do %>
-        <%= image_tag "icons/colored-rating", alt: "rating" %>
+        <%= image_tag "icons/colored-rating.svg", alt: "rating" %>
       <% end %>
       <% (5 - profile.average_rating.to_i).times do %>
-        <%= image_tag "icons/rating", alt: "rating" %>
+        <%= image_tag "icons/rating.svg", alt: "rating" %>
       <% end %>
       <span class="rating-size">(<%= profile.ratings.size %>)</span>
     </div>
