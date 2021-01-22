@@ -11,10 +11,10 @@
     <div class="profileHeaderLeft">
       <div class="flex items-center justify-content-center mt-3">
         <% @profile.average_rating.to_i.times do %>
-          <%= image_tag "icons/colored-rating", alt: "rating" %>
+          <%= image_tag "icons/colored-rating.svg", alt: "rating" %>
         <% end %>
         <% (5 - @profile.average_rating.to_i).times do %>
-          <%= image_tag "icons/rating", alt: "rating" %>
+          <%= image_tag "icons/rating.svg", alt: "rating" %>
         <% end %>
         <span class="rating-size">(<%= @profile.ratings.size %>)</span>
       </div>
@@ -26,12 +26,12 @@
       <% if @connection %>
         <%#= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
         <%= link_to new_profile_booking_path(@profile), class: "mr-3", class: "btn-lg px-0 btn-primary" do %>
-          <%= image_tag "icons/schedule", alt: "Book user" %>
+          <%= image_tag "icons/schedule.svg", alt: "Book user" %>
           <p class="textWhite">BOOK</p>
         <% end %>
       <% else %>
         <%= link_to profile_connections_path(@profile), class: "mr-3 btn-lg px-0 btn-primary", method: :post  do %>
-          <%= image_tag "icons/user-plus", alt: "Add user" %>
+          <%= image_tag "icons/user-plus.svg", alt: "Add user" %>
           <p class="textWhite">ADD</p>
         <% end %>
       <% end %>
@@ -39,7 +39,7 @@
 
       </div>
       <%= link_to "#", class: "btn-lg px-0 btn-white" do %>
-        <%= image_tag "icons/message", alt: "Messafe" %>
+        <%= image_tag "icons/message.svg", alt: "Messafe" %>
         <p>MESSAGE</p>
       <% end %>
   <% end %>
