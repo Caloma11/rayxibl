@@ -1,6 +1,14 @@
 <div class="profile-card">
   <div class="top">
-    <button class="action"><%= image_tag "icons/calendar", alt: "calendar", class: "icon" %></button>
+    <% if add_to_network %>
+      <%= link_to profile_connections_path(profile), method: :post, class: "action" do %>
+        <%= image_tag "icons/person-add", alt: "connection add", class: "icon" %>
+      <% end %>
+    <% else %>
+      <%= link_to "#", class: "action" do %>
+        <%= image_tag "icons/calendar", alt: "calendar", class: "icon" %>
+      <% end %>
+    <% end %>
     <% if profile.user.avatar.attached? %>
       <%= image_tag profile.user.avatar.service_url, alt: "profile avatar", width: 64, height: 64 %>
     <% else %>
