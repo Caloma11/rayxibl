@@ -9,19 +9,25 @@
         <%= image_tag "icons/calendar.svg", alt: "calendar", class: "icon" %>
       <% end %>
     <% end %>
-    <% if profile.user.avatar.attached? %>
-      <%= image_tag profile.user.avatar.service_url, alt: "profile avatar", width: 64, height: 64 %>
-    <% else %>
-      <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "profile avatar", height: 64, width: 64 %>
+
+    <%= link_to profile_path(profile) do %>
+      <% if profile.user.avatar.attached? %>
+        <%= image_tag profile.user.avatar.service_url, alt: "profile avatar", width: 64, height: 64 %>
+      <% else %>
+        <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "profile avatar", height: 64, width: 64 %>
+      <% end %>
     <% end %>
+
     <button class="action"><%= image_tag "icons/more.svg", alt: "more", class: "icon" %></button>
   </div>
   <div class="bottom">
-    <div class="text-group">
-      <h3 class="name"><%= profile.user.display_name %></h3>
-      <h5 class="profession"><%= profile.profession %></h5>
-      <p class="location"><%= profile.location %></p>
-    </div>
+    <%= link_to profile_path(profile) do %>
+      <div class="text-group">
+        <h3 class="name"><%= profile.user.display_name %></h3>
+        <h5 class="profession"><%= profile.profession %></h5>
+        <p class="location"><%= profile.location %></p>
+      </div>
+    <% end %>
 
     <% if conversation %>
       <%= link_to conversation_path(conversation), class: "btn btn-white mt-3" do %>
@@ -34,10 +40,10 @@
     <% end %>
     <div class="flex items-center justify-content-center mt-3">
       <% profile.average_rating.to_i.times do %>
-        <%= image_tag "icons/colored-rating.svg", alt: "rating" %>
+        <%= image_tag "icons/colored-rating.svg", alt: "rating", class: "star" %>
       <% end %>
       <% (5 - profile.average_rating.to_i).times do %>
-        <%= image_tag "icons/rating.svg", alt: "rating" %>
+        <%= image_tag "icons/rating.svg", alt: "rating", class: "star" %>
       <% end %>
       <span class="rating-size">(<%= profile.ratings.size %>)</span>
     </div>
