@@ -47,6 +47,7 @@
                       required: false %>
           <%= f.input :price_type, collection: Job.price_types.map { |ex| [ex[0].capitalize, ex[0]] }, wrapper_html: { class: "flex flex-column mb-3" } %>
         </div>
+        <%= f.input :attachments, as: :file, input_html: { multiple: true } %>
       </div>
       <div class="separator">
         <div class="mx-3">
