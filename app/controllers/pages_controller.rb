@@ -9,4 +9,7 @@ class PagesController < ApplicationController
       @clients = current_user.profile.managers
     end
   end
+
+  def schedule
+  end
 end
