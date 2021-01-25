@@ -43,7 +43,8 @@
       </div>
 
       <!-- Message Button -->
-      <% if current_user.conversation_with(@profile.user) %>
+      <% conversation ||= current_user.conversation_with(@profile.user) %>
+      <% if conversation %>
         <%= link_to conversation_path(conversation), class: "btn-lg px-0 btn-white" do %>
           <%= image_tag "icons/message.svg", alt: "message" %> Message
         <% end %>
@@ -82,11 +83,6 @@
       <%= render "#{params[:tab] || 'about' }_content" %>
     </div>
 
-  <!-- TODO: Ask adam about how to display expertise and confirm appearance of notes form -->
-   <!--  <div class="profileSection">
-      <h3>Experience Level</h3>
-      <p><%#= @profile.expertise&.capitalize %></p>
-    </div> -->
   </div>
 </div>
 

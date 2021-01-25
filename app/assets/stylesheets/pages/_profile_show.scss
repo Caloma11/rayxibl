@@ -30,6 +30,9 @@
 }
 
 .profileButtons {
+
+  margin-top: -32px; // Removes white space left by relative position of the div above it
+
   .btn-lg {
     flex-grow: 1;
     border-radius: 8px;
