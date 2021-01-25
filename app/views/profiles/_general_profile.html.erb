@@ -22,6 +22,8 @@
   </div>
 
   <!-- Buttons -->
+
+  <!-- Add or Book button -->
   <div class="profileButtons flex justify-content-around p-3 pt-0">
     <% if current_user.manager? %>
       <% if @connection %>
@@ -39,10 +41,19 @@
       <div class="spacer">
 
       </div>
-      <%= link_to "#", class: "btn-lg px-0 btn-white" do %>
-        <%= image_tag "icons/message.svg", alt: "Messafe" %>
-        <p>MESSAGE</p>
+
+      <!-- Message Button -->
+      <% if current_user.conversation_with(@profile.user) %>
+        <%= link_to conversation_path(conversation), class: "btn-lg px-0 btn-white" do %>
+          <%= image_tag "icons/message.svg", alt: "message" %> Message
+        <% end %>
+      <% else %>
+        <%= link_to profile_conversations_path(@profile, conversation: { profile_id: @profile.id }), method: :post, class: "btn-lg px-0 btn-white" do %>
+          <%= image_tag "icons/message.svg", alt: "message" %> Message
+        <% end %>
       <% end %>
+
+
   <% end %>
 
   </div>
@@ -78,3 +89,5 @@
     </div> -->
   </div>
 </div>
+
+
