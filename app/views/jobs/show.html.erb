@@ -1,46 +1,79 @@
 <div class="job-show">
-  <div class="header">
-    <%= render partial: "shared/back_link", locals: { text: "Job details" } %>
+  <div class="mx-3 pt-3 flex justify-content-between items-center">
+    <div class="flex items-center">
+      <%= link_to :back do %>
+        <%= image_tag "icons/left-arrow.svg", alt: "back link", width: 16, height: 16 %>
+      <% end %>
+      <div class="flex items-center ml-3">
+        <% if @job.company.logo.attached? %>
+          <%= image_tag @job.company.logo.service_url, alt: "company logo", width: 40, height: 40 %>
+        <% else %>
+          <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "company logo", width: 40, height: 40 %>
+        <% end %>
+        <div class="ml-3">
+          <h3 class="m-0"><%= @job.profession %></h3>
+          <p class="m-0"><%= @job.company.name %></p>
+        </div>
+      </div>
+    </div>
+    <%= image_tag "icons/more.svg", alt: "more", width: 24, height: 24 %>
   </div>
 
-  <section class="flex justify-content-between">
-    <% if @job.company.logo.attached? %>
-      <%= image_tag @job.company.logo.service_url, alt: "#{@job.company.name}'s logo", width: 64, height: 64 %>
+  <section class="mx-3">
+    <% if current_user.manager? %>
+      <%= link_to profiles_path(job_id: @job.id), class: "btn btn-secondary my-3" do %>
+        <div class="flex justify-content-center items-center">
+          <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
+          <span class="textWhite">View applicants (<%= @job.job_applications.count %>)</span>
+        </div>
+      <% end %>
     <% else %>
-      <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "dummy company logo", width: 64, height: 64 %>
+      <% if JobApplication.find_by(job: @job, profile: current_user.profile) %>
+        <button disabled class="btn btn-secondary my-3">
+          <div class="flex justify-content-center items-center">
+            <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
+            <span class="textWhite">You have already applied to this job</span>
+          </div>
+        </button>
+      <% else %>
+        <%= link_to job_job_applications_path(@job, job_application: { profile_id: current_user.profile.id }), method: :post, class: "btn btn-secondary my-3" do %>
+          <div class="flex justify-content-center items-center">
+            <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
+            <span class="textWhite">Apply</span>
+          </div>
+        <% end %>
+      <% end %>
     <% end %>
-    <div>
-      <h5><%= @job.profession %></h5>
-      <p><%= @job.company.name %></p>
-    </div>
-    <p>TODO: Job status to be added</p>
-  </section>
-
-  <section>
-    <div class="mb-3">
-      <button>Description</button>
-      <button>Applicants (<%= @job.job_applications.count %>)</button>
-    </div>
-    <div class="mb-3">
-      <% @job.skill_list.each do |skill| %>
-        <span class="pill"><%= skill %></span>
+    <div class="applicant-avatars">
+      <% @job.job_applications.includes(profile: [user: :avatar_attachment]).limit(5).each do |ja| %>
+        <%= render partial: "profiles/small_avatar", locals: { profile: ja.profile } %>
+      <% end %>
+      <% last_application ||= @job.job_applications.last %>
+      <% if last_application && (@job.job_applications.count - 5).positive? %>
+        <div class="small-avatar">
+          <div class="last-avatar" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= avatar_url(last_application.profile) %>');">
+            + <%= @job.job_applications.count - 5 %>
+          </div>
+        </div>
       <% end %>
     </div>
   </section>
 
-  <section class="details">
-    <div class="flex">
-      <p class="mb-0 bold textGray">Location</p>
-      <p class="mb-0 ml-3 textGray"><%= @job.location %></p>
+  <section class="text-block mx-3 uppercase">
+    <p>Maximum budget <%= @job.rate %> <%= @job.price_type %></p>
+    <p><%= @job.start_date.strftime("%d %b") %> - <%= @job.end_date.strftime("%d %b") %>, <%= @job.start_time.strftime("%H:%M") %> - <%= @job.end_time.strftime("%H:%M") %></p>
+    <p><%= @job.location %></p>
+    <div class="skills">
+      <p class="subtitle">Key Skills</p>
+      <div class="skill-pills">
+        <% @job.skill_list.each do |skill| %>
+          <div class="skill-pill"><%= skill %></div>
+        <% end %>
+      </div>
     </div>
-    <div class="flex">
-      <p class="mb-0 bold textGray">Expertise</p>
-      <p class="mb-0 ml-3 textGray"><%= @job.expertise %></p>
-    </div>
-    <div class="flex">
-      <p class="mb-0 bold textGray">Rate</p>
-      <p class="mb-0 ml-3 textGray"><%= @job.rate %></p>
-    </div>
+  </section>
+
+  <section class="mx-3">
     <p><%= @job.description %></p>
   </section>
 </div>

@@ -12,6 +12,7 @@ class Profile < ApplicationRecord
   has_many :conversations
   has_many :profile_attachments
   has_many :bookings
+  has_many :job_applications
   # [BE CAREFUL]: Not scoped to a specific manager
   has_many :notes
 
