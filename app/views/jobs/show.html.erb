@@ -61,7 +61,7 @@
 
   <section class="text-block mx-3 uppercase">
     <p>Maximum budget <%= @job.rate %> <%= @job.price_type %></p>
-    <p><%= @job.start_date.strftime("%d %b") %> - <%= @job.end_date.strftime("%d %b") %>, <%= @job.start_time.strftime("%H:%M") %> - <%= @job.end_time.strftime("%H:%M") %></p>
+    <p><%= @job.start_date&.strftime("%d %b") %> - <%= @job.end_date&.strftime("%d %b") %>, <%= @job.start_time&.strftime("%H:%M") %> - <%= @job.end_time&.strftime("%H:%M") %></p>
     <p><%= @job.location %></p>
     <div class="skills">
       <p class="subtitle">Key Skills</p>
