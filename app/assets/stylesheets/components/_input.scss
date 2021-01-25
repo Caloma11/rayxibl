@@ -6,4 +6,7 @@ select {
 	border-radius: $radius-md;
 	padding: 8px;
 	color: #121217;
+  &:focus {
+    outline: $blue auto 1px;
+  }
 }

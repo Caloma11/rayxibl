@@ -2,12 +2,29 @@
 	display: none;
 }
 
+.block {
+  display: block;
+}
+
+.none {
+  display: none;
+}
+
 .flex {
 	display: flex;
 
 	&.flex-column {
 		flex-direction: column;
 	}
+
+  &.flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+}
+
+.flex-shrink-2 {
+  flex-shrink: 2;
 }
 
 .flex-grow-1 {
