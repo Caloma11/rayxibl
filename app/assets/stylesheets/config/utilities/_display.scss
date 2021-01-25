@@ -66,6 +66,14 @@
 	border-radius: 50%;
 }
 
+.rounded-square {
+  @extend .rounded;
+  border-bottom-left-radius: 100%16px;
+  border-bottom-right-radius: 100%16px;
+  border-top-left-radius: 100%16px;
+  border-top-right-radius: 100%16px;
+}
+
 .rounded-pill {
 	border-radius: 100px;
 }

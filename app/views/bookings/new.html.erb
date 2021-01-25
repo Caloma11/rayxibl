@@ -1,4 +1,20 @@
-<h1 class="mx-0" style="text-align: center;">Book <%= @profile.user.display_name %> here</h1>
+<section class="mx-3 mt-4 flex justify-content-between items-center">
+  <%= link_to :back do %>
+    <%= image_tag "icons/cross.svg", alt: "exit", class: "icon", height: 16, width: 16 %>
+  <% end %>
+  <p class="textDarkGray">NEW BOOKING</p>
+  <%= image_tag "icons/more.svg", alt: "more", class: "icon more", height: 24, width: 24 %>
+</section>
+
+<section class="flex p-3">
+  <% if @profile.user.avatar.attached? %>
+    <%= image_tag @profile.user.avatar, alt: "alttext", class: "profileAvatar rounded-square", height: 80, width: 80  %>
+  <% else %>
+    <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-square", height: 80, width: 80 %>
+  <% end %>
+</section>
+
+
 <div class="flex w-100 justify-content-center">
   <div class="bookingCard">
     <%= simple_form_for [@profile, @booking] do |f| %>
