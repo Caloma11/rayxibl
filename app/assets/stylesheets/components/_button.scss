@@ -41,4 +41,10 @@ input[type="submit"] {
 	&[disabled] {
 		filter: grayscale(80%);
 	}
+
+  &.btn-note {
+    @extend  .text-center, .border-gray;
+    color: $gray !important;
+  }
+
 }

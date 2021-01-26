@@ -20,6 +20,9 @@ class ProfilesController < ApplicationController
   def show
     @connection = current_user.find_connection(@profile.user)
     @notes = current_user.manager.notes_of(@profile).includes([:manager]) if current_user.manager?
+
+    @links = @profile.profile_attachments.where.not(url: nil)
+    @documents = @profile.profile_attachments.where(url: nil)
   end
 
   def new
@@ -53,7 +56,7 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile = Profile.includes(user: [:avatar_attachment]).find(params[:id])
+    @profile = Profile.includes(:profile_attachments, user: [:avatar_attachment]).find(params[:id])
     authorize @profile
   end
 

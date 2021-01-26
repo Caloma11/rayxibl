@@ -7,7 +7,7 @@ class NotesController < ApplicationController
     @note.manager = current_user.manager
     authorize @note
     if @note.save
-      redirect_to profile_path(@profile, anchor: "writeYourNote")
+      redirect_to profile_path(@profile, anchor: "writeYourNote", tab: "notes")
     else
       render 'profiles/show'
     end

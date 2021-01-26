@@ -1,8 +1,8 @@
 <div class="generalProfile">
 
-  <div class="profileBanner" style="background-image: url(<%= avatar_url(@profile) %>)">
+  <div class="profileBanner" style="background-image: url(<%= avatar_url(@profile) %>)"></div>
 
-  </div>
+  <!-- Name and description -->
   <div class="profileHeader">
     <div class="profileHeaderRight">
       <h1><%= @profile.user.display_name %></h1>
@@ -21,6 +21,9 @@
     </div>
   </div>
 
+  <!-- Buttons -->
+
+  <!-- Add or Book button -->
   <div class="profileButtons flex justify-content-around p-3 pt-0">
     <% if current_user.manager? %>
       <% if @connection %>
@@ -38,83 +41,49 @@
       <div class="spacer">
 
       </div>
-      <%= link_to "#", class: "btn-lg px-0 btn-white" do %>
-        <%= image_tag "icons/message.svg", alt: "Messafe" %>
-        <p>MESSAGE</p>
+
+      <!-- Message Button -->
+      <% conversation ||= current_user.conversation_with(@profile.user) %>
+      <% if conversation %>
+        <%= link_to conversation_path(conversation), class: "btn-lg px-0 btn-white" do %>
+          <%= image_tag "icons/message.svg", alt: "message" %> Message
+        <% end %>
+      <% else %>
+        <%= link_to profile_conversations_path(@profile, conversation: { profile_id: @profile.id }), method: :post, class: "btn-lg px-0 btn-white" do %>
+          <%= image_tag "icons/message.svg", alt: "message" %> Message
+        <% end %>
       <% end %>
+
+
   <% end %>
 
   </div>
 
 
+  <!-- Skills -->
   <div class="container">
-
-    <div class="profileSection">
-      <h3 class="textGray">Key kills</h3>
-      <div class="flex justify-content-between">
+    <div class="profileSection  p-3" id="skills">
+      <h3 class="small"><small class="textGray">KEY SKILLS</small></h3>
+      <div class="flex justify-content-around skill-pills">
         <% @profile.skill_list.each do |skill| %>
-          <span><%= skill %></span>
+          <span class="skill-pill"><%= skill %></span>
         <% end %>
       </div>
     </div>
 
-    <div class="profileSection">
-      <h3>About</h3>
-      <p><%= @profile.overview %></p>
+    <!-- Tabs -->
+
+    <div class="profileTabs" id="tabs">
+      <%= link_to "About", profile_path(@profile, tab: 'about', anchor: 'skills'), class: "tab #{'active' if params[:tab] == 'about' || !params[:tab] }" %>
+      <%= link_to "Links", profile_path(@profile, tab: 'links', anchor: 'skills'), class: "tab #{'active' if params[:tab] == 'links' }" %>
+      <%= link_to "Notes (#{@notes.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), class: "tab #{'active' if params[:tab] == 'notes' }" %>
     </div>
 
-    <div class="profileSection">
-      <h3>Experience Level</h3>
-      <p><%= @profile.expertise&.capitalize %></p>
+    <div class="p-3">
+      <%= render "#{params[:tab] || 'about' }_content" %>
     </div>
 
-
-    <h3>LINKS</h3>
-    <% @profile.profile_attachments.includes(:attachment_attachment).each do |pa| %>
-      <div class="profileSection">
-        <% if pa.attachment.attached? %>
-          <%= link_to "Download", download_attachment_path(pa), method: :post  %>
-        <% else %>
-          <%= link_to pa.title, sanitize_url(pa.url), target: :_blank, class: "btn btn-secondary"  %>
-        <% end %>
-      </div>
-    <% end %>
-
-    <% if @connection && current_user.manager? %>
-      <div class="profileSection">
-        <h3>Internal Notes</h3>
-        <% @notes.each do |note| %>
-          <div class="noteCard p-3 mb-3" style="border: 1px solid gray; border-radius: 4px;">
-            <div class="noteCardHeader flex" style="border-bottom: 1px solid lightgray;">
-              <div class="noteCardHeaderRight flex flex-grow-1">
-                <% if note.manager.user.avatar.attached? %>
-                  <%= image_tag note.manager.user.avatar, alt: "alttext", class: "profileAvatar rounded-circle", height: 32, width: 32  %>
-                <% else %>
-                  <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 32, width: 32 %>
-                <% end %>
-                <div class="ml-3">
-                  <h2 class="my-0"><%= note.manager.user.display_name %></h2>
-                  <p><%= note.created_at.strftime("%e %b %Y") %></p>
-                </div>
-              </div>
-              <div class="noteCardHeaderLeft">
-                <p class="my-0" style="transform: rotate(90deg); font-size: 32px">...</p>
-              </div>
-            </div>
-            <div class="noteCardBody">
-              <p><%= note.content %></p>
-            </div>
-          </div>
-        <% end %>
-      </div>
-
-      <div id="writeYourNote">
-        <h4>Write your note: <em style="color: gray">( Only visible to you )</em></h4>
-        <%= simple_form_for [@profile, Note.new], remote: true do |f| %>
-          <%= f.input :content, as: :text %>
-          <%= f.submit %>
-        <% end %>
-      </div>
-    <% end %>
   </div>
 </div>
+
+
