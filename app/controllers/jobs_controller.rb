@@ -5,6 +5,12 @@ class JobsController < ApplicationController
     if params[:manager_id]
       @jobs = @jobs.where(manager_id: params[:manager_id])
     end
+
+    if params[:status] == "0"
+      @jobs = @jobs.live
+    elsif params[:status] == "1"
+      @jobs = @jobs.archived
+    end
   end
 
   def show
