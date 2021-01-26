@@ -1,11 +1,13 @@
 class Job < ApplicationRecord
   include Bookings::Constants
   include Profiles::Constants
+  include Jobs::Constants
 
   acts_as_taggable_on :skills
 
   enum price_type: PRICE_TYPES
   enum expertise: EXPERTISES
+  enum status: STATUSES
 
   belongs_to :manager
   has_one :company, through: :manager
