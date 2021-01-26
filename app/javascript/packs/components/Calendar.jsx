@@ -1,45 +1,15 @@
-import React, { useState } from "react";
-import ReactDOM from "react-dom";
 import Moment from "moment";
 import { extendMoment } from "moment-range";
+import React, { useState } from "react";
+import ReactDOM from "react-dom";
+import { initialDays } from "../../utils/initialDays";
+import { BookingForm } from "./BookingForm";
+import { CalendarDay } from "./CalendarDay";
+import { CalendarDayHeaders } from "./CalendarDayHeaders";
+import { CalendarProfiles } from "./CalendarProfiles";
 
 const moment = extendMoment(Moment);
 
-const initialData = [];
-const startWeek = moment().add(0, "M").startOf("month").week();
-const endWeek = moment().add(0, "M").endOf("month").week();
-for (let week = startWeek; week < endWeek; week += 1) {
-	const day = Array(7)
-		.fill(0)
-		.map((n, i) =>
-			moment()
-				.week(week)
-				.startOf("week")
-				.clone()
-				.add(n + i, "day")
-		);
-	initialData.push(day);
-}
-
-const generateData = (monthOffset = 0) => {
-	const final = [];
-	const startWeek = moment().add(monthOffset, "M").startOf("month").week();
-	const endWeek = moment().add(monthOffset, "M").endOf("month").week();
-	for (let week = startWeek; week < endWeek; week += 1) {
-		const day = Array(7)
-			.fill(0)
-			.map((n, i) =>
-				moment()
-					.week(week)
-					.startOf("week")
-					.clone()
-					.add(n + i, "day")
-			);
-		final.push(day);
-	}
-
-	return final;
-};
 const profiles = [
 	{
 		id: 1,
@@ -55,14 +25,37 @@ const profiles = [
 	}
 ];
 
-const Calendar = () => {
-	const [data, setData] = useState(initialData);
-	const [monthOffset, setMonthOffset] = useState(0);
-	const [weekOffset, setWeekOffset] = useState(1);
-	const [numberOfWeeks, setNumberOfWeeks] = useState(Array(7).fill(0));
+window.moment = moment;
 
-	const handleDayClick = ({ profile, i, j }) => {
-		console.log({ profile, i, j });
+const Calendar = () => {
+	const [data, setData] = useState(initialDays);
+	const [monthOffset, setMonthOffset] = useState(1);
+	const [weekOffset, setWeekOffset] = useState(1);
+	const [numberOfWeeks, setNumberOfWeeks] = useState(
+		Array(1).fill(Array(7).fill(0))
+	);
+	const [showForm, setShowForm] = useState(false);
+	const [formDetails, setFormDetails] = useState(null);
+
+	const generateData = () => {
+		const final = [];
+		const withMonthOffset = moment().add(monthOffset, "M");
+		const startWeek = withMonthOffset.startOf("month").week();
+		const endWeek = withMonthOffset.endOf("month").week();
+		for (let week = startWeek; week < endWeek; week += 1) {
+			const day = Array(7)
+				.fill(0)
+				.map((n, i) =>
+					moment()
+						.week(week)
+						.startOf("week")
+						.clone()
+						.add(n + i, "day")
+				);
+			final.push(day);
+		}
+
+		return final;
 	};
 
 	const handleScroll = e => {
@@ -70,59 +63,39 @@ const Calendar = () => {
 			e.currentTarget.scrollWidth - e.currentTarget.scrollLeft <=
 			e.currentTarget.offsetWidth;
 
-		if (reachedEnd) {
+		// TODO: Handle next year
+		// Problem right now is: <CalendarDayHeader /> visually breaks (offset)
+		if (reachedEnd && monthOffset <= 12) {
 			setWeekOffset(prevState => prevState + 1);
-			setNumberOfWeeks(prevState => [...prevState, ...Array(7).fill(0)]);
-		}
+			setNumberOfWeeks(prevState => [...prevState, [...Array(7).fill(0)]]);
 
-		if (weekOffset % 5 === 0 && reachedEnd) {
-			console.log("generate new days");
-			setMonthOffset(prevState => prevState + 1);
-			// + 1 because has not re-rendered
-			const newDays = generateData(monthOffset + 1);
-			setData(prevState => [...prevState, ...newDays]);
+			if (weekOffset % 4 === 0) {
+				setMonthOffset(prevState => prevState + 1);
+				const newDays = generateData();
+				setData(prevState => [...prevState, ...newDays]);
+			}
 		}
 	};
 
 	return (
 		<section id="calendar">
-			<h1>Calendar</h1>
-
+			{showForm && formDetails && Object.keys(formDetails).length > 0 && (
+				<BookingForm formDetails={formDetails} setShowForm={setShowForm} />
+			)}
 			<div className="calendarContainer" onScroll={handleScroll}>
-				<div className="profiles">
-					<div className="week blank"></div>
-					{profiles.map(profile => (
-						<div key={profile.id} className="week profile">
-							<p>{profile.name}</p>
-						</div>
-					))}
-				</div>
+				<CalendarProfiles profiles={profiles} />
 				<div className="allDays">
-					<div className="dayHeaders">
-						{data.slice(0, weekOffset).map((week, i) => {
-							return week.map((day, j) => {
-								const today = day.isSame(moment(), "day") ? "today" : "";
-
-								return (
-									<div key={`${i}_${j}`} className="dayHeader day">
-										<span className="uppercase">{day.format("dd")}</span>
-										<p className={today}>{day.format("D")}</p>
-									</div>
-								);
-							});
-						})}
-					</div>
+					<CalendarDayHeaders data={data} weekOffset={weekOffset} />
 					{profiles.map((profile, i) => {
 						return (
-							<div className="daysCollection" key={i}>
-								{numberOfWeeks.map((_, j) => (
-									<div
-										className="day"
-										onClick={() => handleDayClick({ profile, i, j })}
-										key={`${j}_${i}`}
-									></div>
-								))}
-							</div>
+							<CalendarDay
+								numberOfWeeks={numberOfWeeks}
+								key={i}
+								profile={profile}
+								data={data}
+								setShowForm={setShowForm}
+								setFormDetails={setFormDetails}
+							/>
 						);
 					})}
 				</div>
