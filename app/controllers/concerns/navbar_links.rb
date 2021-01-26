@@ -7,7 +7,7 @@ module NavbarLinks
     },
     {
       icon: "icons/schedule.svg",
-      url: "#"
+      url: ROUTES.schedule_path
     },
     {
       icon: "icons/people.svg",
