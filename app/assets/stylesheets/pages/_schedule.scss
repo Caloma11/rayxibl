@@ -2,6 +2,7 @@
 	#calendar {
 		.calendarContainer {
 			display: flex;
+			overflow-x: scroll;
 
 			p {
 				margin: 0;
@@ -16,9 +17,50 @@
 					background: rgb(120, 120, 196);
 				}
 
+				&.blank {
+					background: transparent;
+					height: 60px;
+				}
+			}
+
+			.dayHeaders {
+				@extend .flex, .justify-content-between;
+
+				height: 60px;
+
+				.dayHeader {
+					@extend .flex, .flex-column, .items-center;
+
+					width: 80px;
+
+					span {
+						color: #8a9099;
+					}
+
+					p {
+						@extend .bold, .flex, .justify-content-center, .items-center;
+
+						width: 40px;
+						height: 40px;
+						border-radius: $radius-md;
+						color: #4f4f4f;
+
+						&.today {
+							background: #4888ff;
+							color: white;
+						}
+					}
+				}
+			}
+
+			.daysCollection {
+				@extend .flex;
+
+				height: 80px;
+
 				.day {
 					border: 2px solid red;
-					padding: 16px;
+					width: 80px;
 				}
 			}
 		}
