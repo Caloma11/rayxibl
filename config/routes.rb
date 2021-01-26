@@ -42,4 +42,10 @@ Rails.application.routes.draw do
   post "download_attachment/:id", to: "profile_attachments#download", as: :download_attachment
   post "booking_download_attachment/:id", to: "booking_attachments#download", as: :booking_download_attachment
   get "schedule", to: "pages#schedule"
+
+  namespace :api do
+    namespace :v1 do
+      resources :bookings, only: %i[create]
+    end
+  end
 end
