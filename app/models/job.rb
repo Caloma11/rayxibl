@@ -18,4 +18,8 @@ class Job < ApplicationRecord
   validates :location, :profession, :expertise, :description, :rate, :expiration_date, presence: true
 
   scope :active, -> { where("expiration_date > :today", today: Date.today) }
+
+  def full_timestamp
+    "#{start_date.strftime("%d %b")} - #{end_date.strftime("%d %b")}, #{start_time.strftime("%H:%M")} - #{end_time.strftime("%H:%M")}"
+  end
 end

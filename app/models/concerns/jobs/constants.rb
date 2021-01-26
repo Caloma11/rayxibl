@@ -1,5 +1,5 @@
 module Jobs
   module Constants
-    STATUSES = %w[open archived closed]
+    STATUSES = %w[live archived closed]
   end
 end
