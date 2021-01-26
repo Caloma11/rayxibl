@@ -11,9 +11,10 @@ class BookingsController < ApplicationController
   def create
     @booking = Booking.new(booking_params)
     @booking.manager = current_user.manager
-    @booking.profile = Profile.find(params[:profile_id])
+    @profile = Profile.find(params[:profile_id])
+    @booking.profile = @profile
     authorize @booking
-    # CALCULTATE TOTAL_PRICE HERE
+    # CALCULATE TOTAL_PRICE HERE
     if @booking.save
       redirect_to booking_path(@booking)
     else
@@ -36,18 +37,22 @@ class BookingsController < ApplicationController
   end
 
   def booking_params
-    params.require(:booking).permit(:title,
+   sanitized_params = params.require(:booking).permit(:title,
                                      :description,
                                      :start_time,
                                      :end_time,
                                      :duration,
                                      :start_date,
                                      :end_date,
-                                     :billable,
                                      :price,
                                      :price_type,
-                                     attachments: []
+                                     attachments: [],
+                                     billable: []
                                     )
+   if sanitized_params[:billable].present?
+    sanitized_params[:billable] = true
+   end
+   sanitized_params
   end
 end
 

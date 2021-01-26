@@ -1,6 +1,10 @@
-#dashboardPage {
-	.jobs {
-		.active-jobs {
+.jobs-index {
+	section.jobs {
+		.job-card {
+			.skill-pill {
+				margin: 0;
+			}
+
 			.applicant-avatars {
 				@extend .flex, .justify-content-center;
 
@@ -35,14 +39,6 @@
 						background-size: cover;
 					}
 				}
-			}
-		}
-	}
-
-	.bookings {
-		.booking-cards {
-			.booking-card {
-				box-shadow: 0px 0px 16px 4px rgba(50, 42, 91, 0.08);
 			}
 		}
 	}

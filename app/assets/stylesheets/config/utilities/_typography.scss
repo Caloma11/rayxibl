@@ -15,6 +15,10 @@
 	color: $black;
 }
 
+.textDarkGray {
+	color: $dark-gray;
+}
+
 .textLightBlack {
 	color: $light-black;
 }
@@ -23,6 +27,11 @@
 // Text sizing
 .textSm {
 	font-size: 12px;
+}
+
+// TODO: Change shit naming
+.textBetween {
+	font-size: 14px;
 }
 
 .textMd {
@@ -49,4 +58,8 @@
 
 .no-decoration {
 	text-decoration: none;
+}
+
+.uppercase {
+	text-transform: uppercase;
 }

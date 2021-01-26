@@ -1,0 +1,64 @@
+<div class="jobs-new">
+  <section class="mx-3 flex justify-content-between items-center">
+    <%= link_to jobs_path do %>
+      <%= image_tag "icons/cross.svg", alt: "exit", class: "icon" %>
+    <% end %>
+    <h1>NEW JOB POST</h1>
+    <%= image_tag "icons/more.svg", alt: "more", class: "icon more" %>
+  </section>
+
+  <section class="content">
+    <%= simple_form_for @job do |f| %>
+      <div class="mx-3">
+        <%= f.input :profession, label: "Job title",
+                    placeholder: "Photographer",
+                    wrapper_html: { class: "flex flex-column mb-3" },
+                    required: false %>
+        <%= f.input :description, placeholder: "Something here",
+                    wrapper_html: { class: "flex flex-column mb-3" },
+                    required: false %>
+        <%= f.input :skill_list, label: "Key skills",
+                    wrapper_html: { class: "flex flex-column mb-3" } %>
+        <%= f.input :expertise, collection: Job.expertises.map { |ex| [ex[0].capitalize, ex[0]] },
+                    wrapper_html: { class: "flex flex-column mb-3" },
+                    required: false %>
+        <%= f.input :location, placeholder: "London, United Kingdom",
+                    wrapper_html: { class: "flex flex-column mb-3" },
+                    required: false %>
+        <%= f.input :expiration_date, wrapper_html: { class: "flex flex-column mb-3" },
+                    required: false, html5: true, as: :date %>
+        <!-- TODO: Add checkbox here with JS functionality that toggles show/hide of date & time columns -->
+        <div>
+          <%= f.input :start_time, as: :time, html5: true,
+                      wrapper_html: { class: "flex flex-column mb-3" } %>
+          <%= f.input :end_time, as: :time, html5: true,
+                      wrapper_html: { class: "flex flex-column mb-3" } %>
+        </div>
+        <div>
+          <%= f.input :start_date, as: :date, html5: true,
+                      wrapper_html: { class: "flex flex-column mb-3" } %>
+          <%= f.input :end_date, as: :date, html5: true,
+                      wrapper_html: { class: "flex flex-column mb-3" } %>
+        </div>
+        <!-- TODO: Add checkbox here with JS functionality that toggles show/hide of date & time columns -->
+        <div class="flex">
+          <%= f.input :rate, label: "Max budget", placeholder: "$250",
+                      wrapper_html: { class: "flex flex-column mb-3 mr-3" },
+                      required: false %>
+          <%= f.input :price_type, collection: Job.price_types.map { |ex| [ex[0].capitalize, ex[0]] }, wrapper_html: { class: "flex flex-column mb-3" } %>
+        </div>
+        <%= f.input :attachments, as: :file, input_html: { multiple: true } %>
+      </div>
+      <div class="separator">
+        <div class="mx-3">
+          <button type="submit" class="btn btn-secondary">
+            <div class="flex items-center justify-content-center">
+              <%= image_tag "icons/brief.svg", alt: "brief" %>
+              <span class="textWhite bold">Post job</span>
+            </div>
+          </button>
+        </div>
+      </div>
+    <% end %>
+  </section>
+</div>

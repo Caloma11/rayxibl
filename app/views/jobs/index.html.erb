@@ -1,15 +1,23 @@
 <div class="jobs-index">
-  <div class="header">
-    <%= render partial: "shared/back_link", locals: { text: "Job posts" } %>
+  <div class="flex justify-content-between items-center px-3">
+    <%= link_to :back do %>
+      <%= image_tag "icons/left-arrow.svg", alt: "back button", width: 16, height: 16 %>
+    <% end %>
+    <h3>Job Posts</h3>
+    <button><%= image_tag "icons/search.svg", alt: "search", width: 16, height: 16 %></button>
   </div>
 
-  <section class="filter">
-    <input type="text" placeholder="Search" />
-    <button>sort by</button>
+  <section class="flex bg-blueish-gray py-1 my-3">
+    <% Job.statuses.keys.first(2).each do |k| %>
+      <%= link_to k,
+                  jobs_path(status: Job.statuses[k]),
+                  class: "btn w-100 text-center btn-#{params[:status]&.to_i == Job.statuses[k] ? "white" : "transparent"}" %>
+    <% end %>
+    <%= link_to "ALL", jobs_path, class: "btn w-100 text-center btn-#{!params[:status] ? "white" : "transparent"}" %>
   </section>
 
-  <section class="jobs">
-    <% @jobs.each do |job| %>
+  <section class="jobs bg-blueish-gray px-3">
+    <% @jobs.includes(:manager, job_applications: [profile: { user: :avatar_attachment }]).each do |job| %>
       <%= render partial: "jobs/card", locals: { job: job } %>
     <% end %>
   </section>

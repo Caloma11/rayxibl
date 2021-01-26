@@ -7,6 +7,11 @@ class ProfilesController < ApplicationController
     if params[:network]
       skip_policy_scope
       @profiles = current_user.manager.network.includes(user: [avatar_attachment: :blob])
+    elsif params[:job_id]
+      @profiles = policy_scope(Profile)
+                    .joins(job_applications: :job)
+                    .includes(user: { avatar_attachment: :blob })
+                    .where(job_applications: { job_id: params[:job_id] })
     else
       @profiles = policy_scope(Profile).includes(user: [avatar_attachment: :blob])
     end
@@ -15,6 +20,9 @@ class ProfilesController < ApplicationController
   def show
     @connection = current_user.find_connection(@profile.user)
     @notes = current_user.manager.notes_of(@profile).includes([:manager]) if current_user.manager?
+
+    @links = @profile.profile_attachments.where.not(url: nil)
+    @documents = @profile.profile_attachments.where(url: nil)
   end
 
   def new
@@ -48,7 +56,7 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile = Profile.includes(user: [:avatar_attachment]).find(params[:id])
+    @profile = Profile.includes(:profile_attachments, user: [:avatar_attachment]).find(params[:id])
     authorize @profile
   end
 
