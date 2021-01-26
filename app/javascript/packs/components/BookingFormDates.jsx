@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { BookingFormTimeList } from "./BookingFormTimeList";
 
 export const BookingFormDates = ({
+	chosenDate,
 	specificHour,
 	setSpecificHour,
 	startTime,
@@ -15,20 +16,26 @@ export const BookingFormDates = ({
 	endDate,
 	setEndDate
 }) => {
+	useEffect(() => {
+		if (chosenDate) {
+			setStartDate(chosenDate);
+		}
+	}, []);
+
 	return (
 		<>
 			<div className="duration-toggler">
 				<button
 					type="button"
 					className={`btn ${specificHour ? "" : "btn-white"}`}
-					onClick={() => setSpecificHour(prevState => !prevState)}
+					onClick={() => setSpecificHour(false)}
 				>
 					Duration
 				</button>
 				<button
 					type="button"
 					className={`btn ${specificHour ? "btn-white" : ""}`}
-					onClick={() => setSpecificHour(prevState => !prevState)}
+					onClick={() => setSpecificHour(true)}
 				>
 					Specific
 				</button>

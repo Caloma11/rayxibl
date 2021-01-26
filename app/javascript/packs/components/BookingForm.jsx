@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import { generateTotalPrice } from "../../utils/generateTotalPrice";
 import { BookingFormDates } from "./BookingFormDates";
 import { BookingFormHeader } from "./BookingFormHeader";
@@ -24,8 +25,27 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 
 	// console.log({ profile, date });
 
-	const handleSubmit = e => {
+	const handleSubmit = async e => {
 		e.preventDefault();
+		const body = {
+			booking: {
+				title,
+				description,
+				start_date: startDate,
+				end_date: endDate,
+				duration,
+				start_time: startTime,
+				end_time: endTime,
+				billable,
+				price,
+				price_type: parseInt(priceType, 10),
+				profile_id: profile.id
+			}
+		};
+
+		await axios.post("/api/v1/bookings", body);
+
+		window.location = "/schedule";
 	};
 
 	// useEffect(() => {
@@ -92,6 +112,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 						></textarea>
 					</div>
 					<BookingFormDates
+						chosenDate={date.format("YYYY-MM-DD")}
 						specificHour={specificHour}
 						setSpecificHour={setSpecificHour}
 						startTime={startTime}
