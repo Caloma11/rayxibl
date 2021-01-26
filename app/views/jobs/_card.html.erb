@@ -1,18 +1,32 @@
-<div class="job-card shadow rounded-lg p-1 flex justify-content-between">
-  <div class="flex">
-    <% if job.company.logo.attached? %>
-      <%= image_tag job.company.logo.service_url, alt: "company logo", width: 64, height: 64, class: "mr-3 p-2" %>
-    <% else %>
-      <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659650_1280.png" alt="company logo" width="64" height="64" class="mr-3 p-2" />
-    <% end %>
-    <div class="job-text flex flex-column justify-content-center">
-      <h3 class="noMargin"><%= job.profession %></h3>
-      <p class="noMargin"><%= pluralize(job.job_applications.count, 'applicant') %></p>
+<div class="job-card bg-white shadow rounded p-3 mb-3">
+  <div class="flex items-start justify-content-between">
+    <div class="flex items-center">
+      <% if job.manager.user.avatar.attached? %>
+        <%= image_tag job.manager.user.avatar.service_url, alt: "avatar", class: "avatar avatar-circle small" %>
+      <% else %>
+        <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "avatar", class: "avatar avatar-circle small" %>
+      <% end %>
+      <h3 class="ml-3 my-0"><%= job.profession %></h3>
     </div>
+    <span class="uppercase skill-pill blue"><%= job.status %></span>
   </div>
-  <div class="job-actions flex items-center mx-3">
-    <%= link_to job_path(job) do %>
-      <%= image_tag "icons/right-arrow.svg", alt: "right arrow" %>
-    <% end %>
+  <div class="flex items-end justify-content-between">
+    <div class="uppercase textBetween">
+      <p class="mb-1">Experience Level: <%= job.expertise %></p>
+      <p class="my-0"><%= job.full_timestamp %></p>
+    </div>
+    <div class="applicant-avatars">
+      <% job.job_applications.includes(profile: [user: :avatar_attachment]).limit(2).each do |ja| %>
+        <%= render partial: "profiles/small_avatar", locals: { profile: ja.profile, size: 16 } %>
+      <% end %>
+      <% last_application ||= job.job_applications.last %>
+      <% if last_application && (job.job_applications.count - 5).positive? %>
+        <div class="small-avatar">
+          <div class="last-avatar" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= avatar_url(last_application.profile) %>');">
+            + <%= job.job_applications.count - 5 %>
+          </div>
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>
