@@ -46,7 +46,7 @@
     <% end %>
     <div class="applicant-avatars">
       <% @job.job_applications.includes(profile: [user: :avatar_attachment]).limit(5).each do |ja| %>
-        <%= render partial: "profiles/small_avatar", locals: { profile: ja.profile } %>
+        <%= render partial: "profiles/small_avatar", locals: { profile: ja.profile, size: 16 } %>
       <% end %>
       <% last_application ||= @job.job_applications.last %>
       <% if last_application && (@job.job_applications.count - 5).positive? %>
