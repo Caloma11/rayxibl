@@ -3,11 +3,11 @@
 }
 
 .block {
-  display: block;
+	display: block;
 }
 
 .none {
-  display: none;
+	display: none;
 }
 
 .flex {
@@ -17,14 +17,13 @@
 		flex-direction: column;
 	}
 
-  &.flex-row-reverse {
-    flex-direction: row-reverse;
-  }
-
+	&.flex-row-reverse {
+		flex-direction: row-reverse;
+	}
 }
 
 .flex-shrink-2 {
-  flex-shrink: 2;
+	flex-shrink: 2;
 }
 
 .flex-grow-1 {
@@ -37,6 +36,10 @@
 
 .items-center {
 	align-items: center;
+}
+
+.items-end {
+	align-items: flex-end;
 }
 
 .items-self-end {
@@ -60,7 +63,7 @@
 }
 
 .justify-content-around {
-  justify-content: space-around;
+	justify-content: space-around;
 }
 
 .list-style-none {
@@ -84,11 +87,11 @@
 }
 
 .rounded-square {
-  @extend .rounded;
-  border-bottom-left-radius: 100%16px;
-  border-bottom-right-radius: 100%16px;
-  border-top-left-radius: 100%16px;
-  border-top-right-radius: 100%16px;
+	@extend .rounded;
+	border-bottom-left-radius: 100%16px;
+	border-bottom-right-radius: 100%16px;
+	border-top-left-radius: 100%16px;
+	border-top-right-radius: 100%16px;
 }
 
 .rounded-pill {
@@ -104,5 +107,13 @@
 }
 
 .border-gray {
-  border: 1px solid $gray !important;
+	border: 1px solid $gray !important;
+}
+
+.bg-blueish-gray {
+	background: $blueish-gray;
+}
+
+.bg-white {
+	background: white;
 }

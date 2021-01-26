@@ -16,7 +16,7 @@
 }
 
 .textDarkGray {
-  color: $dark-gray;
+	color: $dark-gray;
 }
 
 .textLightBlack {
@@ -27,6 +27,11 @@
 // Text sizing
 .textSm {
 	font-size: 12px;
+}
+
+// TODO: Change shit naming
+.textBetween {
+	font-size: 14px;
 }
 
 .textMd {

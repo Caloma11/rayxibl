@@ -1,0 +1,45 @@
+.jobs-index {
+	section.jobs {
+		.job-card {
+			.skill-pill {
+				margin: 0;
+			}
+
+			.applicant-avatars {
+				@extend .flex, .justify-content-center;
+
+				.small-avatar {
+					@extend .flex, .justify-content-center, .items-center;
+
+					&:first-of-type {
+						margin-left: unset !important;
+					}
+
+					margin-left: -10px;
+					background: white;
+					border-radius: 50%;
+					height: 40px;
+					width: 40px;
+
+					img {
+						border-radius: 50%;
+						width: 80%;
+						height: 80%;
+					}
+
+					.last-avatar {
+						@extend .rounded-circle,
+							.textWhite,
+							.flex,
+							.justify-content-center,
+							.items-center;
+
+						width: 80%;
+						height: 80%;
+						background-size: cover;
+					}
+				}
+			}
+		}
+	}
+}
