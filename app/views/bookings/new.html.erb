@@ -1,29 +1,58 @@
-<h1 class="mx-0" style="text-align: center;">Book <%= @profile.user.display_name %> here</h1>
-<div class="flex w-100 justify-content-center">
+<section class="mx-3 mt-4 flex justify-content-between items-center">
+  <%= link_to :back do %>
+    <%= image_tag "icons/cross.svg", alt: "exit", class: "icon", height: 16, width: 16 %>
+  <% end %>
+  <p class="textDarkGray">NEW BOOKING</p>
+  <%= image_tag "icons/more.svg", alt: "more", class: "icon more", height: 24, width: 24 %>
+</section>
+
+<section class="flex p-3">
+  <% if @profile.user.avatar.attached? %>
+    <%= image_tag @profile.user.avatar, alt: "alttext", class: "profileAvatar rounded-square", height: 80, width: 80  %>
+  <% else %>
+    <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-square", height: 80, width: 80 %>
+  <% end %>
+  <div>
+    <p class="mb-0 mx-3"><strong><%= @profile.user.display_name %></strong></p>
+    <p class="textGray my-0 mx-3"><%= @profile.profession %>, <%= @profile.location %></p>
+  </div>
+</section>
+
+
+<div class="flex justify-content-center p-3">
   <div class="bookingCard">
     <%= simple_form_for [@profile, @booking] do |f| %>
-      <%= f.input :title, input_html:{class: "mb-2"} %>
-      <%= f.input :description, input_html:{class: "mb-2"} %>
+      <%= f.input :title, label: "Project / Client", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
+      <%= f.input :description, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
 
       <div class="flex justify-content-between items-center">
         <div class="bookingHours">
-          <%= f.input :start_time, input_html:{class: "mb-2"} %>
-          <%= f.input :end_time, input_html:{class: "mb-2"} %>
+          <%= f.input :start_time, label: "Hours per day", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
+          <%= f.input :end_time, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
         </div>
         <p class="mx-3"><strong>OR</strong></p>
         <div class="bookingDuration">
-          <%= f.input :duration, input_html:{class: "mb-2"} %>
+          <%= f.input :duration, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
         </div>
 
       </div>
 
-      <%= f.input :start_date, input_html:{class: "mb-2"} ,html5: true, as: :date %>
-      <%= f.input :end_date, input_html:{class: "mb-2"} ,html5: true, as: :date%>
-      <%= f.input :billable, as: :radio_buttons, input_html:{class: "mb-2"} %>
-      <%= f.input :price, input_html:{class: "mb-2"} %>
-      <%= f.input :price_type, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2"} %>
-      <%= f.input :attachments, as: :file, input_html: { multiple: true } %>
-      <%= f.submit %>
+      <%= f.input :start_date, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} ,html5: true, as: :date %>
+      <%= f.input :end_date, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} ,html5: true, as: :date%>
+      <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true ]], input_html:{class: "mb-2"}, wrapper_html: { class: "flex flex-row-reverse justify-content-end" }, include_hidden: false %>
+
+      <div class="flex justify-content-between items-center">
+        <%= f.input :price, label: false, placeholder: "$250", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-2 flex-shrink-2" } %>
+        <%= f.input :price_type, label: false, label_html: { class: "block textGray" }, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-3" }  %>
+        <p class="textGray my-0" id="totalPrice"> Total: $1,000</p>
+      </div>
+      <%= f.input :attachments, label_html: { class: "choose-file textGray" }, as: :file, input_html: { multiple: true, class: "none" }, label: "#{image_tag("icons/paperclip", alt: "paperclip")} ADD ATTACHMENT".html_safe %>
+
+
+      <%= f.button :button, class: "btn btn-primary w-100 my-3 send-request" do %>
+        <%= image_tag("icons/paperplane", alt: "paperplane") %>
+        SEND REQUEST
+      <% end %>
     <% end %>
   </div>
 </div>

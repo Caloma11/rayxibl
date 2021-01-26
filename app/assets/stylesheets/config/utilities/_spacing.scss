@@ -103,6 +103,13 @@
 	@extend .mr-3;
 }
 
+.m-3 {
+  @extend .ml-3;
+  @extend .mr-3;
+  @extend .mb-3;
+  @extend .mt-3;
+}
+
 .mt-2 {
 	margin-top: 12px;
 }

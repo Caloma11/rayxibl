@@ -2,12 +2,29 @@
 	display: none;
 }
 
+.block {
+  display: block;
+}
+
+.none {
+  display: none;
+}
+
 .flex {
 	display: flex;
 
 	&.flex-column {
 		flex-direction: column;
 	}
+
+  &.flex-row-reverse {
+    flex-direction: row-reverse;
+  }
+
+}
+
+.flex-shrink-2 {
+  flex-shrink: 2;
 }
 
 .flex-grow-1 {
@@ -64,6 +81,14 @@
 
 .rounded-circle {
 	border-radius: 50%;
+}
+
+.rounded-square {
+  @extend .rounded;
+  border-bottom-left-radius: 100%16px;
+  border-bottom-right-radius: 100%16px;
+  border-top-left-radius: 100%16px;
+  border-top-right-radius: 100%16px;
 }
 
 .rounded-pill {
