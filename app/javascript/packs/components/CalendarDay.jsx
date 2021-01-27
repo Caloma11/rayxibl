@@ -1,4 +1,5 @@
 import React from "react";
+import moment from "moment";
 
 export const CalendarDay = ({
 	profile,
@@ -18,10 +19,12 @@ export const CalendarDay = ({
 		<div className="daysCollection">
 			{numberOfWeeks.map((week, j) => {
 				return week.map((_, k) => {
+					const today = data[j][k].isSame(moment(), "day") ? "today" : "";
+
 					return (
 						<div
 							key={`${j}_${k}`}
-							className="day"
+							className={`day ${today}`}
 							onClick={() => handleDayClick({ week: j, day: k })}
 						></div>
 					);
