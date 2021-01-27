@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { generateTotalPrice } from "../../utils/generateTotalPrice";
 import { BookingFormDates } from "./BookingFormDates";
@@ -20,30 +20,17 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 	const [price, setPrice] = useState("");
 	const [priceType, setPriceType] = useState(-1);
 	const [totalPrice, setTotalPrice] = useState(null);
+	const [attachments, setAttachments] = useState([]);
+	const formRef = useRef(null);
 
 	const { profile, date } = formDetails;
 
-	// console.log({ profile, date });
-
 	const handleSubmit = async e => {
 		e.preventDefault();
-		const body = {
-			booking: {
-				title,
-				description,
-				start_date: startDate,
-				end_date: endDate,
-				duration,
-				start_time: startTime,
-				end_time: endTime,
-				billable,
-				price,
-				price_type: parseInt(priceType, 10),
-				profile_id: profile.id
-			}
-		};
 
-		await axios.post("/api/v1/bookings", body);
+		const formData = new FormData(formRef.current);
+		formData.append("booking[profile_id]", profile.id);
+		await axios.post("/api/v1/bookings", formData);
 
 		window.location = "/schedule";
 	};
@@ -88,7 +75,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 	return (
 		<div>
 			<BookingFormHeader setShowForm={setShowForm} profile={profile} />
-			<form className="bookingForm" onSubmit={handleSubmit}>
+			<form ref={formRef} className="bookingForm" onSubmit={handleSubmit}>
 				<div className="px-3">
 					<div className="input-wrapper">
 						<label htmlFor="booking_title">Project/Client</label>
@@ -105,6 +92,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 						<label htmlFor="booking_description">Description</label>
 						<textarea
 							id="booking_description"
+							name="booking[description]"
 							value={description}
 							onChange={e => setDescription(e.target.value)}
 							placeholder="Subtly charming bacon evangelist. Coffee guru. Twitter junkie. Lifelong travel ninja. Subtly charming bacon evangelist. Coffee guru. Twitter junkie. Lifelong travel ninja."
@@ -135,7 +123,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 						setPriceType={setPriceType}
 						totalPrice={totalPrice}
 					/>
-					<BookingFormAttachments />
+					<BookingFormAttachments setAttachments={setAttachments} />
 				</div>
 				<div className="separator"></div>
 				<div className="px-3">
