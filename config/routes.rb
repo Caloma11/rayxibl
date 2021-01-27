@@ -46,6 +46,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :bookings, only: %i[create]
+      resources :networks, only: %i[index]
     end
   end
 end
