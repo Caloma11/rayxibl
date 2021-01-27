@@ -11,8 +11,6 @@ import { CalendarProfiles } from "./CalendarProfiles";
 
 const moment = extendMoment(Moment);
 
-window.moment = moment;
-
 const Calendar = () => {
 	const [profiles, setProfiles] = useState([]);
 	const [data, setData] = useState(initialDays);
@@ -23,13 +21,16 @@ const Calendar = () => {
 	);
 	const [showForm, setShowForm] = useState(false);
 	const [formDetails, setFormDetails] = useState(null);
+	const lastRenderedWeek = initialDays[initialDays.length - 1];
+	const lastRenderedDay = lastRenderedWeek[lastRenderedWeek.length - 1];
+	const [weekCounter, setWeekCounter] = useState(lastRenderedDay.week() + 1);
 
 	const generateData = () => {
 		const final = [];
 		const withMonthOffset = moment().add(monthOffset, "M");
-		const startWeek = withMonthOffset.startOf("month").week();
+		// const startWeek = withMonthOffset.startOf("month").week();
 		const endWeek = withMonthOffset.endOf("month").week();
-		for (let week = startWeek; week < endWeek; week += 1) {
+		for (let week = weekCounter; week < endWeek; week += 1) {
 			const day = Array(7)
 				.fill(0)
 				.map((n, i) =>
@@ -41,6 +42,11 @@ const Calendar = () => {
 				);
 			final.push(day);
 		}
+
+		const lastWeekOfNewData = final[final.length - 1];
+		const lastDayOfNewData = lastWeekOfNewData[lastWeekOfNewData.length - 1];
+
+		setWeekCounter(lastDayOfNewData.week() + 1);
 
 		return final;
 	};
@@ -56,6 +62,7 @@ const Calendar = () => {
 			setWeekOffset(prevState => prevState + 1);
 			setNumberOfWeeks(prevState => [...prevState, [...Array(7).fill(0)]]);
 
+			// Happens every 4 weeks
 			if (weekOffset % 4 === 0) {
 				setMonthOffset(prevState => prevState + 1);
 				const newDays = generateData();
