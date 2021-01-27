@@ -7,10 +7,10 @@ module NavbarLinks
     },
     {
       icon: "icons/schedule.svg",
-      url: "#"
+      url: ROUTES.schedule_path
     },
     {
-      icon: "icons/people.svg",
+      icon: "icons/people-dark.svg",
       url: ROUTES.profiles_path
     },
     {
@@ -32,7 +32,7 @@ module NavbarLinks
     },
     {
       text: "Clients",
-      icon: "icons/people.svg",
+      icon: "icons/people-dark.svg",
       url: ROUTES.managers_path
     },
     {

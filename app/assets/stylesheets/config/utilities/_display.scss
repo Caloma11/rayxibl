@@ -6,6 +6,14 @@
 	display: block;
 }
 
+.none {
+	display: none;
+}
+
+.inline-flex {
+	display: inline-flex;
+}
+
 .flex {
 	display: flex;
 
@@ -88,6 +96,22 @@
 
 .rounded-circle {
 	border-radius: 50%;
+}
+
+.rounded-top-left {
+	border-top-left-radius: 8px;
+}
+
+.rounded-bottom-left {
+	border-bottom-left-radius: 8px;
+}
+
+.rounded-top-right {
+	border-top-right-radius: 8px;
+}
+
+.rounded-bottom-right {
+	border-bottom-right-radius: 8px;
 }
 
 .rounded-square {

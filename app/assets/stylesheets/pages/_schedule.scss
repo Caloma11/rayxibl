@@ -1,0 +1,127 @@
+#calendar-page {
+	#calendar {
+		@extend .relative;
+
+		form.bookingForm {
+			position: absolute;
+			height: 100vh;
+			width: 100%;
+			background: white;
+			z-index: 1;
+		}
+
+		.calendarContainer {
+			display: flex;
+			overflow-x: scroll;
+
+			p {
+				margin: 0;
+			}
+
+			.profiles {
+				position: sticky;
+				left: 0;
+				background: white;
+			}
+
+			.week {
+				height: 120px;
+				display: flex;
+
+				&.profile {
+					@extend .flex,
+						.flex-column,
+						.items-center,
+						.justify-content-center,
+						.px-1;
+
+					img {
+						width: 48px;
+						height: 48px;
+					}
+
+					p {
+						font-size: 14px;
+						color: #3f434a;
+					}
+
+					span {
+						@extend .text-center, .mt-1;
+
+						font-size: 12px;
+						color: #828282;
+					}
+				}
+
+				&.blank {
+					background: transparent;
+					height: 60px;
+				}
+			}
+
+			.dayHeaders {
+				@extend .flex, .justify-content-between;
+
+				height: 60px;
+
+				.dayHeader {
+					@extend .flex, .flex-column, .items-center;
+
+					width: 80px;
+					border: 1px solid transparent;
+
+					span {
+						color: #8a9099;
+					}
+
+					p {
+						@extend .bold, .flex, .justify-content-center, .items-center;
+
+						width: 40px;
+						height: 40px;
+						border-radius: $radius-md;
+						color: #4f4f4f;
+
+						&.today {
+							background: #4888ff;
+							color: white;
+						}
+					}
+				}
+			}
+
+			.daysCollection {
+				@extend .flex;
+
+				height: 120px;
+
+				.day {
+					border: 1px solid #e8e9eb;
+					width: 80px;
+					height: 120px;
+
+					&.today {
+						background: #fafbff;
+					}
+
+					&.blueBorder {
+						border: 1px solid transparent;
+					}
+
+					.event {
+						@extend .mb-2;
+
+						width: 100%;
+						background: $blue-3;
+
+						.event-details {
+							color: white;
+							font-size: 12px;
+							overflow-x: overlay;
+						}
+					}
+				}
+			}
+		}
+	}
+}

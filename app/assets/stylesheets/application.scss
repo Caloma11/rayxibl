@@ -9,12 +9,21 @@
 @import "flatpickr/dist/flatpickr";
 @import "flatpickr/dist/themes/airbnb";
 
+html, body {
+  @extend .h-100;
+}
 
 body {
 	margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
 * {
 	font-family: "Montserrat", sans-serif;
 	color: $black;
+}
+
+.yielded-content {
+  flex: 1 0 auto;
 }
