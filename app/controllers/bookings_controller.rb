@@ -46,6 +46,7 @@ class BookingsController < ApplicationController
                                      :end_date,
                                      :price,
                                      :price_type,
+                                     :weekends,
                                      attachments: [],
                                      billable: []
                                     )

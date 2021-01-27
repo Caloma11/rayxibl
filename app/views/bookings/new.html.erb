@@ -29,41 +29,56 @@
       <div class="flex justify-content-between items-center flex-shrink-2">
 
         <!-- Start time and end time OR duration input -->
-        <div class="bookingHours flex items-end">
-          <%= f.input :start_time, label: "Hours per day", label_html: { class: "block textGray nowrap" }, input_html:{class: "mb-2 w-100 start-timepicker"}, as: :string %>
-        <span class="self-centered mx-3 mt-2"> - </span>
-          <%= f.input :end_time, label: false, input_html:{class: "mb-2 w-100 end-timepicker"}, as: :string %>
-          <div class="bookingDuration">
-            <%= f.input :duration, label_html: { class: "block textGray none" }, input_html:{class: "mb-2 w-100 none"} %>
+        <div class="bookingHours">
+          <div class="bookingSpecific">
+            <label class="block textGray nowrap">Hours per day</label>
+            <div class="inputs flex items-center">
+              <%= f.input :start_time, label: false, label_html: { class: "block textGray nowrap" }, input_html:{class: "mb-2 w-100 start-timepicker"}, as: :string %>
+              <span class="self-centered mx-2"> - </span>
+              <%= f.input :end_time, label: false, input_html:{class: "mb-2 w-100 end-timepicker"}, as: :string %>
+            </div>
+          </div>
+
+          <!-- Hidden duration -->
+          <div class="bookingDuration none">
+            <%= f.input :duration, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
           </div>
         </div>
         <!-- End of left side -->
 
       <!-- Duration toggler -->
-      <div class="profileTabs flex-grow-1 textSm" id="tabs">
-        <%= link_to "Duration", "#", class: "tab p-2", data: { turbolinks: false } %>
-        <%= link_to "Specific", "#", class: "tab p-2 active", data: { turbolinks: false } %>
+      <div class="profileTabs flex-grow-1 textSm mr-0" id="tabs">
+        <%= link_to "Duration", "#", id: "duration", class: "tab p-2", data: { turbolinks: false } %>
+        <%= link_to "Specific", "#", id: "specific", class: "tab p-2 active", data: { turbolinks: false } %>
       </div>
 
 
       </div>
 
+      <!-- Dates input -->
       <div class="flex items-end justify-content-between">
-        <%= f.input :start_date, label: "Dates", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100 datepicker"}, as: :string %>
-        <div class="flex flex-row-reverse items-center mb-2">
-          <label class="block textGray" for="weekend">Incl. weekends</label>
-          <input type="checkbox" class="mr-2" name="weekend">
+
+        <div class="dates-input-wrapper">
+          <label for="dates" class="block textGray">Dates</label>
+          <input type="text" name="dates" class="mb-2 w-100 datepicker">
+        </div>
+
+        <div>
+          <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" }, label_html: { class: "block textGray nowrap flex items-center" }, wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
         </div>
       </div>
-      <%= f.input :end_date, label: false, input_html:{class: "mb-2 w-100 datepicker none"}, as: :string %>
 
+      <!-- Hidden inputs for start and end dates -->
+      <%= f.input :start_date, label: "sd", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"}, as: :hidden %>
 
+      <%= f.input :end_date, label: "ed", input_html:{class: "mb-2 w-100"}, as: :hidden %>
 
-
+      <!-- Billable input -->
       <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true ]], input_html:{class: "mb-2"}, wrapper_html: { class: "flex flex-row-reverse justify-content-end my-2" }, include_hidden: false %>
 
+      <!-- Price section -->
       <div class="flex justify-content-between items-center">
-        <%= f.input :price, label: false, placeholder: "$250", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-2 flex-shrink-2" } %>
+        <%= f.input :price, label: false, placeholder: "Ex: $250", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-2 flex-shrink-2" } %>
         <%= f.input :price_type, label: false, label_html: { class: "block textGray" }, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-3" }  %>
         <p class="textGray my-0" id="totalPrice"> Total: $1,000</p>
       </div>

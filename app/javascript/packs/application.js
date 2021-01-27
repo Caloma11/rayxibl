@@ -4,7 +4,8 @@
 // that code so it'll be compiled.
 
 import { initConversationCable } from "../channels/conversation_channel";
-import { initFlatpickr } from "../plugins/flatpickr";
+import { initFlatpickr } from "../plugins/newBookingFlatpickr";
+import { initDurationToggler } from "../components/durationToggler";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -22,4 +23,5 @@ require("channels");
 document.addEventListener("turbolinks:load", () => {
 	initConversationCable();
   initFlatpickr();
-});
+  initDurationToggler();
+})
