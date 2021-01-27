@@ -16,6 +16,8 @@ class Profile < ApplicationRecord
   # [BE CAREFUL]: Not scoped to a specific manager
   has_many :notes
 
+  delegate :display_name, to: :user
+
   enum expertise: EXPERTISES
 
   validates :profession, :location, :overview, presence: true
@@ -25,6 +27,14 @@ class Profile < ApplicationRecord
   def average_rating
     return 0 if ratings.size.zero?
     (ratings.pluck(:value).sum.to_f / ratings.size.to_f).round
+  end
+
+  def avatar
+    if user.avatar.attached?
+      user.avatar.service_url
+    else
+      "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg"
+    end
   end
 
   private
