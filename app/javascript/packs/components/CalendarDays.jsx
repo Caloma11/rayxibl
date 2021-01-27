@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 
-export const CalendarDay = ({
+export const CalendarDays = ({
 	profile,
 	numberOfWeeks,
 	data,

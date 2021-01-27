@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import axios from "axios";
 import { initialDays } from "../../utils/initialDays";
 import { BookingForm } from "./BookingForm";
-import { CalendarDay } from "./CalendarDay";
+import { CalendarDays } from "./CalendarDays";
 import { CalendarDayHeaders } from "./CalendarDayHeaders";
 import { CalendarProfiles } from "./CalendarProfiles";
 
@@ -75,6 +75,7 @@ const Calendar = () => {
 		(async () => {
 			try {
 				const { data } = await axios.get("/api/v1/networks");
+				console.log(data);
 				setProfiles(data);
 			} catch (error) {
 				console.log(error);
@@ -93,7 +94,7 @@ const Calendar = () => {
 					<CalendarDayHeaders data={data} weekOffset={weekOffset} />
 					{profiles.map((profile, i) => {
 						return (
-							<CalendarDay
+							<CalendarDays
 								numberOfWeeks={numberOfWeeks}
 								key={i}
 								profile={profile}
