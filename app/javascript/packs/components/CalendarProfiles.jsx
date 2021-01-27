@@ -6,7 +6,7 @@ export const CalendarProfiles = ({ profiles }) => {
 			<div className="week blank"></div>
 			{profiles.map(profile => (
 				<div key={profile.id} className="week profile">
-					<p>{profile.name}</p>
+					<p>{profile.displayName}</p>
 				</div>
 			))}
 		</div>

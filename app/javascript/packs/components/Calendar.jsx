@@ -1,7 +1,8 @@
 import Moment from "moment";
 import { extendMoment } from "moment-range";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
+import axios from "axios";
 import { initialDays } from "../../utils/initialDays";
 import { BookingForm } from "./BookingForm";
 import { CalendarDay } from "./CalendarDay";
@@ -10,24 +11,10 @@ import { CalendarProfiles } from "./CalendarProfiles";
 
 const moment = extendMoment(Moment);
 
-const profiles = [
-	{
-		id: 1,
-		name: "Rayhan"
-	},
-	{
-		id: 2,
-		name: "Abisha"
-	},
-	{
-		id: 3,
-		name: "Wirjowerdojo"
-	}
-];
-
 window.moment = moment;
 
 const Calendar = () => {
+	const [profiles, setProfiles] = useState([]);
 	const [data, setData] = useState(initialDays);
 	const [monthOffset, setMonthOffset] = useState(1);
 	const [weekOffset, setWeekOffset] = useState(1);
@@ -76,6 +63,17 @@ const Calendar = () => {
 			}
 		}
 	};
+
+	useEffect(() => {
+		(async () => {
+			try {
+				const { data } = await axios.get("/api/v1/networks");
+				setProfiles(data);
+			} catch (error) {
+				console.log(error);
+			}
+		})();
+	}, []);
 
 	return (
 		<section id="calendar">
