@@ -4,7 +4,7 @@ import blackCrossSvg from "../images/black-cross.svg";
 export const BookingFormHeader = ({ setShowForm, profile }) => {
 	return (
 		<div className="booking-form-header">
-			<div className="flex justify-content-between px-3">
+			<div className="flex justify-content-between">
 				<button type="button" onClick={() => setShowForm(false)}>
 					<img src={blackCrossSvg} alt="back" width={16} height={16} />
 				</button>
