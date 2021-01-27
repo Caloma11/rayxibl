@@ -20,6 +20,7 @@ class Job < ApplicationRecord
   scope :active, -> { where("expiration_date > :today", today: Date.today) }
 
   def full_timestamp
+    return unless (start_date && end_date && start_time && end_time)
     "#{start_date.strftime("%d %b")} - #{end_date.strftime("%d %b")}, #{start_time.strftime("%H:%M")} - #{end_time.strftime("%H:%M")}"
   end
 end

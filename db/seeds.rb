@@ -156,10 +156,14 @@ job = Job.create!(
   manager: manager,
   location: "Bali, Indonesia",
   profession: "Web Developer",
-  expertise: "UX Designer",
+  expertise: Profile::EXPERTISES.sample,
   description: "Bacon ipsum dolor amet veniam officia fatback id incididunt. In dolor nulla enim short loin excepteur consectetur nisi in laborum.",
   rate: "$250 - $350 / day",
-  expiration_date: DateTime.now + 7.days
+  expiration_date: DateTime.now + 7.days,
+  start_date: Date.today + 2.days,
+  end_date: Date.today + 4.days,
+  start_time: Time.now,
+  end_time: Time.now + 8.hours
 )
 puts "[END] - Creating a job"
 
