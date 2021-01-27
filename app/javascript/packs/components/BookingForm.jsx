@@ -87,7 +87,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 
 	return (
 		<div>
-			<BookingFormHeader setShowForm={setShowForm} />
+			<BookingFormHeader setShowForm={setShowForm} profile={profile} />
 			<form className="bookingForm" onSubmit={handleSubmit}>
 				<div className="px-3">
 					<div className="input-wrapper">
