@@ -1,7 +1,6 @@
 class Api::V1::NetworksController < ApplicationController
   def index
-    binding.pry
-    @networks = policy_scope(current_user.manager.network)
-    render json: @networks
+    @networks = policy_scope(current_user.manager.network.includes(user: [avatar_attachment: :blob]))
+    render json: @networks, each_serializer: ProfileSerializer
   end
 end
