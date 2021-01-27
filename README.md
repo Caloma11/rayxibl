@@ -3,6 +3,8 @@
 - In `/profiles`, AJAXify the tab switch (My network & Everyone buttons)
 - When pressing "add to network" (user plus icon) in `/profiles`, AJAXify it so that it gets added instantly in the "My network" section
 
+- Ajaxify loading of profiles on `profiles#index` 
+
   More on point 2 (nice to have behaviours):
 
   - It should not disappear right away in the "Everyone" section
