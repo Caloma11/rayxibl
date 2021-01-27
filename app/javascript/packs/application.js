@@ -6,6 +6,7 @@
 import { initConversationCable } from "../channels/conversation_channel";
 import { initFlatpickr } from "../plugins/newBookingFlatpickr";
 import { initDurationToggler } from "../components/durationToggler";
+import { bindBillableCheckbox } from "../components/billable";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -24,4 +25,5 @@ document.addEventListener("turbolinks:load", () => {
 	initConversationCable();
   initFlatpickr();
   initDurationToggler();
+  bindBillableCheckbox();
 })
