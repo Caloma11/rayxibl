@@ -4,6 +4,7 @@
 // that code so it'll be compiled.
 
 import { initConversationCable } from "../channels/conversation_channel";
+import { initFlatpickr } from "../plugins/flatpickr";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -17,6 +18,8 @@ require("channels");
 // const images = require.context('../images', true)
 // const imagePath = (name) => images(name, true)
 
+
 document.addEventListener("turbolinks:load", () => {
 	initConversationCable();
+  initFlatpickr();
 });

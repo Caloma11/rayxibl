@@ -1,3 +1,4 @@
+
 <section class="mx-3 mt-4 flex justify-content-between items-center">
   <%= link_to :back do %>
     <%= image_tag "icons/cross.svg", alt: "exit", class: "icon", height: 16, width: 16 %>
@@ -25,21 +26,41 @@
       <%= f.input :title, label: "Project / Client", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
       <%= f.input :description, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
 
-      <div class="flex justify-content-between items-center">
-        <div class="bookingHours">
-          <%= f.input :start_time, label: "Hours per day", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
-          <%= f.input :end_time, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
+      <div class="flex justify-content-between items-center flex-shrink-2">
+
+        <!-- Start time and end time OR duration input -->
+        <div class="bookingHours flex items-end">
+          <%= f.input :start_time, label: "Hours per day", label_html: { class: "block textGray nowrap" }, input_html:{class: "mb-2 w-100 start-timepicker"}, as: :string %>
+        <span class="self-centered mx-3 mt-2"> - </span>
+          <%= f.input :end_time, label: false, input_html:{class: "mb-2 w-100 end-timepicker"}, as: :string %>
+          <div class="bookingDuration">
+            <%= f.input :duration, label_html: { class: "block textGray none" }, input_html:{class: "mb-2 w-100 none"} %>
+          </div>
         </div>
-        <p class="mx-3"><strong>OR</strong></p>
-        <div class="bookingDuration">
-          <%= f.input :duration, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
-        </div>
+        <!-- End of left side -->
+
+      <!-- Duration toggler -->
+      <div class="profileTabs flex-grow-1 textSm" id="tabs">
+        <%= link_to "Duration", "#", class: "tab p-2", data: { turbolinks: false } %>
+        <%= link_to "Specific", "#", class: "tab p-2 active", data: { turbolinks: false } %>
+      </div>
+
 
       </div>
 
-      <%= f.input :start_date, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} ,html5: true, as: :date %>
-      <%= f.input :end_date, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} ,html5: true, as: :date%>
-      <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true ]], input_html:{class: "mb-2"}, wrapper_html: { class: "flex flex-row-reverse justify-content-end" }, include_hidden: false %>
+      <div class="flex items-end justify-content-between">
+        <%= f.input :start_date, label: "Dates", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100 datepicker"}, as: :string %>
+        <div class="flex flex-row-reverse items-center mb-2">
+          <label class="block textGray" for="weekend">Incl. weekends</label>
+          <input type="checkbox" class="mr-2" name="weekend">
+        </div>
+      </div>
+      <%= f.input :end_date, label: false, input_html:{class: "mb-2 w-100 datepicker none"}, as: :string %>
+
+
+
+
+      <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true ]], input_html:{class: "mb-2"}, wrapper_html: { class: "flex flex-row-reverse justify-content-end my-2" }, include_hidden: false %>
 
       <div class="flex justify-content-between items-center">
         <%= f.input :price, label: false, placeholder: "$250", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-2 flex-shrink-2" } %>

@@ -22,6 +22,10 @@
 	}
 }
 
+.self-centered {
+  align-self: center;
+}
+
 .flex-shrink-2 {
 	flex-shrink: 2;
 }
@@ -116,4 +120,8 @@
 
 .bg-white {
 	background: white;
+}
+
+.nowrap {
+  white-space: nowrap;
 }

@@ -3,7 +3,7 @@
 <%= link_to "ADD A NOTE", "#note_content", class: "btn btn-note py-3"  %>
 
 <div class="notesContainer mt-3">
-  <% if @connection && current_user.manager? %>
+  <% if current_user.manager? %>
     <% @notes.each do |note| %>
       <div class="flex p-3">
         <% if note.manager.user.avatar.attached? %>
