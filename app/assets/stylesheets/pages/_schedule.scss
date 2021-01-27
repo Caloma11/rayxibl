@@ -18,6 +18,12 @@
 				margin: 0;
 			}
 
+			.profiles {
+				position: sticky;
+				left: 0;
+				background: white;
+			}
+
 			.week {
 				height: 120px;
 				display: flex;
@@ -96,6 +102,23 @@
 
 					&.today {
 						background: #fafbff;
+					}
+
+					&.blueBorder {
+						border: 1px solid transparent;
+					}
+
+					.event {
+						@extend .mb-2;
+
+						width: 100%;
+						background: $blue-3;
+
+						.event-details {
+							color: white;
+							font-size: 12px;
+							overflow-x: overlay;
+						}
 					}
 				}
 			}
