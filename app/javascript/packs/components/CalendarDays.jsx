@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import moment from "moment";
 import { CalendarDay } from "./CalendarDay";
 
@@ -9,6 +9,8 @@ export const CalendarDays = ({
 	setShowForm,
 	setFormDetails
 }) => {
+	const [bookings, setBookings] = useState(profile.bookings);
+
 	const handleDayClick = ({ week, day }) => {
 		const date = data[week][day];
 		const formDetails = { profile, date };
@@ -20,15 +22,18 @@ export const CalendarDays = ({
 		<div className="daysCollection">
 			{numberOfWeeks.map((week, j) => {
 				return week.map((_, k) => {
-					const today = data[j][k].isSame(moment(), "day") ? "today" : "";
+					const dayOfWeek = data[j][k];
+					const today = dayOfWeek.isSame(moment(), "day");
 
 					return (
 						<CalendarDay
 							handleDayClick={handleDayClick}
+							dayOfWeek={dayOfWeek}
 							today={today}
 							week={j}
 							day={k}
 							key={`${j}_${k}`}
+							bookings={bookings}
 						/>
 					);
 				});

@@ -75,7 +75,6 @@ const Calendar = () => {
 		(async () => {
 			try {
 				const { data } = await axios.get("/api/v1/networks");
-				console.log(data);
 				setProfiles(data);
 			} catch (error) {
 				console.log(error);
