@@ -12,4 +12,11 @@ class ManagerPolicy < ApplicationPolicy
   def create?
     user && !user.manager && !user.profile
   end
+
+  def new?
+    # Conditions:
+    # User is there
+    # Does not have a manager yet
+    user.present? && !user.manager
+  end
 end
