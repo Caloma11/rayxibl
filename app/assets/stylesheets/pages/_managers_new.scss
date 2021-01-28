@@ -1,0 +1,10 @@
+.manager-new-page {
+	background: $blueish-gray;
+	height: 100%;
+
+	input[type="text"] {
+		@extend .py-3;
+
+		background: white;
+	}
+}

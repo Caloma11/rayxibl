@@ -1,14 +1,35 @@
-<%= simple_form_for @manager do |f| %>
-  <%= f.input :job_title %>
-  <% if current_user.invited_by&.manager %>
-    <%= f.simple_fields_for :company_attributes do |ff| %>
-      <%= ff.input :name, label: "Your company name:", input_html: { value: current_user.invited_by.manager.company.name, disabled: true } %>
-    <% end %>
-    <%= f.association :company, input_html: { value: current_user.invited_by.manager.company.id }, as: :hidden %>
-  <% else %>
-    <%= f.simple_fields_for :company_attributes do |ff| %>
-      <%= ff.input :name, label: "Your company name:" %>
-    <% end %>
+<div class="manager-new-page">
+  <%= simple_form_for @manager, html: { class: "mx-3" } do |f| %>
+    <div class="step-1">
+      <h3 class="uppercase text-center">Your profile</h3>
+      <%= f.simple_fields_for :user_attributes do |u| %>
+        <%= u.input :avatar, as: :file,
+                    required: false,
+                    label: "Display picture", label_html: { class: "uppercase textSm" },
+                    wrapper_html: { class: "flex flex-column-reverse justify-content-center items-center mb-3" } %>
+        <%= u.input :first_name, label: false,
+                    placeholder: "First name",
+                    wrapper_html: { class: "flex mb-3" },
+                    input_html: { class: "w-100" } %>
+        <%= u.input :last_name, label: false,
+                    placeholder: "Last name",
+                    wrapper_html: { class: "flex mb-3" },
+                    input_html: { class: "w-100" } %>
+      <% end %>
+      <%= f.input :job_title %>
+    </div>
+    <div class="step-2">
+      <% if !current_user.invited_by&.manager %>
+        <%= f.simple_fields_for :company_attributes do |ff| %>
+          <%= ff.input :name, label: "Your company name:", input_html: { value: current_user.invited_by.manager.company.name, disabled: true } %>
+        <% end %>
+        <%= f.association :company, input_html: { value: current_user.invited_by.manager.company.id }, as: :hidden %>
+      <% else %>
+        <%= f.simple_fields_for :company_attributes do |ff| %>
+          <%= ff.input :name, label: "Your company name:" %>
+        <% end %>
+      <% end %>
+      <%= f.submit %>
+    </div>
   <% end %>
-  <%= f.submit %>
-<% end %>
+</div>

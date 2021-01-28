@@ -12,6 +12,7 @@ class Manager < ApplicationRecord
   validates :job_title, presence: true
 
   accepts_nested_attributes_for :company
+  accepts_nested_attributes_for :user
 
   scope :except_me, ->(my_id) { joins(:company).where.not(id: my_id) }
 
