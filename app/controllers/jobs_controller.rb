@@ -36,6 +36,16 @@ class JobsController < ApplicationController
     end
   end
 
+  def edit
+    @job = Job.find(params[:id])
+    authorize @job
+  end
+
+  def update
+    @job = Job.find(params[:id])
+    authorize @job
+  end
+
   private
 
   def job_params

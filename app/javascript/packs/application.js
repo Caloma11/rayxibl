@@ -8,6 +8,7 @@ import { initFlatpickr } from "../plugins/newBookingFlatpickr";
 import { initDurationToggler } from "../components/durationToggler";
 import { bindBillableCheckbox } from "../components/billable";
 import { stepForm } from "../components/stepForm";
+import { moreToggler } from "../components/moreToggler";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -27,4 +28,5 @@ document.addEventListener("turbolinks:load", () => {
 	initDurationToggler();
 	bindBillableCheckbox();
 	stepForm();
+	moreToggler();
 });

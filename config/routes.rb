@@ -10,7 +10,7 @@ Rails.application.routes.draw do
 
   get "/dashboard", to: "pages#dashboard"
   resources :bookings, only: %i[show]
-  resources :jobs, only: %i[index show new create] do
+  resources :jobs, only: %i[index show new create edit update] do
     resources :job_applications, only: %i[create]
   end
 

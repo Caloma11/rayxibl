@@ -16,7 +16,30 @@
         </div>
       </div>
     </div>
-    <%= image_tag "icons/more.svg", alt: "more", width: 24, height: 24 %>
+    <% if @job.manager == current_user.manager %>
+      <div class="relative">
+        <div class="none actions-container">
+          <div class="actions flex flex-column job-show">
+            <%= link_to edit_job_path(@job), class: "action-link" do %>
+              EDIT
+            <% end %>
+            <%= link_to "#", class: "action-link" do %>
+              SHARE
+            <% end %>
+            <%= link_to "#", class: "action-link" do %>
+              CREATE BOOKING
+            <% end %>
+            <%= link_to "#", class: "action-link" do %>
+              ARCHIVE
+            <% end %>
+          </div>
+        </div>
+
+        <button class="trigger">
+          <%= image_tag "icons/more.svg", class: "toggler", alt: "more", width: 24, height: 24 %>
+        </button>
+      </div>
+    <% end %>
   </div>
 
   <section class="mx-3">
@@ -45,7 +68,7 @@
       <% end %>
     <% end %>
     <div class="applicant-avatars">
-      <% @job.job_applications.includes(profile: [user: :avatar_attachment]).limit(5).each do |ja| %>
+      <% @job.job_applications.includes(profile: [user: { avatar_attachment: :blob }]).limit(5).each do |ja| %>
         <%= render partial: "profiles/small_avatar", locals: { profile: ja.profile, size: 16 } %>
       <% end %>
       <% last_application ||= @job.job_applications.last %>
