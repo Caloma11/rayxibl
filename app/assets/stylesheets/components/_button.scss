@@ -42,9 +42,15 @@ input[type="submit"] {
 		filter: grayscale(80%);
 	}
 
-  &.btn-note {
-    @extend  .text-center, .border-gray;
-    color: $gray !important;
-  }
+	&.btn-note {
+		@extend .text-center, .border-gray;
+		color: $gray !important;
+	}
 
+	&.btn-gray-gradient {
+		@extend .text-center;
+
+		background: linear-gradient(135deg, #6c7580 3.76%, #262b34 97.26%);
+		color: $light-gray;
+	}
 }
