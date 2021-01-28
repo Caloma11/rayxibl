@@ -8,7 +8,7 @@
       <% end %>
       <h3 class="ml-3 my-0"><%= job.profession %></h3>
     </div>
-    <span class="uppercase skill-pill blue"><%= job.status %></span>
+    <span class="uppercase skill-pill <%= job.status == "live" ? "blue": "brown" %>"><%= job.status %></span>
   </div>
   <div class="flex items-end justify-content-between">
     <div class="uppercase textBetween">
