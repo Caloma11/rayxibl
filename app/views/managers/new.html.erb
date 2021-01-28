@@ -1,7 +1,7 @@
 <div class="manager-new-page">
   <%= simple_form_for @manager, html: { class: "mx-3" } do |f| %>
     <div class="step-1">
-      <h3 class="uppercase text-center">Your profile</h3>
+      <h3 class="uppercase text-center mt-0 pt-3">Your profile</h3>
       <%= f.simple_fields_for :user_attributes do |u| %>
         <%= u.input :avatar, as: :file,
                     required: false,
@@ -16,20 +16,44 @@
                     wrapper_html: { class: "flex mb-3" },
                     input_html: { class: "w-100" } %>
       <% end %>
-      <%= f.input :job_title %>
+      <%= f.input :job_title,
+                  required: false,
+                  label: false,
+                  wrapper_html: { class: "flex mb-3" },
+                  input_html: { class: "w-100" },
+                  placeholder: "Job title" %>
+      <div class="flex justify-content-end">
+        <button class="next-step" type="button"><%= image_tag "icons/arrow-right.svg", alt: "submit", width: 16, height: 16 %></button>
+      </div>
     </div>
-    <div class="step-2">
-      <% if !current_user.invited_by&.manager %>
+    <div class="step-2 none">
+      <h3 class="uppercase text-center mt-0 pt-3">Your company</h3>
+      <% if current_user.invited_by&.manager %>
         <%= f.simple_fields_for :company_attributes do |ff| %>
           <%= ff.input :name, label: "Your company name:", input_html: { value: current_user.invited_by.manager.company.name, disabled: true } %>
         <% end %>
         <%= f.association :company, input_html: { value: current_user.invited_by.manager.company.id }, as: :hidden %>
       <% else %>
         <%= f.simple_fields_for :company_attributes do |ff| %>
-          <%= ff.input :name, label: "Your company name:" %>
+          <%= ff.input :logo, as: :file,
+                       required: false,
+                       label: "Company logo", label_html: { class: "uppercase textSm" },
+                       wrapper_html: { class: "flex flex-column-reverse justify-content-center items-center mb-3" } %>
+          <%= ff.input :name, label: false,
+                       required: false,
+                       wrapper_html: { class: "flex mb-3" },
+                       input_html: { class: "w-100" },
+                       placeholder: "Company" %>
         <% end %>
       <% end %>
-      <%= f.submit %>
+      <div class="flex justify-content-between">
+        <button class="previous-step" type="button"><%= image_tag "icons/left-arrow-blue.svg", alt: "submit", width: 16, height: 16 %></button>
+        <button type="submit"><%= image_tag "icons/arrow-right.svg", alt: "submit", width: 16, height: 16 %></button>
+      </div>
+    </div>
+    <div class="flex justify-content-center items-center step-indicator-wrapper">
+      <div class="step-indicator step-indicator-1 active"><%= image_tag "icons/step-circle.svg", alt: "step indicator", width: 8, height: 8 %></div>
+      <div class="step-indicator step-indicator-2"><%= image_tag "icons/step-circle.svg", alt: "step indicator", width: 8, height: 8 %></div>
     </div>
   <% end %>
 </div>
