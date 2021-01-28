@@ -5,7 +5,9 @@ class Booking < ApplicationRecord
   belongs_to :profile
   has_many_attached :attachments
 
-  validates :title, :description, :price, :price_type, presence: true
+  validates :title, :description, presence: true
+  validates :price, :price_type, presence: true, if: -> { self.billable }
+
   enum price_type: PRICE_TYPES
   enum status: STATUSES
 
