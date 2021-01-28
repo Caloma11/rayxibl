@@ -1,31 +1,59 @@
-<h2>Sign up</h2>
-
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
-
-  <div class="field">
-    <%= f.label :role, "I'm A Manager" %>
-    <%= f.radio_button :role, "manager" %>
+<div class="registration-page">
+  <div class="flex items-center justify-content-between p-3 mb-5">
+    <%= link_to root_path do %>
+      <%= image_tag "icons/left-arrow.svg", width: 24, height: 24, alt: "back link" %>
+    <% end %>
+    <h2 class="uppercase my-0">Sign up</h2>
+    <div style="width: 32px"></div>
   </div>
 
-  <div class="field">
-    <%= f.label :role, "I'm A Freelancer" %>
-    <%= f.radio_button :role, "freelancer" %>
-  </div>
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :email, "Enter your email" %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
+    <div class="flex justify-content-center">
+      <div class="field mr-3">
+        <%= f.radio_button :role, "manager" %>
+        <%= f.label :role, "I'm A Manager" %>
+      </div>
 
-  <div class="field">
-    <%= f.label :password %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
+      <div class="field">
+        <%= f.radio_button :role, "freelancer" %>
+        <%= f.label :role, "I'm A Freelancer" %>
+      </div>
+    </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+    <div class="mx-3 mt-4">
+      <div class="flex mb-3">
+        <%= f.email_field :email, autofocus: true,
+                          autocomplete: "email",
+                          class: "w-100 bg-white py-3 textMd",
+                          placeholder: "alan@gmail.com" %>
+      </div>
 
-<%= render "devise/shared/links" %>
+      <div class="flex mb-3">
+        <%= f.password_field :password,
+                             autocomplete: "new-password",
+                             class: "bg-white w-100 py-3 textMd",
+                             placeholder: "********" %>
+      </div>
+
+      <div>
+        <%= f.submit "Create account", class: "btn btn-primary w-100 py-3 textMd" %>
+        <div class="my-3 flex items-center justify-content-center">
+          <div class="mr-3" style="width: 40px; border-top: 1px solid black"></div>
+          <p class="m-0 textSm">OR</p>
+          <div class="ml-3" style="width: 40px; border-top: 1px solid black"></div>
+        </div>
+        <%= link_to "#", class: "btn btn-gray-gradient py-3" do %>
+          <%= image_tag "icons/google.svg", alt: "Google icon", width: 16, height: 16, class: "vertical-align-middle mr-1" %> Sign up with Google
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="mx-3 mt-4">
+    <p>
+      Already have an account? <%= link_to "Sign in", new_session_path(resource_name), class: "textBlue semi-bold" %>
+    </p>
+  </div>
+</div>
