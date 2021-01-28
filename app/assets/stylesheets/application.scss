@@ -2,9 +2,12 @@
 @import "config/colors";
 @import "config/utilities/index";
 
-// Your CSS partials
+// CSS partials
 @import "components/index";
 @import "pages/index";
+
+@import "flatpickr/dist/flatpickr";
+@import "flatpickr/dist/themes/airbnb";
 
 html, body {
   @extend .h-100;

@@ -12,7 +12,7 @@
 }
 
 .mr-0 {
-	margin-right: 0;
+	margin-right: 0 !important;
 }
 
 .m-0 {
@@ -23,12 +23,24 @@
 	margin-bottom: 8px;
 }
 
+.ml-2 {
+  margin-left: 8px;
+}
+
+.mr-2 {
+  margin-right: 8px;
+}
+
 .mt-2 {
 	margin-top: 8px;
 }
 
 .my-2 {
 	@extend .mt-2, .mb-2;
+}
+
+.mx-2 {
+  @extend .mr-2, .ml-2;
 }
 
 .mb-1 {
