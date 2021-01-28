@@ -4,6 +4,8 @@ input[type="submit"] {
 	@extend .no-decoration;
 	border: none;
 	background: transparent;
+  -webkit-tap-highlight-color: transparent;
+
 
 	&.btn {
 		display: block;

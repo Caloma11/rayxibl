@@ -25,7 +25,6 @@
       background:white;
   }
 
-
   .choose-file {
     border: 1px solid #d3d3d3;
     padding: 8px 24px;
@@ -55,14 +54,10 @@
       height: 32px;
       width: 32px;
     }
-
   }
-
 }
 
-  #totalPrice {
-
-    @extend .flex, .items-center;
-    white-space: nowrap;
-
-  }
+#totalPrice {
+  @extend .flex, .items-center;
+  white-space: nowrap;
+}
