@@ -18,7 +18,7 @@ export const CalendarDay = ({
     ORDER OF ARRAY:
     [IS_START_DATE, IN_BETWEEN, IS_END_DATE]
   */
-	const hehe = bookings.map(booking => {
+	const eventDateBooleans = bookings.map(booking => {
 		return [
 			moment(booking.startDate).isSame(dayOfWeek, "day"),
 			dayOfWeek.isBetween(booking.startDate, booking.endDate),
@@ -37,23 +37,29 @@ export const CalendarDay = ({
 			className={`day ${todayClassName}`}
 			onClick={() => handleDayClick({ week, day })}
 		>
-			{hehe.map((a, i) => {
+			{eventDateBooleans.map((a, i) => {
 				if (!a.some(ele => ele)) return null;
 
 				const booking = bookings[i];
 				const eventClassName = `${EVENT_CLASS_NAMES} ${
 					a[0] ? START_EVENT_CLASS_NAMES : ""
 				} ${a[2] ? END_EVENT_CLASS_NAMES : ""}`;
+				const momentStart = moment(booking.startDate);
+				const momentEnd = moment(booking.endDate);
+				const eventDuration = momentEnd.diff(momentStart, "days") + 1;
 
 				return (
 					<div
 						key={i}
 						className={eventClassName}
-						style={{ height: 80 / hehe.length }}
+						style={{ height: 80 / eventDateBooleans.length }}
 						onClick={handleEventClick}
 					>
 						{a[0] && (
-							<p className="event-details" style={{ width: 80 * hehe.length }}>
+							<p
+								className="event-details"
+								style={{ width: 80 * eventDuration }}
+							>
 								{booking.title}
 							</p>
 						)}
