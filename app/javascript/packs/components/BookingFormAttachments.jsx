@@ -1,6 +1,11 @@
 import React from "react";
 
-export const BookingFormAttachments = () => {
+export const BookingFormAttachments = ({ setAttachments }) => {
+	const handleChange = e => {
+		e.persist();
+		setAttachments(prevState => [...prevState, ...e.target.files]);
+	};
+
 	return (
 		<>
 			<div className="input-wrapper">
@@ -10,6 +15,7 @@ export const BookingFormAttachments = () => {
 					name="booking[attachments][]"
 					type="file"
 					multiple
+					onChange={handleChange}
 				/>
 			</div>
 		</>

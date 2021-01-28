@@ -111,10 +111,10 @@
 					.event {
 						@extend .mb-2;
 
-						width: 100%;
 						background: $blue-3;
 
 						.event-details {
+							height: 100%;
 							color: white;
 							font-size: 12px;
 							overflow-x: overlay;

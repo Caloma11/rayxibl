@@ -2,8 +2,8 @@ import moment from "moment";
 
 const generateInitialDays = () => {
 	const initialData = [];
-	const startWeek = moment().add(0, "M").startOf("month").week();
-	const endWeek = moment().add(0, "M").endOf("month").week();
+	const startWeek = moment().week();
+	const endWeek = moment().add(1, "M").endOf("month").week();
 
 	for (let week = startWeek; week < endWeek - 1; week += 1) {
 		const day = Array(7)

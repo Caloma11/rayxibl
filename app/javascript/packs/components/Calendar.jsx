@@ -28,7 +28,6 @@ const Calendar = () => {
 	const generateData = () => {
 		const final = [];
 		const withMonthOffset = moment().add(monthOffset, "M");
-		// const startWeek = withMonthOffset.startOf("month").week();
 		const endWeek = withMonthOffset.endOf("month").week();
 		for (let week = weekCounter; week < endWeek; week += 1) {
 			const day = Array(7)
