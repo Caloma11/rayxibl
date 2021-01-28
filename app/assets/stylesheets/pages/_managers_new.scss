@@ -1,0 +1,41 @@
+.manager-new-page {
+	background: $blueish-gray;
+	height: 100%;
+
+	input[type="text"] {
+		@extend .py-3;
+
+		background: white;
+	}
+
+	form {
+		button[type="submit"],
+		.next-step {
+			@extend .rounded-circle;
+
+			height: 40px;
+			width: 40px;
+			background: $dark-blue-gradient;
+		}
+	}
+
+	.step-indicator-wrapper {
+		margin-top: -30px;
+	}
+
+	.step-indicator {
+		@extend .flex, .justify-content-center, .items-center;
+
+		width: 20px;
+		height: 20px;
+
+		&.active {
+			img {
+				@extend .rounded-circle;
+
+				padding: 2px;
+				border: 2px solid $blue-2;
+			}
+		}
+	}
+}

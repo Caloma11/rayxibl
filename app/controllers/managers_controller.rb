@@ -19,6 +19,7 @@ class ManagersController < ApplicationController
   def create
     @manager = Manager.new(manager_params)
     authorize @manager
+    current_user.update(manager_params[:user_attributes])
     @manager.user = current_user
     if @manager.save
       redirect_to root_path
@@ -30,6 +31,6 @@ class ManagersController < ApplicationController
   private
 
   def manager_params
-    params.require(:manager).permit(:job_title, :company_id, company_attributes: {})
+    params.require(:manager).permit(:job_title, :company_id, company_attributes: {}, user_attributes: {})
   end
 end

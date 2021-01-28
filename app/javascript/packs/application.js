@@ -7,6 +7,7 @@ import { initConversationCable } from "../channels/conversation_channel";
 import { initFlatpickr } from "../plugins/newBookingFlatpickr";
 import { initDurationToggler } from "../components/durationToggler";
 import { bindBillableCheckbox } from "../components/billable";
+import { stepForm } from "../components/stepForm";
 import { moreToggler } from "../components/moreToggler";
 
 require("@rails/ujs").start();
@@ -26,5 +27,6 @@ document.addEventListener("turbolinks:load", () => {
 	initFlatpickr();
 	initDurationToggler();
 	bindBillableCheckbox();
+	stepForm();
 	moreToggler();
 });
