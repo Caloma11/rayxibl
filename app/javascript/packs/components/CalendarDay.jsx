@@ -5,6 +5,16 @@ const START_EVENT_CLASS_NAMES = "rounded-top-left rounded-bottom-left pl-1";
 const EVENT_CLASS_NAMES = "event py-1";
 const END_EVENT_CLASS_NAMES = "rounded-top-right rounded-bottom-right";
 
+const determineColor = status => {
+	if (status === "rejected") {
+		return "red";
+	} else if (status === "accepted") {
+		return "green";
+	}
+
+	return "yellow";
+};
+
 export const CalendarDay = ({
 	handleDayClick,
 	dayOfWeek,
@@ -43,25 +53,41 @@ export const CalendarDay = ({
 				const booking = bookings[i];
 				const eventClassName = `${EVENT_CLASS_NAMES} ${
 					a[0] ? START_EVENT_CLASS_NAMES : ""
-				} ${a[2] ? END_EVENT_CLASS_NAMES : ""}`;
+				} ${a[2] ? END_EVENT_CLASS_NAMES : ""} ${determineColor(
+					booking.status
+				)}`;
 				const momentStart = moment(booking.startDate);
 				const momentEnd = moment(booking.endDate);
-				const eventDuration = momentEnd.diff(momentStart, "days") + 1;
+				let eventDuration = momentEnd.diff(momentStart, "days");
+				let timeText;
+
+				if (booking.duration) {
+					timeText = `${booking.duration} HR / DAY`;
+				} else {
+					timeText = `${booking.startTime} - ${booking.endTime}`;
+				}
+
+				console.log(booking);
+
+				if (eventDuration === 0) eventDuration = 1;
 
 				return (
 					<div
 						key={i}
 						className={eventClassName}
-						style={{ height: 80 / eventDateBooleans.length }}
+						style={{
+							height: 80 / eventDateBooleans.length
+						}}
 						onClick={handleEventClick}
 					>
 						{a[0] && (
-							<p
+							<div
 								className="event-details"
-								style={{ width: 80 * eventDuration }}
+								style={{ width: 120 * eventDuration }}
 							>
-								{booking.title}
-							</p>
+								<p className="title">{booking.title}</p>
+								<p className="time">{timeText}</p>
+							</div>
 						)}
 					</div>
 				);
