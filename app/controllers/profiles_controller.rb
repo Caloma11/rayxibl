@@ -15,6 +15,11 @@ class ProfilesController < ApplicationController
     else
       @profiles = policy_scope(Profile).includes(:ratings, user: [:manager, avatar_attachment: :blob])
     end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
