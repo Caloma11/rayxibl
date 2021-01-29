@@ -4,19 +4,22 @@
 
   <!-- Name and description -->
   <div class="profileHeader">
-    <div class="profileHeaderRight">
+    <div class="profileHeaderLeft">
       <h1><%= @profile.user.display_name %></h1>
       <p class="textGray"><%= @profile.profession %>, <%= @profile.location %></p>
     </div>
-    <div class="profileHeaderLeft">
+    <div class="profileHeaderRight">
       <div class="flex items-center justify-content-center mt-3">
-        <% @profile.average_rating.to_i.times do %>
-          <%= image_tag "icons/colored-rating.svg", alt: "rating" %>
-        <% end %>
-        <% (5 - @profile.average_rating.to_i).times do %>
-          <%= image_tag "icons/rating.svg", alt: "rating" %>
-        <% end %>
-        <span class="rating-size">(<%= @profile.ratings.size %>)</span>
+        <div class="stars">
+          <% @profile.average_rating.to_i.times do %>
+            <%= image_tag "icons/colored-rating.svg", alt: "rating" %>
+          <% end %>
+          <% (5 - @profile.average_rating.to_i).times do %>
+            <%= image_tag "icons/rating.svg", alt: "rating" %>
+          <% end %>
+          <span class="rating-size">(<%= @profile.ratings.size %>)</span>
+          <p class="textGray uppercase semi-bold text-center textSm"><%= @profile.expertise %> level</p>
+        </div>
       </div>
     </div>
   </div>
