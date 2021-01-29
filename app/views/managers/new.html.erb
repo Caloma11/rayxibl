@@ -1,12 +1,17 @@
+
 <div class="manager-new-page">
   <%= simple_form_for @manager, html: { class: "mx-3" } do |f| %>
     <div class="step-1">
       <h3 class="uppercase text-center mt-0 pt-3">Your profile</h3>
       <%= f.simple_fields_for :user_attributes do |u| %>
+        <div class="flex justify-content-center">
+          <%= image_tag "icons/camera.svg", alt: "preview of image", id: "avatar-preview", class: "initial avatar avatar-circle", width: 300 %>
+        </div>
         <%= u.input :avatar, as: :file,
                     required: false,
-                    label: "Display picture", label_html: { class: "uppercase textSm" },
-                    wrapper_html: { class: "flex flex-column-reverse justify-content-center items-center mb-3" } %>
+                    label: "Display picture", label_html: { class: "uppercase textSm mt-3" },
+                    wrapper_html: { class: "flex flex-column-reverse justify-content-center items-center mb-3" },
+                    input_html: { class: "none" } %>
         <%= u.input :first_name, label: false,
                     placeholder: "First name",
                     wrapper_html: { class: "flex mb-3" },
@@ -35,10 +40,14 @@
         <%= f.association :company, input_html: { value: current_user.invited_by.manager.company.id }, as: :hidden %>
       <% else %>
         <%= f.simple_fields_for :company_attributes do |ff| %>
+          <div class="flex justify-content-center">
+            <%= image_tag "icons/camera.svg", alt: "preview of image", id: "logo-preview", class: "initial avatar avatar-circle", width: 300 %>
+          </div>
           <%= ff.input :logo, as: :file,
-                       required: false,
-                       label: "Company logo", label_html: { class: "uppercase textSm" },
-                       wrapper_html: { class: "flex flex-column-reverse justify-content-center items-center mb-3" } %>
+                      required: false,
+                      label: "Company logo", label_html: { class: "uppercase textSm mt-3" },
+                      wrapper_html: { class: "flex flex-column-reverse justify-content-center items-center mb-3" },
+                      input_html: { class: "none" } %>
           <%= ff.input :name, label: false,
                        required: false,
                        wrapper_html: { class: "flex mb-3" },
