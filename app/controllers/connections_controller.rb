@@ -8,6 +8,7 @@ class ConnectionsController < ApplicationController
     authorize @connection
     if @connection.save
       last_url = Rails.application.routes.recognize_path(request.referrer)
+      flash[:notice] = "You have added #{@profile.user.display_name} to your network!"
       if last_url[:action] == "index" && last_url[:controller] == "profiles"
         redirect_to profiles_path
       else
