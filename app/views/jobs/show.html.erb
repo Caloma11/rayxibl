@@ -1,18 +1,22 @@
 <div class="job-show">
-  <div class="mx-3 pt-3 flex justify-content-between items-center">
-    <div class="flex items-center">
+  <div class="mx-3 pt-3 mt-3 flex justify-content-between items-start">
+    <div class="flex items-start">
       <%= link_to :back do %>
-        <%= image_tag "icons/left-arrow.svg", alt: "back link", width: 16, height: 16 %>
+        <%= image_tag "icons/left-arrow.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm" %>
       <% end %>
-      <div class="flex items-center ml-3">
-        <% if @job.company.logo.attached? %>
-          <%= image_tag @job.company.logo.service_url, alt: "company logo", width: 40, height: 40 %>
-        <% else %>
-          <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "company logo", width: 40, height: 40 %>
-        <% end %>
-        <div class="ml-3">
+      <div class="flex items-start ml-3">
+        <div class="flex flex-column justify-content-center items-center mr-2">
+          <% if @job.company.logo.attached? %>
+            <%= image_tag @job.company.logo.service_url, alt: "company logo", width: 64, height: 40, class: "company-logo" %>
+          <% else %>
+            <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "company logo", width: 40, height: 40, class: "company-logo" %>
+          <% end %>
+          <span class="uppercase skill-pill mx-0 <%= @job.status == "live" ? "blue": "brown" %>"><%= @job.status %></span>
+        </div>
+        <div class="ml-3 navHeader">
           <h3 class="m-0"><%= @job.profession %></h3>
-          <p class="m-0"><%= @job.company.name %></p>
+          <p class="m-0 textGray"><%= @job.company.name %></p>
+          <p class="m-0 textGray"><%= @job.location %></p>
         </div>
       </div>
     </div>
@@ -44,7 +48,7 @@
 
   <section class="mx-3">
     <% if current_user.manager? %>
-      <%= link_to profiles_path(job_id: @job.id), class: "btn btn-secondary my-3" do %>
+      <%= link_to profiles_path(job_id: @job.id), class: "btn btn-secondary mt-4 mb-3 mx-3" do %>
         <div class="flex justify-content-center items-center">
           <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
           <span class="textWhite">View applicants (<%= @job.job_applications.count %>)</span>
@@ -82,13 +86,13 @@
     </div>
   </section>
 
-  <section class="text-block mx-3 uppercase">
-    <p>Maximum budget <%= @job.rate %> <%= @job.price_type %></p>
-    <p><%= @job.start_date&.strftime("%d %b") %> - <%= @job.end_date&.strftime("%d %b") %>, <%= @job.start_time&.strftime("%H:%M") %> - <%= @job.end_time&.strftime("%H:%M") %></p>
-    <p><%= @job.location %></p>
-    <div class="skills">
-      <p class="subtitle">Key Skills</p>
-      <div class="skill-pills">
+  <section class="text-block mx-3 mb-3 uppercase">
+    <p class="mb-3"><strong class="textDarkGray">experience level:</strong> <%= @job.expertise %> </p>
+    <p class="mb-3"><strong class="textDarkGray">budget:</strong> <%= @job.rate %> <%= @job.price_type %></p>
+    <p><%= @job.start_date&.strftime("%d %b") %> <strong class="textDarkGray">-</strong> <%= @job.end_date&.strftime("%d %b") %>, <%= @job.start_time&.strftime("%H:%M") %> <strong class="textDarkGray">-</strong> <%= @job.end_time&.strftime("%H:%M") %></p>
+    <div class="skills mt-4">
+      <p class="subtitle mb-0">Key Skills</p>
+      <div class="skill-pills px-0">
         <% @job.skill_list.each do |skill| %>
           <div class="skill-pill"><%= skill %></div>
         <% end %>
@@ -97,6 +101,6 @@
   </section>
 
   <section class="mx-3">
-    <p><%= @job.description %></p>
+    <p class="textGray"><%= @job.description %></p>
   </section>
 </div>
