@@ -6,8 +6,8 @@ $day-header-height: 60px;
 	#calendar {
 		@extend .relative;
 
-		form.bookingForm {
-			position: absolute;
+		#booking-form-container {
+			position: fixed;
 			height: 100vh;
 			width: 100%;
 			background: white;
