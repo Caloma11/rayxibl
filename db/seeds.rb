@@ -165,6 +165,10 @@ job = Job.create!(
   start_time: Time.now,
   end_time: Time.now + 8.hours
 )
+
+job.skill_list.add(%w(ruby django python rails c#))
+job.save
+
 puts "[END] - Creating a job"
 
 puts "[BEGIN] - Creating a job application"
