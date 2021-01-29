@@ -4,7 +4,7 @@ import moment from "moment";
 const CalendarDayHeader = ({ day, today }) => {
 	return (
 		<div className="dayHeader day">
-			<span className="uppercase">{day.format("dd")}</span>
+			<span className={`uppercase ${today}`}>{day.format("ddd")}</span>
 			<p className={today}>{day.format("D")}</p>
 		</div>
 	);

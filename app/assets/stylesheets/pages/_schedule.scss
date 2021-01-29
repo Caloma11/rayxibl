@@ -77,6 +77,11 @@ $day-header-height: 60px;
 
 					span {
 						color: #8a9099;
+						font-weight: 500;
+
+						&.today {
+							color: $blue-2;
+						}
 					}
 
 					p {
@@ -86,10 +91,10 @@ $day-header-height: 60px;
 						height: 40px;
 						border-radius: $radius-md;
 						color: #4f4f4f;
+						font-weight: 600;
 
 						&.today {
-							background: #4888ff;
-							color: white;
+							color: $blue-2;
 						}
 					}
 				}
