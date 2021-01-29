@@ -1,5 +1,6 @@
 import React from "react";
 import moment from "moment";
+import { truncate } from "../../utils/truncate";
 
 const START_EVENT_CLASS_NAMES = "rounded-top-left rounded-bottom-left pl-1";
 const EVENT_CLASS_NAMES = "event py-1";
@@ -14,6 +15,7 @@ const determineColor = status => {
 
 	return "yellow";
 };
+const DAY_WIDTH = 80;
 
 export const CalendarDay = ({
 	handleDayClick,
@@ -58,7 +60,7 @@ export const CalendarDay = ({
 				)}`;
 				const momentStart = moment(booking.startDate);
 				const momentEnd = moment(booking.endDate);
-				let eventDuration = momentEnd.diff(momentStart, "days");
+				let eventDuration = momentEnd.diff(momentStart, "days") + 1;
 				let timeText;
 
 				if (booking.duration) {
@@ -67,8 +69,6 @@ export const CalendarDay = ({
 					timeText = `${booking.startTime} - ${booking.endTime}`;
 				}
 
-				console.log(booking);
-
 				if (eventDuration === 0) eventDuration = 1;
 
 				return (
@@ -76,16 +76,18 @@ export const CalendarDay = ({
 						key={i}
 						className={eventClassName}
 						style={{
-							height: 80 / eventDateBooleans.length
+							height: DAY_WIDTH / eventDateBooleans.length
 						}}
 						onClick={handleEventClick}
 					>
 						{a[0] && (
 							<div
 								className="event-details"
-								style={{ width: 120 * eventDuration }}
+								style={{ width: DAY_WIDTH * eventDuration }}
 							>
-								<p className="title">{booking.title}</p>
+								<p className="title">
+									{truncate(booking.title, { scale: eventDuration })}
+								</p>
 								<p className="time">{timeText}</p>
 							</div>
 						)}
