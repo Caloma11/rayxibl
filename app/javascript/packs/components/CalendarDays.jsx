@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import moment from "moment";
 import { CalendarDay } from "./CalendarDay";
 
@@ -9,8 +9,6 @@ export const CalendarDays = ({
 	setShowForm,
 	setFormDetails
 }) => {
-	const [bookings, setBookings] = useState(profile.bookings);
-
 	const handleDayClick = ({ week, day }) => {
 		const date = data[week][day];
 		const formDetails = { profile, date };
@@ -33,7 +31,7 @@ export const CalendarDays = ({
 							week={j}
 							day={k}
 							key={`${j}_${k}`}
-							bookings={bookings}
+							bookings={profile.bookings}
 						/>
 					);
 				});
