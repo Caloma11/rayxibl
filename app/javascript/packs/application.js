@@ -9,6 +9,7 @@ import { initDurationToggler } from "../components/durationToggler";
 import { bindBillableCheckbox } from "../components/billable";
 import { stepForm } from "../components/stepForm";
 import { moreToggler } from "../components/moreToggler";
+import { previewImage } from "../components/previewImage";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -29,4 +30,5 @@ document.addEventListener("turbolinks:load", () => {
 	bindBillableCheckbox();
 	stepForm();
 	moreToggler();
+	previewImage();
 });
