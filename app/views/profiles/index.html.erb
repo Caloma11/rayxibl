@@ -10,34 +10,16 @@
   </section>
 
   <section class="switch flex justify-content-between p-3 my-3" style="background-color: #F9FBFE;">
-    <%= link_to profiles_path(network: true), class: "flex items-center btn #{params[:network] ? 'btn-white' : 'btn-transparent'}" do %>
+    <%= link_to profiles_path(network: true), remote: true, class: "flex items-center btn #{params[:network] ? 'btn-white' : 'btn-transparent'}" do %>
       <%= image_tag "icons/person-check.svg", alt: "in network", class: "vertical-align-middle" %> My network
     <% end %>
-    <%= link_to profiles_path, class: "flex items-center btn #{params[:network] ? 'btn-transparent' : 'btn-white'}" do %>
+    <%= link_to profiles_path, remote: true, class: "flex items-center btn #{params[:network] ? 'btn-transparent' : 'btn-white'}" do %>
       <%= image_tag "icons/people-dark.svg", alt: "everyone", class: "vertical-align-middle" %> Everyone
     <% end %>
   </section>
 
   <section class="cards">
-    <% if params[:network] %>
-      <% if @profiles.size.positive? %>
-        <% @profiles.each do |profile| %>
-          <% conversation ||= current_user.conversation_with(profile.user) %>
-          <% connection ||= current_user.find_connection(profile.user) %>
-          <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation, add_to_network: !connection.present? } %>
-        <% end %>
-      <% else %>
-        <h2>You don't have any freelancers in your network</h2>
-      <% end %>
-    <% else %>
-      <% @profiles.each do |profile| %>
-        <% conversation ||= current_user.conversation_with(profile.user) %>
-        <% connection ||= current_user.find_connection(profile.user) %>
-        <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation, add_to_network: !connection.present? } %>
-      <% end %>
-
-      <%= javascript_pack_tag "components/ActionButton" %>
-    <% end %>
+    <%= render partial: "profiles/cards", locals: { profiles: @profiles } %>
   </section>
 </div>
 
