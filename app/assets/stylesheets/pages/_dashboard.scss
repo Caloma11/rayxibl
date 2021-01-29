@@ -1,6 +1,12 @@
 #dashboardPage {
 	.jobs {
 		.active-jobs {
+			.job-card {
+				.skill-pill {
+					@extend .mr-0;
+				}
+			}
+
 			.applicant-avatars {
 				@extend .flex, .justify-content-center;
 

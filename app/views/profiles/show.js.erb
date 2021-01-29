@@ -1,0 +1,24 @@
+(() => {
+  const tabContent = document.getElementById("tab-content");
+  const aboutTab = document.getElementById("about-tab");
+  const linkTab = document.getElementById("link-tab");
+  const noteTab = document.getElementById("note-tab");
+
+  const addActiveClass  = node => node.classList.add("active");
+  const removeActiveClass = node => node.classList.remove("active");
+
+  if (tabContent) {
+    tabContent.innerHTML = "<%= j render partial: "profiles/#{params[:tab] || "about"}_content" %>";
+
+    if ("<%= params[:tab] %>" == "about" || <%= !params[:tab] %>) {
+      addActiveClass(aboutTab);
+      [linkTab, noteTab].forEach(removeActiveClass);
+    } else if ("<%= params[:tab] %>" == "links") {
+      addActiveClass(linkTab);
+      [aboutTab, noteTab].forEach(removeActiveClass);
+    } else if ("<%= params[:tab] %>" == "notes") {
+      addActiveClass(noteTab);
+      [aboutTab, linkTab].forEach(removeActiveClass);
+    }
+  }
+})();
