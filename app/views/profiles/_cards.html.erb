@@ -1,0 +1,19 @@
+<% if params[:network] %>
+  <% if profiles.size.positive? %>
+    <% profiles.each do |profile| %>
+      <% conversation ||= current_user.conversation_with(profile.user) %>
+      <% connection ||= current_user.find_connection(profile.user) %>
+      <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation, add_to_network: !connection.present? } %>
+    <% end %>
+  <% else %>
+    <h2>You don't have any freelancers in your network</h2>
+  <% end %>
+<% else %>
+  <% profiles.each do |profile| %>
+    <% conversation ||= current_user.conversation_with(profile.user) %>
+    <% connection ||= current_user.find_connection(profile.user) %>
+    <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation, add_to_network: !connection.present? } %>
+  <% end %>
+
+  <%= javascript_pack_tag "components/ActionButton" %>
+<% end %>

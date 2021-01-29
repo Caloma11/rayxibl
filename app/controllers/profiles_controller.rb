@@ -15,6 +15,11 @@ class ProfilesController < ApplicationController
     else
       @profiles = policy_scope(Profile).includes(:ratings, user: [:manager, avatar_attachment: :blob])
     end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show
@@ -23,6 +28,11 @@ class ProfilesController < ApplicationController
 
     @links = @profile.profile_attachments.where.not(url: nil)
     @documents = @profile.profile_attachments.where(url: nil)
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def new
@@ -56,7 +66,7 @@ class ProfilesController < ApplicationController
   private
 
   def set_profile
-    @profile = Profile.includes(:profile_attachments, user: [:avatar_attachment]).find(params[:id])
+    @profile = Profile.find(params[:id])
     authorize @profile
   end
 
