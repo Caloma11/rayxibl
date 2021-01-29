@@ -142,6 +142,14 @@
 	margin-top: 32px;
 }
 
+.mb-4 {
+  margin-bottom: 32px;
+}
+
+.my-4 {
+  @extend .mt-4, .mb-4;
+}
+
 .mt-5 {
 	margin-top: 64px;
 }
@@ -149,11 +157,11 @@
 // Padding
 
 .pl-0 {
-	padding-left: 0;
+	padding-left: 0 !important;
 }
 
 .pr-0 {
-	padding-right: 0;
+	padding-right: 0 !important;
 }
 
 .px-0 {
@@ -271,4 +279,8 @@
 .py-4 {
 	padding-top: 32px !important;
 	padding-bottom: 32px !important;
+}
+
+.p-0 {
+  padding: 0 !important;
 }
