@@ -21,8 +21,7 @@
     <% else %>
       <%= link_to "SIGN IN BUTTON", new_user_session_path %>
     <% end %>
-
-    <% if user_signed_in? %>
+    <% if user_signed_in? && !(params[:controller] == "conversations" && params[:action] == "show") %>
       <%= render partial: "shared/navbar" %>
     <% end %>
   </body>

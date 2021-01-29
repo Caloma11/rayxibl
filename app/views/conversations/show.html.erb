@@ -1,32 +1,48 @@
-<div class="convo-show">
-  <section class="flex shadow">
-    <%= link_to :back, class: "flex items-center" do %>
-      <%= image_tag "icons/left-arrow.svg", alt: "back link", height: 24, width: 24 %>
-    <% end %>
-    <div class="flex items-center">
-      <% if @other_person.avatar.present? %>
-        <%= image_tag @other_person.avatar.service_url, alt: "Avatar", width: 80, height: 80, class: "ml-3" %>
-      <% else %>
-        <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "Avatar", width: 80, height: 80, class: "ml-3" %>
+<div class="convo-show h-100 flex flex-column">
+  <div class="convo-header">
+    <section class="flex shadow pt-3 pb-2 px-3">
+      <%= link_to :back, class: "flex items-center" do %>
+        <%= image_tag "icons/left-arrow.svg", alt: "back link", height: 24, width: 24, class: "mr-2" %>
       <% end %>
-
-      <div class="ml-3">
-        <h3 class="noMargin"><%= @other_person.display_name %></h3>
-        <% if @other_person.freelancer? %>
-          <p class="noMargin"><%= @other_person.profile.profession %></p>
-          <span><%= @other_person.profile.location %></span>
+      <div class="flex items-center flex-grow-1">
+        <% if @other_person.avatar.present? %>
+          <%= image_tag @other_person.avatar.service_url, alt: "Avatar", width: 64, height: 64, class: "ml-3 rounded-square company-logo" %>
+        <% else %>
+          <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "Avatar", width: 64  , height: 64   , class: "ml-3 rounded-square company-logo" %>
         <% end %>
-      </div>
-    </div>
-  </section>
 
-  <section class="mt-2" id="messages" data-current-user-id="<%= current_user.id %>" data-conversation-id="<%= @conversation.id %>">
+        <div class="ml-3">
+          <h3 class="noMargin"><%= @other_person.display_name %></h3>
+          <% if @other_person.freelancer? %>
+            <p class="noMargin semi-bold textGray"><%= @other_person.profile.profession %></p>
+            <span class="textMd textGray"><%= @other_person.profile.location %></span>
+          <% end %>
+        </div>
+      </div>
+      <button><%= image_tag "icons/search.svg", alt: "search", width: 24, height: 24, class: "ml-3" %></button>
+    </section>
+  </div>
+
+  <section class="mt-2 flex-grow-1" id="messages" data-current-user-id="<%= current_user.id %>" data-conversation-id="<%= @conversation.id %>">
     <% @conversation.messages.each do |message| %>
       <%= render partial: "messages/message", locals: { message: message, user_is_author: message.user == current_user } %>
     <% end %>
   </section>
 
-  <%= simple_form_for [@conversation, @message], remote: true do |f| %>
-    <%= f.input :content, as: :string, label: false, placeholder: "Type a message...", input_html: { class: "rounded-pill" } %>
-  <% end %>
+  <div class="message-form flex items-end">
+    <%= simple_form_for [@conversation, @message], remote: true, html: {class: "flex-grow-1"} do |f| %>
+      <%= f.input :content, as: :string, label: false, placeholder: "Type a message...", input_html: { class: "rounded-pill" } %>
+    <% end %>
+    <% if current_user.manager? %>
+      <% unless current_user.find_connection(@conversation.profile.user) %>
+        <%= link_to profile_connections_path(@conversation.profile), method: :post, class: "action", remote: true do %>
+          <%= image_tag "icons/person-add.svg", alt: "connection add", class: "p-1 mr-2 icon", width: 32, height: 32 %>
+        <% end %>
+      <% else %>
+        <%= link_to new_profile_booking_path(@conversation.profile), class: "action" do %>
+          <%= image_tag "icons/calendar.svg", alt: "calendar", class: "p-1 mr-2 icon", width: 32, height: 32 %>
+        <% end %>
+      <% end %>
+    <% end %>
+  </div>
 </div>
