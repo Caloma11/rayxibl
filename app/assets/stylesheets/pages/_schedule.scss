@@ -1,3 +1,6 @@
+$day-height: 180px;
+$day-header-height: 60px;
+
 #calendar-page {
 	#calendar {
 		@extend .relative;
@@ -19,13 +22,14 @@
 			}
 
 			.profiles {
-				position: sticky;
+				@extend .sticky;
+
 				left: 0;
 				background: white;
 			}
 
 			.week {
-				height: 120px;
+				height: $day-height;
 				display: flex;
 
 				&.profile {
@@ -55,19 +59,20 @@
 
 				&.blank {
 					background: transparent;
-					height: 60px;
+					height: $day-header-height;
 				}
 			}
 
 			.dayHeaders {
 				@extend .flex, .justify-content-between;
 
-				height: 60px;
+				top: 0;
+				height: $day-header-height;
 
 				.dayHeader {
 					@extend .flex, .flex-column, .items-center;
 
-					width: 80px;
+					width: 120px;
 					border: 1px solid transparent;
 
 					span {
@@ -93,12 +98,12 @@
 			.daysCollection {
 				@extend .flex;
 
-				height: 120px;
+				height: $day-height;
 
 				.day {
 					border: 1px solid #e8e9eb;
-					width: 80px;
-					height: 120px;
+					width: 120px;
+					height: $day-height;
 
 					&.today {
 						background: #fafbff;
@@ -111,13 +116,33 @@
 					.event {
 						@extend .mb-2;
 
-						background: $blue-3;
+						background: $flat-orange-5;
+						border-top: 8px solid $flat-orange-3;
+
+						&.red {
+							background: $flat-red-5;
+							border-top-color: $flat-red-3;
+						}
+
+						&.green {
+							background: $flat-green-5;
+							border-top-color: $flat-green-3;
+						}
 
 						.event-details {
 							height: 100%;
-							color: white;
-							font-size: 12px;
 							overflow-x: overlay;
+
+							.title {
+								font-size: 12px;
+								color: $dark-gray;
+								font-weight: 600;
+							}
+
+							.time {
+								font-size: 10px;
+								font-weight: 500;
+							}
 						}
 					}
 				}
