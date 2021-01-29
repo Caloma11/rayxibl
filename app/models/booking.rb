@@ -1,5 +1,6 @@
 class Booking < ApplicationRecord
   include Bookings::Constants
+  include Bookings::CalculatePrice
 
   belongs_to :manager
   belongs_to :profile
@@ -10,6 +11,8 @@ class Booking < ApplicationRecord
 
   enum price_type: PRICE_TYPES
   enum status: STATUSES
+
+  before_create :determine_total_price
 
   %w[start end].each do |identifier|
     define_method :"parsed_#{identifier}_date" do
