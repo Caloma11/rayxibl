@@ -1,3 +1,4 @@
+$day-width: 120px;
 $day-height: 180px;
 $day-header-height: 60px;
 
@@ -50,9 +51,8 @@ $day-header-height: 60px;
 					}
 
 					span {
-						@extend .text-center, .mt-1;
+						@extend .text-center, .mt-1, .textSm;
 
-						font-size: 12px;
 						color: #828282;
 					}
 				}
@@ -72,7 +72,7 @@ $day-header-height: 60px;
 				.dayHeader {
 					@extend .flex, .flex-column, .items-center;
 
-					width: 120px;
+					width: $day-width;
 					border: 1px solid transparent;
 
 					span {
@@ -102,7 +102,7 @@ $day-header-height: 60px;
 
 				.day {
 					border: 1px solid #e8e9eb;
-					width: 120px;
+					width: $day-width;
 					height: $day-height;
 
 					&.today {
@@ -134,7 +134,8 @@ $day-header-height: 60px;
 							overflow-x: overlay;
 
 							.title {
-								font-size: 12px;
+								@extend .textSm;
+
 								color: $dark-gray;
 								font-weight: 600;
 							}
