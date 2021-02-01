@@ -6,6 +6,6 @@ class NotePolicy < ApplicationPolicy
   end
 
   def create?
-    user.manager && user.find_connection(record.profile.user)
+    user.manager
   end
 end

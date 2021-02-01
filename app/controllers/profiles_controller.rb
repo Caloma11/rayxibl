@@ -1,6 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: :show
-
+  before_action :set_profile, only: [:show, :edit]
   def index
     redirect_to dashboard_path if current_user.freelancer?
 
@@ -61,6 +60,10 @@ class ProfilesController < ApplicationController
     else
       render 'new'
     end
+  end
+
+  def edit
+
   end
 
   private
