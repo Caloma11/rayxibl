@@ -1,10 +1,7 @@
 (() => {
   const addButton = document.querySelector(".profileButtons a");
-
   const scheduleIconPath = "<%= image_path 'icons/schedule-white' %>"
-
   addButton.href = "<%= new_profile_booking_path(@profile) %> "
-
   addButton.innerHTML = `<img alt="Book user" src=${scheduleIconPath}><p class="textWhite">BOOK</p>`
-
+  // TODO: Add the 'remove from your network' option on the action-container once other PR is merged
 })();
