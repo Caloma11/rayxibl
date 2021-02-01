@@ -13,12 +13,12 @@
             <div class="actions flex flex-column job-show">
               <% connection ||= current_user.find_connection(@profile.user) %>
               <% if connection %>
-                <%= link_to connection_path(connection), method: :delete, class: "action-link flex items-center" do %>
+                <%= button_to connection_path(connection), method: :delete, class: "action-link flex items-center w-100" do %>
                   <%= image_tag "icons/user-minus", alt: "remove user", width: 24, height: 24, class: "mr-3" %>
                   REMOVE
                 <% end %>
               <% end %>
-              <%= link_to "#", class: "action-link flex items-center" do %>
+              <%= link_to "#", class: "action-link flex items-center w-100" do %>
                 <%= image_tag "icons/share-white", alt: "share profile", width: 24, height: 24, class: "mr-3" %>
                 SHARE
               <% end %>
