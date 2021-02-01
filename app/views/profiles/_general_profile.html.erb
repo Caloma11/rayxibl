@@ -32,11 +32,11 @@
       <% if @connection %>
         <%#= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
         <%= link_to new_profile_booking_path(@profile), class: "mr-3", class: "btn-lg px-0 btn-primary" do %>
-          <%= image_tag "icons/schedule.svg", alt: "Book user" %>
+          <%= image_tag "icons/schedule-white.svg", alt: "Book user" %>
           <p class="textWhite">BOOK</p>
         <% end %>
       <% else %>
-        <%= link_to profile_connections_path(@profile), class: "mr-3 btn-lg px-0 btn-primary", method: :post  do %>
+        <%= link_to profile_connections_path(@profile) ,class: "mr-3 btn-lg px-0 btn-primary", method: :post, remote: true  do %>
           <%= image_tag "icons/user-plus.svg", alt: "Add user" %>
           <p class="textWhite">ADD</p>
         <% end %>

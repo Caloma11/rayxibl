@@ -7,15 +7,20 @@ class ConnectionsController < ApplicationController
     @connection = Connection.new(profile: @profile, company: @company)
     authorize @connection
     if @connection.save
-      last_url = Rails.application.routes.recognize_path(request.referrer)
-      flash[:notice] = "You have added #{@profile.user.display_name} to your network!"
-      if last_url[:action] == "index" && last_url[:controller] == "profiles"
-        redirect_to profiles_path
-      elsif last_url[:action] == "show" && last_url[:controller] == "conversations"
-        @conversation = Conversation.find_by(manager: current_user.manager, profile: @profile)
-        redirect_to conversation_path(@conversation, anchor: "message-#{@conversation.messages.last.id}")
-      else
-        redirect_to profile_path(@profile)
+      respond_to do |format|
+        format.html do
+          last_url = Rails.application.routes.recognize_path(request.referrer)
+          flash[:notice] = "You have added #{@profile.user.display_name} to your network!"
+          if last_url[:action] == "index" && last_url[:controller] == "profiles"
+            redirect_to profiles_path
+          elsif last_url[:action] == "show" && last_url[:controller] == "conversations"
+            @conversation = Conversation.find_by(manager: current_user.manager, profile: @profile)
+            redirect_to conversation_path(@conversation, anchor: "message-#{@conversation.messages.last.id}")
+          else
+            redirect_to profile_path(@profile)
+          end
+        end
+        format.js
       end
     else
       render 'profiles/show'
