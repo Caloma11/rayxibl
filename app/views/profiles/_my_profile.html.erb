@@ -1,6 +1,14 @@
 <div class="generalProfile w-100">
 
-  <div class="profileBanner" style="background-image: url(<%= avatar_url(@profile) %>)"></div>
+  <div class="profileBanner" style="background-image: linear-gradient(to left, rgba(255,255,255,0.2),rgba(0,0,0,0.4)), url(<%= avatar_url(@profile) %>)">
+    <div class="headerOptions flex w-100 justify-content-between p-3">
+      <div>
+        <%= link_to :back do %>
+          <%= image_tag "icons/left-arrow-white.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 
   <!-- Name and description -->
   <div class="profileHeader">

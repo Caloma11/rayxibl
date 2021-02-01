@@ -1,15 +1,34 @@
 <div class="generalProfile w-100">
 
-  <div class="profileBanner" style="background-image: linear-gradient(to left, rgba(255,255,255,0.2),rgba(0,0,0,0.4)), url(<%= avatar_url(@profile) %>)">
+  <div class="profileBanner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(255,255,255,0.2)), url(<%= avatar_url(@profile) %>)">
     <div class="headerOptions flex w-100 justify-content-between p-3">
       <div>
         <%= link_to :back do %>
           <%= image_tag "icons/left-arrow-white.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm" %>
         <% end %>
       </div>
-      <div>
-          <%= image_tag "icons/more.svg" %>
-      </div>
+      <% if current_user.manager? %>
+        <div class="relative">
+          <div class="none actions-container">
+            <div class="actions flex flex-column job-show">
+              <% connection ||= current_user.find_connection(@profile.user) %>
+              <% if connection %>
+                <%= link_to connection_path(connection), method: :delete, class: "action-link flex items-center" do %>
+                  <%= image_tag "icons/user-minus", alt: "remove user", width: 24, height: 24, class: "mr-3" %>
+                  REMOVE
+                <% end %>
+              <% end %>
+              <%= link_to "#", class: "action-link flex items-center" do %>
+                <%= image_tag "icons/share-white", alt: "share profile", width: 24, height: 24, class: "mr-3" %>
+                SHARE
+              <% end %>
+            </div>
+          </div>
+          <div class="trigger">
+            <%= image_tag "icons/more-white.svg", class: "toggler", width: 24, height: 24 %>
+          </div>
+        </div>
+      <% end %>
     </div>
   </div>
 
