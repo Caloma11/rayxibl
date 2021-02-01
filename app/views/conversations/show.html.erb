@@ -1,7 +1,7 @@
 <div class="convo-show h-100 flex flex-column">
   <div class="convo-header">
     <section class="flex shadow pt-3 pb-2 px-3">
-      <%= link_to :back, class: "flex items-center" do %>
+      <%= link_to profile_path(@conversation.profile), class: "flex items-center" do %>
         <%= image_tag "icons/left-arrow.svg", alt: "back link", height: 24, width: 24, class: "mr-2" %>
       <% end %>
       <div class="flex items-center flex-grow-1">
