@@ -5,7 +5,7 @@
 - ~~When pressing "add to network" (user plus icon) in `/profiles`, AJAXify it so that it gets added instantly in the "My network" section~~
 
 - Ajaxify loading of profiles on `profiles#index`
-- Ajaxify adding to network on `profiles#show`
+- ~~Ajaxify adding to network on `profiles#show`
 
   More on point 2 (nice to have behaviours):
 
