@@ -36,7 +36,7 @@
           <p class="textWhite">BOOK</p>
         <% end %>
       <% else %>
-        <%= link_to profile_connections_path(@profile) ,class: "mr-3 btn-lg px-0 btn-primary", method: :post, remote: true  do %>
+        <%= link_to ajax_profile_connections_path(@profile) ,class: "mr-3 btn-lg px-0 btn-primary", method: :post, remote: true  do %>
           <%= image_tag "icons/user-plus.svg", alt: "Add user" %>
           <p class="textWhite">ADD</p>
         <% end %>
