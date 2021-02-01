@@ -4,8 +4,17 @@
   const linkTab = document.getElementById("link-tab");
   const noteTab = document.getElementById("note-tab");
 
-  const addActiveClass  = node => node.classList.add("active");
-  const removeActiveClass = node => node.classList.remove("active");
+  const addActiveClass = (node) => {
+    if (node) {
+      node.classList.add("active");
+    }
+  }
+
+  const removeActiveClass = (node) => {
+    if (node) {
+      node.classList.remove("active");
+    }
+  }
 
   if (tabContent) {
     tabContent.innerHTML = "<%= j render partial: "profiles/#{params[:tab] || "about"}_content" %>";
