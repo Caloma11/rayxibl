@@ -1,5 +1,4 @@
 # Future TODO List
--
 
 - ~~In `/profiles`, AJAXify the tab switch (My network & Everyone buttons)~~
 - ~~In `/profiles/:id`, AJAXify the tab switch (About, Links & Notes)~~
