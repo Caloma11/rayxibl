@@ -43,15 +43,16 @@ dummy_freelancers = []
 dummy_managers = []
 puts ">> Creating 10 dummy managers"
 10.times do |i|
-  user = User.create!(
+  user = User.new(
     email: "random_manager_#{i}@test.com",
     password: "123123",
     first_name: "Manager_#{i}",
     last_name: "LastName_#{i}",
     role: 0
   )
-
+  user.skip_confirmation_notification!
   user.confirm
+  user.save
 
   dummy_managers << user
 end

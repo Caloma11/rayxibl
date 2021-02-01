@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     mount LetterOpenerWeb::Engine, at: "/letter_opener"
   end
 
+  mount ActionCable.server => "/cable"
+
   devise_for :users, controllers: { confirmations: 'confirmations', invitations: 'users/invitations' }
 
   get "/dashboard", to: "pages#dashboard"
