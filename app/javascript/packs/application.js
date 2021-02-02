@@ -11,6 +11,7 @@ import { stepForm } from "../components/stepForm";
 import { moreToggler } from "../components/moreToggler";
 import { previewImage } from "../components/previewImage";
 import { filtering } from "../components/filtering";
+import { initTomSelect } from "../plugins/tomSelect";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -33,4 +34,5 @@ document.addEventListener("turbolinks:load", () => {
 	moreToggler();
 	previewImage();
 	filtering();
+	initTomSelect();
 });
