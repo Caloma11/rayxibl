@@ -38,6 +38,7 @@ class ConnectionsController < ApplicationController
 
   def destroy
     @connection.destroy
+    flash[:notice] = "You have removed #{@connection.profile.user.display_name} from your network."
     redirect_to profile_path(@connection.profile)
   end
 

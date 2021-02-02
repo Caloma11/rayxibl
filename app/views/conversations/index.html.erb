@@ -1,16 +1,20 @@
 <div class="convo-index">
-  <div class="flex justify-content-between items-center">
-    <%= link_to "Back", :back %>
-    <p>INBOX</p>
-    <p>Something</p>
-  </div>
+  <section class="head">
+    <%= link_to :back do %>
+      <%= image_tag "icons/left-arrow.svg", alt: "back link", height: 24, width: 24, class: "mr-2" %>
+    <% end %>
+    <p class="">INBOX</p>
+    <%= button_to "#", method: :get do %>
+      <%= image_tag "icons/filter.svg", alt: "filter" %>
+    <% end %>
+  </section>
 
   <section class="switch flex justify-content-between p-3 my-3" style="background-color: #F9FBFE;">
     <%= link_to conversations_path(network: true), class: "flex items-center btn #{params[:network] ? 'btn-white' : 'btn-transparent'}" do %>
       <%= image_tag "icons/person-check", alt: "in network" %> My network
     <% end %>
     <%= link_to conversations_path, class: "flex items-center btn #{params[:network] ? 'btn-transparent' : 'btn-white'}" do %>
-      <%= image_tag "icons/people", alt: "everyone" %> Everyone
+      <%= image_tag "icons/people-dark", alt: "everyone" %> Everyone
     <% end %>
   </section>
 

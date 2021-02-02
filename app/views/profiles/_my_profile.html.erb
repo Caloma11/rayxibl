@@ -1,50 +1,80 @@
-<div class="container">
-  <h1>My profile</h1>
-  <div class="profileHeader flex">
-    <% if current_user.avatar.attached? %>
-      <%= image_tag current_user.avatar, alt: "alttext", class: "avatar avatar-square huge" , height: 64, width: 64  %>
-    <% else %>
-      <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 64, width: 64 %>
-    <% end %>
+<div class="generalProfile w-100">
+
+  <div class="profileBanner" style="background-image: linear-gradient(to left, rgba(255,255,255,0.2),rgba(0,0,0,0.4)), url(<%= avatar_url(@profile) %>)">
+    <div class="headerOptions flex w-100 justify-content-between p-3">
+      <div>
+        <%= link_to :back do %>
+          <%= image_tag "icons/left-arrow-white.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm" %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <!-- Name and description -->
+  <div class="profileHeader">
     <div class="profileHeaderLeft">
-      <h2><%= current_user.display_name %></h2>
-      <p><%= current_user.email %></p>
+      <h1><%= @profile.user.display_name %></h1>
+      <p class="textGray"><%= @profile.profession %>, <%= @profile.location %></p>
+    </div>
+    <div class="profileHeaderRight">
+      <div class="flex items-center justify-content-center mt-3">
+        <div class="stars">
+          <% @profile.average_rating.to_i.times do %>
+            <%= image_tag "icons/colored-rating.svg", alt: "rating" %>
+          <% end %>
+          <% (5 - @profile.average_rating.to_i).times do %>
+            <%= image_tag "icons/rating.svg", alt: "rating" %>
+          <% end %>
+          <span class="rating-size">(<%= @profile.ratings.size %>)</span>
+          <p class="textGray uppercase semi-bold text-center textSm"><%= @profile.expertise %> level</p>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div class="profileSection">
-    <h3>Job title</h3>
-    <p><%= @profile.profession %></p>
+  <!-- Buttons -->
+
+  <!-- Add or Book button -->
+  <div class="profileButtons flex justify-content-around p-3 pt-0">
+    <%= link_to "#", class: "mr-3", class: "btn-lg px-0 btn-primary" do %>
+        <%= image_tag "icons/share-white.svg", alt: "Share profile" %>
+        <p class="textWhite">SHARE</p>
+    <% end %>
+      <div class="spacer">
+
+      </div>
+
+  <!-- Edit Button -->
+
+    <%= link_to edit_profile_path(@profile), class: "btn-lg px-0 btn-white" do %>
+      <%= image_tag "icons/edit.svg", alt: "edit" %> EDIT
+    <% end %>
   </div>
 
-  <div class="profileSection">
-    <h3>Location</h3>
-    <p><%= @profile.location&.capitalize %></p>
-  </div>
 
-  <div class="profileSection">
-    <h3>Skills</h3>
-    <p><%= @profile.skill_list %></p>
-  </div>
-
-  <div class="profileSection">
-    <h3>Experience Level</h3>
-    <p><%= @profile.expertise&.capitalize %></p>
-  </div>
-
-  <div class="profileSection">
-    <h3>About you</h3>
-    <p><%= @profile.overview %></p>
-  </div>
-
-  <% @profile.profile_attachments.includes(:attachment_attachment).each do |pa| %>
-    <div class="profileSection">
-      <h3><%= pa.title %></h3>
-      <% if pa.attachment.attached? %>
-        <%= link_to "Download", download_attachment_path(pa), method: :post  %>
-      <% else %>
-        <%= link_to sanitize_url(pa.url), sanitize_url(pa.url), target: :_blank  %>
-      <% end %>
+  <!-- Skills -->
+  <div class="container">
+    <div class="profileSection  p-3" id="skills">
+      <h3 class="small"><small class="textGray">KEY SKILLS</small></h3>
+      <div class="flex justify-content-around skill-pills">
+        <% @profile.skill_list.each do |skill| %>
+          <span class="skill-pill"><%= skill %></span>
+        <% end %>
+      </div>
     </div>
-  <% end %>
+
+    <!-- Tabs -->
+
+    <div class="profileTabs" id="tabs">
+      <%= link_to "About", profile_path(@profile, tab: 'about', anchor: 'skills'), id: "about-tab", class: "tab #{'active' if params[:tab] == 'about' || !params[:tab] }", remote: true %>
+      <%= link_to "Links", profile_path(@profile, tab: 'links', anchor: 'skills'), id: "link-tab", class: "tab #{'active' if params[:tab] == 'links' }", remote: true %>
+    </div>
+
+    <div class="p-3" id="tab-content">
+      <%= render "#{params[:tab] || 'about' }_content" %>
+    </div>
+
+  </div>
 </div>
+
+
