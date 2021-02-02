@@ -3,19 +3,27 @@ module NavbarLinks
   MANAGER_NAVBAR_LINKS = [
     {
       icon: "icons/dashboard.svg",
-      url: ROUTES.dashboard_path
+      url: ROUTES.dashboard_path,
+      active_icon: "icons/dashboard-black.svg",
+      text: "Dashboard"
     },
     {
       icon: "icons/schedule.svg",
-      url: ROUTES.schedule_path
+      url: ROUTES.schedule_path,
+      active_icon: "icons/schedule-black.svg",
+      text: "Schedule/calendar"
     },
     {
-      icon: "icons/people-dark.svg",
-      url: ROUTES.profiles_path
+      icon: "icons/people-gray.svg",
+      url: ROUTES.profiles_path,
+      active_icon: "icons/people-dark.svg",
+      text: "Freelancers"
     },
     {
       icon: "icons/inbox.svg",
-      url: ROUTES.conversations_path
+      url: ROUTES.conversations_path,
+      active_icon: "icons/inbox-black.svg",
+      text: "Inbox"
     }
   ].freeze
 
@@ -23,22 +31,26 @@ module NavbarLinks
     {
       text: "Dashboard",
       icon: "icons/dashboard.svg",
-      url: ROUTES.dashboard_path
+      url: ROUTES.dashboard_path,
+      active_icon: "icons/dashboard-black.svg"
     },
     {
       text: "Inbox",
       icon: "icons/inbox.svg",
-      url: ROUTES.conversations_path
+      url: ROUTES.conversations_path,
+      active_icon: "icons/inbox-black.svg"
     },
     {
       text: "Clients",
-      icon: "icons/people-dark.svg",
-      url: ROUTES.managers_path
+      icon: "icons/people-gray.svg",
+      url: ROUTES.managers_path,
+      active_icon: "icons/people-dark.svg"
     },
     {
       text: "Gigs",
       icon: "icons/gigs.svg",
-      url: "#"
+      url: ROUTES.jobs_path,
+      active_icon: "icons/gigs-black.svg"
     }
   ].freeze
 end
