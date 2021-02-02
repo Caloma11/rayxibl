@@ -1,15 +1,12 @@
 <nav class="navbar">
   <% if user_signed_in? %>
-    <% if current_user.manager? %>
-      <% NavbarLinks::MANAGER_NAVBAR_LINKS.each do |link| %>
-        <%= link_to link[:url] do %>
+    <% links ||= current_user.manager? ? NavbarLinks::MANAGER_NAVBAR_LINKS : NavbarLinks::FREELANCER_NAVBAR_LINKS %>
+    <% links.each do |link| %>
+      <%= link_to link[:url], class: "nav-link" do %>
+        <% if request.url.include?(link[:url]) %>
+          <%= image_tag link[:active_icon], alt: link[:text] %>
+        <% else %>
           <%= image_tag link[:icon], alt: link[:text] %>
-        <% end %>
-      <% end %>
-    <% else %>
-      <% NavbarLinks::FREELANCER_NAVBAR_LINKS.each do |link| %>
-        <%= link_to link[:url], class: "nav-link" do %>
-          <%= image_tag link[:icon], alt: link[:text], class: "nav-icon" %>
         <% end %>
       <% end %>
     <% end %>
