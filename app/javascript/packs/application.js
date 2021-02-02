@@ -10,7 +10,7 @@ import { bindBillableCheckbox } from "../components/billable";
 import { stepForm } from "../components/stepForm";
 import { moreToggler } from "../components/moreToggler";
 import { previewImage } from "../components/previewImage";
-import { filtering } from "../components/filtering";
+import { filtering, jobApplicationFilter } from "../components/filtering";
 import { initTomSelect } from "../plugins/tomSelect";
 
 require("@rails/ujs").start();
@@ -35,4 +35,5 @@ document.addEventListener("turbolinks:load", () => {
 	previewImage();
 	filtering();
 	initTomSelect();
+	jobApplicationFilter();
 });
