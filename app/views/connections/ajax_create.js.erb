@@ -1,7 +1,20 @@
 (() => {
   const addButton = document.querySelector(".profileButtons a");
-  const scheduleIconPath = "<%= image_path 'icons/schedule-white' %>"
-  addButton.href = "<%= new_profile_booking_path(@profile) %> "
-  addButton.innerHTML = `<img alt="Book user" src=${scheduleIconPath}><p class="textWhite">BOOK</p>`
-  // TODO: Add the 'remove from your network' option on the action-container once other PR is merged
+  const scheduleIconPath = "<%= image_path 'icons/schedule-white' %>";
+  // Change add button to book button
+  addButton.href = "<%= new_profile_booking_path(@profile) %> ";
+  addButton.innerHTML = `<img alt="Book user" src=${scheduleIconPath}><p class="textWhite">BOOK</p>`;
+
+  // Add remove from network option on actions container
+  const actions = document.querySelector(".actions-container .actions");
+  const removePersonIconPath = "<%= image_path 'icons/user-minus' %>";
+  const formAuthenticityToken = "<%= form_authenticity_token %>";
+  const destroyConnectionPath = "<%= connection_path(@profile.user.find_connection(current_user)) %>"
+  const removeButtonHTML = `<form class="button_to" method="post" action="${destroyConnectionPath}" data-remote="true"><input type="hidden" name="_method" value="delete"><button class="action-link flex items-center w-100" type="submit">
+      <img alt="remove user" width="24" height="24" class="mr-3" src="${removePersonIconPath}">
+      REMOVE
+  </button><input type="hidden" name="authenticity_token" value="${formAuthenticityToken}"></form>`
+
+  actions.insertAdjacentHTML('afterbegin', removeButtonHTML);
 })();
+
