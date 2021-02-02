@@ -9,6 +9,10 @@ class ConnectionPolicy < ApplicationPolicy
     user.manager?
   end
 
+  def ajax_create?
+    create?
+  end
+
   def destroy?
     record.company == user.manager.company
   end

@@ -22,7 +22,11 @@ Rails.application.routes.draw do
     resources :notes, only: %i[create]
     resources :ratings, only: %i[create]
     resources :profile_attachments, only: %i[create]
-    resources :connections, only: %i[create]
+    resources :connections, only: %i[create] do
+      collection do
+        post :ajax, to: "connections#ajax_create" ,as: :ajax
+      end
+    end
     resources :bookings, only: %i[new create]
     resources :conversations, only: %i[create]
   end

@@ -22,10 +22,28 @@ class ConnectionsController < ApplicationController
     end
   end
 
+  def ajax_create
+    @profile = Profile.find(params[:profile_id])
+    @company = current_user.manager.company
+    @connection = Connection.new(profile: @profile, company: @company)
+    authorize @connection
+    if @connection.save
+      respond_to do |format|
+        format.js
+      end
+    else
+      render 'profiles/show'
+    end
+  end
+
   def destroy
+    @profile = @connection.profile
     @connection.destroy
     flash[:notice] = "You have removed #{@connection.profile.user.display_name} from your network."
-    redirect_to profile_path(@connection.profile)
+    respond_to do |format|
+      format.html { redirect_to profile_path(@connection.profile) }
+      format.js
+    end
   end
 
   private
