@@ -8,15 +8,17 @@
 
 @import "flatpickr/dist/flatpickr";
 @import "flatpickr/dist/themes/airbnb";
+@import "tom-select/dist/css/tom-select.min";
 
-html, body {
-  @extend .h-100;
+html,
+body {
+	@extend .h-100;
 }
 
 body {
 	margin: 0;
-  display: flex;
-  flex-direction: column;
+	display: flex;
+	flex-direction: column;
 }
 
 * {
@@ -25,5 +27,5 @@ body {
 }
 
 .yielded-content {
-  flex: 1 0 auto;
+	flex: 1 0 auto;
 }

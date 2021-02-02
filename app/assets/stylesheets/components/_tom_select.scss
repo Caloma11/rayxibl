@@ -1,0 +1,12 @@
+.items.ts-input {
+	background: $blueish-gray;
+	border: 0;
+	box-shadow: unset;
+
+	.item {
+		@extend .shadow;
+
+		border-radius: 4px;
+		background: white !important;
+	}
+}
