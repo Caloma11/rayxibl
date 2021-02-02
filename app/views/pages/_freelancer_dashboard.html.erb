@@ -1,10 +1,53 @@
-<div class="stat-card">
-  <h4>Something should go here</h4>
-  <div class="manager-dashboard-actions">
-    <div class="flex items-center">
-      <%= link_to "Email invite", new_user_invitation_path  %>
-      <%= image_tag "icons/mail.svg", alt: "Invite a manager" %>
-    </div>
-  </div>
+<div id="freelancer">
+  <div class="shadow-alt rounded p-3 mb-3">
+    <h3 class="mt-0 mb-1">Bookings</h3>
+    <p class="subtitle m-0"><%= pluralize @bookings.count, "booking" %> across <%= pluralize @bookings.distinct.count("manager_id"), "client" %></p>
 
+    <div class="card-container flex items-center justify-content-between">
+      <div class="flex items-center">
+        <div class="card accepted">
+          <%= image_tag "icons/checkmark", alt: "active bookings" %>
+        </div>
+        <div class="ml-2">
+          <h4 class="m-0">Accepted</h4>
+          <p class="subtitle m-0"><%= pluralize @bookings.accepted.count, "booking" %></p>
+        </div>
+      </div>
+      <%= link_to "#" do %>
+        <%= image_tag "icons/right-arrow.svg", alt: "accepted bookings" %>
+      <% end %>
+    </div>
+
+    <div class="card-container flex items-center justify-content-between">
+      <div class="flex items-center">
+        <div class="card pending">
+          <%= image_tag "icons/pending.svg", alt: "pending bookings" %>
+        </div>
+        <div class="ml-2">
+          <h4 class="m-0">Pending</h4>
+          <p class="subtitle m-0"><%= pluralize @bookings.pending.count, "booking" %></p>
+        </div>
+      </div>
+      <%= link_to "#" do %>
+        <%= image_tag "icons/right-arrow.svg", alt: "pending bookings" %>
+      <% end %>
+    </div>
+
+    <div class="card-container flex items-center justify-content-between">
+      <div class="flex items-center">
+        <div class="card rejected">
+          <%= image_tag "icons/cross-white.svg", alt: "rejected bookings" %>
+        </div>
+        <div class="ml-2">
+          <h4 class="m-0">Rejected</h4>
+          <p class="subtitle m-0"><%= pluralize @bookings.rejected.count, "booking" %></p>
+        </div>
+      </div>
+      <%= link_to "#" do %>
+        <%= image_tag "icons/right-arrow.svg", alt: "rejected bookings" %>
+      <% end %>
+    </div>
+
+    <%= link_to "View all (#{@bookings.count})", "#", class: "btn btn-primary text-center" %>
+  </div>
 </div>

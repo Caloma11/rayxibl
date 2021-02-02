@@ -10,6 +10,7 @@ class PagesController < ApplicationController
       @jobs = current_user.manager.company.jobs.includes(:company, :manager).limit(3)
     else
       @clients = current_user.profile.managers
+      @bookings = current_user.profile.bookings
     end
   end
 
