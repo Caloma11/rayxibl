@@ -6,6 +6,7 @@ class Manager < ApplicationRecord
   has_many :booked_profiles, through: :bookings, class_name: "Profile", source: :profile
   has_many :conversations
   has_many :jobs
+  has_many :job_applications, through: :jobs
   has_many :notes
   has_many :network, through: :company, source: :profiles, class_name: "Profile"
 
