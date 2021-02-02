@@ -3,7 +3,7 @@
   const scheduleIconPath = "<%= image_path 'icons/schedule-white' %>";
   // Change add button to book button
   addButton.href = "<%= new_profile_booking_path(@profile) %> ";
-  addButton.innerHTML = `<img alt="Book user" src=${scheduleIconPath}><p class="textWhite">BOOK</p>`;
+  addButton.innerHTML = `<img alt="Book user" src="${scheduleIconPath}"><p class="textWhite">BOOK</p>`;
 
   // Add remove from network option on actions container
   const actions = document.querySelector(".actions-container .actions");
