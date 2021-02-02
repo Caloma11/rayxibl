@@ -1,15 +1,15 @@
 <div id="manager">
-  <div class="shadow-alt rounded p-3">
+  <div class="shadow-alt rounded p-3 mb-3">
     <h3 class="mt-0 mb-1">Bookings</h3>
     <p class="subtitle m-0"><%= @booked_profiles.count %> bookings across <%= @booked_profiles.distinct.count("profiles.id") %> freelancers</p>
 
-    <div class="booking-card-container flex items-center justify-content-between">
+    <div class="card-container flex items-center justify-content-between">
       <div class="flex items-center">
-        <div class="booking-card accepted">
+        <div class="card accepted">
           <%= image_tag "icons/checkmark", alt: "active bookings" %>
         </div>
         <div class="ml-2">
-          <h4 class="title m-0">Accepted</h4>
+          <h4 class="m-0">Accepted</h4>
           <p class="subtitle m-0"><%= @bookings.accepted.count %> bookings</p>
         </div>
       </div>
@@ -18,9 +18,9 @@
       <% end %>
     </div>
 
-    <div class="booking-card-container flex items-center justify-content-between">
+    <div class="card-container flex items-center justify-content-between">
       <div class="flex items-center">
-        <div class="booking-card pending">
+        <div class="card pending">
           <%= image_tag "icons/pending.svg", alt: "pending bookings" %>
         </div>
         <div class="ml-2">
@@ -33,9 +33,9 @@
       <% end %>
     </div>
 
-    <div class="booking-card-container flex items-center justify-content-between">
+    <div class="card-container flex items-center justify-content-between">
       <div class="flex items-center">
-        <div class="booking-card rejected">
+        <div class="card rejected">
           <%= image_tag "icons/cross-white.svg", alt: "rejected bookings" %>
         </div>
         <div class="ml-2">
@@ -47,5 +47,30 @@
         <%= image_tag "icons/right-arrow.svg", alt: "rejected bookings" %>
       <% end %>
     </div>
+
+    <%= link_to "View all (#{@bookings.count})", "#", class: "btn btn-primary text-center" %>
+  </div>
+
+  <div class="shadow-alt rounded p-3">
+    <h3 class="mt-0 mb-1">Job posts</h3>
+    <p class="subtitle"><%= current_user.manager.job_applications.count %> applicants for <%= current_user.manager.jobs.count %> jobs</p>
+
+    <% @jobs.each do |job| %>
+      <div class="card-container flex items-center justify-content-between">
+        <div class="flex items-center">
+          <% if job.manager.user.avatar.attached? %>
+            <%= image_tag job.manager.user.avatar.service_url, class: "avatar small avatar-circle", alt: "Manager's picture" %>
+          <% else %>
+            <%= image_tag job.company.logo.service_url, class: "avatar small avatar-circle", alt: "Company's picture" %>
+          <% end %>
+          <div class="ml-2">
+            <h4 class="m-0"><%= job.profession %></h4>
+            <p class="subtitle m-0"><%= pluralize(job.job_applications.count, "applicant") %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to "View all (#{@jobs.count})", jobs_path(manager_id: current_user.manager.id), class: "btn btn-primary text-center" %>
   </div>
 </div>
