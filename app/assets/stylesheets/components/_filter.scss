@@ -1,5 +1,5 @@
 #filter-content {
-	@extend .absolute, .h-100, .w-100, .mt-0;
+	@extend .fixed, .h-100, .w-100, .mt-0, .pb-3;
 
 	top: -16px;
 	left: 0;
