@@ -2,5 +2,9 @@ import TomSelect from "tom-select";
 
 export const initTomSelect = () => {
 	const config = {};
-	new TomSelect("#profile_skills", config);
+	const profileSkills = document.getElementById("profile_skills");
+
+	if (profileSkills) {
+		new TomSelect(profileSkills, config);
+	}
 };
