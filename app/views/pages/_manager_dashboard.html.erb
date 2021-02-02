@@ -1,7 +1,7 @@
 <div id="manager">
   <div class="shadow-alt rounded p-3 mb-3">
     <h3 class="mt-0 mb-1">Bookings</h3>
-    <p class="subtitle m-0"><%= @booked_profiles.count %> bookings across <%= @booked_profiles.distinct.count("profiles.id") %> freelancers</p>
+    <p class="subtitle m-0"><%= pluralize @booked_profiles.count, "booking" %> across <%= pluralize @booked_profiles.distinct.count("profiles.id"), "freelancer" %></p>
 
     <div class="card-container flex items-center justify-content-between">
       <div class="flex items-center">
@@ -10,7 +10,7 @@
         </div>
         <div class="ml-2">
           <h4 class="m-0">Accepted</h4>
-          <p class="subtitle m-0"><%= @bookings.accepted.count %> bookings</p>
+          <p class="subtitle m-0"><%= pluralize @bookings.accepted.count, "booking" %></p>
         </div>
       </div>
       <%= link_to "#" do %>
@@ -25,7 +25,7 @@
         </div>
         <div class="ml-2">
           <h4 class="m-0">Pending</h4>
-          <p class="subtitle m-0"><%= @bookings.pending.count %> bookings</p>
+          <p class="subtitle m-0"><%= pluralize @bookings.pending.count, "booking" %></p>
         </div>
       </div>
       <%= link_to "#" do %>
@@ -40,7 +40,7 @@
         </div>
         <div class="ml-2">
           <h4 class="m-0">Rejected</h4>
-          <p class="subtitle m-0"><%= @bookings.rejected.count %> bookings</p>
+          <p class="subtitle m-0"><%= pluralize @bookings.rejected.count, "booking" %></p>
         </div>
       </div>
       <%= link_to "#" do %>
@@ -53,7 +53,7 @@
 
   <div class="shadow-alt rounded p-3">
     <h3 class="mt-0 mb-1">Job posts</h3>
-    <p class="subtitle"><%= current_user.manager.job_applications.count %> applicants for <%= current_user.manager.jobs.count %> jobs</p>
+    <p class="subtitle"><%= pluralize current_user.manager.job_applications.count, "applicant" %> for <%= pluralize current_user.manager.jobs.count, "job" %></p>
 
     <% @jobs.each do |job| %>
       <div class="card-container flex items-center justify-content-between">
