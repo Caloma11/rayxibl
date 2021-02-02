@@ -12,23 +12,24 @@
     <% end %>
   </div>
 
-  <%= render partial: "#{current_user.role}_dashboard" %>
-
+  <!--
   <section class="bookings">
     <div class="flex items-center justify-content-between">
       <h3>Current bookings</h3>
       <%= link_to "View all", "#" %>
     </div>
     <div class="booking-cards">
-      <% if current_user.freelancer? %>
-        <% current_user.profile.bookings.each do |booking| %>
-          <%= render partial: "bookings/freelancer_card", locals: { booking: booking } %>
-        <% end %>
-      <% else %>
-        <% current_user.manager.bookings.includes(profile: [user: { avatar_attachment: :blob }]).each do |booking| %>
-          <%= render partial: "bookings/manager_card", locals: { booking: booking } %>
-        <% end %>
-      <% end %>
+      <%# if current_user.freelancer? %>
+        <%# current_user.profile.bookings.each do |booking| %>
+          <%#= render partial: "bookings/freelancer_card", locals: { booking: booking } %>
+        <%# end %>
+      <%# else %>
+        <%# current_user.manager.bookings.includes(profile: [user: { avatar_attachment: :blob }]).each do |booking| %>
+          <%#= render partial: "bookings/manager_card", locals: { booking: booking } %>
+        <%# end %>
+      <%# end %>
     </div>
-  </section>
+  </section> -->
+
+  <%= render partial: "#{current_user.role}_dashboard" %>
 </div>
