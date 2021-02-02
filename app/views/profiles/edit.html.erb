@@ -1,0 +1,48 @@
+<h1>Edit your profile</h1>
+
+<h2>1. Personal details</h2>
+
+<%= simple_form_for @profile do |f| %>
+
+  <%= f.simple_fields_for :profile_user do |ff| %>
+    <%= ff.input :avatar, as: :file %>
+    <%= ff.input :first_name %>
+    <%= ff.input :last_name %>
+  <% end %>
+
+  <%= f.input :location %>
+
+  <h2>2. Professional details:</h2>
+
+  <%= f.input :profession %>
+
+  <%= f.input :expertise, collection: Profile::EXPERTISES, label: "Experience level:"%>
+
+  <%= f.input :skill_list, label: "Key skills (max 5, comma separated)" %>
+  <%= f.input :overview, label: "Professional summary:", as: :text  %>
+
+  <h2>3. Links and documents</h2>
+
+  <%= f.simple_fields_for :profile_links do |paf| %>
+    <%= paf.input :title, input_html: {name: "profile[profile_links][][title]"} %>
+    <%= paf.input :url, placeholder: "https://", input_html: {name: "profile[profile_links][][url]"} %>
+    <%= link_to "+ Add another link", "#" %>
+  <% end %>
+
+  <br>
+  <br>
+  <br>
+
+  <%= f.simple_fields_for :profile_documents do |paf| %>
+    <%= paf.input :title, placeholder: "Ex: Curriculum Vitae", input_html: {name: "profile[profile_documents][][title]"}  %>
+    <%= paf.input :attachment, as: :file, input_html: {name: "profile[profile_documents][][attachment]"} %>
+    <%= link_to "Upload another document", "#" %>
+  <% end %>
+
+
+  <br>
+  <br>
+  <br>
+
+  <%= f.submit %>
+<% end %>

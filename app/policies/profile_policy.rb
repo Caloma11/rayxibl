@@ -12,4 +12,8 @@ class ProfilePolicy < ApplicationPolicy
   def create?
     user && !user.manager && !user.profile
   end
+
+  def update?
+    user && record.user == user
+  end
 end
