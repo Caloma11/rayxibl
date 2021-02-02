@@ -4,7 +4,7 @@
       <%= image_tag "icons/search.svg", alt: "search" %>
     </button>
     <p>FREELANCERS</p>
-    <button>
+    <button id="filter-trigger">
       <%= image_tag "icons/filter.svg", alt: "filter" %>
     </button>
   </section>
@@ -21,5 +21,9 @@
   <section class="cards">
     <%= render partial: "profiles/cards", locals: { profiles: @profiles } %>
   </section>
+
+  <div class="none" id="filter-content">
+    <%= render partial: "profiles/filter_content" %>
+  </div>
 </div>
 

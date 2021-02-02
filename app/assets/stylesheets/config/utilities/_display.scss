@@ -14,6 +14,10 @@
 	display: inline-flex;
 }
 
+.fixed {
+	position: fixed;
+}
+
 .flex {
 	display: flex;
 
@@ -136,6 +140,10 @@
 
 .relative {
 	position: relative;
+}
+
+.absolute {
+	position: absolute;
 }
 
 .sticky {

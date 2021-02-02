@@ -1,6 +1,7 @@
 (() => {
   const profileContainer = document.querySelector(".cards");
   const switches = document.querySelectorAll(".switch a");
+  const filterContent = document.getElementById("filter-content");
 
   profileContainer.innerHTML = "<%= j render partial: "profiles/cards", locals: { profiles: @profiles } %>";
   switches.forEach((switchLink) => {
@@ -12,4 +13,8 @@
       switchLink.classList.add("btn-transparent");
     }
   })
+
+  if (!filterContent.classList.contains("none")) {
+    filterContent.classList.add("none");
+  }
 })();

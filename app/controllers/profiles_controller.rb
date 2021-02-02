@@ -5,15 +5,12 @@ class ProfilesController < ApplicationController
 
     if params[:network]
       skip_policy_scope
-      @profiles = current_user.manager.network.includes(:ratings, user: [:manager, avatar_attachment: :blob])
-    elsif params[:job_id]
-      @profiles = policy_scope(Profile)
-                    .joins(job_applications: :job)
-                    .includes(:ratings, user: [:manager, avatar_attachment: :blob ])
-                    .where(job_applications: { job_id: params[:job_id] })
+      profile = Profile
     else
-      @profiles = policy_scope(Profile).includes(:ratings, user: [:manager, avatar_attachment: :blob])
+      profile = policy_scope(Profile)
     end
+
+    @profiles = ProfileFilter.new(profile, params, current_user).call
 
     respond_to do |format|
       format.html

@@ -1,0 +1,28 @@
+#filter-content {
+	@extend .fixed, .h-100, .w-100, .mt-0, .pb-3;
+
+	top: -16px;
+	left: 0;
+	background: white;
+	z-index: 1;
+
+	.head {
+		border-bottom: 2px solid $blueish-gray;
+	}
+
+	.content {
+		@extend .mt-3, .px-3;
+
+		p.title {
+			@extend .uppercase;
+
+			color: $light-black;
+		}
+	}
+
+	form {
+		label {
+			color: $light-black;
+		}
+	}
+}
