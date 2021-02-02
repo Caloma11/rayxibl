@@ -7,6 +7,7 @@ class PagesController < ApplicationController
       @network = current_user.manager.network
       @booked_profiles = current_user.manager.booked_profiles
       @bookings = current_user.manager.bookings
+      @jobs = current_user.manager.company.jobs.includes(:company, :manager).limit(3)
     else
       @clients = current_user.profile.managers
     end
