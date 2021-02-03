@@ -1,18 +1,66 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { Input } from "./Input";
 import filterSvg from "../images/filter.svg";
 import crossDarkSvg from "../images/cross-dark.svg";
+import { EXPERTISES } from "../../utils/constants";
+
+const CalendarAdvancedFilter = ({ states, expertise }) => {
+	const { value, setExpertise, name, label } = expertise;
+
+	return (
+		<div>
+			{states.map((state, i) => {
+				const [value, setValue, name, label] = state;
+
+				return (
+					<Input
+						key={i}
+						name={name}
+						label={label}
+						value={value}
+						setValue={setValue}
+					/>
+				);
+			})}
+			<div className="flex flex-column mb-3">
+				<label className="textLightBlack mb-1" htmlFor={`profile_${name}`}>
+					{label}
+				</label>
+				<select
+					id={`profile_${name}`}
+					name={`profile_${name}`}
+					onChange={e => setExpertise(e.target.value)}
+					value={value}
+				>
+					{EXPERTISES.map((e, i) => (
+						<option key={i} value={i}>
+							{e[0]?.toUpperCase()}
+							{e.substr(1)}
+						</option>
+					))}
+				</select>
+			</div>
+		</div>
+	);
+};
 
 export const CalendarFilter = ({ setProfiles }) => {
 	const [show, setShow] = useState(false);
 	const [name, setName] = useState("");
 	const [profession, setProfession] = useState("");
+	const [skills, setSkills] = useState("");
+	const [location, setLocation] = useState("");
+	const [expertise, setExpertise] = useState("");
+	const [showAdvanced, setShowAdvanced] = useState(false);
 
 	const handleSubmit = async e => {
 		e.preventDefault();
 
 		try {
-			const params = { profile: { name, profession } };
+			const params = {
+				profile: { name, profession, skills, location, expertise }
+			};
 			const { data } = await axios.get("/api/v1/networks", { params });
 			setProfiles(data);
 			setShow(false);
@@ -24,6 +72,13 @@ export const CalendarFilter = ({ setProfiles }) => {
 	const clearFilter = () => {
 		setName("");
 		setProfession("");
+		setSkills("");
+		setLocation("");
+		setExpertise("");
+	};
+
+	const toggleAdvancedFilter = () => {
+		setShowAdvanced(prevState => !prevState);
 	};
 
 	return (
@@ -49,34 +104,42 @@ export const CalendarFilter = ({ setProfiles }) => {
 						<h3 className="textLightBlack">Filter freelancers</h3>
 
 						<form onSubmit={handleSubmit}>
-							<div className="flex flex-column mb-3">
-								<label htmlFor="profile_name" className="textLightBlack mb-1">
-									Name
-								</label>
-								<input
-									type="text"
-									value={name}
-									onChange={e => setName(e.target.value)}
-									name="profile[name]"
-									id="profile_name"
-								/>
-							</div>
-
-							<div className="flex flex-column mb-3">
-								<label
-									htmlFor="profile_profession"
-									className="textLightBlack mb-1"
+							<Input name="name" label="Name" value={name} setValue={setName} />
+							<Input
+								name="profession"
+								label="Profession"
+								value={profession}
+								setValue={setProfession}
+							/>
+							<div className="flex justify-content-center">
+								<button
+									type="button"
+									className="btn btn-float blue text-center"
+									onClick={toggleAdvancedFilter}
 								>
-									Profession
-								</label>
-								<input
-									type="text"
-									value={profession}
-									onChange={e => setProfession(e.target.value)}
-									name="profile[profession]"
-									id="profile_profession"
-								/>
+									More
+								</button>
 							</div>
+							{showAdvanced && (
+								<CalendarAdvancedFilter
+									states={[
+										[
+											skills,
+											setSkills,
+											"skill_list",
+											"Key skills (comma separated)"
+										],
+										[location, setLocation, "location", "Location"]
+									]}
+									expertise={{
+										value: expertise,
+										setExpertise: setExpertise,
+										name: "expertise",
+										label: "Experience Level"
+									}}
+								/>
+							)}
+
 							<div className="flex justify-content-between my-2 mx-4">
 								<button
 									onClick={clearFilter}

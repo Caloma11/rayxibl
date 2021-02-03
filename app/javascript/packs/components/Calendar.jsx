@@ -105,18 +105,24 @@ const Calendar = () => {
 				<CalendarProfiles profiles={profiles} />
 				<div className="allDays">
 					<CalendarDayHeaders data={data} weekOffset={weekOffset} />
-					{profiles.map((profile, i) => {
-						return (
-							<CalendarDays
-								numberOfWeeks={numberOfWeeks}
-								key={i}
-								profile={profile}
-								data={data}
-								setShowForm={setShowForm}
-								setFormDetails={setFormDetails}
-							/>
-						);
-					})}
+					{profiles.length > 0 ? (
+						profiles.map((profile, i) => {
+							return (
+								<CalendarDays
+									numberOfWeeks={numberOfWeeks}
+									key={i}
+									profile={profile}
+									data={data}
+									setShowForm={setShowForm}
+									setFormDetails={setFormDetails}
+								/>
+							);
+						})
+					) : (
+						<div className="mx-3">
+							<h1 className="textDarkGray">No profile...</h1>
+						</div>
+					)}
 				</div>
 			</div>
 		</section>
