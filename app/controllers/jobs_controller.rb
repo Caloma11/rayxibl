@@ -44,6 +44,12 @@ class JobsController < ApplicationController
   def update
     @job = Job.find(params[:id])
     authorize @job
+
+    if @job.update(job_params)
+      redirect_to job_path(@job)
+    else
+      render :edit
+    end
   end
 
   private
