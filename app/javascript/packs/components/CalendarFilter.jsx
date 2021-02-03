@@ -4,10 +4,10 @@ import { CalendarProfileFilter } from "./CalendarProfileFilter";
 import filterSvg from "../images/filter.svg";
 import crossDarkSvg from "../images/cross-dark.svg";
 
-export const CalendarFilter = ({ setProfiles }) => {
+export const CalendarFilter = ({ bookings, setProfiles }) => {
 	const [show, setShow] = useState(false);
 
-	const handleSubmit = async params => {
+	const handleProfileSubmit = async params => {
 		try {
 			const { data } = await axios.get("/api/v1/networks", { params });
 			setProfiles(data);
@@ -37,7 +37,10 @@ export const CalendarFilter = ({ setProfiles }) => {
 						<button style={{ width: 32 }}> </button>
 					</section>
 					<section className="content">
-						<CalendarProfileFilter handleSubmit={handleSubmit} />
+						<CalendarProfileFilter
+							bookings={bookings}
+							handleSubmit={handleProfileSubmit}
+						/>
 					</section>
 				</div>
 			)}

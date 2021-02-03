@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Input } from "./Input";
+import { CalendarBookingFilter } from "./CalendarBookingFilter";
 import { EXPERTISES } from "../../utils/constants";
 
 const CalendarAdvancedFilter = ({ states, expertise }) => {
@@ -31,7 +32,7 @@ const CalendarAdvancedFilter = ({ states, expertise }) => {
 					value={value}
 				>
 					{EXPERTISES.map((e, i) => (
-						<option key={i} value={i}>
+						<option key={i} value={i - 1}>
 							{e[0]?.toUpperCase()}
 							{e.substr(1)}
 						</option>
@@ -42,12 +43,14 @@ const CalendarAdvancedFilter = ({ states, expertise }) => {
 	);
 };
 
-export const CalendarProfileFilter = ({ handleSubmit }) => {
+export const CalendarProfileFilter = ({ bookings, handleSubmit }) => {
 	const [name, setName] = useState("");
 	const [profession, setProfession] = useState("");
 	const [skills, setSkills] = useState("");
 	const [location, setLocation] = useState("");
 	const [expertise, setExpertise] = useState("");
+	const [status, setStatus] = useState("");
+	const [bookingIds, setBookingIds] = useState([]);
 	const [showAdvanced, setShowAdvanced] = useState(false);
 
 	const clearFilter = () => {
@@ -66,7 +69,8 @@ export const CalendarProfileFilter = ({ handleSubmit }) => {
 		e.preventDefault();
 
 		const params = {
-			profile: { name, profession, skills, location, expertise }
+			profile: { name, profession, skills, location, expertise },
+			booking: { status, id: bookingIds }
 		};
 		handleSubmit(params);
 	};
@@ -106,6 +110,14 @@ export const CalendarProfileFilter = ({ handleSubmit }) => {
 						}}
 					/>
 				)}
+
+				<CalendarBookingFilter
+					bookings={bookings}
+					status={status}
+					setStatus={setStatus}
+					bookingIds={bookingIds}
+					setBookingIds={setBookingIds}
+				/>
 
 				<div className="flex justify-content-between my-2 mx-4">
 					<button
