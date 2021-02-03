@@ -8,10 +8,12 @@ import { BookingForm } from "./BookingForm";
 import { CalendarDays } from "./CalendarDays";
 import { CalendarDayHeaders } from "./CalendarDayHeaders";
 import { CalendarProfiles } from "./CalendarProfiles";
+import { CalendarFilter } from "./CalendarFilter";
 
 const moment = extendMoment(Moment);
 
 const Calendar = () => {
+	const [loading, setLoading] = useState(true);
 	const [profiles, setProfiles] = useState([]);
 	const [data, setData] = useState(initialDays);
 	const [monthOffset, setMonthOffset] = useState(1);
@@ -78,14 +80,27 @@ const Calendar = () => {
 			} catch (error) {
 				console.log(error);
 			}
+			setLoading(false);
 		})();
 	}, []);
+
+	if (loading) {
+		return (
+			<section
+				id="calendar"
+				className="flex justify-content-center items-center"
+			>
+				<h1>Loading...</h1>
+			</section>
+		);
+	}
 
 	return (
 		<section id="calendar">
 			{showForm && formDetails && Object.keys(formDetails).length > 0 && (
 				<BookingForm formDetails={formDetails} setShowForm={setShowForm} />
 			)}
+			<CalendarFilter setProfiles={setProfiles} />
 			<div className="calendarContainer" onScroll={handleScroll}>
 				<CalendarProfiles profiles={profiles} />
 				<div className="allDays">
