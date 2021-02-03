@@ -64,6 +64,10 @@ class ProfilesController < ApplicationController
 
   end
 
+  def update
+    raise
+  end
+
   private
 
   def set_profile
