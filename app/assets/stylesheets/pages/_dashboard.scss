@@ -1,4 +1,49 @@
 #dashboardPage {
+	h1 {
+		@extend .uppercase;
+
+		font-weight: 500;
+		font-size: 20px;
+	}
+
+	#manager,
+	#freelancer {
+		p.subtitle {
+			font-size: 14px;
+		}
+
+		.card-container {
+			@extend .py-2, .px-3, .rounded, .my-3;
+
+			background-color: $blueish-gray;
+
+			.card {
+				@extend .rounded-circle,
+					.p-2,
+					.flex,
+					.justify-content-center,
+					.items-center;
+
+				&.accepted {
+					background: $flat-green-3;
+				}
+
+				&.pending {
+					background: $flat-yellow-3;
+				}
+
+				&.rejected {
+					background: $flat-red-2;
+				}
+
+				img {
+					height: 24px;
+					width: 24px;
+				}
+			}
+		}
+	}
+
 	.jobs {
 		.active-jobs {
 			.job-card {

@@ -1,24 +1,76 @@
-<div class="manager-dashboard-actions">
-  <div class="flex items-center">
-    <%= link_to new_user_invitation_path, class: "flex items-center" do %>
-      Email invite
-      <%= image_tag "icons/mail", alt: "Invite a freelancer" %>
-    <% end %>
-  </div>
-  <%= link_to "Browse flxibl", profiles_path %>
-</div>
+<div id="manager">
+  <div class="shadow-alt rounded p-3 mb-3">
+    <h3 class="mt-0 mb-1">Bookings</h3>
+    <p class="subtitle m-0"><%= pluralize @booked_profiles.count, "booking" %> across <%= pluralize @booked_profiles.distinct.count("profiles.id"), "freelancer" %></p>
 
-<section class="jobs">
-  <div class="active-jobs">
-    <div class="flex justify-content-between items-center">
-      <h3>Active job posts</h3>
-      <%= link_to "View all", jobs_path(manager_id: current_user.manager.id) %>
-    </div>
-
-    <div>
-      <% current_user.manager.jobs.order(:created_at).limit(3).each do |job| %>
-        <%= render partial: "jobs/card", locals: { job: job } %>
+    <div class="card-container flex items-center justify-content-between">
+      <div class="flex items-center">
+        <div class="card accepted">
+          <%= image_tag "icons/checkmark", alt: "active bookings" %>
+        </div>
+        <div class="ml-2">
+          <h4 class="m-0">Accepted</h4>
+          <p class="subtitle m-0"><%= pluralize @bookings.accepted.count, "booking" %></p>
+        </div>
+      </div>
+      <%= link_to "#" do %>
+        <%= image_tag "icons/right-arrow.svg", alt: "accepted bookings" %>
       <% end %>
     </div>
+
+    <div class="card-container flex items-center justify-content-between">
+      <div class="flex items-center">
+        <div class="card pending">
+          <%= image_tag "icons/pending.svg", alt: "pending bookings" %>
+        </div>
+        <div class="ml-2">
+          <h4 class="m-0">Pending</h4>
+          <p class="subtitle m-0"><%= pluralize @bookings.pending.count, "booking" %></p>
+        </div>
+      </div>
+      <%= link_to "#" do %>
+        <%= image_tag "icons/right-arrow.svg", alt: "pending bookings" %>
+      <% end %>
+    </div>
+
+    <div class="card-container flex items-center justify-content-between">
+      <div class="flex items-center">
+        <div class="card rejected">
+          <%= image_tag "icons/cross-white.svg", alt: "rejected bookings" %>
+        </div>
+        <div class="ml-2">
+          <h4 class="m-0">Rejected</h4>
+          <p class="subtitle m-0"><%= pluralize @bookings.rejected.count, "booking" %></p>
+        </div>
+      </div>
+      <%= link_to "#" do %>
+        <%= image_tag "icons/right-arrow.svg", alt: "rejected bookings" %>
+      <% end %>
+    </div>
+
+    <%= link_to "View all (#{@bookings.count})", "#", class: "btn btn-primary text-center" %>
   </div>
-</section>
+
+  <div class="shadow-alt rounded p-3">
+    <h3 class="mt-0 mb-1">Job posts</h3>
+    <p class="subtitle"><%= pluralize current_user.manager.job_applications.count, "applicant" %> for <%= pluralize current_user.manager.jobs.count, "job" %></p>
+
+    <% @jobs.each do |job| %>
+      <div class="card-container flex items-center justify-content-between">
+        <div class="flex items-center">
+          <% if job.manager.user.avatar.attached? %>
+            <%= image_tag job.manager.user.avatar.service_url, class: "avatar small avatar-circle", alt: "Manager's picture" %>
+          <% else %>
+            <%= image_tag job.company.logo.service_url, class: "avatar small avatar-circle", alt: "Company's picture" %>
+          <% end %>
+          <div class="ml-2">
+            <h4 class="m-0"><%= job.profession %></h4>
+            <p class="subtitle m-0"><%= pluralize(job.job_applications.count, "applicant") %></p>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
+    <%= link_to "View all (#{@jobs.count})", jobs_path(manager_id: current_user.manager.id), class: "btn btn-primary text-center" %>
+  </div>
+</div>

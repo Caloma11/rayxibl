@@ -1,5 +1,7 @@
 <div id="dashboardPage" class="mx-3">
-  <div class="flex justify-content-between items-center">
+  <div class="mb-3 flex justify-content-between items-center">
+    <%# DON'T REMOVE %>
+    <div></div>
     <h1>Hello <%= current_user.first_name %></h1>
     <% if current_user.manager? %>
       <%= link_to manager_path(current_user.manager) do %>
@@ -13,22 +15,4 @@
   </div>
 
   <%= render partial: "#{current_user.role}_dashboard" %>
-
-  <section class="bookings">
-    <div class="flex items-center justify-content-between">
-      <h3>Current bookings</h3>
-      <%= link_to "View all", "#" %>
-    </div>
-    <div class="booking-cards">
-      <% if current_user.freelancer? %>
-        <% current_user.profile.bookings.each do |booking| %>
-          <%= render partial: "bookings/freelancer_card", locals: { booking: booking } %>
-        <% end %>
-      <% else %>
-        <% current_user.manager.bookings.includes(profile: [user: { avatar_attachment: :blob }]).each do |booking| %>
-          <%= render partial: "bookings/manager_card", locals: { booking: booking } %>
-        <% end %>
-      <% end %>
-    </div>
-  </section>
 </div>
