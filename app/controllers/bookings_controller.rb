@@ -2,6 +2,14 @@ class BookingsController < ApplicationController
   before_action :set_profile, only: :new
   before_action :set_booking, only: :show
 
+  def index
+    if current_user.manager?
+      @bookings = policy_scope(current_user.manager.bookings)
+    else
+      @bookings = policy_scope(current_user.profile.bookings)
+    end
+  end
+
   def new
     @booking = Booking.new
     @booking.profile = @profile

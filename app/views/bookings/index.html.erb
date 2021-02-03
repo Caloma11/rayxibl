@@ -1,0 +1,17 @@
+<div class="bookings-index">
+  <section class="mx-3 mt-4 flex justify-content-between items-center">
+    <%= link_to :back do %>
+      <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
+    <% end %>
+    <p class="textDarkGray">NEW BOOKING</p>
+    <button style="height: 16px; width: 16px"> </button>
+  </section>
+
+  <section>
+    <div class="flex flex-column">
+      <% @bookings.each do |booking| %>
+        <%= render partial: "bookings/#{current_user.role}_card", locals: { booking: booking } %>
+      <% end %>
+    </div>
+  </section>
+</div>
