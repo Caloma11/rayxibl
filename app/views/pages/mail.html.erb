@@ -1,0 +1,17 @@
+<div class="mail">
+  <section class="mx-3 pt-4 flex justify-content-between items-center">
+    <%= link_to new_user_registration_path do %>
+      <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
+    <% end %>
+    <p class="textDarkGray uppercase">Sign up</p>
+    <button style="width: 16px; height: 16px;"> </button>
+  </section>
+
+  <section id="content" class="bg-white rounded-lg shadow-alt mx-3 p-4 flex flex-column justify-content-center items-center">
+    <%= image_tag "icons/new-mail.svg", alt: "new mail image", width: 300 %>
+    <h1 class="mt-0 textDarkOne">You've got mail</h1>
+    <p class="textLightBlack text-center">You should have received an email with a unique link to sign in</p>
+  </section>
+
+  <section></section>
+</div>
