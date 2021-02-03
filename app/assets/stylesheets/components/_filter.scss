@@ -1,6 +1,7 @@
 #filter-content {
-	@extend .fixed, .h-100, .w-100, .mt-0, .pb-3;
+	@extend .fixed, .h-100, .w-100, .mt-0, .pb-3, .mb-3;
 
+	overflow-y: scroll;
 	top: -16px;
 	left: 0;
 	background: white;
@@ -23,6 +24,64 @@
 	form {
 		label {
 			color: $light-black;
+		}
+	}
+
+	.advanced-content {
+		#job-application-trigger {
+			color: $blue-2;
+			transition: 0.25s ease;
+
+			&.expanded {
+				color: $flat-dark-5;
+				opacity: 0.5;
+			}
+		}
+
+		#job-application-content {
+			.jobs {
+				.job-card {
+					.skill-pill {
+						@extend .mr-0;
+					}
+
+					.applicant-avatars {
+						@extend .flex, .justify-content-center;
+
+						.small-avatar {
+							@extend .flex, .justify-content-center, .items-center;
+
+							&:first-of-type {
+								margin-left: unset !important;
+							}
+
+							margin-left: -20px;
+							background: white;
+							border-radius: 50%;
+							height: 40px;
+							width: 40px;
+
+							img {
+								border-radius: 50%;
+								width: 80%;
+								height: 80%;
+							}
+
+							.last-avatar {
+								@extend .rounded-circle,
+									.textWhite,
+									.flex,
+									.justify-content-center,
+									.items-center;
+
+								width: 80%;
+								height: 80%;
+								background-size: cover;
+							}
+						}
+					}
+				}
+			}
 		}
 	}
 }

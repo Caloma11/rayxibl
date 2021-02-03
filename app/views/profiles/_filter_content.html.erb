@@ -24,6 +24,24 @@
                   label: "Experience level",
                   input_html: { multiple: true },
                   collection: Profile.expertises %>
+      <%= f.input :job_id, as: :hidden,
+                  input_html: { name: "profile[job_id]" } %>
+
+      <section class="advanced-content">
+        <button id="job-application-trigger" class="btn btn-float w-100 text-center" type="button">
+          Filter by job applications
+          <%= image_tag "icons/down-chevron.svg", alt: "expand content", id: "down", class: "vertical-align-middle" %>
+          <%= image_tag "icons/up-chevron.svg", alt: "minimize content", id: "up", class: "none vertical-align-middle" %>
+        </button>
+        <div id="job-application-content" class="opaque h-0">
+          <section class="jobs">
+            <% @jobs.includes(:manager, job_applications: [profile: { user: :avatar_attachment }]).each do |job| %>
+              <%= render partial: "jobs/card", locals: { job: job, dummy_link: true } %>
+            <% end %>
+          </section>
+        </div>
+      </section>
+
       <div class="mt-5 mb-3 mx-3 px-3 flex justify-content-between">
         <button type="submit" name="profile[clear]" value="true" class="btn btn-float red">Clear</button>
         <%# DUMMY BUTTON FOR NOW %>
