@@ -11,7 +11,7 @@
 	margin-left: 0;
 }
 
-.mr-0 {
+.m0 {
 	margin-right: 0 !important;
 }
 
@@ -73,6 +73,10 @@
 
 .mr-2 {
 	margin-right: 8px;
+}
+
+.mr-0 {
+  margin-right: 0;
 }
 
 .mx-0 {
@@ -149,6 +153,23 @@
 .my-4 {
   @extend .mt-4, .mb-4;
 }
+
+.mr-4 {
+  margin-right: 32px;
+}
+
+.ml-4 {
+  margin-left: 32px;
+}
+
+.my-4 {
+  @extend .mt-4, .mb-4;
+}
+
+.mx-4 {
+  @extend .mr-4, .ml-4;
+}
+
 
 .mt-5 {
 	margin-top: 64px;
