@@ -1,7 +1,7 @@
 class JobPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope.active
+      scope
     end
   end
 

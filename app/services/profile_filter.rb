@@ -61,10 +61,20 @@ class ProfileFilter
                     .where(expertise: expertises)
     end
 
+    filter_via_job_application
+
     if profile_params[:clear] == "true"
       @profiles = profile.includes(:ratings, user: [:manager, avatar_attachment: :blob])
     end
 
     @profiles
+  end
+
+  def filter_via_job_application
+    job_ids = profile_params[:job_id].split(",")
+
+    if job_ids.length.positive?
+      @profiles = profile.joins(job_applications: :job).where(job_applications: { jobs: { id: job_ids } })
+    end
   end
 end

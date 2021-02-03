@@ -11,6 +11,7 @@ class ProfilesController < ApplicationController
     end
 
     @profiles = ProfileFilter.new(profile, params, current_user).call
+    @jobs = current_user.manager.jobs
 
     respond_to do |format|
       format.html
