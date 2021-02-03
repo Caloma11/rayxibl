@@ -89,7 +89,14 @@
   <section class="text-block mx-3 mb-3 uppercase">
     <p class="mb-3"><strong class="textDarkGray">experience level:</strong> <%= @job.expertise %> </p>
     <p class="mb-3"><strong class="textDarkGray">budget:</strong> <%= @job.rate %> <%= @job.price_type %></p>
-    <p><%= @job.start_date&.strftime("%d %b") %> <strong class="textDarkGray">-</strong> <%= @job.end_date&.strftime("%d %b") %>, <%= @job.start_time&.strftime("%H:%M") %> <strong class="textDarkGray">-</strong> <%= @job.end_time&.strftime("%H:%M") %></p>
+    <p>
+      <%= @job.start_date&.strftime("%d %b") %> <strong class="textDarkGray">-</strong> <%= @job.end_date&.strftime("%d %b") %>,
+      <% if @job.start_time && @job.end_time %>
+        <%= @job.start_time&.strftime("%H:%M") %> <strong class="textDarkGray">-</strong> <%= @job.end_time&.strftime("%H:%M") %>
+      <% else %>
+        <%= @job.duration %> hours / day
+      <% end %>
+    </p>
     <div class="skills mt-4">
       <p class="subtitle mb-0">Key Skills</p>
       <div class="skill-pills px-0">

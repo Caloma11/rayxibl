@@ -12,6 +12,7 @@ import { moreToggler } from "../components/moreToggler";
 import { previewImage } from "../components/previewImage";
 import { filtering, jobApplicationFilter } from "../components/filtering";
 import { initTomSelect } from "../plugins/tomSelect";
+import { jobFlatpickr } from "../plugins/jobFlatpickr";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -36,4 +37,5 @@ document.addEventListener("turbolinks:load", () => {
 	filtering();
 	initTomSelect();
 	jobApplicationFilter();
+	jobFlatpickr();
 });
