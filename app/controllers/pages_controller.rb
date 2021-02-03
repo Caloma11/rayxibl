@@ -16,4 +16,7 @@ class PagesController < ApplicationController
 
   def schedule
   end
+
+  def mail
+  end
 end
