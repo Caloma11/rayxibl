@@ -53,7 +53,7 @@ const Calendar = () => {
 	const handleScroll = e => {
 		const reachedEnd =
 			e.currentTarget.scrollWidth - e.currentTarget.scrollLeft <=
-			e.currentTarget.offsetWidth;
+			e.currentTarget.offsetWidth + 20;
 
 		// TODO: Handle next year
 		// Problem right now is: <CalendarDayHeader /> visually breaks (offset)
