@@ -30,3 +30,12 @@ export const TIME_LIST = [
 	"22:00",
 	"23:00"
 ];
+export const EXPERTISES = [
+	"",
+	"junior",
+	"junior-mid",
+	"mid",
+	"mid-senior",
+	"senior",
+	"pro"
+];

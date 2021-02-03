@@ -3,6 +3,31 @@ $day-height: 180px;
 $day-header-height: 60px;
 
 #calendar-page {
+	#calendar-filter {
+		.filter-overlay {
+			@extend .bg-white;
+
+			position: fixed;
+			width: 100%;
+			height: 100vh;
+			z-index: 1;
+
+			.header {
+				border-bottom: 2px solid $blueish-gray;
+			}
+
+			.content {
+				@extend .px-3;
+
+				h3 {
+					@extend .uppercase, .mb-3;
+
+					font-size: 16px;
+				}
+			}
+		}
+	}
+
 	#calendar {
 		@extend .relative;
 
@@ -17,6 +42,7 @@ $day-header-height: 60px;
 		.calendarContainer {
 			display: flex;
 			overflow-x: scroll;
+			border-bottom: 2px solid $blueish-gray;
 
 			p {
 				margin: 0;
