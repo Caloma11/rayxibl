@@ -7,7 +7,7 @@
     <button style="height: 16px; width: 16px"> </button>
   </section>
 
-  <section>
+  <section class="mx-3 mt-4">
     <div class="flex flex-column">
       <% @bookings.each do |booking| %>
         <%= render partial: "bookings/#{current_user.role}_card", locals: { booking: booking } %>
