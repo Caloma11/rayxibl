@@ -41,6 +41,10 @@ input[type="submit"] {
 		&.red {
 			color: $flat-red-2;
 		}
+
+		&.blue {
+			color: $blue-2;
+		}
 	}
 
 	&[disabled] {
