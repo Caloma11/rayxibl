@@ -52,6 +52,7 @@ Rails.application.routes.draw do
   post "download_attachment/:id", to: "profile_attachments#download", as: :download_attachment
   post "booking_download_attachment/:id", to: "booking_attachments#download", as: :booking_download_attachment
   get "schedule", to: "pages#schedule"
+  patch "/bookings/:id/cancel", to: "bookings#cancel", as: :booking_cancel
 
   namespace :api do
     namespace :v1 do
