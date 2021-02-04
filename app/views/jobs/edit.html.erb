@@ -46,15 +46,26 @@
           <%= link_to "Specific", "#", id: "specific", class: "tab active", data: { turbolinks: false } %>
         </div>
       </div>
-      <div class="flex">
+      <div class="flex items-end justify-content-between">
         <div class="dates-input-wrapper">
           <label for="dates" class="block textGray">Dates</label>
           <input type="text" name="dates" class="mb-2 w-100 datepicker">
         </div>
         <%= f.input :start_date, as: :hidden,
-                    wrapper_html: { class: "flex flex-column mb-3 mr-3" } %>
+                    wrapper_html: { class: "flex flex-column mb-3 mr-3 none" } %>
         <%= f.input :end_date, as: :hidden,
-                    wrapper_html: { class: "flex flex-column mb-3" } %>
+                    wrapper_html: { class: "flex flex-column mb-3 none" } %>
+
+        <div>
+          <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" },
+                      label_html: { class: "block textGray nowrap flex items-center" },
+                      wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
+          <%#= f.input :weekends, as: :check_boxes, collection: [["", true]],
+                      checked: @job.weekends,
+                      label: "Incl. weekends", input_html: { class: "mr-2" },
+                      label_html: { class: "block textGray nowrap flex items-center" },
+                      wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
+        </div>
       </div>
       <!-- TODO: Add checkbox here with JS functionality that toggles show/hide of date & time columns -->
       <div class="flex">
