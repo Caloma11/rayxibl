@@ -60,14 +60,8 @@
           <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" },
                       label_html: { class: "block textGray nowrap flex items-center" },
                       wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
-          <%#= f.input :weekends, as: :check_boxes, collection: [["", true]],
-                      checked: @job.weekends,
-                      label: "Incl. weekends", input_html: { class: "mr-2" },
-                      label_html: { class: "block textGray nowrap flex items-center" },
-                      wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
         </div>
       </div>
-      <!-- TODO: Add checkbox here with JS functionality that toggles show/hide of date & time columns -->
       <div class="flex">
         <%= f.input :rate, label: "Max budget", placeholder: "$250",
                     wrapper_html: { class: "flex flex-column mb-3 mr-3" },
