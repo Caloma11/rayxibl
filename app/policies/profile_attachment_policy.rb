@@ -9,4 +9,8 @@ class ProfileAttachmentPolicy < ApplicationPolicy
     true
   end
 
+  def create?
+    record.profile.user == user
+  end
+
 end

@@ -10,4 +10,8 @@ select {
 		outline: $blue auto 1px;
 		background: white;
 	}
+
+  &.lg {
+    @extend .textMd;
+  }
 }

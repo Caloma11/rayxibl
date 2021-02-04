@@ -10,8 +10,10 @@ import { bindBillableCheckbox } from "../components/billable";
 import { stepForm } from "../components/stepForm";
 import { moreToggler } from "../components/moreToggler";
 import { previewImage } from "../components/previewImage";
+import { editPreviewImage } from "../components/editProfilePreviewImage";
 import { filtering, jobApplicationFilter } from "../components/filtering";
 import { initTomSelect } from "../plugins/tomSelect";
+import { initEditLinksAndDocuments } from "../components/editLinksAndDocuments";
 import { jobFlatpickr } from "../plugins/jobFlatpickr";
 import { editBookingFlatpickr } from "../plugins/editBookingFlatpickr";
 
@@ -38,6 +40,8 @@ document.addEventListener("turbolinks:load", () => {
 	filtering();
 	initTomSelect();
 	jobApplicationFilter();
+  editPreviewImage();
+  initEditLinksAndDocuments();
 	jobFlatpickr();
 	editBookingFlatpickr();
 });
