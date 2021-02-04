@@ -25,11 +25,13 @@ const nextStepListen = ({
 		stepTwo.classList.remove("none");
 		stepIndicatorOne.classList.remove("active");
 		stepIndicatorTwo.classList.add("active");
+    window.scrollTo(0, 0);
 	});
 };
 
 export const stepForm = () => {
 	const container = document.querySelector(".manager-new-page");
+  const otherContainer = document.querySelector(".profileEdit")
 	const stepOne = document.querySelector(".step-1");
 	const stepTwo = document.querySelector(".step-2");
 	const previousStepButton = document.querySelector(".previous-step");
@@ -37,7 +39,7 @@ export const stepForm = () => {
 	const stepIndicatorOne = document.querySelector(".step-indicator-1");
 	const stepIndicatorTwo = document.querySelector(".step-indicator-2");
 
-	if (container) {
+	if (container || otherContainer) {
 		const elements = {
 			stepOne,
 			stepTwo,

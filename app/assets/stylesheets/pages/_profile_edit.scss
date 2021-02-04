@@ -1,0 +1,121 @@
+.profileEdit {
+  .profession-edit {
+    margin-top: -48px;
+  }
+
+  #camera-icon {
+    @extend .p-3, .rounded-circle, .mb-3;
+    background-color: $blue-2;
+  }
+
+  .headerOptions {
+    top: 8px;
+  }
+  height: 100%;
+
+  img {
+    &.initial {
+      background: $dark-blue-gradient;
+    }
+  }
+
+  .next-step {
+    @extend .rounded-circle;
+
+    height: 40px;
+    width: 40px;
+    background: $dark-blue-gradient;
+  }
+
+  .step-indicator-wrapper {
+    margin-top: -42px;
+  }
+
+  .minus-30 {
+    margin-top: -30px;
+  }
+
+  .step-indicator {
+    @extend .flex, .justify-content-center, .items-center;
+
+    width: 20px;
+    height: 20px;
+
+    &.active {
+      img {
+        @extend .rounded-circle;
+
+        padding: 2px;
+        border: 2px solid $blue-2;
+      }
+    }
+  }
+
+  #profile_overview {
+    height: 240px;
+  }
+  .choose-file {
+    border: 1px solid #d3d3d3;
+    padding: 8px 24px;
+    cursor: pointer;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 2px;
+    img {
+      height: 32px;
+      width: 32px;
+    }
+
+  @extend .mx-4;
+  }
+
+  .or-separator {
+    p {
+      @extend .mx-3;
+    }
+    .line {
+      height: 1px;
+      width: 64px;
+      background-color: $gray;
+    }
+  }
+
+  .save {
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 2px;
+    font-size: 16px;
+    img {
+      height: 32px;
+      width: 32px;
+    }
+  }
+
+  #links-modal, #documents-modal {
+    position: fixed;
+    height: 100vh;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    top: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    form {
+      @extend .rounded;
+      padding: 64px 32px;
+      background-color: white;
+      img {
+        left: 16px;
+        top: 16px;
+        position: absolute;
+      }
+    }
+  }
+}
+

@@ -1,48 +1,147 @@
-<h1>Edit your profile</h1>
+<div class="profileEdit w-100">
 
-<h2>1. Personal details</h2>
+  <div class="step-1">
+    <%= simple_form_for @profile do |f| %>
+      <div class="profileBanner flex items-center justify-content-center relative" style="background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.56)), url(<%= avatar_url(@profile) %>)">
+        <div class="headerOptions flex w-100 justify-content-between p-3">
+          <div>
+            <%= link_to profile_path(@profile) do %>
+              <%= image_tag "icons/cross-white.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm" %>
+            <% end %>
+          </div>
+        </div>
+          <%= f.simple_fields_for :profile_user do |f| %>
+        <div class="camera">
+            <%= f.input :avatar, as: :file, input_html: { class: 'none'}, label_html: { class: 'upload-photo'}, label: "#{(image_tag 'icons/camera', id: 'camera-icon', width: 32, height: 32)}".html_safe, required: false %>
+        </div>
+      </div>
 
-<%= simple_form_for @profile do |f| %>
+      <div class="profileHeader">
+          <%= f.input :first_name, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { value: @profile.user.first_name, class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "pr-3"} %>
+          <%= f.input :last_name, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { value: @profile.user.last_name, class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "pl-3 overflow-hidden"} %>
+        <% end %>
+      </div>
 
-  <%= f.simple_fields_for :profile_user do |ff| %>
-    <%= ff.input :avatar, as: :file %>
-    <%= ff.input :first_name %>
-    <%= ff.input :last_name %>
-  <% end %>
+      <%= f.input :profession, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "profession-edit px-3 overflow-hidden"} %>
 
-  <%= f.input :location %>
+      <%= f.input :expertise, label: "Experience level", required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", id: "edit_profile_expertise" }, wrapper_html: { class: "px-3 overflow-hidden"}, collection: Profile::EXPERTISES %>
 
-  <h2>2. Professional details:</h2>
-
-  <%= f.input :profession %>
-
-  <%= f.input :expertise, collection: Profile::EXPERTISES, label: "Experience level:"%>
-
-  <%= f.input :skill_list, label: "Key skills (max 5, comma separated)" %>
-  <%= f.input :overview, label: "Professional summary:", as: :text  %>
-
-  <h2>3. Links and documents</h2>
-
-  <%= f.simple_fields_for :profile_links do |paf| %>
-    <%= paf.input :title, input_html: {name: "profile[profile_links][][title]"} %>
-    <%= paf.input :url, placeholder: "https://", input_html: {name: "profile[profile_links][][url]"} %>
-    <%= link_to "+ Add another link", "#" %>
-  <% end %>
-
-  <br>
-  <br>
-  <br>
-
-  <%= f.simple_fields_for :profile_documents do |paf| %>
-    <%= paf.input :title, placeholder: "Ex: Curriculum Vitae", input_html: {name: "profile[profile_documents][][title]"}  %>
-    <%= paf.input :attachment, as: :file, input_html: {name: "profile[profile_documents][][attachment]"} %>
-    <%= link_to "Upload another document", "#" %>
-  <% end %>
+      <%= f.input :skill_list, label: "Key skills (max 5, comma separated)", required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", value: "#{@profile.skill_list.join(", ")}" }, wrapper_html: { class: "px-3 overflow-hidden"} %>
 
 
-  <br>
-  <br>
-  <br>
+      <%= f.input :location, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg"}, wrapper_html: { class: "px-3 overflow-hidden"} %>
+      <div class="flex justify-content-end p-3 items-center">
+        <button class="next-step" type="button"><%= image_tag "icons/arrow-right.svg", alt: "submit", width: 16, height: 16 %></button>
+      </div>
+  </div>
+  <!-- End of Step 1 -->
 
-  <%= f.submit %>
-<% end %>
+  <!-- Step 2 -->
+  <div class="step-2 flex none flex-column h-100 justify-content-between">
+    <div class="step-content h-100 mb-5">
+      <%= link_to profile_path(@profile) do %>
+        <%= image_tag "icons/cross.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm p-3 mt-3" %>
+      <% end %>
+      <%= f.input :overview, as: :text, label: "Professional Summary", required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"}  %>
+    <% end %>
+    <!-- End of the main form -->
+
+
+      <label class="p-3 text optional textGray block">Links and documents</label>
+
+      <!-- Links Modal -->
+      <div class="none" id="links-modal">
+        <%= simple_form_for [@profile, ProfileAttachment.new], html: { class: "relative" }, remote: true do |paf| %>
+          <%= image_tag "icons/cross.svg", alt: "back link", width: 16, height: 16, class: "mr-2 textSm", id: "close-links" %>
+          <%= paf.input :title, required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+          <%= paf.input :url, placeholder: "https://", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+          <div class="p-3">
+            <%= paf.submit "Save link", class: "btn btn-white"%>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Link Buttons -->
+      <div class="links-list p-3">
+        <% unless @links.empty? %>
+          <h3 class=""><small class="textGray">LINKS</small></h3>
+          <% @links.each do |link| %>
+            <%= link_to sanitize_url(link.url), target: :_blank, class: "btn-centered btn-secondary mb-3 flex items-center justify-content-center" do  %>
+            <%= image_tag "icons/edit-white", alt: "edit", class: "mr-2", height: 32, width: 32 %>
+            <%= link.title&.capitalize %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <!-- Add another link -->
+      <div class="mb-3">
+        <label class="choose-file textGray" id="add-a-link">
+          <%= image_tag("icons/zap", alt: "zap", class: "mr-2") %>
+          ADD <%= @links.any? ? "ANOTHER" : "A LINK" %>
+        </label>
+      </div>
+
+      <!-- OR separator -->
+      <div class="my-4 or-separator flex w-100 justify-content-center items-center">
+        <div class="line"></div>
+        <p>OR</p>
+        <div class="line"></div>
+      </div>
+
+      <!-- Documents Modal -->
+      <div class="none" id="documents-modal">
+        <%= simple_form_for [@profile, ProfileAttachment.new], html: { class: "relative" }, remote: true do |paf| %>
+          <%= image_tag "icons/cross.svg", alt: "back link", width: 16, height: 16, class: "mr-2 textSm", id: "close-documents" %>
+          <%= paf.input :title, required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+          <%= paf.input :attachment, as: :file, required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+          <div class="p-3">
+            <%= paf.submit "Save document", class: "btn btn-white"%>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Documents buttons -->
+
+      <div class="documents-list px-3 pb-3">
+        <% unless @documents.empty? %>
+          <h3 class=""><small class="textGray">DOCUMENTS</small></h3>
+          <% @documents.each do |link| %>
+            <%= link_to download_attachment_path(link), method: :post, class: "btn-centered btn-secondary mb-3 flex items-center justify-content-center" do %>
+            <%= image_tag "icons/download-white", width: 32, height: 32, class: "mr-2" %>
+            <%= link.title&.capitalize %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <!-- Add another document -->
+      <div>
+        <label class="choose-file textGray" id="upload-a-document">
+          <%= image_tag("icons/paperclip", alt: "paperclip", class: "mr-2") %>
+          UPLOAD <%= @documents.any? ? "ANOTHER" : "DOCUMENT" %>
+        </label>
+      </div>
+
+      <div class="px-3 mt-5">
+
+        <!-- TODO: STYLE THIS BUTTON TO MATCH FIGMA  -->
+
+        <button type="submit" form="edit_profile_<%= @profile.id %>" class="btn btn-primary my-3 save w-100" />
+          <%= image_tag("icons/save", alt: "save", class: "mr-2") %>
+          SAVE
+        </button>
+      </div>
+
+    </div>
+    <!-- End of step 2 content -->
+    <div class="flex justify-content-between p-3">
+      <button class="previous-step" type="button"><%= image_tag "icons/left-arrow-blue.svg", alt: "submit", width: 16, height: 16 %>
+    </div>
+  </div>
+
+  <div class="flex justify-content-center items-center step-indicator-wrapper minus-30">
+    <div class="step-indicator step-indicator-1 active"><%= image_tag "icons/step-circle.svg", alt: "step indicator", width: 8, height: 8 %></div>
+    <div class="step-indicator step-indicator-2"><%= image_tag "icons/step-circle.svg", alt: "step indicator", width: 8, height: 8 %></div>
+  </div>
+
+</div>

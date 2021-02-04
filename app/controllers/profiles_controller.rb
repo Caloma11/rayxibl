@@ -1,5 +1,5 @@
 class ProfilesController < ApplicationController
-  before_action :set_profile, only: [:show, :edit]
+  before_action :set_profile, only: [:show, :edit, :update]
   def index
     redirect_to dashboard_path if current_user.freelancer?
 
@@ -61,7 +61,17 @@ class ProfilesController < ApplicationController
   end
 
   def edit
+    @links = @profile.profile_attachments.where.not(url: nil)
+    @documents = @profile.profile_attachments.where(url: nil)
+  end
 
+  def update
+    if @profile.update(profile_params)
+      current_user.update(user_params[:profile_user])
+      redirect_to profile_path(@profile)
+    else
+      render 'edit'
+    end
   end
 
   private

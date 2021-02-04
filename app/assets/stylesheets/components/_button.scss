@@ -15,6 +15,14 @@ input[type="submit"] {
 		padding: 8px 16px;
 	}
 
+  &.btn-centered {
+    text-transform: uppercase;
+    font-weight: 500;
+    border-radius: 8px;
+    color: #2f2f3e;
+    padding: 8px 16px;
+  }
+
 	&.btn-lg {
 		@extend .btn;
 		padding: 16px 32px;

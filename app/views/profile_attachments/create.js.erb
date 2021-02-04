@@ -1,0 +1,54 @@
+// TODO:
+// Update view with the link buttons
+
+// Change text from `A LINK` OR `DOCUMENT` to `ANOTHER`
+(() => {
+  let isLink = "<%= @is_link%>";
+  isLink = (isLink === "true");
+  if (isLink) {
+    const linksList = document.querySelector(".links-list");
+    const modalWrapper = document.getElementById("links-modal");
+    const addALink = document.getElementById("add-a-link");
+
+    // Close modal
+    modalWrapper.classList.add("none");
+    // Clear modal form
+    document.querySelector("#links-modal form").reset();
+
+    const sanitizedUrl = "<%= sanitize_url(@profile_attachment.url)%>";
+    const editIconPath = "<%= image_path 'icons/edit-white.svg' %>";
+    const zapIconPath = "<%= image_path 'icons/zap.svg' %>";
+    const newLinkTitle = "<%= @profile_attachment.title %>";
+
+    const linkHTML = `<a target="_blank" class="btn-centered btn-secondary mb-3 flex items-center justify-content-center" href="${sanitizedUrl}">
+      <img alt="edit" class="mr-2" height="32" width="32" src="${editIconPath}">
+      ${newLinkTitle}
+      </a>`;
+
+    // Insert new button
+    linksList.insertAdjacentHTML('beforeend', linkHTML);
+
+    // Change "A LINK" to "ANOTHER"
+    addALink.innerHTML = `<img alt="zap" class="mr-2" src="${zapIconPath}">ADD ANOTHER`
+
+  } else {
+    // Close modal
+    const modalWrapper = document.getElementById("documents-modal");
+    modalWrapper.classList.add("none");
+    // Clear modal form
+    document.querySelector("#documents-modal form").reset();
+
+    const uploadADocument = document.getElementById("upload-a-document");
+    const documentsList = document.querySelector(".documents-list");
+    const downloadUrl = "<%= download_attachment_path(@profile_attachment)%>";
+    const downloadIconPath = "<%= image_path 'icons/download-white.svg' %>";
+    const paperclipIconPath = "<%= image_path 'icons/paperclip.svg' %>";
+    const newLinkTitle = "<%= @profile_attachment.title %>";
+
+    const docHTML = `<a class="btn-centered btn-secondary mb-3 flex items-center justify-content-center" rel="nofollow" data-method="post" href="${downloadUrl}"><img width="32" height="32" class="mr-2" src="${downloadIconPath}">${newLinkTitle}
+      </a>`;
+
+    documentsList.insertAdjacentHTML("beforeend", docHTML);
+    uploadADocument.innerHTML = `<img alt="paperclip" class="mr-2" src="${paperclipIconPath}">ADD ANOTHER`
+  }
+})();
