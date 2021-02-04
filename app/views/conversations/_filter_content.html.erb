@@ -1,0 +1,53 @@
+<div class="h-100">
+  <section class="head">
+    <button class="filter-exit"><%= image_tag "icons/cross.svg", alt: "close" %></button>
+    <p>FILTER</p>
+    <button style="opacity: 0; user-select: none"><%= image_tag "icons/cross.svg", alt: "close" %></button>
+  </section>
+
+  <section class="content">
+    <p class="title">Freelancers</p>
+
+    <%= simple_form_for :profile, url: conversations_path, method: :get, remote: true do |f| %>
+      <%= f.input :name, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :profession, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :skills, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" },
+                  input_html: { multiple: true },
+                  collection: ActsAsTaggableOn::Tag.pluck(:name).uniq %>
+      <%= f.input :location, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :expertise, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" },
+                  label: "Experience level",
+                  input_html: { multiple: true },
+                  collection: Profile.expertises %>
+      <%= f.input :job_id, as: :hidden,
+                  input_html: { name: "profile[job_id]" } %>
+
+      <section class="advanced-content">
+        <button id="job-application-trigger" class="btn btn-float w-100 text-center" type="button">
+          Filter by job applications
+          <%= image_tag "icons/down-chevron.svg", alt: "expand content", id: "down", class: "vertical-align-middle" %>
+          <%= image_tag "icons/up-chevron.svg", alt: "minimize content", id: "up", class: "none vertical-align-middle" %>
+        </button>
+        <div id="job-application-content" class="opaque h-0">
+          <section class="jobs mt-3">
+            <% jobs.each do |job| %>
+              <%= render partial: "jobs/simple_card", locals: { job: job } %>
+            <% end %>
+          </section>
+        </div>
+      </section>
+
+      <div class="mt-5 mb-3 mx-3 px-3 flex justify-content-between">
+        <button type="submit" name="profile[clear]" value="true" class="btn btn-float red">Clear</button>
+        <%# DUMMY BUTTON FOR NOW %>
+        <button class="btn btn-float" style="user-select: none">Saved</button>
+      </div>
+      <%= f.submit "Show results", class: "uppercase btn btn-primary w-100 py-3" %>
+    <% end %>
+  </section>
+</div>
