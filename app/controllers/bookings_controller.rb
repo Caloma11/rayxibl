@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_profile, only: :new
-  before_action :set_booking, only: :show
+  before_action :set_booking, only: [:show, :edit, :update]
 
   def index
     if current_user.manager?
@@ -32,6 +32,19 @@ class BookingsController < ApplicationController
 
   def show
     authorize @booking
+  end
+
+  def edit
+    authorize @booking
+  end
+
+  def update
+    authorize @booking
+    if @booking.update(booking_params)
+      redirect_to booking_path(@booking)
+    else
+      render :edit
+    end
   end
 
   private
