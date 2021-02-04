@@ -38,4 +38,5 @@ class BookingPolicy < ApplicationPolicy
   def still_pending?
     record.pending?
   end
+
 end
