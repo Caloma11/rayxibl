@@ -1,4 +1,9 @@
 <div id="manager">
+  <%= link_to profiles_path(ids: @today_booked_profiles.pluck(:id)), class: "bookings-count" do %>
+    You have <%= pluralize @today_booked_profiles.count, "freelancer" %> booked today
+    <%= image_tag "icons/right-arrow-blue.svg", alt: "profiles", class: "vertical-align-middle", width: 16, height: 16 %>
+  <% end %>
+
   <div class="shadow-alt rounded p-3 mb-3">
     <h3 class="mt-0 mb-1">Bookings</h3>
     <p class="subtitle m-0"><%= pluralize @booked_profiles.count, "booking" %> across <%= pluralize @booked_profiles.distinct.count("profiles.id"), "freelancer" %></p>
@@ -53,7 +58,7 @@
 
   <div class="shadow-alt rounded p-3">
     <h3 class="mt-0 mb-1">Job posts</h3>
-    <p class="subtitle"><%= pluralize current_user.manager.job_applications.count, "applicant" %> for <%= pluralize current_user.manager.jobs.count, "job" %></p>
+    <p class="subtitle"><%= pluralize current_user.manager.job_applications.count, "applicant" %> for <%= pluralize current_user.manager.jobs.count, "job post" %></p>
 
     <% @jobs.each do |job| %>
       <%= link_to job_path(job), class: "card-container flex items-center justify-content-between" do %>
