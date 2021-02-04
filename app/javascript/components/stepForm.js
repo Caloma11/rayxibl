@@ -25,6 +25,7 @@ const nextStepListen = ({
 		stepTwo.classList.remove("none");
 		stepIndicatorOne.classList.remove("active");
 		stepIndicatorTwo.classList.add("active");
+    window.scrollTo(0, 0);
 	});
 };
 
