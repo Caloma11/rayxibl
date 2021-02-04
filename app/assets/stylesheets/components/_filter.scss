@@ -27,6 +27,19 @@
 		}
 	}
 
+	.job-simple-card {
+		@extend .rounded, .mb-3;
+		background: $blueish-gray;
+
+		h3 {
+			font-size: 16px;
+		}
+
+		p {
+			font-size: 12px;
+		}
+	}
+
 	.advanced-content {
 		#job-application-trigger {
 			color: $blue-2;
@@ -39,6 +52,13 @@
 		}
 
 		#job-application-content {
+			&.h-0 {
+				.jobs,
+				.job-simple-card {
+					@extend .h-0, .m-0, .p-0;
+				}
+			}
+
 			.jobs {
 				.job-card {
 					.skill-pill {
