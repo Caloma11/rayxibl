@@ -10,7 +10,6 @@ const initLinksForm = () => {
     })
 
     closeLinksModal.addEventListener('click', (e) => {
-      console.log(888)
       modalWrapper.classList.add("none");
     })
   }

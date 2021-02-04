@@ -16,8 +16,8 @@
     document.querySelector("#links-modal form").reset();
 
     const sanitizedUrl = "<%= sanitize_url(@profile_attachment.url)%>";
-    const editIconPath = "<%= image_path 'icons/edit-white' %>";
-    const zapIconPath = "<%= image_path 'icons/zap' %>";
+    const editIconPath = "<%= image_path 'icons/edit-white.svg' %>";
+    const zapIconPath = "<%= image_path 'icons/zap.svg' %>";
     const newLinkTitle = "<%= @profile_attachment.title %>";
 
     const linkHTML = `<a target="_blank" class="btn-centered btn-secondary mb-3 flex items-center justify-content-center" href="${sanitizedUrl}">
@@ -41,8 +41,8 @@
     const uploadADocument = document.getElementById("upload-a-document");
     const documentsList = document.querySelector(".documents-list");
     const downloadUrl = "<%= download_attachment_path(@profile_attachment)%>";
-    const downloadIconPath = "<%= image_path 'icons/download-white' %>";
-    const paperclipIconPath = "<%= image_path 'icons/paperclip' %>";
+    const downloadIconPath = "<%= image_path 'icons/download-white.svg' %>";
+    const paperclipIconPath = "<%= image_path 'icons/paperclip.svg' %>";
     const newLinkTitle = "<%= @profile_attachment.title %>";
 
     const docHTML = `<a class="btn-centered btn-secondary mb-3 flex items-center justify-content-center" rel="nofollow" data-method="post" href="${downloadUrl}"><img width="32" height="32" class="mr-2" src="${downloadIconPath}">${newLinkTitle}
