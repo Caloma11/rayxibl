@@ -1,6 +1,6 @@
 const editPreviewImage = () => {
   const banner = document.querySelector(".profileEdit .profileBanner");
-  const input = document.getElementById('profile_user_avatar');
+  const input = document.getElementById('profile_profile_user_avatar');
 
   const displayPreview = (input) => {
     if (input.files && input.files[0]) {
