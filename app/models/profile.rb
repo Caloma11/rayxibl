@@ -17,6 +17,8 @@ class Profile < ApplicationRecord
   # [BE CAREFUL]: Not scoped to a specific manager
   has_many :notes
 
+  scope :has_bookings_today, -> { joins(:bookings).where("bookings.start_date = ?", Date.today) }
+
   delegate :display_name, to: :user
 
   enum expertise: EXPERTISES
