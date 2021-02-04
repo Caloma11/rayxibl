@@ -54,7 +54,8 @@
 		#job-application-content {
 			&.h-0 {
 				.jobs,
-				.job-simple-card {
+				.job-simple-card,
+				.job-card {
 					@extend .h-0, .m-0, .p-0;
 				}
 			}
