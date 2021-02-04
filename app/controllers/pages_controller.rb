@@ -1,4 +1,6 @@
 class PagesController < ApplicationController
+  skip_before_action :authenticate_user!, only: %i[mail]
+
   def home
   end
 
@@ -15,5 +17,10 @@ class PagesController < ApplicationController
   end
 
   def schedule
+  end
+
+  def mail
+    data = Rails.application.routes.recognize_path(request.referrer)
+    redirect_to root_path if data[:controller] != "registrations" && data[:action] != "new"
   end
 end

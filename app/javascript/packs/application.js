@@ -14,6 +14,8 @@ import { editPreviewImage } from "../components/editProfilePreviewImage";
 import { filtering, jobApplicationFilter } from "../components/filtering";
 import { initTomSelect } from "../plugins/tomSelect";
 import { initEditLinksAndDocuments } from "../components/editLinksAndDocuments";
+import { jobFlatpickr } from "../plugins/jobFlatpickr";
+import { editBookingFlatpickr } from "../plugins/editBookingFlatpickr";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -40,4 +42,6 @@ document.addEventListener("turbolinks:load", () => {
 	jobApplicationFilter();
   editPreviewImage();
   initEditLinksAndDocuments();
+	jobFlatpickr();
+	editBookingFlatpickr();
 });

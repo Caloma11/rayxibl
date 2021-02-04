@@ -1,3 +1,75 @@
-<div class="mx-3">
-  <h1 class="text-center">TODO THIS PAGE</h1>
+<div class="mx-3 job-edit">
+  <div class="flex justify-content-between items-center px-3">
+    <%= link_to :back do %>
+      <%= image_tag "icons/left-arrow.svg", alt: "back button", width: 16, height: 16 %>
+    <% end %>
+    <h3>Edit job</h3>
+    <button><%= image_tag "icons/more.svg", alt: "search", width: 16, height: 16 %></button>
+  </div>
+
+  <section>
+    <%= simple_form_for @job do |f| %>
+      <%= f.input :profession, required: false,
+                  label: "Job title", label_html: { class: "mb-1" },
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :description, required: false,
+                  label_html: { class: "mb-1" },
+                  wrapper_html: { class: "flex flex-column mb-3" },
+                  input_html: { rows: 5 } %>
+      <%= f.input :skill_list, label: "Key skills",
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :expertise, collection: Job.expertises.map { |ex| [ex[0].capitalize, ex[0]] },
+                  wrapper_html: { class: "flex flex-column mb-3" },
+                  required: false %>
+      <%= f.input :location, placeholder: "London, United Kingdom",
+                  wrapper_html: { class: "flex flex-column mb-3" },
+                  required: false %>
+      <div class="flex justify-content-between items-end mb-3">
+        <div class="bookingSpecific flex flex-column">
+          <label for="job_start_date">Hours per day</label>
+          <div class="flex">
+            <%= f.input :start_time, as: :time, html5: true,
+                        label: false,
+                        wrapper_html: { class: "flex flex-column" } %>
+            <span class="self-centered mx-2"> - </span>
+            <%= f.input :end_time, as: :time, html5: true,
+                        label: false,
+                        wrapper_html: { class: "flex flex-column" } %>
+          </div>
+        </div>
+        <div class="bookingDuration none">
+          <%= f.input :duration,
+                      wrapper_html: { class: "flex flex-column" } %>
+        </div>
+        <div class="profileTabs flex-grow-1 textSm mr-0" id="tabs">
+          <%= link_to "Duration", "#", id: "duration", class: "tab", data: { turbolinks: false } %>
+          <%= link_to "Specific", "#", id: "specific", class: "tab active", data: { turbolinks: false } %>
+        </div>
+      </div>
+      <div class="flex items-end justify-content-between">
+        <div class="dates-input-wrapper">
+          <label for="dates" class="block textGray">Dates</label>
+          <input type="text" name="dates" class="mb-2 w-100 datepicker">
+        </div>
+        <%= f.input :start_date, as: :hidden,
+                    wrapper_html: { class: "flex flex-column mb-3 mr-3 none" } %>
+        <%= f.input :end_date, as: :hidden,
+                    wrapper_html: { class: "flex flex-column mb-3 none" } %>
+
+        <div>
+          <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" },
+                      label_html: { class: "block textGray nowrap flex items-center" },
+                      wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
+        </div>
+      </div>
+      <div class="flex">
+        <%= f.input :rate, label: "Max budget", placeholder: "$250",
+                    wrapper_html: { class: "flex flex-column mb-3 mr-3" },
+                    required: false %>
+        <%= f.input :price_type, collection: Job.price_types.map { |ex| [ex[0].capitalize, ex[0]] }, wrapper_html: { class: "flex flex-column mb-3" } %>
+      </div>
+      <%= f.input :attachments, as: :file, input_html: { multiple: true } %>
+      <%= f.submit "Update Job", class: "btn btn-primary w-100 my-3 py-2" %>
+    <% end %>
+  </section>
 </div>

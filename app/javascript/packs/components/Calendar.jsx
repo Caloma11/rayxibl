@@ -8,11 +8,14 @@ import { BookingForm } from "./BookingForm";
 import { CalendarDays } from "./CalendarDays";
 import { CalendarDayHeaders } from "./CalendarDayHeaders";
 import { CalendarProfiles } from "./CalendarProfiles";
+import { CalendarFilter } from "./CalendarFilter";
 
 const moment = extendMoment(Moment);
 
 const Calendar = () => {
+	const [loading, setLoading] = useState(true);
 	const [profiles, setProfiles] = useState([]);
+	const [bookings, setBookings] = useState([]);
 	const [data, setData] = useState(initialDays);
 	const [monthOffset, setMonthOffset] = useState(1);
 	const [weekOffset, setWeekOffset] = useState(1);
@@ -53,7 +56,7 @@ const Calendar = () => {
 	const handleScroll = e => {
 		const reachedEnd =
 			e.currentTarget.scrollWidth - e.currentTarget.scrollLeft <=
-			e.currentTarget.offsetWidth;
+			e.currentTarget.offsetWidth + 20;
 
 		// TODO: Handle next year
 		// Problem right now is: <CalendarDayHeader /> visually breaks (offset)
@@ -75,33 +78,58 @@ const Calendar = () => {
 			try {
 				const { data } = await axios.get("/api/v1/networks");
 				setProfiles(data);
+				setBookings(
+					data
+						.map(pr => pr.bookings)
+						.flat()
+						.map(({ id, title }) => ({ id, title }))
+				);
 			} catch (error) {
 				console.log(error);
 			}
+			setLoading(false);
 		})();
 	}, []);
+
+	if (loading) {
+		return (
+			<section
+				id="calendar"
+				className="flex justify-content-center items-center"
+			>
+				<h1>Loading...</h1>
+			</section>
+		);
+	}
 
 	return (
 		<section id="calendar">
 			{showForm && formDetails && Object.keys(formDetails).length > 0 && (
 				<BookingForm formDetails={formDetails} setShowForm={setShowForm} />
 			)}
+			<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
 			<div className="calendarContainer" onScroll={handleScroll}>
 				<CalendarProfiles profiles={profiles} />
 				<div className="allDays">
 					<CalendarDayHeaders data={data} weekOffset={weekOffset} />
-					{profiles.map((profile, i) => {
-						return (
-							<CalendarDays
-								numberOfWeeks={numberOfWeeks}
-								key={i}
-								profile={profile}
-								data={data}
-								setShowForm={setShowForm}
-								setFormDetails={setFormDetails}
-							/>
-						);
-					})}
+					{profiles.length > 0 ? (
+						profiles.map((profile, i) => {
+							return (
+								<CalendarDays
+									numberOfWeeks={numberOfWeeks}
+									key={i}
+									profile={profile}
+									data={data}
+									setShowForm={setShowForm}
+									setFormDetails={setFormDetails}
+								/>
+							);
+						})
+					) : (
+						<div className="mx-3">
+							<h1 className="textDarkGray">No profile...</h1>
+						</div>
+					)}
 				</div>
 			</div>
 		</section>

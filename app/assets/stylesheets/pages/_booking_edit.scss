@@ -1,0 +1,57 @@
+.booking-edit {
+	#booking_start_time,
+	#booking_end_time {
+		width: 80px;
+		height: 24px;
+	}
+
+	#booking_duration {
+		width: 200px;
+		height: 24px;
+	}
+
+	.bookingDuration {
+		width: 214px;
+	}
+
+	#tabs {
+		@extend .rounded;
+
+		height: 32px;
+
+		.tab {
+			padding-top: unset !important;
+			padding-bottom: unset !important;
+
+			&.active {
+				@extend .rounded;
+			}
+		}
+	}
+
+	.booking_attachments {
+		@extend .flex, .justify-content-center, .items-center, .py-2;
+
+		border: 3px solid $flat-gray-3;
+		border-radius: 8px;
+
+		label {
+			img {
+				@extend .vertical-align-middle;
+
+				width: 32px;
+				height: 32px;
+			}
+		}
+	}
+
+	.separator {
+		@extend .my-3;
+
+		border-bottom: 2px solid $blueish-gray;
+	}
+
+	button[type="submit"] {
+		font-size: 16px;
+	}
+}

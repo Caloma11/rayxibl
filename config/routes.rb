@@ -8,10 +8,14 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => "/cable"
 
-  devise_for :users, controllers: { confirmations: 'confirmations', invitations: 'users/invitations' }
+  devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations', invitations: 'users/invitations' }
 
   get "/dashboard", to: "pages#dashboard"
-  resources :bookings, only: %i[show]
+
+  resources :bookings, only: %i[index show edit update]
+
+  get "/mail", to: "pages#mail"
+
   resources :jobs, only: %i[index show new create edit update] do
     resources :job_applications, only: %i[create]
   end

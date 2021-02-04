@@ -48,7 +48,7 @@
       <% end %>
     </div>
 
-    <%= link_to "View all (#{@bookings.count})", "#", class: "btn btn-primary text-center" %>
+    <%= link_to "View all (#{@bookings.count})", bookings_path, class: "btn btn-primary text-center" %>
   </div>
 
   <div class="shadow-alt rounded p-3">
@@ -56,7 +56,7 @@
     <p class="subtitle"><%= pluralize current_user.manager.job_applications.count, "applicant" %> for <%= pluralize current_user.manager.jobs.count, "job" %></p>
 
     <% @jobs.each do |job| %>
-      <div class="card-container flex items-center justify-content-between">
+      <%= link_to job_path(job), class: "card-container flex items-center justify-content-between" do %>
         <div class="flex items-center">
           <% if job.manager.user.avatar.attached? %>
             <%= image_tag job.manager.user.avatar.service_url, class: "avatar small avatar-circle", alt: "Manager's picture" %>
@@ -68,7 +68,7 @@
             <p class="subtitle m-0"><%= pluralize(job.job_applications.count, "applicant") %></p>
           </div>
         </div>
-      </div>
+      <% end %>
     <% end %>
 
     <%= link_to "View all (#{@jobs.count})", jobs_path(manager_id: current_user.manager.id), class: "btn btn-primary text-center" %>
