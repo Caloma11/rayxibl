@@ -13,6 +13,7 @@ import { previewImage } from "../components/previewImage";
 import { editPreviewImage } from "../components/editProfilePreviewImage";
 import { filtering, jobApplicationFilter } from "../components/filtering";
 import { initTomSelect } from "../plugins/tomSelect";
+import { initEditLinksAndDocuments } from "../components/editLinksAndDocuments";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -38,4 +39,5 @@ document.addEventListener("turbolinks:load", () => {
 	initTomSelect();
 	jobApplicationFilter();
   editPreviewImage();
+  initEditLinksAndDocuments();
 });
