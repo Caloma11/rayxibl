@@ -14,16 +14,20 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def edit?
-    is_booker?
+    is_booker? && before_start?
   end
 
   def update?
-    is_booker?
+    is_booker? && before_start?
   end
 
   private
 
   def is_booker?
     user.manager? && record.manager == user.manager
+  end
+
+  def before_start?
+    Date.today < record.start_date
   end
 end
