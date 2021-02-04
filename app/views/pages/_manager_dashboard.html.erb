@@ -58,7 +58,7 @@
 
   <div class="shadow-alt rounded p-3">
     <h3 class="mt-0 mb-1">Job posts</h3>
-    <p class="subtitle"><%= pluralize current_user.manager.job_applications.count, "applicant" %> for <%= pluralize current_user.manager.jobs.count, "job" %></p>
+    <p class="subtitle"><%= pluralize current_user.manager.job_applications.count, "applicant" %> for <%= pluralize current_user.manager.jobs.count, "job post" %></p>
 
     <% @jobs.each do |job| %>
       <%= link_to job_path(job), class: "card-container flex items-center justify-content-between" do %>
