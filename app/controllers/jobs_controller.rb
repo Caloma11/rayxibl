@@ -61,7 +61,7 @@ class JobsController < ApplicationController
       :location, :start_time, :end_time,
       :start_date, :end_date, :rate,
       :profession, :expiration_date,
-      :duration,
+      :duration, :weekends,
       :price_type, attachments: []
     )
   end

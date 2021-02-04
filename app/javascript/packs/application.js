@@ -13,6 +13,7 @@ import { previewImage } from "../components/previewImage";
 import { filtering, jobApplicationFilter } from "../components/filtering";
 import { initTomSelect } from "../plugins/tomSelect";
 import { jobFlatpickr } from "../plugins/jobFlatpickr";
+import { editBookingFlatpickr } from "../plugins/editBookingFlatpickr";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -38,4 +39,5 @@ document.addEventListener("turbolinks:load", () => {
 	initTomSelect();
 	jobApplicationFilter();
 	jobFlatpickr();
+	editBookingFlatpickr();
 });

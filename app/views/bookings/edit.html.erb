@@ -1,0 +1,83 @@
+<div class="booking-edit">
+  <section class="mx-3 mt-4 flex justify-content-between items-center">
+    <%= link_to booking_path(@booking) do %>
+      <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
+    <% end %>
+    <p class="textDarkGray uppercase">Edit booking</p>
+    <button><%= image_tag "icons/more.svg", alt: "more", width: 18, height: 18 %></button>
+  </section>
+  <section class="mt-3">
+    <div class="flex mx-3">
+      <% if @booking.profile.user.avatar.attached? %>
+        <%= image_tag @booking.profile.user.avatar.service_url, alt: "Avatar", width: 40, height: 40 %>
+      <% else %>
+        <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "Avatar", width: 40, height: 40 %>
+      <% end %>
+      <div class="ml-3">
+        <h5 class="noMargin"><%= @booking.profile.user.display_name %></h5>
+        <p class="noMargin textLightBlack semi-bold"><%= @booking.profile.profession %></p>
+      </div>
+    </div>
+
+    <%= simple_form_for @booking, html: { class: "mt-3" } do |f| %>
+      <div class="mx-3">
+        <%= f.input :title, required: false,
+                    label: "Project/Client",
+                    label_html: { class: "mb-1 textLightBlack" },
+                    wrapper_html: { class: "flex flex-column mb-3" } %>
+        <%= f.input :description, required: false,
+                    label_html: { class: "mb-1 textLightBlack" },
+                    wrapper_html: { class: "flex flex-column mb-3" },
+                    input_html: { rows: 4 } %>
+        <div class="flex justify-content-between items-end mb-3">
+          <div class="bookingSpecific flex flex-column">
+            <label for="job_start_date">Hours per day</label>
+            <div class="flex">
+              <%= f.input :start_time, as: :time, html5: true,
+                          label: false,
+                          wrapper_html: { class: "flex flex-column" } %>
+              <span class="self-centered mx-2"> - </span>
+              <%= f.input :end_time, as: :time, html5: true,
+                          label: false,
+                          wrapper_html: { class: "flex flex-column" } %>
+            </div>
+          </div>
+          <div class="bookingDuration none">
+            <%= f.input :duration,
+                        wrapper_html: { class: "flex flex-column" } %>
+          </div>
+          <div class="profileTabs flex-grow-1 textSm mr-0" id="tabs">
+            <%= link_to "Duration", "#", id: "duration", class: "tab", data: { turbolinks: false } %>
+            <%= link_to "Specific", "#", id: "specific", class: "tab active", data: { turbolinks: false } %>
+          </div>
+        </div>
+        <div class="flex items-end justify-content-between">
+          <div class="dates-input-wrapper">
+            <label for="dates" class="block textGray">Dates</label>
+            <input type="text" name="dates" class="mb-2 w-100 datepicker">
+
+            <%= f.input :start_date, as: :hidden,
+                        wrapper_html: { class: "flex flex-column mb-3 mr-3 none" } %>
+            <%= f.input :end_date, as: :hidden,
+                        wrapper_html: { class: "flex flex-column mb-3 none" } %>
+          </div>
+
+          <div>
+            <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" }, label_html: { class: "block textGray nowrap flex items-center" }, wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
+          </div>
+        </div>
+        <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true]], input_html:{ class: "mb-2", checked: false }, wrapper_html: { class: "flex flex-row-reverse justify-content-end my-2" }, include_hidden: false %>
+        <div id="priceSection" class="flex justify-content-between items-center none">
+          <%= f.input :price, label: false, placeholder: "Ex: $250", label_html: { class: "block textGray" }, input_html: { class: "mb-2" }, wrapper_html: { class: "mr-2 flex-shrink-2" } %>
+          <%= f.input :price_type, label: false, label_html: { class: "block textGray" }, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-3" }  %>
+          <p class="textGray my-0" id="totalPrice"> Total: $1,000</p>
+        </div>
+        <%= f.input :attachments, label_html: { class: "choose-file textGray" }, as: :file, input_html: { multiple: true, class: "none" }, label: "#{image_tag("icons/paperclip", alt: "paperclip")} ADD ATTACHMENT".html_safe %>
+      </div>
+      <div class="separator"></div>
+      <div class="mx-3">
+        <button class="btn btn-primary w-100 py-3" type="submit"><%= image_tag "icons/paperplane.svg", alt: "update", width: 24, height: 24, class: "vertical-align-middle" %> Update request</button>
+      </div>
+    <% end %>
+  </section>
+</div>

@@ -11,9 +11,9 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations', invitations: 'users/invitations' }
 
   get "/dashboard", to: "pages#dashboard"
-  
-  resources :bookings, only: %i[index show]
-  
+
+  resources :bookings, only: %i[index show edit update]
+
   get "/mail", to: "pages#mail"
 
   resources :jobs, only: %i[index show new create edit update] do

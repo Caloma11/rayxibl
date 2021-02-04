@@ -12,4 +12,18 @@ class BookingPolicy < ApplicationPolicy
   def create?
     user.manager? && user.find_connection(record.profile.user)
   end
+
+  def edit?
+    is_booker?
+  end
+
+  def update?
+    is_booker?
+  end
+
+  private
+
+  def is_booker?
+    user.manager? && record.manager == user.manager
+  end
 end
