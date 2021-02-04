@@ -8,7 +8,7 @@
         <%= image_tag "icons/person.svg", alt: "person icon" %>
       <% end %>
     <% else %>
-      <%= link_to "#" do %>
+      <%= link_to profile_path(current_user.profile) do %>
         <%= image_tag "icons/person.svg", alt: "person icon" %>
       <% end %>
     <% end %>
