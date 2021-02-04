@@ -21,6 +21,10 @@ class BookingPolicy < ApplicationPolicy
     is_booker? && before_start?
   end
 
+  def cancel?
+    is_booker? && before_start? && !record.rejected?
+  end
+
   private
 
   def is_booker?
