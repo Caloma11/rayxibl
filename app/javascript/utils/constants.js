@@ -39,3 +39,4 @@ export const EXPERTISES = [
 	"senior",
 	"pro"
 ];
+export const STATUSES = ["", "pending", "accepted", "rejected", "all"];

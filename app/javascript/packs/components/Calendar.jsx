@@ -15,6 +15,7 @@ const moment = extendMoment(Moment);
 const Calendar = () => {
 	const [loading, setLoading] = useState(true);
 	const [profiles, setProfiles] = useState([]);
+	const [bookings, setBookings] = useState([]);
 	const [data, setData] = useState(initialDays);
 	const [monthOffset, setMonthOffset] = useState(1);
 	const [weekOffset, setWeekOffset] = useState(1);
@@ -77,6 +78,12 @@ const Calendar = () => {
 			try {
 				const { data } = await axios.get("/api/v1/networks");
 				setProfiles(data);
+				setBookings(
+					data
+						.map(pr => pr.bookings)
+						.flat()
+						.map(({ id, title }) => ({ id, title }))
+				);
 			} catch (error) {
 				console.log(error);
 			}
@@ -100,7 +107,7 @@ const Calendar = () => {
 			{showForm && formDetails && Object.keys(formDetails).length > 0 && (
 				<BookingForm formDetails={formDetails} setShowForm={setShowForm} />
 			)}
-			<CalendarFilter setProfiles={setProfiles} />
+			<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
 			<div className="calendarContainer" onScroll={handleScroll}>
 				<CalendarProfiles profiles={profiles} />
 				<div className="allDays">
