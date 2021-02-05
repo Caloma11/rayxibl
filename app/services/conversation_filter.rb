@@ -30,6 +30,18 @@ class ConversationFilter
       @conversations = @conversations.where("profiles.expertise IN (?)", expertises.join(","))
     end
 
+    filter_via_job_applications!
+
     @conversations
+  end
+
+  private
+
+  def filter_via_job_applications!
+    job_ids = params[:job_id].split(",")
+
+    if job_ids.length.positive?
+      @conversations = @conversations.joins(profile: [job_applications: :job]).where("jobs.id IN (?)", job_ids)
+    end
   end
 end
