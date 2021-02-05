@@ -1,4 +1,4 @@
-<div class="job-simple-card p-3 flex justify-content-between items-center">
+<div class="job-simple-card p-3 flex justify-content-between items-center" data-job-id="<%= job.id %>">
   <div class="flex">
     <% if job.manager.user.avatar.attached? %>
       <%= image_tag job.manager.user.avatar.service_url, class: "avatar avatar-circle small", alt: "Manager avatar" %>
@@ -11,4 +11,5 @@
       <p class="m-0"><%= pluralize job.job_applications.count, "applicant" %></p>
     </div>
   </div>
+  <input type="checkbox" class="indicator" />
 </div>
