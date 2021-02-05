@@ -6,6 +6,6 @@ class JobApplicationPolicy < ApplicationPolicy
   end
 
   def create?
-    user.present? && !record.job.profiles.include?(user.profile)
+    user.present? && !record.job.profiles.include?(user.profile) && record.job.manager.user.find_connection(user) == false
   end
 end
