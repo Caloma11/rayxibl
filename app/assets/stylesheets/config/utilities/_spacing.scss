@@ -1,313 +1,380 @@
-// Margin
-.mb-0 {
-	margin-bottom: 0;
-}
+$spacing-0: 0;
+$base-spacing: 4px;
+$spacing-2: calc(#{$base-spacing} * 2);
+$spacing-3: calc(#{$base-spacing} * 4);
+$spacing-4: calc(#{$base-spacing} * 8);
+$spacing-5: calc(#{$base-spacing} * 16);
 
+// START: Margin top
 .mt-0 {
-	margin-top: 0;
+	margin-top: $spacing-0;
 }
 
-.ml-0 {
-	margin-left: 0;
-}
-
-.mr-0 {
-	margin-right: 0 !important;
-}
-
-.m-0 {
-	margin: 0;
-}
-
-.mb-2 {
-	margin-bottom: 8px;
-}
-
-.mb-5 {
-	margin-bottom: 64px;
-}
-
-.ml-2 {
-	margin-left: 8px;
-}
-
-.mr-2 {
-	margin-right: 8px;
+.mt-1 {
+	margin-top: $base-spacing;
 }
 
 .mt-2 {
-	margin-top: 8px;
+	margin-top: $spacing-2;
+}
+
+.mt-3 {
+	margin-top: $spacing-3;
+}
+
+.mt-4 {
+	margin-top: $spacing-4;
+}
+
+.mt-5 {
+	margin-top: $spacing-5;
+}
+// END: Margin top
+
+// START: Margin bottom
+.mb-0 {
+	margin-bottom: $spacing-0;
+}
+
+.mb-1 {
+	margin-bottom: $base-spacing;
+}
+
+.mb-2 {
+	margin-bottom: $spacing-2;
+}
+
+.mb-3 {
+	margin-bottom: $spacing-3;
+}
+
+.mb-4 {
+	margin-bottom: $spacing-4;
+}
+
+.mb-5 {
+	margin-bottom: $spacing-5;
+}
+
+// END: Margin bottom
+
+// START: Margin left
+.ml-0 {
+	margin-left: $spacing-0;
+}
+
+.ml-1 {
+	margin-left: $base-spacing;
+}
+
+.ml-2 {
+	margin-left: $spacing-2;
+}
+
+.ml-3 {
+	margin-left: $spacing-3;
+}
+
+.ml-4 {
+	margin-left: $spacing-4;
+}
+
+.ml-5 {
+	margin-left: $spacing-5;
+}
+
+// END: Margin left
+
+// START: Margin right
+.mr-0 {
+	margin-right: $spacing-0 !important;
+}
+
+.mr-1 {
+	margin-right: $base-spacing;
+}
+
+.mr-2 {
+	margin-right: $spacing-2;
+}
+
+.mr-3 {
+	margin-right: $spacing-3;
+}
+
+.mr-4 {
+	margin-right: $spacing-4;
+}
+
+.mr-5 {
+	margin-right: $spacing-5;
+}
+
+// END: Margin right
+
+// START: Margin Y-axis
+.my-0 {
+	@extend .mb-0;
+	@extend .mt-0;
+}
+
+.my-1 {
+	@extend .mt-1, .mb-1;
 }
 
 .my-2 {
 	@extend .mt-2, .mb-2;
 }
 
-.mx-2 {
-	@extend .mr-2, .ml-2;
-}
-
-.mx-4 {
-	margin-left: 32px;
-	margin-right: 32px;
-}
-
-.mx-5 {
-	margin-left: 64px;
-	margin-right: 64px;
-}
-
-.mb-1 {
-	margin-bottom: 4px;
-}
-
-.mt-1 {
-	margin-top: 4px;
-}
-
-.mr-1 {
-	margin-right: 4px;
-}
-
-.ml-1 {
-	margin-left: 4px;
-}
-
-.mx-1 {
-	@extend .mr-1, .ml-1;
-}
-
-.m-1 {
-	@extend .mr-1, .ml-1, .mb-1, .mt-1;
-}
-
-.mr-2 {
-	margin-right: 8px;
-}
-
-.mx-0 {
-	@extend .ml-0;
-	@extend .mr-0;
-}
-
-.my-0 {
-	@extend .mb-0;
-	@extend .mt-0;
-}
-
-.noMargin,
-.m-0 {
-	margin: 0;
-}
-
-.mt-3 {
-	margin-top: 16px;
-}
-
-.mr-1 {
-	margin-right: 4px;
-}
-
-.mr-3 {
-	margin-right: 16px;
-}
-
-.mb-1 {
-	margin-bottom: 4px;
-}
-
-.mb-3 {
-	margin-bottom: 16px;
-}
-
 .my-3 {
 	@extend .mt-3, .mb-3;
-}
-
-.mx-3 {
-	@extend .ml-3;
-	@extend .mr-3;
-}
-
-.m-3 {
-	@extend .ml-3;
-	@extend .mr-3;
-	@extend .mb-3;
-	@extend .mt-3;
-}
-
-.mt-2 {
-	margin-top: 12px;
-}
-
-.ml-1 {
-	margin-left: 4px;
-}
-
-.ml-3 {
-	margin-left: 16px;
-}
-
-.mt-4 {
-	margin-top: 32px;
-}
-
-.mb-4 {
-	margin-bottom: 32px;
 }
 
 .my-4 {
 	@extend .mt-4, .mb-4;
 }
 
-.mr-4 {
-  margin-right: 32px;
+.my-5 {
+	@extend .mt-5, .mb-5;
+}
+// END: Margin Y-axis
+
+// START: Margin X-axis
+.mx-0 {
+	@extend .ml-0, .mr-0;
 }
 
-.ml-4 {
-  margin-left: 32px;
+.mx-1 {
+	@extend .mr-1, .ml-1;
 }
 
-.my-4 {
-  @extend .mt-4, .mb-4;
+.mx-2 {
+	@extend .mr-2, .ml-2;
+}
+
+.mx-3 {
+	@extend .ml-3, .mr-3;
 }
 
 .mx-4 {
-  @extend .mr-4, .ml-4;
+	@extend .ml-4, .mr-4;
 }
 
+.mx-5 {
+	@extend .ml-5, .mr-5;
+}
+// END: Margin X-axis
 
-.mt-5 {
-	margin-top: 64px;
+// START: Margin all direction
+.m-0,
+.noMargin {
+	@extend .my-0, .mx-0;
 }
 
-// Padding
-
-.pl-0 {
-	padding-left: 0 !important;
+.m-1 {
+	@extend .my-1, .mx-1;
 }
 
-.pr-0 {
-	padding-right: 0 !important;
+.m-2 {
+	@extend .my-2, .mx-2;
 }
 
-.px-0 {
-	@extend .pl-0;
-	@extend .pr-0;
+.m-3 {
+	@extend .my-3, .mx-3;
 }
 
-.px-1 {
-	padding-left: 4px;
-	padding-right: 4px;
+.m-4 {
+	@extend .my-4, .mx-4;
 }
 
+.m-5 {
+	@extend .my-5, .mx-5;
+}
+// END: Margin all direction
+
+// START: Padding top
 .pt-0 {
-	padding-top: 0;
-}
-
-.p-1 {
-	padding: 4px;
-}
-
-.p-2 {
-	padding: 8px;
-}
-
-.p-3 {
-	padding: 16px;
-}
-
-.px-3 {
-	padding-left: 16px;
-	padding-right: 16px;
-}
-
-.spacer {
-	width: 8px;
-}
-
-.pb-2 {
-	padding-bottom: 8px;
-}
-
-.pt-2 {
-	padding-top: 8px;
-}
-
-.pl-2 {
-	padding-left: 8px;
-}
-
-.pr-2 {
-	padding-right: 8px;
-}
-
-.py-2 {
-	@extend .pt-2, .pb-2;
-}
-
-.pb-1 {
-	padding-bottom: 4px;
+	padding-top: $spacing-0;
 }
 
 .pt-1 {
-	padding-top: 4px;
+	padding-top: $base-spacing;
+}
+
+.pt-2 {
+	padding-top: $spacing-2;
+}
+
+.pt-3 {
+	padding-top: $spacing-3;
+}
+
+.pt-4 {
+	padding-top: $spacing-4;
+}
+
+.pt-5 {
+	padding-top: $spacing-5;
+}
+// END: Padding top
+
+// START: Padding bottom
+.pb-0 {
+	padding-bottom: $spacing-0;
+}
+
+.pb-1 {
+	padding-bottom: $base-spacing;
+}
+
+.pb-2 {
+	padding-bottom: $spacing-2;
+}
+
+.pb-3 {
+	padding-bottom: $spacing-3;
+}
+
+.pb-4 {
+	padding-bottom: $spacing-4;
+}
+
+.pb-5 {
+	padding-bottom: $spacing-5;
+}
+// END: Padding bottom
+
+// START: Padding left
+.pl-0 {
+	padding-left: $spacing-0;
 }
 
 .pl-1 {
-	padding-left: 4px;
+	padding-left: $base-spacing;
+}
+
+.pl-2 {
+	padding-left: $spacing-2;
+}
+
+.pl-3 {
+	padding-left: $spacing-3;
+}
+
+.pl-4 {
+	padding-left: $spacing-4;
+}
+
+.pl-5 {
+	padding-left: $spacing-5;
+}
+// END: Padding left
+
+// START: Padding right
+.pr-0 {
+	padding-right: $spacing-0;
 }
 
 .pr-1 {
-	padding-right: 4px;
+	padding-right: $base-spacing;
+}
+
+.pr-2 {
+	padding-right: $spacing-2;
+}
+
+.pr-3 {
+	padding-right: $spacing-3;
+}
+
+.pr-4 {
+	padding-right: $spacing-4;
+}
+
+.pr-5 {
+	padding-right: $spacing-5;
+}
+// END: Padding right
+
+// START: Padding Y-axis
+.py-0 {
+	@extend .pt-0, .pb-0;
 }
 
 .py-1 {
 	@extend .pt-1, .pb-1;
 }
 
-.pb-3 {
-	padding-bottom: 16px;
-}
-
-.pt-3 {
-	padding-top: 16px;
-}
-
-.pl-3 {
-	padding-left: 16px;
-}
-
-.pr-3 {
-	padding-right: 16px;
+.py-2 {
+	@extend .pt-2, .pb-2;
 }
 
 .py-3 {
-	padding-top: 16px !important;
-	padding-bottom: 16px !important;
-}
-
-.pb-4 {
-	padding-bottom: 32px;
-}
-
-.pt-4 {
-	padding-top: 32px;
-}
-
-.pl-4 {
-	padding-left: 32px;
-}
-
-.pr-4 {
-	padding-right: 32px;
+	@extend .pt-3, .pb-3;
 }
 
 .py-4 {
-	padding-top: 32px !important;
-	padding-bottom: 32px !important;
+	@extend .pt-4, .pb-4;
 }
 
+.py-5 {
+	@extend .pt-5, .pb-5;
+}
+// END: Padding Y-axis
+
+// START: Padding X-axis
+.px-0 {
+	@extend .pl-0, .pr-0;
+}
+
+.px-1 {
+	@extend .pl-1, .pr-1;
+}
+
+.px-2 {
+	@extend .pl-2, .pl-2;
+}
+
+.px-3 {
+	@extend .pl-3, .pr-3;
+}
+
+.px-4 {
+	@extend .pl-4, .pr-4;
+}
+
+.px-5 {
+	@extend .pl-5, .pr-5;
+}
+// END: Padding X-axis
+
+// START: Padding all direction
 .p-0 {
-	padding: 0 !important;
+	@extend .py-0, .px-0;
+}
+
+.p-1 {
+	@extend .py-1, .px-1;
+}
+
+.p-2 {
+	@extend .py-2, .px-2;
+}
+
+.p-3 {
+	@extend .py-3, .px-3;
+}
+
+.p-4 {
+	@extend .py-4, .px-4;
+}
+
+.p-5 {
+	@extend .py-5, .px-5;
+}
+// END: Padding all direction
+
+// OTHER
+.spacer {
+	width: $spacing-2;
 }

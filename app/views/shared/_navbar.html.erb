@@ -4,9 +4,9 @@
     <% links.each do |link| %>
       <%= link_to link[:url], class: "nav-link" do %>
         <% if request.url.include?(link[:url]) %>
-          <%= image_tag link[:active_icon], alt: link[:text] %>
+          <%= image_tag link[:active_icon], alt: link[:text], class: "nav-icon" %>
         <% else %>
-          <%= image_tag link[:icon], alt: link[:text] %>
+          <%= image_tag link[:icon], alt: link[:text], class: "nav-icon" %>
         <% end %>
       <% end %>
     <% end %>
