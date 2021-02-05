@@ -7,8 +7,8 @@ class Conversation < ApplicationRecord
 
   scope :by_latest_message, -> {
     joins("FULL JOIN messages m ON m.conversation_id = conversations.id")
-    .includes([:messages, profile: { user: :avatar_attachment }])
-    .order("messages.created_at DESC")
+    .includes([profile: { user: :avatar_attachment }])
+    .order("conversations.updated_at DESC")
     .distinct
   }
 
