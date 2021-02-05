@@ -35,6 +35,8 @@ export const jobApplicationFilter = () => {
 		});
 	}
 
+	if (jobCardFilters.length <= 0) return;
+
 	jobCardFilters.forEach(card => {
 		card.addEventListener("click", () => {
 			const { jobId } = card.dataset;
@@ -42,6 +44,32 @@ export const jobApplicationFilter = () => {
 				activeJobIds = activeJobIds.filter(ele => ele !== parseInt(jobId, 10));
 			} else {
 				activeJobIds.push(parseInt(jobId, 10));
+			}
+
+			profileJobIdInput.value = activeJobIds;
+		});
+	});
+};
+
+export const conversationFilter = () => {
+	let activeJobIds = [];
+	const profileJobIdInput = document.getElementById("profile_job_id");
+	const jobCards = document.querySelectorAll(".job-simple-card");
+
+	if (jobCards.length <= 0) return;
+
+	jobCards.forEach(jobCard => {
+		jobCard.addEventListener("click", () => {
+			const indicatorCheckbox = jobCard.querySelector(".indicator");
+			jobCard.classList.toggle("selected");
+			const { jobId } = jobCard.dataset;
+			const numberJobId = parseInt(jobId, 10);
+			indicatorCheckbox.checked = !indicatorCheckbox.checked;
+
+			if (activeJobIds.includes(numberJobId)) {
+				activeJobIds = activeJobIds.filter(ele => ele !== numberJobId);
+			} else {
+				activeJobIds.push(numberJobId);
 			}
 
 			profileJobIdInput.value = activeJobIds;
