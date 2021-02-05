@@ -1,5 +1,5 @@
 nav.navbar {
-	@extend .mb-3;
+	@extend .pb-3, .pt-2;
 
 	flex-shrink: 0; // For sticky footer behavior
 	position: sticky;
@@ -7,8 +7,9 @@ nav.navbar {
 	background: white;
 	display: flex;
 	justify-content: space-between;
-	padding: 10px 40px;
 	border-top: 1px solid #f4f6f9;
+	padding-left: 40px;
+	padding-right: 40px;
 
 	a.nav-link {
 		img.nav-icon {
