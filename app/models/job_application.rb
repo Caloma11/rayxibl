@@ -6,4 +6,15 @@ class JobApplication < ApplicationRecord
 
   validates :job, uniqueness: { scope: :profile }
   enum status: STATUSES
+
+  after_create :create_conversation
+
+  private
+
+  def create_conversation
+    Conversation.first_or_create(
+      profile: profile,
+      manager: job.manager
+    )
+  end
 end
