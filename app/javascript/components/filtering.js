@@ -1,3 +1,10 @@
+const clearValue = node => (node.value = "");
+const clearCard = job => job.classList.remove("selected");
+const clearSelected = card => {
+	card.classList.remove("selected");
+	card.querySelector("input[type='checkbox']").checked = false;
+};
+
 export const filtering = () => {
 	const filterButton = document.getElementById("filter-trigger");
 	const filterContent = document.getElementById("filter-content");
@@ -23,6 +30,7 @@ export const jobApplicationFilter = () => {
 	const downChevron = document.getElementById("down");
 	const jobCardFilters = document.querySelectorAll(".job-card");
 	const profileJobIdInput = document.getElementById("profile_job_id");
+	const clearFilterBtn = document.getElementById("clear");
 	let activeJobIds = [];
 
 	if (trigger) {
@@ -34,6 +42,16 @@ export const jobApplicationFilter = () => {
 			content.classList.toggle("h-0");
 		});
 	}
+
+	clearFilterBtn.addEventListener("click", () => {
+		const form = document.querySelector(".simple_form.profile");
+		const inputs = form.querySelectorAll(
+			"input[type='text'], input[type='hidden']"
+		);
+
+		inputs.forEach(clearValue);
+		jobCardFilters.forEach(clearCard);
+	});
 
 	if (jobCardFilters.length <= 0) return;
 
@@ -56,6 +74,17 @@ export const conversationFilter = () => {
 	let activeJobIds = [];
 	const profileJobIdInput = document.getElementById("profile_job_id");
 	const jobCards = document.querySelectorAll(".job-simple-card");
+	const clearFilterBtn = document.getElementById("clear");
+
+	clearFilterBtn.addEventListener("click", () => {
+		const form = document.querySelector(".simple_form.profile");
+		const inputs = form.querySelectorAll(
+			"input[type='text'], input[type='hidden']"
+		);
+
+		inputs.forEach(clearValue);
+		jobCards.forEach(clearSelected);
+	});
 
 	if (jobCards.length <= 0) return;
 
