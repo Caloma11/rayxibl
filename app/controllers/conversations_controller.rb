@@ -3,6 +3,7 @@ class ConversationsController < ApplicationController
     skip_policy_scope
     if current_user.manager?
       @conversations = current_user.manager.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }])
+      @jobs = current_user.manager.jobs
 
       if params[:network]
         @conversations = @conversations.where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message
@@ -11,12 +12,24 @@ class ConversationsController < ApplicationController
       end
     else
       @conversations = current_user.profile.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }])
+      @jobs = current_user.profile.jobs
 
       if params[:network]
         @conversations = @conversations.where(manager_id: current_user.profile.managers.pluck(:id)).by_latest_message
       else
         @conversations = @conversations.by_latest_message.merge(@conversations.with_no_messages)
       end
+    end
+
+    profile_params = params[:profile]
+
+    if profile_params
+      @conversations = ConversationFilter.new(@conversations, profile_params, current_user).call
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

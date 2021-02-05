@@ -1,4 +1,20 @@
 .convo-index {
+	#filter-content {
+		.content {
+			form {
+				.advanced-content {
+					#job-application-content {
+						.job-simple-card {
+							&.selected {
+								background: $flat-blue-5;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
 	#conversations {
 		.convo-snippet {
 			.time {
@@ -8,29 +24,28 @@
 			}
 		}
 	}
-  .head {
-    @extend .flex, .justify-content-between, .items-center ,.px-3, .mt-3;
+	.head {
+		@extend .flex, .justify-content-between, .items-center, .px-3, .mt-3;
 
-    button {
-      img {
-        width: 24px;
-        height: 24px;
-      }
-    }
-  }
+		button {
+			img {
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
 
-  .switch {
-    a.btn {
-      line-height: 22px;
-      padding: 8px 24px;
+	.switch {
+		a.btn {
+			line-height: 22px;
+			padding: 8px 24px;
 
-      img {
-        @extend .mr-1;
-        object-fit: contain;
-        height: 18px;
-        width: 18px;
-      }
-    }
-  }
-
+			img {
+				@extend .mr-1;
+				object-fit: contain;
+				height: 18px;
+				width: 18px;
+			}
+		}
+	}
 }
