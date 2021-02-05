@@ -21,7 +21,7 @@ export const jobApplicationFilter = () => {
 	const content = document.getElementById("job-application-content");
 	const upChevron = document.getElementById("up");
 	const downChevron = document.getElementById("down");
-	const jobCardFilters = document.querySelectorAll(".job-card-filter");
+	const jobCardFilters = document.querySelectorAll(".job-card");
 	const profileJobIdInput = document.getElementById("profile_job_id");
 	let activeJobIds = [];
 
@@ -40,6 +40,7 @@ export const jobApplicationFilter = () => {
 	jobCardFilters.forEach(card => {
 		card.addEventListener("click", () => {
 			const { jobId } = card.dataset;
+			card.classList.toggle("selected");
 			if (activeJobIds.includes(parseInt(jobId, 10))) {
 				activeJobIds = activeJobIds.filter(ele => ele !== parseInt(jobId, 10));
 			} else {

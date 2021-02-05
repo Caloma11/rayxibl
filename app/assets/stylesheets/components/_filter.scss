@@ -62,6 +62,10 @@
 
 			.jobs {
 				.job-card {
+					&.selected {
+						background: $flat-blue-5 !important;
+					}
+
 					.skill-pill {
 						@extend .mr-0;
 					}
