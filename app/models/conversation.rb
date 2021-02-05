@@ -5,20 +5,18 @@ class Conversation < ApplicationRecord
 
   validates :manager, uniqueness: { scope: :profile }
 
-  # TODO: Find a way to do with only 1 scope that doesn't remove `Conversation` without messages
   scope :by_latest_message, -> {
-    joins(:messages)
+    joins("FULL JOIN messages m ON m.conversation_id = conversations.id")
     .includes([:messages, profile: { user: :avatar_attachment }])
-    .order("messages.created_at")
+    .order("messages.created_at DESC")
     .distinct
-  }
-  scope :with_no_messages, -> {
-    left_outer_joins(:messages)
-     .includes([:messages, profile: { user: :avatar_attachment }])
-     .distinct
   }
 
   def other_person(user)
     @other_person ||= user == manager.user ? profile.user : manager.user
+  end
+
+  def last_message
+    messages&.order(:created_at)&.last
   end
 end

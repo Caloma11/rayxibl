@@ -8,7 +8,7 @@ class ConversationsController < ApplicationController
       if params[:network]
         @conversations = @conversations.where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message
       else
-        @conversations = @conversations.by_latest_message.merge(@conversations.with_no_messages)
+        @conversations = @conversations.by_latest_message
       end
     else
       @conversations = current_user.profile.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }])
@@ -17,7 +17,7 @@ class ConversationsController < ApplicationController
       if params[:network]
         @conversations = @conversations.where(manager_id: current_user.profile.managers.pluck(:id)).by_latest_message
       else
-        @conversations = @conversations.by_latest_message.merge(@conversations.with_no_messages)
+        @conversations = @conversations.by_latest_message
       end
     end
 
