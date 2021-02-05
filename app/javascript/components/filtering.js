@@ -43,17 +43,19 @@ export const jobApplicationFilter = () => {
 		});
 	}
 
-	clearFilterBtn.addEventListener("click", () => {
-		const form = document.querySelector(".simple_form.profile");
-		const inputs = form.querySelectorAll(
-			"input[type='text'], input[type='hidden']"
-		);
+	if (clearFilterBtn) {
+		clearFilterBtn.addEventListener("click", () => {
+			const form = document.querySelector(".simple_form.profile");
+			const inputs = form.querySelectorAll(
+				"input[type='text'], input[type='hidden']"
+			);
 
-		inputs.forEach(clearValue);
-		jobCardFilters.forEach(clearCard);
-	});
+			inputs.forEach(clearValue);
+			jobCardFilters.forEach(clearCard);
+		});
+	}
 
-	if (jobCardFilters.length <= 0) return;
+	if (jobCardFilters.length <= 0 && !profileJobIdInput) return;
 
 	jobCardFilters.forEach(card => {
 		card.addEventListener("click", () => {
@@ -76,17 +78,19 @@ export const conversationFilter = () => {
 	const jobCards = document.querySelectorAll(".job-simple-card");
 	const clearFilterBtn = document.getElementById("clear");
 
-	clearFilterBtn.addEventListener("click", () => {
-		const form = document.querySelector(".simple_form.profile");
-		const inputs = form.querySelectorAll(
-			"input[type='text'], input[type='hidden']"
-		);
+	if (clearFilterBtn) {
+		clearFilterBtn.addEventListener("click", () => {
+			const form = document.querySelector(".simple_form.profile");
+			const inputs = form.querySelectorAll(
+				"input[type='text'], input[type='hidden']"
+			);
 
-		inputs.forEach(clearValue);
-		jobCards.forEach(clearSelected);
-	});
+			inputs.forEach(clearValue);
+			jobCards.forEach(clearSelected);
+		});
+	}
 
-	if (jobCards.length <= 0) return;
+	if (jobCards.length <= 0 && !profileJobIdInput) return;
 
 	jobCards.forEach(jobCard => {
 		jobCard.addEventListener("click", () => {
