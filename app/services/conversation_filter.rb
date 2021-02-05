@@ -8,6 +8,12 @@ class ConversationFilter
   end
 
   def call
+    if params[:clear] == "true"
+      filter_with_clear!
+
+      return @conversations
+    end
+
     if params[:name] != ""
       @conversations = @conversations.where("users.first_name ILIKE :name OR users.last_name ILIKE :name", name: "%#{params[:name]}%")
     end
@@ -36,6 +42,14 @@ class ConversationFilter
   end
 
   private
+
+  def filter_with_clear!
+    if current_user.manager?
+      @conversations = current_user.manager.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }]).by_latest_message
+    else
+      @conversations = current_user.profile.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }]).by_latest_message
+    end
+  end
 
   def filter_via_job_applications!
     job_ids = params[:job_id].split(",")
