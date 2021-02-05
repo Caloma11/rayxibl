@@ -1,17 +1,23 @@
 <div id="dashboardPage" class="mx-3">
-  <div class="mb-3 flex justify-content-between items-center">
+  <div class="head mb-3 flex justify-content-between items-center">
     <%# DON'T REMOVE %>
     <div></div>
     <h1>Hello <%= current_user.first_name %></h1>
-    <% if current_user.manager? %>
-      <%= link_to manager_path(current_user.manager) do %>
-        <%= image_tag "icons/person.svg", alt: "person icon" %>
-      <% end %>
-    <% else %>
-      <%= link_to profile_path(current_user.profile) do %>
-        <%= image_tag "icons/person.svg", alt: "person icon" %>
-      <% end %>
-    <% end %>
+    <div class="relative">
+      <div class="actions-container none">
+        <div class="actions flex flex-column dashboard">
+          <% if current_user.manager? %>
+            <%= link_to "My profile", manager_path(current_user.manager), class: "action-link" %>
+          <% else %>
+            <%= link_to "My profile", profile_path(current_user.profile), class: "action-link" %>
+          <% end %>
+          <%= link_to "Settings", "#", class: "action-link" %>
+        </div>
+      </div>
+      <button class="trigger">
+        <%= image_tag user_avatar_url(current_user), class: "avatar avatar-circle small" %>
+      </button>
+    </div>
   </div>
 
   <%= render partial: "#{current_user.role}_dashboard" %>
