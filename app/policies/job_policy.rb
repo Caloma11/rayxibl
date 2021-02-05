@@ -1,7 +1,11 @@
 class JobPolicy < ApplicationPolicy
   class Scope < Scope
     def resolve
-      scope
+      if user.freelancer?
+        scope.outside_connections(user.profile)
+      else
+        scope
+      end
     end
   end
 
