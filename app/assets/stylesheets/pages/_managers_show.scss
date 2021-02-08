@@ -1,0 +1,18 @@
+.managerShow {
+  .btn-lg {
+    border-radius: 8px;
+    text-align: center;
+    font-size: 12px;
+
+    img {
+      @extend .mr-2;
+      height: 32px;
+      width: 32px;
+    }
+
+    letter-spacing: 2px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

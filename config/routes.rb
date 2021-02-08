@@ -37,7 +37,7 @@ Rails.application.routes.draw do
 
   resources :connections, only: %i[destroy]
 
-  resources :managers, only: %i[index show new create]
+  resources :managers, except: %i[destroy]
   resources :conversations, only: %i[index show] do
     resources :messages, only: %i[create]
   end
