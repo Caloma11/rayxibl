@@ -26,6 +26,8 @@ class ProfilesController < ApplicationController
     @links = @profile.profile_attachments.where.not(url: nil)
     @documents = @profile.profile_attachments.where(url: nil)
 
+    @previous_page = request.referer || ""
+
     respond_to do |format|
       format.html
       format.js
@@ -33,30 +35,37 @@ class ProfilesController < ApplicationController
   end
 
   def new
-    @profile = Profile.new
+    @profile = Profile.find_by(id: params[:profile_id]) || Profile.new
+    @links = @profile.profile_attachments.where.not(url: nil)
+    @documents = @profile.profile_attachments.where(url: nil)
+    @profile.destroy if params[:step] == "step_one"
     authorize @profile
   end
 
   def create
-    @profile = Profile.new(profile_params)
-    authorize @profile
-    @profile.user = current_user
-
-    if @profile.save
-
-      # Create attachments
-      attachment_params.each do |ap|
-        profile_attachment = ProfileAttachment.new(ap)
-        profile_attachment.profile = @profile
-        profile_attachment.save!
+    # STEP ONE
+    if params[:step] == "step_one"
+      @profile = Profile.new(step_one_profile_params)
+      authorize @profile
+      @profile.user = current_user
+      if @profile.save
+        # Update user
+        current_user.update(user_params[:profile_user])
+        redirect_to new_profile_path(step: "step_two", profile_id: @profile.id)
+      else
+        render 'new'
       end
-
-      # Update user
-      current_user.update(user_params[:profile_user])
-
-      redirect_to profile_path(@profile)
-    else
-      render 'new'
+    else # STEP TWO
+      @profile = Profile.find(params[:profile_id])
+      authorize @profile
+      @profile.update(step_two_profile_params)
+      if @profile.save(context: :step_two)
+        redirect_to profile_path(@profile)
+      else #Re-render step two
+        @links = @profile.profile_attachments.where.not(url: nil)
+        @documents = @profile.profile_attachments.where(url: nil)
+        render 'new'
+      end
     end
   end
 
@@ -79,6 +88,14 @@ class ProfilesController < ApplicationController
   def set_profile
     @profile = Profile.find(params[:id])
     authorize @profile
+  end
+
+  def step_one_profile_params
+    params.require(:profile).permit(:profession, :location, :expertise, :skill_list)
+  end
+
+  def step_two_profile_params
+    params.require(:profile).permit(:overview).reject{|_, v| v.blank?}
   end
 
   def profile_params
