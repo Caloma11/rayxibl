@@ -10,7 +10,11 @@ class ProfilePolicy < ApplicationPolicy
   end
 
   def create?
-    user && !user.manager && !user.profile
+    if user&.profile
+      !record.overview && record.user == user
+    else
+      user && !user.manager
+    end
   end
 
   def update?
