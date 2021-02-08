@@ -20,6 +20,7 @@ import { initTomSelect } from "../plugins/tomSelect";
 import { initEditLinksAndDocuments } from "../components/editLinksAndDocuments";
 import { jobFlatpickr } from "../plugins/jobFlatpickr";
 import { editBookingFlatpickr } from "../plugins/editBookingFlatpickr";
+import { initNewManagerPreviews } from "../components/newManagerPreviews";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -49,4 +50,5 @@ document.addEventListener("turbolinks:load", () => {
 	jobFlatpickr();
 	editBookingFlatpickr();
 	conversationFilter();
+  initNewManagerPreviews();
 });
