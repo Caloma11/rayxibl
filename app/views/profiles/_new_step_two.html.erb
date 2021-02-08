@@ -1,0 +1,104 @@
+  <!-- Step 2 -->
+  <div class="step-2 flex flex-column h-100 justify-content-between">
+    <div class="step-content h-100 mb-5">
+      <%= simple_form_for Profile.new, url: profiles_path(step: "step_two", profile_id: @profile.id) do |f| %>
+        <%= f.input :overview, as: :text, label: "Professional Summary", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"}  %>
+      <% end %>
+
+
+      <label class="p-3 text optional textGray block">Links and documents</label>
+
+      <!-- Links Modal -->
+      <div class="none" id="links-modal">
+        <%= simple_form_for [@profile, ProfileAttachment.new], html: { class: "relative" }, remote: true do |paf| %>
+          <%= image_tag "icons/cross.svg", alt: "back link", width: 16, height: 16, class: "mr-2 textSm", id: "close-links" %>
+          <%= paf.input :title, required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+          <%= paf.input :url, placeholder: "https://", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+          <div class="p-3">
+            <%= paf.submit "Save link", class: "btn btn-white"%>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Link Buttons -->
+      <div class="links-list p-3">
+        <% unless @links.empty? %>
+          <h3 class=""><small class="textGray">LINKS</small></h3>
+          <% @links.each do |link| %>
+            <%= link_to sanitize_url(link.url), target: :_blank, class: "btn-centered btn-secondary mb-3 flex items-center justify-content-center" do  %>
+            <%= image_tag "icons/edit-white", alt: "edit", class: "mr-2", height: 32, width: 32 %>
+            <%= link.title&.capitalize %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+      <!-- Add another link -->
+      <div class="mb-3">
+        <label class="choose-file textGray" id="add-a-link">
+          <%= image_tag("icons/zap", alt: "zap", class: "mr-2") %>
+          ADD <%= @links.any? ? "ANOTHER" : "A LINK" %>
+        </label>
+      </div>
+
+      <!-- OR separator -->
+      <div class="my-4 or-separator flex w-100 justify-content-center items-center">
+        <div class="line"></div>
+        <p>OR</p>
+        <div class="line"></div>
+      </div>
+
+      <!-- Documents Modal -->
+      <div class="none" id="documents-modal">
+        <%= simple_form_for [@profile, ProfileAttachment.new], html: { class: "relative" }, remote: true do |paf| %>
+          <%= image_tag "icons/cross.svg", alt: "back link", width: 16, height: 16, class: "mr-2 textSm", id: "close-documents" %>
+          <%= paf.input :title, required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+          <%= paf.input :attachment, as: :file, required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+          <div class="p-3">
+            <%= paf.submit "Save document", class: "btn btn-white"%>
+          </div>
+        <% end %>
+      </div>
+
+      <!-- Documents buttons -->
+
+      <div class="documents-list px-3 pb-3">
+        <% unless @documents.empty? %>
+          <h3 class=""><small class="textGray">DOCUMENTS</small></h3>
+          <% @documents.each do |link| %>
+            <%= link_to download_attachment_path(link), method: :post, class: "btn-centered btn-secondary mb-3 flex items-center justify-content-center" do %>
+            <%= image_tag "icons/download-white", width: 32, height: 32, class: "mr-2" %>
+            <%= link.title&.capitalize %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
+
+      <!-- Add another document -->
+      <div>
+        <label class="choose-file textGray" id="upload-a-document">
+          <%= image_tag("icons/paperclip", alt: "paperclip", class: "mr-2") %>
+          UPLOAD <%= @documents.any? ? "ANOTHER" : "DOCUMENT" %>
+        </label>
+      </div>
+
+      <div class="px-3 mt-5">
+
+        <button type="submit" form="new_profile" class="btn btn-primary my-3 save w-100" />
+          <%= image_tag("icons/save", alt: "save", class: "mr-2") %>
+          SAVE
+        </button>
+      </div>
+
+    </div>
+    <!-- End of step 2 content -->
+    <div class="flex justify-content-between p-3">
+      <%= link_to new_profile_path(step: "step_one", profile_id: @profile.id), class: "previous_step" do %>
+        <%= image_tag "icons/left-arrow-blue.svg", alt: "submit", width: 16, height: 16 %>
+      <% end %>
+  </div>
+
+  <div class="flex justify-content-center items-center step-indicator-wrapper minus-30">
+    <div class="step-indicator step-indicator-1 active"><%= image_tag "icons/step-circle.svg", alt: "step indicator", width: 8, height: 8 %></div>
+    <div class="step-indicator step-indicator-2"><%= image_tag "icons/step-circle.svg", alt: "step indicator", width: 8, height: 8 %></div>
+  </div>
+</div>
