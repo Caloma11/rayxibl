@@ -2,18 +2,22 @@ class ConversationsController < ApplicationController
   def index
     skip_policy_scope
     if current_user.manager?
+      @conversations = current_user.manager.conversations.includes(profile: [user: { avatar_attachment: :blob }])
       @jobs = current_user.manager.jobs
+
       if params[:network]
-        @conversations = current_user.manager.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }]).where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message
+        @conversations = @conversations.where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message
       else
-        @conversations = current_user.manager.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }]).by_latest_message
+        @conversations = @conversations.by_latest_message
       end
     else
+      @conversations = current_user.profile.conversations.includes(profile: [user: { avatar_attachment: :blob }])
       @jobs = current_user.profile.jobs
+
       if params[:network]
-        @conversations = current_user.profile.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }]).where(manager_id: current_user.profile.managers.pluck(:id)).by_latest_message
+        @conversations = @conversations.where(manager_id: current_user.profile.managers.pluck(:id)).by_latest_message
       else
-        @conversations = current_user.profile.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }]).by_latest_message
+        @conversations = @conversations.by_latest_message
       end
     end
 
