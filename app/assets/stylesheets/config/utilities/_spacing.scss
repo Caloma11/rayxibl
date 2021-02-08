@@ -332,7 +332,7 @@ $spacing-5: calc(#{$base-spacing} * 16);
 }
 
 .px-2 {
-	@extend .pl-2, .pl-2;
+	@extend .pl-2, .pr-2;
 }
 
 .px-3 {
