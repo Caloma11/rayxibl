@@ -1,18 +1,20 @@
 nav.navbar {
-  flex-shrink: 0; // For sticky footer behavior
+	@extend .pb-3, .pt-2;
+
+	flex-shrink: 0; // For sticky footer behavior
 	position: sticky;
 	bottom: 0;
 	background: white;
 	display: flex;
 	justify-content: space-between;
-	padding: 10px 40px;
 	border-top: 1px solid #f4f6f9;
+	padding-left: 40px;
+	padding-right: 40px;
 
 	a.nav-link {
 		img.nav-icon {
-			height: 32px;
-			width: 32px;
+			height: 20px;
+			width: 20px;
 		}
 	}
 }
-
