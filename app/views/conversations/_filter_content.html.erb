@@ -8,7 +8,7 @@
   <section class="content">
     <p class="title">Freelancers</p>
 
-    <%= simple_form_for :profile, url: profiles_path, method: :get, remote: true do |f| %>
+    <%= simple_form_for :profile, url: conversations_path, method: :get, remote: true do |f| %>
       <%= f.input :name, required: false,
                   wrapper_html: { class: "flex flex-column mb-3" } %>
       <%= f.input :profession, required: false,
@@ -34,9 +34,9 @@
           <%= image_tag "icons/up-chevron.svg", alt: "minimize content", id: "up", class: "none vertical-align-middle" %>
         </button>
         <div id="job-application-content" class="opaque h-0">
-          <section class="jobs">
-            <% @jobs.includes(:manager, job_applications: [profile: { user: :avatar_attachment }]).each do |job| %>
-              <%= render partial: "jobs/card", locals: { job: job, dummy_link: true } %>
+          <section class="jobs mt-3">
+            <% jobs.each do |job| %>
+              <%= render partial: "jobs/simple_card", locals: { job: job } %>
             <% end %>
           </section>
         </div>

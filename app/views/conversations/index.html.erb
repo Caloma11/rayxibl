@@ -3,10 +3,12 @@
     <%= link_to :back do %>
       <%= image_tag "icons/left-arrow.svg", alt: "back link", height: 24, width: 24, class: "mr-2" %>
     <% end %>
-    <p class="">INBOX</p>
-    <%= button_to "#", method: :get do %>
-      <%= image_tag "icons/filter.svg", alt: "filter" %>
-    <% end %>
+    <p>INBOX</p>
+    <button id="filter-trigger" type="button"><%= image_tag "icons/filter.svg", alt: "filter" %></button>
+
+    <div id="filter-content" class="none">
+      <%= render partial: "conversations/filter_content", locals: { jobs: @jobs } %>
+    </div>
   </section>
 
   <section class="switch flex justify-content-between p-3 my-3" style="background-color: #F9FBFE;">
@@ -19,9 +21,6 @@
   </section>
 
   <section id="conversations" class="mx-3">
-    <% @conversations.each do |conversation| %>
-      <% other_person ||= conversation.other_person(current_user) %>
-      <%= render partial: "conversations/snippet", locals: { conversation: conversation, other_person: other_person } %>
-    <% end %>
+    <%= render partial: "conversations/snippets", locals: { conversations: @conversations } %>
   </section>
 </div>

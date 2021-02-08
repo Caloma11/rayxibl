@@ -1,0 +1,10 @@
+(() => {
+  const conversationsContainer = document.getElementById("conversations");
+  const filterContent = document.getElementById("filter-content");
+
+  conversationsContainer.innerHTML = "<%= j render partial: "conversations/snippets", locals: { conversations: @conversations } %>"
+
+  if (!filterContent.classList.contains("none")) {
+    filterContent.classList.add("none");
+  }
+})()

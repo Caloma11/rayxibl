@@ -2,17 +2,30 @@ class ConversationsController < ApplicationController
   def index
     skip_policy_scope
     if current_user.manager?
+      @jobs = current_user.manager.jobs
       if params[:network]
-        @conversations = current_user.manager.conversations.includes(:messages, profile: [user: :avatar_attachment]).where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message
+        @conversations = current_user.manager.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }]).where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message
       else
-        @conversations = current_user.manager.conversations.includes(:messages, profile: [user: :avatar_attachment]).by_latest_message
+        @conversations = current_user.manager.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }]).by_latest_message
       end
     else
+      @jobs = current_user.profile.jobs
       if params[:network]
-        @conversations = current_user.profile.conversations.includes(:messages, profile: [user: :avatar_attachment]).where(manager_id: current_user.profile.managers.pluck(:id)).by_latest_message
+        @conversations = current_user.profile.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }]).where(manager_id: current_user.profile.managers.pluck(:id)).by_latest_message
       else
-        @conversations = current_user.profile.conversations.includes(:messages, profile: [user: :avatar_attachment]).by_latest_message
+        @conversations = current_user.profile.conversations.includes(:messages, profile: [user: { avatar_attachment: :blob }]).by_latest_message
       end
+    end
+
+    profile_params = params[:profile]
+
+    if profile_params
+      @conversations = ConversationFilter.new(@conversations, profile_params, current_user).call
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

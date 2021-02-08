@@ -1,6 +1,6 @@
-<div class="job-card bg-white shadow rounded p-3 mb-3">
+<div class="job-card bg-white shadow rounded p-3 mb-3" data-job-id="<%= job.id %>">
   <% if defined?(dummy_link) && dummy_link %>
-    <div class="job-card-filter" data-job-id="<%= job.id %>">
+    <div class="job-card-filter">
       <div class="flex items-start justify-content-between">
         <div class="flex items-center">
           <% if job.manager.user.avatar.attached? %>

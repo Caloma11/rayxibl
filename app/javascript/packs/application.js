@@ -11,7 +11,11 @@ import { stepForm } from "../components/stepForm";
 import { moreToggler } from "../components/moreToggler";
 import { previewImage } from "../components/previewImage";
 import { editPreviewImage } from "../components/editProfilePreviewImage";
-import { filtering, jobApplicationFilter } from "../components/filtering";
+import {
+	filtering,
+	jobApplicationFilter,
+	conversationFilter
+} from "../components/filtering";
 import { initTomSelect } from "../plugins/tomSelect";
 import { initEditLinksAndDocuments } from "../components/editLinksAndDocuments";
 import { jobFlatpickr } from "../plugins/jobFlatpickr";
@@ -40,8 +44,9 @@ document.addEventListener("turbolinks:load", () => {
 	filtering();
 	initTomSelect();
 	jobApplicationFilter();
-  editPreviewImage();
-  initEditLinksAndDocuments();
+	editPreviewImage();
+	initEditLinksAndDocuments();
 	jobFlatpickr();
 	editBookingFlatpickr();
+	conversationFilter();
 });
