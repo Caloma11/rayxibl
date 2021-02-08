@@ -18,7 +18,8 @@
 		right: 0;
 		bottom: 80px;
 
-		&.job-show {
+		&.job-show,
+		&.dashboard {
 			top: 40px;
 			bottom: unset;
 		}
@@ -28,14 +29,14 @@
 			text-transform: uppercase;
 			border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 			padding: 8px 0;
-      &:hover {
-        opacity: .8;
-      }
-      &:active {
-        opacity: .8;
-        background-color: rgba(20, 15, 38, 0.1);
-        border-radius: 16px;
-      }
+			&:hover {
+				opacity: 0.8;
+			}
+			&:active {
+				opacity: 0.8;
+				background-color: rgba(20, 15, 38, 0.1);
+				border-radius: 16px;
+			}
 		}
 	}
 

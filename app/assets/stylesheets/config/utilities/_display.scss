@@ -34,10 +34,6 @@
 	}
 }
 
-.none {
-	display: none;
-}
-
 .self-centered {
 	align-self: center;
 }
@@ -98,7 +94,7 @@
 	box-shadow: 0px 6px 36px rgba(59, 74, 116, 0.2);
 }
 
- .opaque {
+.opaque {
 	opacity: 0;
 }
 
@@ -188,9 +184,9 @@
 }
 
 .overflow-hidden {
-  overflow: hidden;
+	overflow: hidden;
 }
 
 .border-box {
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
