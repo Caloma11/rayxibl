@@ -22,7 +22,7 @@ class ManagersController < ApplicationController
     current_user.update(manager_params[:user_attributes])
     @manager.user = current_user
     if @manager.save
-      redirect_to root_path
+      redirect_to manager_path(@manager)
     else
       render 'new'
     end
