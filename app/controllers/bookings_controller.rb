@@ -8,7 +8,7 @@ class BookingsController < ApplicationController
                     .includes(profile: [user: { avatar_attachment: :blob }])
                     .today_and_after
     else
-      @bookings = policy_scope(current_user.profile.bookings)
+      @bookings = policy_scope(current_user.profile.bookings).today_and_after
     end
 
     if params[:status]
