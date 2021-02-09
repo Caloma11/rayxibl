@@ -1,4 +1,4 @@
-.manager-new-page {
+/* .manager-new-page {
 	background: $blueish-gray;
 	height: 100%;
 
@@ -45,3 +45,61 @@
 		}
 	}
 }
+ */
+
+ .managerNew {
+
+  #camera-icon {
+    @extend .p-3, .rounded-circle, .mb-3;
+    background-color: $blue-2;
+  }
+
+ img {
+    &.initial {
+      background: $dark-blue-gradient;
+    }
+  }
+
+  .save {
+    padding: 8px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 2px;
+    font-size: 16px;
+    img {
+      height: 32px;
+      width: 32px;
+    }
+  }
+
+  .job-title {
+    margin-top: -40px;
+  }
+
+  #picture-placeholder-icon {
+    @extend .p-2, .rounded-circle, .mb-1;
+    background-color: $blue-2;
+  }
+
+  #label-logo-placeholder {
+    img {
+      box-shadow: 0px 3px 6px -2px rgba(50, 51, 9, .1);
+    }
+  }
+
+  abbr {
+    @extend .none;
+  }
+
+  .upload-photo {
+    @extend .textGray, .textSm;
+  }
+
+  label.logo-filled {
+    @extend .textBlue;
+    img {
+      @extend .mb-1;
+    }
+  }
+ }

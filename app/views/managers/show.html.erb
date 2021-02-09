@@ -1,36 +1,35 @@
-<div id="manager-show">
-  <div class="header">
-    <%= render partial: "shared/back_link", locals: { text: "Profile" } %>
+<div class="managerShow w-100">
+
+  <div class="profileBanner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(255,255,255,0.2)), url(<%= avatar_url(@manager) %>)">
+    <div class="headerOptions flex w-100 justify-content-between p-3">
+      <div>
+        <%= render partial: "shared/back_link", locals: { text: "Profile" } %>
+      </div>
+    </div>
   </div>
 
-  <section class="profile-section">
-    <div class="profile">
-      <div>
-        <% if current_user.avatar.attached? %>
-          <%= image_tag current_user.avatar.service_url, alt: "user avatar", width: 64, height: 64 %>
-        <% else %>
-          <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "user avatar", width: 64, height: 64 %>
-        <% end %>
-        <h3><%= current_user.display_name %></h3>
-        <p><%= current_user.company.name %></p>
-      </div>
-      <%= link_to "Edit", "#" %>
+  <!-- Name and description -->
+  <div class="profileHeader">
+    <div class="profileHeaderLeft">
+      <h1><%= @manager.user.display_name %></h1>
+      <p class="textGray"> <strong> <%= @manager.job_title %> </strong> at <%= @manager.company.name %></p>
     </div>
-  </section>
+    <div class="profileHeaderRight">
+      <%= link_to edit_manager_path(@manager), class: "btn-lg px-0 btn-white block" do %>
+        <%= image_tag "icons/edit.svg", alt: "edit" %> EDIT
+      <% end %>
+    </div>
+  </div>
 
-  <section class="company-section">
-    <div class="field">
-      <label for="company_name">Company name</label>
-      <input type="text" readonly disabled value="<%= current_user.company.name %>" />
-      <%= link_to "Edit", "#" %>
-    </div>
 
-    <div class="field">
-      <label for="company_name">Job title</label>
-      <input type="text" readonly disabled value="<%= current_user.manager.job_title %>" />
-      <%= link_to "Edit", "#" %>
-    </div>
-  </section>
+
+
+
+
+
+
+
+
 
   <section class="team-members">
     <h2>Your team</h2>
