@@ -1,14 +1,6 @@
 <div>
   <% if first %>
-    <p class="uppercase mb-3">
-      <% if Date.today.beginning_of_week == day %>
-        This week
-      <% elsif (Date.today + 1.week).beginning_of_week == day %>
-        Next week
-      <% else %>
-        <%= day.strftime("%d %b") %> - <%= day.end_of_week.strftime("%d %b") %>
-      <% end %>
-    </p>
+    <p class="uppercase mb-3"><%= week(day) %></p>
   <% end %>
   <div class="booking-card bg-white mb-3 <%= booking.status %>" data-id="<%= booking.id %>" role="button">
     <div class="flex justify-content-between items-center">
