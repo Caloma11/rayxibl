@@ -25,7 +25,7 @@ Rails.application.configure do
   if ENV["STAGING"] == "true"
     config.action_mailer.default_url_options = { host: "flxibl-staging.herokuapp.com", protocol: "https" }
   else
-    config.action_mailer.default_url_options = { host: "flxibl.herokuapp.com", protocol: "https" }
+    config.action_mailer.default_url_options = { host: "flxibl.io", protocol: "https" }
   end
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
@@ -54,10 +54,10 @@ Rails.application.configure do
     config.action_cable.allowed_request_origins = [ "https://flxibl-staging.herokuapp.com/", "http://flxibl-staging.herokuapp.com/" ]
   else
     config.action_cable.url = "wss://flxibl.herokuapp.com/cable"
-    config.action_cable.allowed_request_origins = [ "https://flxibl.herokuapp.com/", "http://flxibl.herokuapp.com/" ]
+    config.action_cable.allowed_request_origins = [ "https://flxibl.herokuapp.com/", "http://flxibl.herokuapp.com/", "www.flxibl.io", "https://flxibl.io", "https://www.flxibl.io" ]
   end
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  # config.force_ssl = true
+  config.force_ssl = true
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
