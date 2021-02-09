@@ -14,6 +14,10 @@ class BookingsController < ApplicationController
       @bookings = @bookings.where(status: status)
     end
 
+    if params[:booking]
+      @bookings = BookingFilter.new(@bookings, params[:booking], current_user).call
+    end
+
     respond_to do |format|
       format.html
       format.js
