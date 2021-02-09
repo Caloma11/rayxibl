@@ -21,6 +21,7 @@ import { initEditLinksAndDocuments } from "../components/editLinksAndDocuments";
 import { jobFlatpickr } from "../plugins/jobFlatpickr";
 import { editBookingFlatpickr } from "../plugins/editBookingFlatpickr";
 import { initNewManagerPreviews } from "../components/newManagerPreviews";
+import { bookingCardLink } from "../components/bookingCardLink";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -52,6 +53,7 @@ document.addEventListener("turbolinks:load", () => {
 	conversationFilter();
 	initNewManagerPreviews();
 	moreTogglerMultiple();
+	bookingCardLink();
 
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
