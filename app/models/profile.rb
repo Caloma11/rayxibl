@@ -10,7 +10,7 @@ class Profile < ApplicationRecord
   has_many :managers, through: :companies
   has_many :ratings
   has_many :conversations
-  has_many :profile_attachments
+  has_many :profile_attachments, dependent: :destroy
   has_many :bookings, -> { order(Arel.sql("end_date - start_date DESC")) }
   has_many :job_applications
   has_many :jobs, through: :job_applications
@@ -23,7 +23,9 @@ class Profile < ApplicationRecord
 
   enum expertise: EXPERTISES
 
-  validates :profession, :location, :overview, presence: true
+  validates :profession, :location, presence: true
+
+  validates :overview, presence: true, on: :step_two
 
   after_create :connect_with_inviter
 

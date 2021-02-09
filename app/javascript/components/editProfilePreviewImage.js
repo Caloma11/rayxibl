@@ -1,5 +1,5 @@
-const editPreviewImage = () => {
-  const banner = document.querySelector(".profileEdit .profileBanner");
+const editAndNewPreviewImage = () => {
+  const banner = document.querySelector(".profileEdit .profileBanner") || document.querySelector(".profileNew .profileBanner")
   const input = document.getElementById('profile_profile_user_avatar');
 
   const displayPreview = (input) => {
@@ -19,4 +19,4 @@ const editPreviewImage = () => {
   }
 }
 
-export { editPreviewImage }
+export { editAndNewPreviewImage }

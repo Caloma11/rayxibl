@@ -10,7 +10,7 @@ import { bindBillableCheckbox } from "../components/billable";
 import { stepForm } from "../components/stepForm";
 import { moreToggler } from "../components/moreToggler";
 import { previewImage } from "../components/previewImage";
-import { editPreviewImage } from "../components/editProfilePreviewImage";
+import { editAndNewPreviewImage } from "../components/editProfilePreviewImage";
 import {
 	filtering,
 	jobApplicationFilter,
@@ -44,7 +44,7 @@ document.addEventListener("turbolinks:load", () => {
 	filtering();
 	initTomSelect();
 	jobApplicationFilter();
-	editPreviewImage();
+	editAndNewPreviewImage();
 	initEditLinksAndDocuments();
 	jobFlatpickr();
 	editBookingFlatpickr();
