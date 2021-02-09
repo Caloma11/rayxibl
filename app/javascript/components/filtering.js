@@ -10,7 +10,7 @@ export const filtering = () => {
 	const filterContent = document.getElementById("filter-content");
 	const filterExit = document.querySelector(".filter-exit");
 
-	if (filterButton) {
+	if (filterButton && filterContent) {
 		filterButton.addEventListener("click", () => {
 			filterContent.classList.remove("none");
 		});
