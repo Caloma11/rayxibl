@@ -12,6 +12,10 @@ class BookingFilter
       @bookings = @bookings.where("title ILIKE :title", title: "%#{params[:title]}%")
     end
 
+    if params[:profession] != ""
+      @bookings = @bookings.joins(:profile).where("profiles.profession ILIKE :profession", profession: "%#{params[:profession]}%")
+    end
+
     @bookings
   end
 end

@@ -11,6 +11,8 @@
     <%= simple_form_for :booking, url: bookings_path, method: :get, remote: true do |f| %>
       <%= f.input :title, required: false,
                   wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :profession, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
 
       <%= f.submit "Show results", class: "uppercase btn btn-primary w-100 py-3" %>
     <% end %>
