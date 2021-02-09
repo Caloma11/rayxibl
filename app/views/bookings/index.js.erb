@@ -1,0 +1,16 @@
+(() => {
+  const bookingCards = document.getElementById("booking-cards");
+  const switches = document.querySelectorAll(".switch a");
+
+  bookingCards.innerHTML = "<%= j render partial: "bookings/booking_cards", locals: { bookings: @bookings } %>";
+
+  switches.forEach(switchLink => {
+    if (switchLink.classList.contains("btn-transparent") && switchLink.dataset.status == "<%= params[:status] %>") {
+      switchLink.classList.add("btn-white");
+      switchLink.classList.remove("btn-transparent");
+    } else {
+      switchLink.classList.remove("btn-white");
+      switchLink.classList.add("btn-transparent");
+    }
+  })
+})();

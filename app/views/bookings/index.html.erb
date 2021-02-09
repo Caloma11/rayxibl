@@ -7,11 +7,24 @@
     <button style="height: 16px; width: 16px"> </button>
   </section>
 
+  <section class="switch flex justify-content-between px-3 my-3">
+    <%= link_to "Accepted", bookings_path(status: 1),
+                remote: true, data: { status: 1 },
+                class: "flex items-center btn #{params[:status] == "1" ? "btn-white" : "btn-transparent"}" %>
+    <%= link_to "Pending", bookings_path(status: 0),
+                remote: true, data: { status: 0 },
+                class: "flex items-center btn #{params[:status] == "0" ? "btn-white" : "btn-transparent"}" %>
+    <%= link_to "Rejected", bookings_path(status: 2),
+                remote: true, data: { status: 2 },
+                class: "flex items-center btn #{params[:status] == "2" ? "btn-white" : "btn-transparent"}" %>
+    <%= link_to "All", bookings_path(status: -1),
+                remote: true, data: { status: -1 },
+                class: "flex items-center btn #{!params[:status] ? "btn-white" : "btn-transparent"}" %>
+  </section>
+
   <section class="mx-3 mt-4">
-    <div class="flex flex-column">
-      <% @bookings.each do |booking| %>
-        <%= render partial: "bookings/#{current_user.role}_card", locals: { booking: booking } %>
-      <% end %>
+    <div class="flex flex-column" id="booking-cards">
+      <%= render partial: "bookings/booking_cards", locals: { bookings: @bookings } %>
     </div>
   </section>
 </div>
