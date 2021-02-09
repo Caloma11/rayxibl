@@ -13,7 +13,14 @@
                   wrapper_html: { class: "flex flex-column mb-3" } %>
       <%= f.input :profession, required: false,
                   wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :location, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
 
+      <div class="mt-5 mb-3 mx-3 px-3 flex justify-content-between">
+        <button type="submit" name="booking[clear]" value="true" id="clear" class="btn btn-float red">Clear</button>
+        <%# DUMMY BUTTON FOR NOW %>
+        <button class="btn btn-float" style="user-select: none">Saved</button>
+      </div>
       <%= f.submit "Show results", class: "uppercase btn btn-primary w-100 py-3" %>
     <% end %>
   </section>
