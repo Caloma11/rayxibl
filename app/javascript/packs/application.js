@@ -52,4 +52,7 @@ document.addEventListener("turbolinks:load", () => {
 	conversationFilter();
 	initNewManagerPreviews();
 	moreTogglerMultiple();
+
+	// For bookings/index.js.erb
+	window.moreTogglerMultiple = moreTogglerMultiple;
 });
