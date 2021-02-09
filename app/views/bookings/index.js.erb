@@ -1,6 +1,7 @@
 (() => {
   const bookingCards = document.getElementById("booking-cards");
   const switches = document.querySelectorAll(".switch a");
+  const filterContent = document.getElementById("filter-content");
 
   bookingCards.innerHTML = "<%= j render partial: "bookings/booking_cards", locals: { bookings: @bookings } %>";
 
@@ -14,5 +15,8 @@
     }
   })
 
+  if (!filterContent.classList.contains("none")) {
+    filterContent.classList.add("none");
+  }
   window.moreTogglerMultiple();
 })();
