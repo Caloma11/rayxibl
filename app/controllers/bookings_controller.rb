@@ -4,7 +4,7 @@ class BookingsController < ApplicationController
 
   def index
     if current_user.manager?
-      @bookings = policy_scope(current_user.manager.bookings)
+      @bookings = policy_scope(current_user.manager.bookings).includes(profile: [user: { avatar_attachment: :blob }])
     else
       @bookings = policy_scope(current_user.profile.bookings)
     end
