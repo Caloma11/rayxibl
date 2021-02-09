@@ -8,7 +8,7 @@ import { initFlatpickr } from "../plugins/newBookingFlatpickr";
 import { initDurationToggler } from "../components/durationToggler";
 import { bindBillableCheckbox } from "../components/billable";
 import { stepForm } from "../components/stepForm";
-import { moreToggler } from "../components/moreToggler";
+import { moreToggler, moreTogglerMultiple } from "../components/moreToggler";
 import { previewImage } from "../components/previewImage";
 import { editAndNewPreviewImage } from "../components/editProfilePreviewImage";
 import {
@@ -50,5 +50,6 @@ document.addEventListener("turbolinks:load", () => {
 	jobFlatpickr();
 	editBookingFlatpickr();
 	conversationFilter();
-  initNewManagerPreviews();
+	initNewManagerPreviews();
+	moreTogglerMultiple();
 });
