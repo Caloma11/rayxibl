@@ -25,7 +25,7 @@ Rails.application.configure do
   if ENV["STAGING"] == "true"
     config.action_mailer.default_url_options = { host: "flxibl-staging.herokuapp.com", protocol: "https" }
   else
-    config.action_mailer.default_url_options = { host: "flxibl.herokuapp.com", protocol: "https" }
+    config.action_mailer.default_url_options = { host: "flxibl.io", protocol: "https" }
   end
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
