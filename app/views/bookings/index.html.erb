@@ -5,9 +5,13 @@
         <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
       <% end %>
       <p class="textDarkGray">Bookings</p>
-      <button id="filter-trigger">
+      <button id="filter-trigger" type="button">
         <%= image_tag "icons/filter.svg", alt: "filter", width: 16, height: 16 %>
       </button>
+
+      <div id="filter-content" class="none">
+        <%= render partial: "bookings/filter_content" %>
+      </div>
     </section>
 
     <section class="switch bg-blueish-gray flex justify-content-between mx-3 p-1 rounded my-3">

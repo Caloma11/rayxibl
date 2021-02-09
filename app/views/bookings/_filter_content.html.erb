@@ -1,0 +1,18 @@
+<div class="h-100">
+  <section class="head">
+    <button class="filter-exit"><%= image_tag "icons/cross.svg", alt: "close" %></button>
+    <p>FILTER</p>
+    <button style="opacity: 0; user-select: none"><%= image_tag "icons/cross.svg", alt: "close" %></button>
+  </section>
+
+  <section class="content">
+    <p class="title">Bookings</p>
+
+    <%= simple_form_for :booking, url: bookings_path, method: :get, remote: true do |f| %>
+      <%= f.input :title, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
+
+      <%= f.submit "Show results", class: "uppercase btn btn-primary w-100 py-3" %>
+    <% end %>
+  </section>
+</div>
