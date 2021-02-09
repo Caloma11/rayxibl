@@ -1,4 +1,17 @@
 .bookings-index {
+	#filter-content {
+		.head {
+			@extend .flex, .justify-content-between, .px-3, .mt-3;
+
+			button {
+				img {
+					width: 24px;
+					height: 24px;
+				}
+			}
+		}
+	}
+
 	.switch {
 		a {
 			text-transform: none;
