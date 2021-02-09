@@ -7,7 +7,6 @@ class BookingsController < ApplicationController
       @bookings = policy_scope(current_user.manager.bookings)
                     .includes(profile: [user: { avatar_attachment: :blob }])
                     .today_and_after
-                    .group_by { |booking| booking.start_date.beginning_of_week }
     else
       @bookings = policy_scope(current_user.profile.bookings)
     end
@@ -20,6 +19,8 @@ class BookingsController < ApplicationController
     if params[:booking]
       @bookings = BookingFilter.new(@bookings, params[:booking], current_user).call
     end
+
+    @bookings = @bookings.group_by { |booking| booking.start_date.beginning_of_week }
 
     respond_to do |format|
       format.html
