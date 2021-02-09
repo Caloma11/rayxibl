@@ -54,7 +54,7 @@ Rails.application.configure do
     config.action_cable.allowed_request_origins = [ "https://flxibl-staging.herokuapp.com/", "http://flxibl-staging.herokuapp.com/" ]
   else
     config.action_cable.url = "wss://flxibl.herokuapp.com/cable"
-    config.action_cable.allowed_request_origins = [ "https://flxibl.herokuapp.com/", "http://flxibl.herokuapp.com/" ]
+    config.action_cable.allowed_request_origins = [ "https://flxibl.herokuapp.com/", "http://flxibl.herokuapp.com/", "www.flxibl.io", "https://flxibl.io", "https://www.flxibl.io" ]
   end
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
   config.force_ssl = true
