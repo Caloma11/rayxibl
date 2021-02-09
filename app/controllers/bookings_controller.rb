@@ -20,7 +20,7 @@ class BookingsController < ApplicationController
       @bookings = BookingFilter.new(@bookings, params[:booking], current_user).call
     end
 
-    @bookings = @bookings.group_by { |booking| booking.start_date.beginning_of_week }
+    @bookings = @bookings.group_by { |booking| booking.start_date.beginning_of_week }.sort_by { |day| day }.to_h
 
     respond_to do |format|
       format.html
