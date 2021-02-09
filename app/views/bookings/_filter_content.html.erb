@@ -13,8 +13,17 @@
                   wrapper_html: { class: "flex flex-column mb-3" } %>
       <%= f.input :profession, required: false,
                   wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :skills, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" },
+                  input_html: { multiple: true },
+                  collection: ActsAsTaggableOn::Tag.pluck(:name).uniq %>
       <%= f.input :location, required: false,
                   wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :expertise, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" },
+                  label: "Experience level",
+                  input_html: { multiple: true },
+                  collection: Profile.expertises %>
 
       <div class="mt-5 mb-3 mx-3 px-3 flex justify-content-between">
         <button type="submit" name="booking[clear]" value="true" id="clear" class="btn btn-float red">Clear</button>
