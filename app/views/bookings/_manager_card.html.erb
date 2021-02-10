@@ -16,7 +16,7 @@
         </div>
       </div>
       <div class="relative">
-        <div class="none actions-container" data-booking-id="<%= booking.id %>">
+        <div class="none actions-container" data-id="<%= booking.id %>">
           <div class="actions flex flex-column bookings-index">
             <%= link_to edit_booking_path(booking), class: "action-link" do %>
               <%= image_tag "icons/edit-white.svg", alt: "edit icon", width: 24, height: 24, class: "vertical-align-middle mr-2" %> Edit
@@ -33,7 +33,7 @@
             <% end %>
           </div>
         </div>
-        <button class="trigger" data-booking-id="<%= booking.id %>">
+        <button class="trigger" data-id="<%= booking.id %>">
           <%= image_tag "icons/more.svg", alt: "more", width: 16, height: 16 %>
         </button>
       </div>

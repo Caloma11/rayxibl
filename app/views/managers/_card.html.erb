@@ -4,7 +4,13 @@
     <div>
       <%= image_tag manager_avatar(manager), alt: "manager avatar", class: "avatar avatar-square" %>
     </div>
-    <button class="trigger"><%= image_tag "icons/more.svg", alt: "sub-menu", width: 24, height: 24 %></button>
+    <div class="relative">
+      <div class="none actions-container" data-id="<%= manager.id %>">
+        <div class="actions flex flex-column bookings-index">
+        </div>
+      </div>
+      <button data-id="<%= manager.id %>" class="trigger"><%= image_tag "icons/more.svg", alt: "sub-menu", width: 24, height: 24 %></button>
+    </div>
   </div>
   <div class="text-center">
     <h3 class="mt-0 mb-3 textMd"><%= manager.user.display_name %></h3>
