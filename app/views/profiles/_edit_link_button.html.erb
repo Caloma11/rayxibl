@@ -1,0 +1,24 @@
+<%= button_tag class: "btn-centered btn-secondary mb-3 flex items-center justify-content-center w-100" do %>
+  <div class="flex justify-content-center items-center textWhite flex-grow-1">
+    <% if link.url.blank? %>
+      <%= image_tag "icons/download-white", width: 32, height: 32, class: "mr-2" %>
+    <% else %>
+      <%= image_tag "icons/edit-white", width: 32, height: 32, class: "mr-2" %>
+    <% end %>
+    <%= link.title&.capitalize %>
+  </div>
+  <!-- Actions container of blue btn for documents -->
+  <div class="relative">
+    <div class="none actions-container" data-id="<%= link.id %>" >
+      <div class="actions flex flex-column">
+        <%= link_to "Edit", "#", class: "action-link flex items-center w-100" %>
+        <%= button_to "Remove", profile_attachment_path(link), class: "action-link flex items-center w-100", remote: true, method: :delete %>
+      </div>
+    </div>
+    <!-- Blue document button trigger -->
+    <div class="trigger" data-id="<%= link.id %>">
+      <%= image_tag "icons/more-white.svg", class: "toggler", width: 24, height: 24 %>
+    </div>
+  </div>
+<!-- End of relative -->
+<% end %>

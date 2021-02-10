@@ -1,0 +1,21 @@
+<button name="button" class="btn-centered btn-secondary mb-3 flex items-center justify-content-center w-100">
+  <div class="flex justify-content-center items-center textWhite flex-grow-1">
+    <% if attributes[:is_link] %>
+      <%= image_tag "icons/edit-white", width: 32, height: 32, class: "mr-2" %>
+    <% else %>
+      <%= image_tag "icons/download-white", width: 32, height: 32, class: "mr-2" %>
+    <% end %>
+    <%= attributes[:title] %>
+  </div>
+  <div class="relative">
+    <div class="none actions-container" data-id="<%= @profile_attachment.id %>">
+      <div class="actions flex flex-column">
+        <a class="action-link flex items-center w-100" href="#">Edit</a>
+        <form class="button_to" method="post" action="/profile_attachments/<%= @profile_attachment.id %>" data-remote="true"><input type="hidden" name="_method" value="delete"><input class="action-link flex items-center w-100" type="submit" value="Remove"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"></form>
+      </div>
+    </div>
+    <div class="trigger toBind" data-id="<%= @profile_attachment.id %>">
+      <%= image_tag "icons/more-white.svg", class: "toggler", width: 24, height: 24 %>
+    </div>
+  </div>
+</button>
