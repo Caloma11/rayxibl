@@ -9,6 +9,8 @@
     <%= simple_form_for :manager, url: managers_path, method: :get, remote: true do |f| %>
       <%= f.input :name, required: false,
                   wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :job_title, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
 
       <div class="mt-5 mb-3 mx-3 px-3 flex justify-content-between">
         <button type="submit" name="manager[clear]" value="true" id="clear" class="btn btn-float red">Clear</button>
