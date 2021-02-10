@@ -2,8 +2,17 @@ class ManagersController < ApplicationController
   def index
     @managers = policy_scope(Manager)
       .joins(company: { connections: :profile })
-      .includes([:company, :user])
+      .includes([:company, { user: [:avatar_attachment] }])
       .where(connections: { profile_id: current_user.profile.id })
+
+    if params[:manager]
+      @managers = ManagerFilter.new(@managers, params[:manager], current_user).call
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def show

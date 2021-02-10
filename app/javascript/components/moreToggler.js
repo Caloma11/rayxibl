@@ -24,7 +24,7 @@ export const moreTogglerMultiple = () => {
 	const triggers = document.querySelectorAll(".trigger");
 	const actionsContainers = document.querySelectorAll(".actions-container");
 
-	if (triggers.length > 1   && actionsContainers.length > 1  ) {
+	if (triggers.length > 1 && actionsContainers.length > 1) {
 		triggers.forEach(trigger => {
 			trigger.addEventListener("click", e => {
 				e.stopPropagation();

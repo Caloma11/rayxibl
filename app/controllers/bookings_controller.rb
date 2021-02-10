@@ -26,16 +26,6 @@ class BookingsController < ApplicationController
       format.html
       format.js
     end
-
-    if params[:status]
-      status = params[:status] == "-1" ? (0..2).to_a : params[:status].to_i
-      @bookings = @bookings.where(status: status)
-    end
-
-    respond_to do |format|
-      format.html
-      format.js
-    end
   end
 
   def new

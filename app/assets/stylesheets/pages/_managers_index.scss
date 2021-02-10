@@ -1,0 +1,29 @@
+#managers-index {
+	.head {
+		@extend .flex, .justify-content-between, .px-3, .mt-5, .mb-3;
+
+		button {
+			img {
+				width: 24px;
+				height: 24px;
+			}
+		}
+	}
+
+	#manager-cards {
+		@extend .px-3;
+
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+
+		.manager-card {
+			@extend .mb-3, .p-3;
+
+			border-bottom: 1px solid #f4f6f9;
+
+			&:nth-child(odd) {
+				border-right: 1px solid#f4f6f9;
+			}
+		}
+	}
+}

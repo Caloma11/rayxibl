@@ -1,11 +1,22 @@
-<div>
-  <div class="search-bar">
-    <input type="text" placeholder="Search" />
+<div id="managers-index">
+  <section class="head">
+    <button>
+      <%= image_tag "icons/search.svg", alt: "search" %>
+    </button>
+    <div class="flex flex-column items-center justify-content-center">
+      <p class="m-0">CLIENTS (<%= @managers.length %>)</p>
+      <span class="textSm textLightBlack">Managers who have added you</span>
+    </div>
+    <button id="filter-trigger">
+      <%= image_tag "icons/filter.svg", alt: "filter" %>
+    </button>
+  </section>
+
+  <div id="manager-cards">
+    <%= render partial: "managers/cards", locals: { managers: @managers } %>
   </div>
 
-  <div class="manager-cards">
-    <% @managers.each do |manager| %>
-      <%= render partial: "managers/card", locals: { manager: manager } %>
-    <% end %>
+  <div class="none" id="filter-content">
+    <%= render partial: "managers/filter_content" %>
   </div>
 </div>
