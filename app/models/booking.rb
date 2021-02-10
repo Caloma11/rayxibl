@@ -15,6 +15,7 @@ class Booking < ApplicationRecord
   scope :today_and_after, -> { where("start_date >= ?", Date.today) }
 
   before_create :determine_total_price
+  after_create :create_widget
 
   %w[start end].each do |identifier|
     define_method :"parsed_#{identifier}_date" do
@@ -46,5 +47,13 @@ class Booking < ApplicationRecord
     else
       "#{parsed_start_time} - #{parsed_end_time}"
     end
+  end
+
+  private
+
+  def create_widget
+    convo = Conversation.first_or_create(company: manager.company, profile: profile)
+
+    convo.messages.create!(booking: self, user: manager.user)
   end
 end
