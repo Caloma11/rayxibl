@@ -25,16 +25,16 @@ export const moreTogglerMultiple = () => {
 	const triggers = document.querySelectorAll(".trigger");
 	const actionsContainers = document.querySelectorAll(".actions-container");
 
-	if (triggers.length > 1   && actionsContainers.length > 1  ) {
+	if (triggers.length > 1 && actionsContainers.length > 1) {
 		triggers.forEach(trigger => {
 			trigger.addEventListener("click", e => {
 				e.stopPropagation();
 
 				const chosenContainer = Array.from(actionsContainers).find(
-					ele => ele.dataset.bookingId === trigger.dataset.bookingId
+					ele => ele.dataset.id === trigger.dataset.id
 				);
 				const restOfContainer = Array.from(actionsContainers).filter(
-					ele => ele.dataset.bookingId !== trigger.dataset.bookingId
+					ele => ele.dataset.id !== trigger.dataset.id
 				);
 
 				chosenContainer.classList.toggle("none");

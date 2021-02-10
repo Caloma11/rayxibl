@@ -13,7 +13,7 @@
           <p class="subtitle m-0"><%= pluralize @bookings.accepted.count, "booking" %></p>
         </div>
       </div>
-      <%= link_to "#" do %>
+      <%= link_to bookings_path(status: 1) do %>
         <%= image_tag "icons/right-arrow.svg", alt: "accepted bookings" %>
       <% end %>
     </div>
@@ -28,7 +28,7 @@
           <p class="subtitle m-0"><%= pluralize @bookings.pending.count, "booking" %></p>
         </div>
       </div>
-      <%= link_to "#" do %>
+      <%= link_to bookings_path(status: 0) do %>
         <%= image_tag "icons/right-arrow.svg", alt: "pending bookings" %>
       <% end %>
     </div>
@@ -43,7 +43,7 @@
           <p class="subtitle m-0"><%= pluralize @bookings.rejected.count, "booking" %></p>
         </div>
       </div>
-      <%= link_to "#" do %>
+      <%= link_to bookings_path(status: 2) do %>
         <%= image_tag "icons/right-arrow.svg", alt: "rejected bookings" %>
       <% end %>
     </div>
