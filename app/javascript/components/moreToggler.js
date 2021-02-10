@@ -1,7 +1,6 @@
 export const moreToggler = () => {
 	const trigger = document.querySelector(".trigger");
 	const actionsContainer = document.querySelector(".actions-container");
-
 	if (document.querySelectorAll(".trigger").length > 1) return;
 	if (trigger && actionsContainer) {
 		trigger.addEventListener("click", e => {
@@ -31,10 +30,10 @@ export const moreTogglerMultiple = () => {
 				e.stopPropagation();
 
 				const chosenContainer = Array.from(actionsContainers).find(
-					ele => ele.dataset.bookingId === trigger.dataset.bookingId
+					ele => ele.dataset.id === trigger.dataset.id
 				);
 				const restOfContainer = Array.from(actionsContainers).filter(
-					ele => ele.dataset.bookingId !== trigger.dataset.bookingId
+					ele => ele.dataset.id !== trigger.dataset.id
 				);
 
 				chosenContainer.classList.toggle("none");

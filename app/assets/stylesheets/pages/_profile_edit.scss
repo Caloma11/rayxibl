@@ -117,5 +117,10 @@
       }
     }
   }
+
+  .actions-container .actions {
+    bottom: auto;
+    z-index: 2;
+  }
 }
 
