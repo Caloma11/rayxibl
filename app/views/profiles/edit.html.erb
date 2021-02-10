@@ -76,7 +76,7 @@
               <div class="none actions-container" data-id="<%= link.id %>" >
                 <div class="actions flex flex-column">
                   <%= link_to "Edit", "#", class: "action-link flex items-center w-100" %>
-                  <%= link_to "Remove", "#", class: "action-link flex items-center w-100" %>
+                  <%= button_to "Remove", profile_attachment_path(link), class: "action-link flex items-center w-100", remote: true, method: :delete %>
                 </div>
               </div>
               <!-- Blue link button trigger -->

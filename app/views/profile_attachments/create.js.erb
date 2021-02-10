@@ -1,7 +1,3 @@
-// TODO:
-// Update view with the link buttons
-
-// Change text from `A LINK` OR `DOCUMENT` to `ANOTHER`
 (() => {
   let isLink = "<%= @is_link%>";
   isLink = (isLink === "true");
@@ -19,17 +15,36 @@
     const editIconPath = "<%= image_path 'icons/edit-white.svg' %>";
     const zapIconPath = "<%= image_path 'icons/zap.svg' %>";
     const newLinkTitle = "<%= @profile_attachment.title %>";
+    const moreWhiteIconPath = "<%= image_path 'icons/more-white.svg' %>";
+    const profileAttachmentId = "<%= @profile_attachment.id %>";
+    const formAuthenticityToken ="<%= form_authenticity_token %>";
 
-    const linkHTML = `<a target="_blank" class="btn-centered btn-secondary mb-3 flex items-center justify-content-center" href="${sanitizedUrl}">
+    const linkHTML = `<button name="button" class="btn-centered btn-secondary mb-3 flex items-center justify-content-center w-100">
+    <div class="flex justify-content-center items-center textWhite flex-grow-1">
       <img alt="edit" class="mr-2" height="32" width="32" src="${editIconPath}">
       ${newLinkTitle}
-      </a>`;
+    </div>
+    <div class="relative">
+      <div class="none actions-container" data-id="${profileAttachmentId}">
+        <div class="actions flex flex-column">
+          <a class="action-link flex items-center w-100" href="#">Edit</a>
+          <form class="button_to" method="post" action="/profile_attachments/${profileAttachmentId}" data-remote="true"><input type="hidden" name="_method" value="delete"><input class="action-link flex items-center w-100" type="submit" value="Remove"><input type="hidden" name="authenticity_token" value="${formAuthenticityToken}"></form>
+        </div>
+      </div>
+      <div class="trigger" data-id="${profileAttachmentId}">
+        <img class="toggler" width="24" height="24" src="${moreWhiteIconPath}">
+      </div>
+    </div>
+  </button>`;
+
 
     // Insert new button
     linksList.insertAdjacentHTML('beforeend', linkHTML);
 
     // Change "A LINK" to "ANOTHER"
     addALink.innerHTML = `<img alt="zap" class="mr-2" src="${zapIconPath}">ADD ANOTHER`
+
+    window.moreTogglerMultiple();
 
   } else {
     // Close modal
