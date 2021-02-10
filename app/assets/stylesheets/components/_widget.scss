@@ -1,0 +1,30 @@
+.booking-widget {
+	border: 6px;
+	border-top: 12px solid;
+
+	&.accepted {
+		border-color: $flat-green-3;
+	}
+
+	&.pending {
+		border-color: $flat-yellow-3;
+	}
+
+	&.rejected {
+		border-color: $flat-red-4;
+	}
+
+	.box {
+		@extend .rounded, .p-2, .items-center, .mb-3;
+
+		border: 1px solid #dfe5ee;
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+	}
+
+	.attachment {
+		@extend .rounded;
+
+		border: 1px solid $flat-gray-3;
+	}
+}
