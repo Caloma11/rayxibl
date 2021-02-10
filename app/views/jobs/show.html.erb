@@ -7,7 +7,8 @@
       <div class="flex items-start ml-3">
         <div class="flex flex-column justify-content-center items-center mr-2">
           <% if @job.company.logo.attached? %>
-            <%= image_tag @job.company.logo.service_url, alt: "company logo", width: 64, height: 40, class: "company-logo" %>
+            <div class="company-logo" style="background-image: url(<%= @job.company.logo.service_url %>)">
+          </div>
           <% else %>
             <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "company logo", width: 40, height: 40, class: "company-logo" %>
           <% end %>

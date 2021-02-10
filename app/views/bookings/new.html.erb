@@ -9,7 +9,8 @@
 
 <section class="flex p-3">
   <% if @profile.user.avatar.attached? %>
-    <%= image_tag @profile.user.avatar, alt: "alttext", class: "profileAvatar rounded-square", height: 80, width: 80  %>
+    <div class="profileAvatar rounded-square" style="background-image: url(<%= @profile.user.avatar.service_url %>)">
+    </div>
   <% else %>
     <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-square", height: 80, width: 80 %>
   <% end %>
