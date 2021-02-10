@@ -3,7 +3,8 @@
     <div class="flex items-start justify-content-between">
       <div class="flex">
         <% if other_person.avatar.attached? %>
-          <%= image_tag other_person.avatar.service_url, alt: "Avatar", width: 40, height: 40 %>
+        <div class="convo-avatar rounded-square" style="background-image: url(<%= other_person.avatar.service_url %>)">
+        </div>
         <% else %>
           <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "Avatar", width: 40, height: 40 %>
         <% end %>
