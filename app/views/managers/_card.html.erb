@@ -1,8 +1,20 @@
 <div class="manager-card">
-  <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659650_1280.png" width="64" height="64" />
-  <div class="manager-text">
-    <h3><%= manager.user.display_name %></h3>
-    <p><%= manager.company.name %></p>
+  <div class="flex justify-content-between items-start">
+    <button style="opacity: 0; user-select: none; width: 36px; height: 36px"></button>
+    <div>
+      <%= image_tag manager_avatar(manager), alt: "manager avatar", class: "avatar avatar-square" %>
+    </div>
+    <button class="trigger"><%= image_tag "icons/more.svg", alt: "sub-menu", width: 24, height: 24 %></button>
   </div>
-  <div class="manager-actions"></div>
+  <div class="text-center">
+    <h3 class="mt-0 mb-3 textMd"><%= manager.user.display_name %></h3>
+    <p class="bold uppercase textLightBlack my-0"><%= manager.job_title %></p>
+    <p class="textSm textLightBlack my-0"><%= manager.company.name %></p>
+  </div>
+  <% convo ||= current_user.conversation_with(manager.user) %>
+  <% if convo %>
+    <%= link_to conversation_path(convo), class: "btn btn-white textSm text-center mt-3" do %>
+      <%= image_tag "icons/message.svg", alt: "message", width: 16, height: 16, class: "vertical-align-middle" %> Message
+    <% end %>
+  <% end %>
 </div>

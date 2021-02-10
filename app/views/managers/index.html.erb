@@ -1,11 +1,9 @@
-<div>
+<div id="managers-index">
   <div class="search-bar">
     <input type="text" placeholder="Search" />
   </div>
 
-  <div class="manager-cards">
-    <% @managers.each do |manager| %>
-      <%= render partial: "managers/card", locals: { manager: manager } %>
-    <% end %>
+  <div id="manager-cards">
+    <%= render partial: "managers/cards", locals: { managers: @managers } %>
   </div>
 </div>
