@@ -86,6 +86,7 @@ export const toBindMoreTogglerMultiple = (withBound = false) => {
         chosenContainer.classList.toggle("none");
         restOfContainer.forEach(ele => ele.classList.add("none"));
       });
+      setTimeout(() => { trigger.classList.remove("toBind") }, 500)
     });
 
     document.body.addEventListener("click", () => {
