@@ -6,6 +6,9 @@
 
 - Ajaxify loading of profiles on `profiles#index`
 - ~~Ajaxify adding to network on `profiles#show`~~
+- Jobs#new page styling
+- Notifications system
+- Archiving jobs system -> (Is it there on both sides ?)
 
   More on point 2 (nice to have behaviours):
 
