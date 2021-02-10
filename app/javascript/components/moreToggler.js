@@ -20,11 +20,15 @@ export const moreToggler = () => {
 	}
 };
 
-export const moreTogglerMultiple = () => {
+export const moreTogglerMultiple = (ajax = false) => {
 	const triggers = document.querySelectorAll(".trigger");
 	const actionsContainers = document.querySelectorAll(".actions-container");
 
-	if (triggers.length > 1 && actionsContainers.length > 1) {
+	const originalCondition = triggers.length > 1 && actionsContainers.length > 1;
+	const ajaxCondition = triggers.length > 0 && actionsContainers.length > 0;
+	const condition = ajax ? ajaxCondition : originalCondition;
+
+	if (condition) {
 		triggers.forEach(trigger => {
 			trigger.addEventListener("click", e => {
 				e.stopPropagation();
