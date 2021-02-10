@@ -4,9 +4,19 @@ class BookingsController < ApplicationController
 
   def index
     if current_user.manager?
-      @bookings = policy_scope(current_user.manager.bookings)
+      @bookings = policy_scope(current_user.manager.bookings).includes(profile: [user: { avatar_attachment: :blob }])
     else
       @bookings = policy_scope(current_user.profile.bookings)
+    end
+
+    if params[:status]
+      status = params[:status] == "-1" ? (0..2).to_a : params[:status].to_i
+      @bookings = @bookings.where(status: status)
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 

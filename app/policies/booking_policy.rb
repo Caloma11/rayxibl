@@ -14,11 +14,11 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def edit?
-    is_booker? && before_start? && still_pending?
+    is_booker?
   end
 
   def update?
-    is_booker? && before_start? && still_pending?
+    is_booker?
   end
 
   def cancel?

@@ -23,4 +23,14 @@ class Booking < ApplicationRecord
       send(:"#{identifier}_time")&.strftime("%H:%M")
     end
   end
+
+  def full_date_time
+    dates = "#{start_date.strftime("%d %b")} - #{end_date.strftime("%d %b")}"
+
+    if duration
+      "#{dates}, #{duration} hours"
+    else
+      "#{dates}, #{parsed_start_time} - #{parsed_end_time}"
+    end
+  end
 end
