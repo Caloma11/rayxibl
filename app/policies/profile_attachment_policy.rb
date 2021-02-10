@@ -13,4 +13,8 @@ class ProfileAttachmentPolicy < ApplicationPolicy
     record.profile.user == user
   end
 
+  def destroy?
+    create?
+  end
+
 end
