@@ -1,18 +1,42 @@
-<div class="booking-card shadow rounded-lg p-1 flex justify-content-between mb-3">
-  <div class="flex">
-    <% if booking.profile.user.avatar.attached? %>
-      <%= image_tag booking.profile.user.avatar.service_url, alt: "company logo", width: 64, height: 64, class: "mr-3 p-2" %>
-    <% else %>
-      <img src="https://cdn.pixabay.com/photo/2015/03/04/22/35/head-659650_1280.png" alt="company logo" width="64" height="64" class="mr-3 p-2" />
-    <% end %>
-    <div class="booking-text flex flex-column justify-content-center">
-      <h3 class="noMargin"><%= booking.title %></h3>
-      <p class="noMargin"><%= booking.profile.user.display_name %></p>
+<div>
+  <% if first %>
+    <p class="uppercase mt-0 mb-3"><%= week(day) %></p>
+  <% end %>
+  <div class="booking-card bg-white mb-3 <%= booking.status %>" data-id="<%= booking.id %>" role="button">
+    <div class="flex justify-content-between items-center">
+      <div class="flex flex-column">
+        <h3 class="m-0 textMd mb-1"><%= booking.title %></h3>
+        <p class="m-0 textSm uppercase"><%= booking.full_date_time %></p>
+        <div class="flex items-center mt-3">
+          <%= image_tag avatar_url(booking.profile), alt: "Profile's avatar", class: "avatar small avatar-circle mr-2" %>
+          <div class="flex flex-column">
+            <h5 class="m-0 textBetween"><%= booking.profile.user.display_name %></h5>
+            <p class="m-0 textSm textLightBlack"><%= booking.profile.profession %></p>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="none actions-container" data-booking-id="<%= booking.id %>">
+          <div class="actions flex flex-column bookings-index">
+            <%= link_to edit_booking_path(booking), class: "action-link" do %>
+              <%= image_tag "icons/edit-white.svg", alt: "edit icon", width: 24, height: 24, class: "vertical-align-middle mr-2" %> Edit
+            <% end %>
+            <% convo ||= Conversation.find_by(manager: booking.manager, profile: booking.profile) %>
+            <% if convo %>
+              <%= link_to conversation_path(convo), class: "action-link" do %>
+                <%= image_tag "icons/message-white.svg", alt: "message icon", width: 16, height: 16, class: "vertical-align-middle mr-2 pl-1" %> Message
+              <% end %>
+            <% else %>
+              <%= link_to profile_conversations_path(conversation: { profile_id: booking.profile.id }, profile_id: booking.profile.id), method: :post, class: "action-link" do %>
+                <%= image_tag "icons/message-white.svg", alt: "message icon", width: 16, height: 16, class: "vertical-align-middle mr-2 pl-1" %> Message
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <button class="trigger" data-booking-id="<%= booking.id %>">
+          <%= image_tag "icons/more.svg", alt: "more", width: 16, height: 16 %>
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="booking-actions flex items-center mx-3">
-    <%= link_to booking_path(booking) do %>
-      <%= image_tag "icons/right-arrow", alt: "right arrow" %>
-    <% end %>
   </div>
 </div>

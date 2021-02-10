@@ -33,7 +33,7 @@ class ConversationFilter
 
     if params[:expertise] != [""]
       expertises = params[:expertise].reject(&:blank?)
-      @conversations = @conversations.where("profiles.expertise IN (?)", expertises.join(","))
+      @conversations = @conversations.where("profiles.expertise IN (?)", expertises)
     end
 
     filter_via_job_applications!

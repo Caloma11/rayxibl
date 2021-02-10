@@ -12,6 +12,8 @@ class Booking < ApplicationRecord
   enum price_type: PRICE_TYPES
   enum status: STATUSES
 
+  scope :today_and_after, -> { where("start_date >= ?", Date.today) }
+
   before_create :determine_total_price
 
   %w[start end].each do |identifier|

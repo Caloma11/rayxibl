@@ -1,63 +1,83 @@
 .bookingCard {
-  abbr {
-    display: none;
-  }
+	abbr {
+		display: none;
+	}
 
-  textarea {
-    min-height: 120px;
-  }
+	textarea {
+		min-height: 120px;
+	}
 
-  input, textarea {
-    box-sizing: border-box;
-  }
+	input,
+	textarea {
+		box-sizing: border-box;
+	}
 
-  .booking_billable {
-    @extend .flex, .items-center;
+	.booking_billable {
+		@extend .flex, .items-center;
 
-    .checkbox {
-      @extend .mr-3;
-    }
-  }
+		.checkbox {
+			@extend .mr-3;
+		}
+	}
 
-    input[type='checkbox'] {
-      width:24px;
-      height:24px;
-      background:white;
-  }
+	input[type="checkbox"] {
+		width: 24px;
+		height: 24px;
+		background: white;
+	}
 
-  .choose-file {
-    border: 1px solid #d3d3d3;
-    padding: 8px 24px;
-    cursor: pointer;
-    background: white;
-    border-radius: 8px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    letter-spacing: 2px;
-    img {
-      height: 32px;
-      width: 32px;
-    }
+	.choose-file {
+		border: 1px solid #d3d3d3;
+		padding: 8px 24px;
+		cursor: pointer;
+		background: white;
+		border-radius: 8px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		letter-spacing: 2px;
+		img {
+			height: 32px;
+			width: 32px;
+		}
 
-    @extend .mx-3, .mt-3;
-  }
+		@extend .mx-3, .mt-3;
+	}
 
-  .send-request {
-    padding: 8px 24px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    letter-spacing: 2px;
-    font-size: 16px;
-    img {
-      height: 32px;
-      width: 32px;
-    }
-  }
+	.send-request {
+		padding: 8px 24px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		letter-spacing: 2px;
+		font-size: 16px;
+		img {
+			height: 32px;
+			width: 32px;
+		}
+	}
 }
 
 #totalPrice {
-  @extend .flex, .items-center;
-  white-space: nowrap;
+	@extend .flex, .items-center;
+	white-space: nowrap;
+}
+
+.booking-card {
+	@extend .p-3;
+
+	border-radius: 6px;
+	box-shadow: 0px 6px 10px rgba(50, 51, 94, 0.15);
+
+	&.accepted {
+		border-top: 6px solid $flat-green-3;
+	}
+
+	&.rejected {
+		border-top: 6px solid $flat-red-3;
+	}
+
+	&.pending {
+		border-top: 6px solid $flat-yellow-3;
+	}
 }

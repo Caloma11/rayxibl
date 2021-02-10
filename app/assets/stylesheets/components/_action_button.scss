@@ -19,7 +19,8 @@
 		bottom: 80px;
 
 		&.job-show,
-		&.dashboard {
+		&.dashboard,
+		&.bookings-index {
 			top: 40px;
 			bottom: unset;
 		}

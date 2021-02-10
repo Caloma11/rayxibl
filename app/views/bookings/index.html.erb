@@ -1,17 +1,38 @@
-<div class="bookings-index">
-  <section class="mx-3 mt-4 flex justify-content-between items-center">
-    <%= link_to :back do %>
-      <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
-    <% end %>
-    <p class="textDarkGray">Bookings</p>
-    <button style="height: 16px; width: 16px"> </button>
-  </section>
-
-  <section class="mx-3 mt-4">
-    <div class="flex flex-column">
-      <% @bookings.each do |booking| %>
-        <%= render partial: "bookings/#{current_user.role}_card", locals: { booking: booking } %>
+<div class="bookings-index bg-blueish-gray">
+  <div class="bg-white pb-2">
+    <section class="px-3 pt-4 flex justify-content-between items-center">
+      <%= link_to :back do %>
+        <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
       <% end %>
+      <p class="textDarkGray">Bookings</p>
+      <button id="filter-trigger" type="button">
+        <%= image_tag "icons/filter.svg", alt: "filter", width: 16, height: 16 %>
+      </button>
+
+      <div id="filter-content" class="none">
+        <%= render partial: "bookings/filter_content" %>
+    </div>
+    </section>
+
+    <section class="switch bg-blueish-gray flex justify-content-between mx-3 p-1 rounded my-3">
+      <%= link_to "Accepted", bookings_path(status: 1),
+                  remote: true, data: { status: 1 },
+                  class: "flex items-center btn #{params[:status] == "1" ? "btn-white" : "btn-transparent"}" %>
+      <%= link_to "Pending", bookings_path(status: 0),
+                  remote: true, data: { status: 0 },
+                  class: "flex items-center btn #{params[:status] == "0" ? "btn-white" : "btn-transparent"}" %>
+      <%= link_to "Rejected", bookings_path(status: 2),
+                  remote: true, data: { status: 2 },
+                  class: "flex items-center btn #{params[:status] == "2" ? "btn-white" : "btn-transparent"}" %>
+      <%= link_to "All", bookings_path(status: -1),
+                  remote: true, data: { status: -1 },
+                  class: "flex items-center btn #{!params[:status] ? "btn-white" : "btn-transparent"}" %>
+    </section>
+  </div>
+
+  <section class="mx-3 mt-3">
+    <div class="flex flex-column" id="booking-cards">
+      <%= render partial: "bookings/booking_cards", locals: { booking_group: @bookings } %>
     </div>
   </section>
 </div>
