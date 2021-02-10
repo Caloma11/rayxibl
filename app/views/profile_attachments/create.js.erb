@@ -55,43 +55,20 @@
 
     const uploadADocument = document.getElementById("upload-a-document");
     const documentsList = document.querySelector(".documents-list");
-    // const downloadUrl = "<%= download_attachment_path(@profile_attachment)%>";
-    const downloadIconPath = "<%= image_path 'icons/download-white.svg' %>";
     const paperclipIconPath = "<%= image_path 'icons/paperclip.svg' %>";
-    const newLinkTitle = "<%= @profile_attachment.title %>";
-    const profileAttachmentId = "<%= @profile_attachment.id %>";
-    const formAuthenticityToken ="<%= form_authenticity_token %>";
-    const moreWhiteIconPath = "<%= image_path 'icons/more-white.svg' %>";
 
-
-    const docHTML = `<button name="button" class="btn-centered btn-secondary mb-3 flex items-center justify-content-center w-100">
-          <div class="flex justify-content-center items-center textWhite flex-grow-1">
-            <img alt="edit" class="mr-2" height="32" width="32" src="${downloadIconPath}">
-            ${newLinkTitle}
-          </div>
-          <div class="relative">
-            <div class="none actions-container" data-id="${profileAttachmentId}">
-              <div class="actions flex flex-column">
-                <a class="action-link flex items-center w-100" href="#">Edit</a>
-                <form class="button_to" method="post" action="/profile_attachments/${profileAttachmentId}" data-remote="true"><input type="hidden" name="_method" value="delete"><input class="action-link flex items-center w-100" type="submit" value="Remove"><input type="hidden" name="authenticity_token" value="${formAuthenticityToken}"></form>
-              </div>
-            </div>
-            <div class="trigger" data-id="${profileAttachmentId}">
-              <img class="toggler" width="24" height="24" src="${moreWhiteIconPath}">
-            </div>
-          </div>
-        </button>`;
-
-
-
-
-
-
-
+    const docHTML = (`<%= j render('profile_attachments/edit_link_button', attributes: {is_link: false, title: @profile_attachment.title.capitalize }) %>`);
     documentsList.insertAdjacentHTML("beforeend", docHTML);
+
     uploadADocument.innerHTML = `<img alt="paperclip" class="mr-2" src="${paperclipIconPath}">ADD ANOTHER`
 
-    window.moreTogglerMultiple();
+    window.toBindMoreTogglerMultiple(true);
 
   }
 })();
+
+
+// TODO:
+
+// Group all const that are repeated into an attributes object and put the HTML string in a partial
+
