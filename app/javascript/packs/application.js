@@ -50,5 +50,5 @@ document.addEventListener("turbolinks:load", () => {
 	jobFlatpickr();
 	editBookingFlatpickr();
 	conversationFilter();
-  initNewManagerPreviews();
+	initNewManagerPreviews();
 });
