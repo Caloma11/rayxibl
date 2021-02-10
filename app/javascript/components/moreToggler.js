@@ -55,50 +55,51 @@ export const moreTogglerMultiple = (ajax = false) => {
 	}
 };
 
-
 export const toBindMoreTogglerMultiple = (withBound = false) => {
-  let triggers;
-  let requiredLength;
-  const allTriggers = document.querySelectorAll(".actionsContainer");
-  if (withBound) {
-    triggers = document.querySelectorAll(".trigger.toBind");
-    requiredLength = 0;
-  } else {
-    triggers = document.querySelectorAll(".trigger:not(.toBind)");
-    requiredLength = 1;
-  }
+	let triggers;
+	let requiredLength;
 
-  let actionsContainers = document.querySelectorAll(".actions-container")
+	if (withBound) {
+		triggers = document.querySelectorAll(".trigger.toBind");
+		requiredLength = 0;
+	} else {
+		triggers = document.querySelectorAll(".trigger:not(.toBind)");
+		requiredLength = 1;
+	}
 
-  if (triggers.length > requiredLength  && actionsContainers.length > 1  ) {
-    triggers.forEach(trigger => {
-      trigger.addEventListener("click", e => {
-        actionsContainers = document.querySelectorAll(".actions-container");
-        e.stopPropagation();
+	let actionsContainers = document.querySelectorAll(".actions-container");
 
+	if (
+		triggers.length > requiredLength &&
+		actionsContainers.length > requiredLength
+	) {
+		triggers.forEach(trigger => {
+			trigger.addEventListener("click", e => {
+				actionsContainers = document.querySelectorAll(".actions-container");
+				e.stopPropagation();
 
-        const chosenContainer = Array.from(actionsContainers).find(
-          ele => ele.dataset.id === trigger.dataset.id
-        );
+				const chosenContainer = Array.from(actionsContainers).find(
+					ele => ele.dataset.id === trigger.dataset.id
+				);
 
-        const restOfContainer = Array.from(actionsContainers).filter(
-          ele => ele.dataset.id !== trigger.dataset.id
-        );
+				const restOfContainer = Array.from(actionsContainers).filter(
+					ele => ele.dataset.id !== trigger.dataset.id
+				);
 
-        console.log({restOfContainer})
+				chosenContainer.classList.toggle("none");
+				restOfContainer.forEach(ele => ele.classList.add("none"));
+			});
+			setTimeout(() => {
+				trigger.classList.remove("toBind");
+			}, 500);
+		});
 
-        chosenContainer.classList.toggle("none");
-        restOfContainer.forEach(ele => ele.classList.add("none"));
-      });
-      setTimeout(() => { trigger.classList.remove("toBind") }, 500)
-    });
-
-    document.body.addEventListener("click", () => {
-      actionsContainers.forEach(container => {
-        if (!container.classList.contains("none")) {
-          container.classList.add("none");
-        }
-      });
-    });
-  }
+		document.body.addEventListener("click", () => {
+			actionsContainers.forEach(container => {
+				if (!container.classList.contains("none")) {
+					container.classList.add("none");
+				}
+			});
+		});
+	}
 };
