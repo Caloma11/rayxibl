@@ -38,10 +38,11 @@ export const CalendarDay = ({
 		];
 	});
 
-	const handleEventClick = e => {
+	const handleEventClick = (e, bookingId) => {
 		// To cancel the parent's click event listener
 		e.stopPropagation();
-		console.log("do something");
+
+		window.location = `/bookings/${bookingId}/edit`;
 	};
 
 	return (
@@ -78,7 +79,7 @@ export const CalendarDay = ({
 						style={{
 							height: DAY_WIDTH / eventDateBooleans.length
 						}}
-						onClick={handleEventClick}
+						onClick={e => handleEventClick(e, booking.id)}
 					>
 						{a[0] && (
 							<div
