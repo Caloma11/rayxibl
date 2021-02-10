@@ -3,6 +3,7 @@ class JobApplicationsController < ApplicationController
     @job = Job.find(params[:job_id])
     @job_application = JobApplication.new(job_application_params)
     @job_application.job = @job
+    @job_application.profile = current_user.profile
 
     authorize @job_application
 
@@ -16,6 +17,6 @@ class JobApplicationsController < ApplicationController
   private
 
   def job_application_params
-    params.require(:job_application).permit(:profile_id)
+    params.require(:job_application).permit(:cover_letter)
   end
 end
