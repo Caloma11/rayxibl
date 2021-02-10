@@ -4,9 +4,27 @@ class BookingsController < ApplicationController
 
   def index
     if current_user.manager?
-      @bookings = policy_scope(current_user.manager.bookings).includes(profile: [user: { avatar_attachment: :blob }])
+      @bookings = policy_scope(current_user.manager.bookings)
+                    .includes(profile: [user: { avatar_attachment: :blob }])
+                    .today_and_after
     else
-      @bookings = policy_scope(current_user.profile.bookings)
+      @bookings = policy_scope(current_user.profile.bookings).today_and_after
+    end
+
+    if params[:status]
+      status = params[:status] == "-1" ? (0..2).to_a : params[:status].to_i
+      @bookings = @bookings.where(status: status)
+    end
+
+    if params[:booking]
+      @bookings = BookingFilter.new(@bookings, params[:booking], current_user).call
+    end
+
+    @bookings = @bookings.group_by { |booking| booking.start_date.beginning_of_week }.sort_by { |day| day }.to_h
+
+    respond_to do |format|
+      format.html
+      format.js
     end
 
     if params[:status]

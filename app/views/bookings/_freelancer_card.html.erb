@@ -1,15 +1,20 @@
-<%= link_to booking_path(booking), class: "booking-card mb-3 #{booking.status}" do %>
-  <div class="flex justify-content-between items-center">
-    <div class="flex flex-column">
-      <h3 class="m-0 textMd mb-1"><%= booking.title %></h3>
-      <p class="m-0 textSm uppercase"><%= booking.full_date_time %></p>
-      <div class="flex items-center mt-3">
-        <%= image_tag avatar_url(booking.profile), alt: "Profile's avatar", class: "avatar small avatar-circle mr-2" %>
-        <div class="flex flex-column">
-          <h5 class="m-0 textBetween"><%= booking.profile.user.display_name %></h5>
-          <p class="m-0 textSm textLightBlack"><%= booking.profile.profession %></p>
+<div>
+  <% if first %>
+    <p class="uppercase mt-0 mb-3"><%= week(day) %></p>
+  <% end %>
+  <div class="booking-card bg-white mb-3 <%= booking.status %>" data-id="<%= booking.id %>" role="button">
+    <div class="flex justify-content-between items-center">
+      <div class="flex flex-column">
+        <h3 class="m-0 textMd mb-1"><%= booking.title %></h3>
+        <p class="m-0 textSm uppercase"><%= booking.full_date_time %></p>
+        <div class="flex items-center mt-3">
+          <%= image_tag avatar_url(booking.profile), alt: "Profile's avatar", class: "avatar small avatar-circle mr-2" %>
+          <div class="flex flex-column">
+            <h5 class="m-0 textBetween"><%= booking.profile.user.display_name %></h5>
+            <p class="m-0 textSm textLightBlack"><%= booking.profile.profession %></p>
+          </div>
         </div>
       </div>
     </div>
   </div>
-<% end %>
+</div>

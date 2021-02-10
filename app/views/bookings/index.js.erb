@@ -1,8 +1,9 @@
 (() => {
   const bookingCards = document.getElementById("booking-cards");
   const switches = document.querySelectorAll(".switch a");
+  const filterContent = document.getElementById("filter-content");
 
-  bookingCards.innerHTML = "<%= j render partial: "bookings/booking_cards", locals: { bookings: @bookings } %>";
+  bookingCards.innerHTML = "<%= j render partial: "bookings/booking_cards", locals: { booking_group: @bookings } %>";
 
   switches.forEach(switchLink => {
     if (switchLink.classList.contains("btn-transparent") && switchLink.dataset.status == "<%= params[:status] %>") {
@@ -13,6 +14,10 @@
       switchLink.classList.add("btn-transparent");
     }
   })
+
+  if (!filterContent.classList.contains("none")) {
+    filterContent.classList.add("none");
+  }
 
   window.moreTogglerMultiple();
 })();

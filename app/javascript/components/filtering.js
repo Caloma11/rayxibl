@@ -45,7 +45,8 @@ export const jobApplicationFilter = () => {
 
 	if (clearFilterBtn) {
 		clearFilterBtn.addEventListener("click", () => {
-			const form = document.querySelector(".simple_form.profile");
+			const form = document.querySelector(".simple_form");
+
 			const inputs = form.querySelectorAll(
 				"input[type='text'], input[type='hidden']"
 			);
@@ -80,7 +81,7 @@ export const conversationFilter = () => {
 
 	if (clearFilterBtn) {
 		clearFilterBtn.addEventListener("click", () => {
-			const form = document.querySelector(".simple_form.profile");
+			const form = document.querySelector(".simple_form");
 			const inputs = form.querySelectorAll(
 				"input[type='text'], input[type='hidden']"
 			);
