@@ -12,7 +12,8 @@
 
     <%= link_to profile_path(profile) do %>
       <% if profile.user.avatar.attached? %>
-        <%= image_tag profile.user.avatar.service_url, alt: "profile avatar", width: 64, height: 64, class: "profile-card-avatar" %>
+        <div class="profile-card-avatar" style="background-image: url(<%= profile.user.avatar.service_url %>); width: 64px; height: 64px">
+        </div>
       <% else %>
         <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "profile avatar", height: 64, width: 64, class: "profile-card-avatar" %>
       <% end %>
