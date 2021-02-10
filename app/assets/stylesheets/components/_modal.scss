@@ -1,0 +1,24 @@
+#modal-content {
+	@extend .vh-100, .vw-100, .flex, .justify-content-center, .items-center;
+
+	position: absolute;
+	top: 0;
+	background: rgba(20, 15, 38, 0.5);
+	z-index: 1;
+	backdrop-filter: blur(100px);
+
+	.card-content {
+		@extend .p-2, .rounded-lg, .mx-2, .bg-white, .flex, .flex-column;
+
+		width: calc(100vw - 20px);
+
+		div.job_application_cover_letter {
+			@extend .w-100;
+
+			#job_application_cover_letter {
+				display: block;
+				width: 95%;
+			}
+		}
+	}
+}
