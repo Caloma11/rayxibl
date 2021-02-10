@@ -34,7 +34,10 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    @conversation = Conversation.includes(messages: [:user]).find(params[:id])
+    @conversation = Conversation.includes(messages: [:booking, :user]).find(params[:id])
+    if params[:booking_id]
+      @booking = Booking.find(params[:booking_id])
+    end
     authorize @conversation
     @other_person = @conversation.other_person(current_user)
     @message = Message.new
