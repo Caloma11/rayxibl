@@ -6,7 +6,8 @@
       <% end %>
       <div class="flex items-center flex-grow-1">
         <% if @other_person.avatar.present? %>
-          <%= image_tag @other_person.avatar.service_url, alt: "Avatar", width: 64, height: 64, class: "ml-3 rounded-square company-logo" %>
+          <div class="profile-card-avatar ml-3 rounded-square company-logo" style="background-image: url(<%= @other_person.avatar.service_url %>)">
+          </div>
         <% else %>
           <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "Avatar", width: 64  , height: 64   , class: "ml-3 rounded-square company-logo" %>
         <% end %>
