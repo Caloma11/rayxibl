@@ -1,6 +1,10 @@
 class JobsController < ApplicationController
   def index
-    @jobs = policy_scope(Job)
+    if current_user.manager?
+      @jobs = policy_scope(Job).includes(manager: { user: { avatar_attachment: :blob } }).active
+    else
+      @jobs = policy_scope(Job).active
+    end
 
     if params[:manager_id]
       @jobs = @jobs.where(manager_id: params[:manager_id])
@@ -10,6 +14,15 @@ class JobsController < ApplicationController
       @jobs = @jobs.live
     elsif params[:status] == "1"
       @jobs = @jobs.archived
+    end
+
+    if params[:applied] == "true"
+      @jobs = @jobs.joins(:job_applications).where("job_applications.profile_id = :id", id: current_user.profile.id)
+    end
+
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 
