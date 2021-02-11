@@ -28,6 +28,7 @@ import { initNewManagerPreviews } from "../components/newManagerPreviews";
 import { bookingCardLink } from "../components/bookingCardLink";
 import { initModal } from "../components/modal";
 import { freelancerJobCardLink } from "../components/freelancerJobCardLinkage";
+import { error } from "../components/error";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -66,6 +67,7 @@ document.addEventListener("turbolinks:load", () => {
 	bookingCardLink();
 	initModal();
 	freelancerJobCardLink();
+	error();
 
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
