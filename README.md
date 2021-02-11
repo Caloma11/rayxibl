@@ -9,7 +9,7 @@
 - Jobs#new page styling
 - Notifications system
 - Archiving jobs system -> (Is it there on both sides ?)
-
+- Accepting a booking => Both on freelancer`s dashboard and widget
   ~~More on point 2 (nice to have behaviours):~~
 
   - ~~It should not disappear right away in the "Everyone" section~~
