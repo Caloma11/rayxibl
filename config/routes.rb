@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   get "/dashboard", to: "pages#dashboard"
 
   resources :bookings, only: %i[index show edit update]
+  patch "/bookings/:id/update_status", to: "bookings#accept_or_reject", as: :booking_update_status
 
   get "/mail", to: "pages#mail"
 
