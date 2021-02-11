@@ -13,8 +13,6 @@ export const editBookingFlatpickr = () => {
 	const dateInput = document.querySelector(".datepicker");
 	const bookingStartDateInput = document.getElementById("booking_start_date");
 	const bookingEndDateInput = document.getElementById("booking_end_date");
-	const jobStartDateInput = document.getElementById("job_start_date");
-	const jobEndDateInput = document.getElementById("job_end_date");
 	const timepickerOptions = {
 		disableMobile: true,
 		noCalendar: true,
@@ -41,17 +39,10 @@ export const editBookingFlatpickr = () => {
 				rangeSeparator: "  -  "
 			},
 			onChange: dates => {
-				if (bookingStartDateInput && bookingEndDateInput) {
-					handleChange(dates, {
-						start: bookingStartDateInput,
-						end: bookingEndDateInput
-					});
-				} else if (jobStartDateInput && jobEndDateInput) {
-					handleChange(dates, {
-						start: jobStartDateInput,
-						end: jobEndDateInput
-					});
-				}
+				handleChange(dates, {
+					start: bookingStartDateInput,
+					end: bookingEndDateInput
+				});
 			}
 		});
 	}
