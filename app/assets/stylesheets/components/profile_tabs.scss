@@ -1,18 +1,23 @@
 .profileTabs {
-  @extend .mx-3, .py-1, .flex, .justify-content-around, .items-center;
-  border-radius: 16px;
-  background-color: $blueish-gray;
+	@extend .mx-3, .py-1, .flex, .justify-content-around, .items-center, .rounded;
 
+	background-color: $blueish-gray;
+	height: 35px;
 
-  .tab {
-    @extend .mx-1, .py-3, .flex-grow-1, .justify-content-center, .h-100, .flex, .items-center;
-    transition: ease .5s;
+	.tab {
+		@extend .mx-1,
+			.flex-grow-1,
+			.justify-content-center,
+			.h-100,
+			.flex,
+			.items-center;
+		transition: ease 0.5s;
 
+		&.active {
+			@extend .rounded, .px-2;
 
-    &.active {
-      background-color: white;
-      border-radius: 16px;
-      box-shadow: 0px 6px 10px rgba(50, 51, 94, 0.15);
-    }
-  }
+			background-color: white;
+			box-shadow: 0px 6px 10px rgba(50, 51, 94, 0.15);
+		}
+	}
 }
