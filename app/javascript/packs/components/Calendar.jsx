@@ -108,7 +108,10 @@ const Calendar = () => {
 				<BookingForm formDetails={formDetails} setShowForm={setShowForm} />
 			)}
 			<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
-			<div className="calendarContainer" onScroll={handleScroll}>
+			<div
+				className={`calendarContainer ${showForm ? "none" : ""}`}
+				onScroll={handleScroll}
+			>
 				<CalendarProfiles profiles={profiles} />
 				<div className="allDays">
 					<CalendarDayHeaders data={data} weekOffset={weekOffset} />
