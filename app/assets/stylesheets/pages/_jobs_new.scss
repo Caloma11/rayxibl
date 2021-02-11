@@ -10,6 +10,12 @@
 			}
 		}
 
+		.bookingHours {
+			@extend .mr-2;
+
+			width: 200px;
+		}
+
 		&.content {
 			#new_job {
 				.separator {

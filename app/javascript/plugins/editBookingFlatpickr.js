@@ -1,11 +1,18 @@
 import flatpickr from "flatpickr";
 
+const handleChange = (dates, { start, end }) => {
+	if (start && end) {
+		start.value = new Date(Date.parse(dates[0])).toDateString();
+		end.value = new Date(Date.parse(dates[1])).toDateString();
+	}
+};
+
 export const editBookingFlatpickr = () => {
 	const startTimeInput = document.getElementById("booking_start_time");
 	const endTimeInput = document.getElementById("booking_end_time");
 	const dateInput = document.querySelector(".datepicker");
-	const startDateInput = document.getElementById("booking_start_date");
-	const endDateInput = document.getElementById("booking_end_date");
+	const bookingStartDateInput = document.getElementById("booking_start_date");
+	const bookingEndDateInput = document.getElementById("booking_end_date");
 	const timepickerOptions = {
 		disableMobile: true,
 		noCalendar: true,
@@ -32,8 +39,10 @@ export const editBookingFlatpickr = () => {
 				rangeSeparator: "  -  "
 			},
 			onChange: dates => {
-				startDateInput.value = new Date(Date.parse(dates[0])).toDateString();
-				endDateInput.value = new Date(Date.parse(dates[1])).toDateString();
+				handleChange(dates, {
+					start: bookingStartDateInput,
+					end: bookingEndDateInput
+				});
 			}
 		});
 	}

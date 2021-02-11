@@ -20,3 +20,4 @@
 
 - Purge CSS for production
 - Use Cloudflare as asset hoster
+- Add Accept/Reject booking in the widget (triple dot icon)
