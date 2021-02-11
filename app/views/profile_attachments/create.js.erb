@@ -11,7 +11,7 @@
     // Clear modal form
     document.querySelector("#links-modal form").reset();
 
-    const linkHTML = (`<%= j render('profile_attachments/edit_link_button', attributes: {is_link: true, title: @profile_attachment.title.capitalize }) %>`);
+    const linkHTML = (`<%= j render('profile_attachments/edit_link_button') %>`);
 
     // Insert new button
     linksList.insertAdjacentHTML('beforeend', linkHTML);
@@ -21,6 +21,7 @@
     addALink.innerHTML = `<img alt="zap" class="mr-2" src="${zapIconPath}">ADD ANOTHER`
 
     window.toBindMoreTogglerMultiple(true);
+    window.initEditLinksModals(true);
 
   } else {
     // Close modal
@@ -33,12 +34,13 @@
     const documentsList = document.querySelector(".documents-list");
     const paperclipIconPath = "<%= image_path 'icons/paperclip.svg' %>";
 
-    const docHTML = (`<%= j render('profile_attachments/edit_link_button', attributes: {is_link: false, title: @profile_attachment.title.capitalize }) %>`);
+    const docHTML = (`<%= j render('profile_attachments/edit_link_button') %>`);
     documentsList.insertAdjacentHTML("beforeend", docHTML);
 
     uploadADocument.innerHTML = `<img alt="paperclip" class="mr-2" src="${paperclipIconPath}">ADD ANOTHER`
 
     window.toBindMoreTogglerMultiple(true);
+    window.initEditLinksModals(true);
 
   }
 })();

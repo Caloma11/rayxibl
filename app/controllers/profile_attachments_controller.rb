@@ -1,7 +1,7 @@
 class ProfileAttachmentsController < ApplicationController
   require 'open-uri'
 
-  before_action :set_profile_attachment, only: [:download, :destroy]
+  before_action :set_profile_attachment, except: [:create]
 
   def download
     data = URI.open(@profile_attachment.attachment.service_url).read
@@ -17,6 +17,18 @@ class ProfileAttachmentsController < ApplicationController
     authorize @profile_attachment
     respond_to do |format|
       format.js
+    end
+  end
+
+  def update
+    if @profile_attachment.update(update_profile_attachment_params)
+      @is_link = @profile_attachment.url.present?
+      respond_to do |format|
+        format.html { redirect_to profile_path(@profile_attachment.profile) }
+        format.js
+      end
+    else
+      render 'profiles/show'
     end
   end
 
@@ -37,6 +49,10 @@ class ProfileAttachmentsController < ApplicationController
 
   def profile_attachment_params
     params.require(:profile_attachment).permit(:title, :url, :attachment)
+  end
+
+  def update_profile_attachment_params
+    params.require(:profile_attachment).permit(:title, :url)
   end
 
 end

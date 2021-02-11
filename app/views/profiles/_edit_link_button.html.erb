@@ -1,4 +1,4 @@
-<%= button_tag class: "btn-centered btn-secondary mb-3 flex items-center justify-content-center w-100" do %>
+<div class="btn-centered btn-secondary mb-3 flex items-center justify-content-center w-100 border-box textBetween" data-button-link-id="<%= link.id %>" >
   <div class="flex justify-content-center items-center textWhite flex-grow-1">
     <% if link.url.blank? %>
       <%= image_tag "icons/download-white", width: 32, height: 32, class: "mr-2" %>
@@ -11,8 +11,15 @@
   <div class="relative">
     <div class="none actions-container" data-id="<%= link.id %>" >
       <div class="actions flex flex-column">
-        <%= link_to "Edit", "#", class: "action-link flex items-center w-100" %>
-        <%= button_to "Remove", profile_attachment_path(link), class: "action-link flex items-center w-100", remote: true, method: :delete %>
+        <%= link_to "#", class: "action-link flex items-center w-100 edit-link-bound", data: { link_id: link.id} do %>
+          <%= image_tag "icons/edit-white", width: 32, height: 32, class: "mr-2" %>
+          <%= link.url.blank? ? "RE-NAME" : "EDIT" %>
+        <% end %>
+        <%= button_to profile_attachment_path(
+          link), class: "action-link flex items-center w-100 textBetween semi-bold", remote: true, method: :delete do %>
+          <%= image_tag "icons/trash-white", width: 32, height: 32, class: "mr-2" %>
+          REMOVE
+        <% end %>
       </div>
     </div>
     <!-- Blue document button trigger -->
@@ -20,5 +27,19 @@
       <%= image_tag "icons/more-white.svg", class: "toggler", width: 24, height: 24 %>
     </div>
   </div>
+</div>
 <!-- End of relative -->
-<% end %>
+
+<!-- Edit Link Modal -->
+<div class="none edit-link-modal-bound" id="edit-links-modal-<%= link.id %>">
+  <%= simple_form_for link, html: { class: "relative" }, remote: true do |paf| %>
+    <%= image_tag "icons/cross.svg", alt: "back link", width: 16, height: 16, class: "mr-2 textSm", id: "edit-close-links-#{link.id}" %>
+    <%= paf.input :title, required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+    <% if link.url.present? %>
+      <%= paf.input :url, placeholder: "https://", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+    <% end %>
+    <div class="p-3">
+      <%= paf.submit "Update link", class: "btn btn-white"%>
+    </div>
+  <% end %>
+</div>
