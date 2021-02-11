@@ -1,0 +1,16 @@
+(() => {
+  const jobsSection = document.querySelector(".jobs");
+  const switches = document.querySelectorAll(".switch a");
+
+  jobsSection.innerHTML = "<%= j render partial: "jobs/job_cards", locals: { jobs: @jobs } %>";
+
+  switches.forEach(switchLink => {
+    if (switchLink.classList.contains("btn-transparent") && switchLink.dataset.status == "<%= params[:status] %>") {
+      switchLink.classList.add("btn-white");
+      switchLink.classList.remove("btn-transparent");
+    } else {
+      switchLink.classList.remove("btn-white");
+      switchLink.classList.add("btn-transparent");
+    }
+  })
+})();

@@ -8,7 +8,11 @@ import { initFlatpickr } from "../plugins/newBookingFlatpickr";
 import { initDurationToggler } from "../components/durationToggler";
 import { bindBillableCheckbox } from "../components/billable";
 import { stepForm } from "../components/stepForm";
-import { moreToggler, moreTogglerMultiple, toBindMoreTogglerMultiple } from "../components/moreToggler";
+import {
+	moreToggler,
+	moreTogglerMultiple,
+	toBindMoreTogglerMultiple
+} from "../components/moreToggler";
 import { previewImage } from "../components/previewImage";
 import { editAndNewPreviewImage } from "../components/editProfilePreviewImage";
 import {
@@ -23,6 +27,7 @@ import { editBookingFlatpickr } from "../plugins/editBookingFlatpickr";
 import { initNewManagerPreviews } from "../components/newManagerPreviews";
 import { bookingCardLink } from "../components/bookingCardLink";
 import { initModal } from "../components/modal";
+import { freelancerJobCardLink } from "../components/freelancerJobCardLinkage";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -53,15 +58,16 @@ document.addEventListener("turbolinks:load", () => {
 	editBookingFlatpickr();
 	conversationFilter();
 	initNewManagerPreviews();
-  if ((/profiles\/\d+\/edit/).test(window.location.href)) {
-	  toBindMoreTogglerMultiple();
-  } else {
-    moreTogglerMultiple();
-  }
+	if (/profiles\/\d+\/edit/.test(window.location.href)) {
+		toBindMoreTogglerMultiple();
+	} else {
+		moreTogglerMultiple();
+	}
 	bookingCardLink();
 	initModal();
+	freelancerJobCardLink();
 
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
-  window.toBindMoreTogglerMultiple = toBindMoreTogglerMultiple;
+	window.toBindMoreTogglerMultiple = toBindMoreTogglerMultiple;
 });
