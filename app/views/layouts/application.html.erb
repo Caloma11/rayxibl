@@ -14,7 +14,9 @@
   <body>
     <%= render 'shared/flashes' %>
     <div class="yielded-content">
-      <%= yield %>
+      <div class="contained">
+        <%= yield %>
+      </div>
     </div>
     <% if user_signed_in? %>
       <%= link_to "SIGN OUT BUTTON", destroy_user_session_path, method: :delete %>

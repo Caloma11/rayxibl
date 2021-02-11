@@ -17,4 +17,8 @@ class ProfileAttachmentPolicy < ApplicationPolicy
     create?
   end
 
+  def update?
+    create?
+  end
+
 end

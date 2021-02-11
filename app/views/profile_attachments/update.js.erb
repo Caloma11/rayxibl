@@ -1,0 +1,18 @@
+(()=> {
+  const paId = "<%= @profile_attachment.id %>";
+  const paTitle = "<%= @profile_attachment.title %>"
+  const isLink = "<%= @is_link %>";
+
+  const button = document.querySelector(`[data-button-link-id='${paId}']`);
+  const activeModal = document.getElementById(`edit-links-modal-${paId}`)
+
+  const downloadIconPath = "<%= image_path 'icons/download-white.svg' %>";
+  const editIconPath = "<%= image_path 'icons/edit-white.svg' %>";
+  const iconPath = isLink === "true" ? editIconPath : downloadIconPath;
+
+  activeModal.classList.add("none");
+
+  button.firstElementChild.innerHTML = `<img width="32" height="32" class="mr-2" src="${iconPath}">
+    ${paTitle}`;
+
+})()

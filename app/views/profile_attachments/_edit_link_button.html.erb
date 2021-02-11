@@ -1,21 +1,45 @@
-<button name="button" class="btn-centered btn-secondary mb-3 flex items-center justify-content-center w-100">
+<div class="btn-centered btn-secondary mb-3 flex items-center justify-content-center w-100 border-box textBetween" data-button-link-id="<%= @profile_attachment.id %>" >
   <div class="flex justify-content-center items-center textWhite flex-grow-1">
-    <% if attributes[:is_link] %>
-      <%= image_tag "icons/edit-white", width: 32, height: 32, class: "mr-2" %>
-    <% else %>
+    <% if @profile_attachment.url.blank? %>
       <%= image_tag "icons/download-white", width: 32, height: 32, class: "mr-2" %>
+    <% else %>
+      <%= image_tag "icons/edit-white", width: 32, height: 32, class: "mr-2" %>
     <% end %>
-    <%= attributes[:title] %>
+    <%= @profile_attachment.title&.capitalize %>
   </div>
+  <!-- Actions container of blue btn for documents -->
   <div class="relative">
-    <div class="none actions-container" data-id="<%= @profile_attachment.id %>">
+    <div class="none actions-container" data-id="<%= @profile_attachment.id %>" >
       <div class="actions flex flex-column">
-        <a class="action-link flex items-center w-100" href="#">Edit</a>
-        <form class="button_to" method="post" action="/profile_attachments/<%= @profile_attachment.id %>" data-remote="true"><input type="hidden" name="_method" value="delete"><input class="action-link flex items-center w-100" type="submit" value="Remove"><input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>"></form>
+        <%= link_to "#", class: "action-link flex items-center w-100 edit-link", data: { link_id: @profile_attachment.id} do %>
+          <%= image_tag "icons/edit-white", width: 32, height: 32, class: "mr-2" %>
+          <%= @profile_attachment.url.blank? ? "RE-NAME" : "EDIT" %>
+        <% end %>
+        <%= button_to profile_attachment_path(
+          @profile_attachment), class: "action-link flex items-center w-100 textBetween semi-bold", remote: true, method: :delete do %>
+          <%= image_tag "icons/trash-white", width: 32, height: 32, class: "mr-2" %>
+          REMOVE
+        <% end %>
       </div>
     </div>
+    <!-- Blue document button trigger -->
     <div class="trigger toBind" data-id="<%= @profile_attachment.id %>">
       <%= image_tag "icons/more-white.svg", class: "toggler", width: 24, height: 24 %>
     </div>
   </div>
-</button>
+</div>
+<!-- End of relative -->
+
+<!-- Edit Link Modal -->
+<div class="none edit-link-modal-bound" id="edit-links-modal-<%= @profile_attachment.id %>">
+  <%= simple_form_for @profile_attachment, html: { class: "relative" }, remote: true do |paf| %>
+    <%= image_tag "icons/cross.svg", alt: "back link", width: 16, height: 16, class: "mr-2 textSm", id: "edit-close-links-#{@profile_attachment.id}" %>
+    <%= paf.input :title, required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+    <% if @profile_attachment.url.present? %>
+      <%= paf.input :url, placeholder: "https://", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"} %>
+    <% end %>
+    <div class="p-3">
+      <%= paf.submit "Update link", class: "btn btn-white"%>
+    </div>
+  <% end %>
+</div>

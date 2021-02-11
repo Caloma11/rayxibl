@@ -29,3 +29,18 @@ body {
 .yielded-content {
 	flex: 1 0 auto;
 }
+
+  @media (min-width: 600px) {
+    .yielded-content {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: $light-gray;
+    }
+    .contained {
+      width: 600px;
+      background-color: white;
+      box-shadow: 1px 6px 19px -1px rgba(0, 0, 0, .1);
+      padding-bottom: 32px;
+    }
+  }

@@ -35,7 +35,7 @@ Rails.application.routes.draw do
     resources :conversations, only: %i[create]
   end
 
-  resources :profile_attachments, only: %i[destroy]
+  resources :profile_attachments, only: %i[destroy update]
 
   resources :connections, only: %i[destroy]
 
