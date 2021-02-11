@@ -1,6 +1,6 @@
 class BookingsController < ApplicationController
   before_action :set_profile, only: :new
-  before_action :set_booking, only: [:show, :edit, :update, :cancel]
+  before_action :set_booking, only: [:show, :edit, :update, :cancel, :accept_or_reject]
 
   def index
     if current_user.manager?
@@ -62,6 +62,16 @@ class BookingsController < ApplicationController
       redirect_to booking_path(@booking)
     else
       render :edit
+    end
+  end
+
+  def accept_or_reject
+    authorize @booking
+
+    if @booking.update(status: params[:booking][:status].to_i)
+      redirect_to conversation_path(@booking.message.conversation)
+    else
+      render "conversations/show"
     end
   end
 
