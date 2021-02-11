@@ -6,6 +6,7 @@ class JobsController < ApplicationController
       @jobs = policy_scope(Job).active
     end
 
+
     if params[:manager_id]
       @jobs = @jobs.where(manager_id: params[:manager_id])
     end
@@ -19,6 +20,11 @@ class JobsController < ApplicationController
     if params[:applied] == "true"
       @jobs = @jobs.joins(:job_applications).where("job_applications.profile_id = :id", id: current_user.profile.id)
     end
+
+    if params[:job]
+      @jobs = JobFilter.new(@jobs, params[:job], current_user).call
+    end
+
 
     respond_to do |format|
       format.html
