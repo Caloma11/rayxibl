@@ -17,6 +17,16 @@ const determineColor = status => {
 };
 const DAY_WIDTH = 80;
 
+/*
+  Variable definitions:
+  1. handleDayClick({ week, day }) => Click listener on an Event
+  2. dayOfWeek => MomentJS object of a Date -> particularly each Day
+  3. today => Boolean that checks whether a `dayOfWeek` is `today` or not
+  4. week => Relative week number from start of year
+  5. day => Day number of a week (0 -> Sunday)
+  6. bookings => All bookings (events)
+*/
+
 export const CalendarDay = ({
 	handleDayClick,
 	dayOfWeek,
@@ -25,8 +35,10 @@ export const CalendarDay = ({
 	day,
 	bookings
 }) => {
+	// Checks if today, if so, use `"today"` as a class to color the background differently
 	const todayClassName = today ? "today" : "";
 	/*
+    Used to render the events properly (particularly if it's multi-day)
     ORDER OF ARRAY:
     [IS_START_DATE, IN_BETWEEN, IS_END_DATE]
   */
@@ -38,6 +50,7 @@ export const CalendarDay = ({
 		];
 	});
 
+	// Go to bookings#edit page if an event is clicked
 	const handleEventClick = (e, bookingId) => {
 		// To cancel the parent's click event listener
 		e.stopPropagation();
@@ -52,33 +65,51 @@ export const CalendarDay = ({
 		>
 			{eventDateBooleans.map((a, i) => {
 				if (!a.some(ele => ele)) return null;
-
+				{
+					/* Every individual booking */
+				}
 				const booking = bookings[i];
+				{
+					/* Used for styling */
+				}
 				const eventClassName = `${EVENT_CLASS_NAMES} ${
 					a[0] ? START_EVENT_CLASS_NAMES : ""
 				} ${a[2] ? END_EVENT_CLASS_NAMES : ""} ${determineColor(
 					booking.status
 				)}`;
+				{
+					/* Generate MomentJS object of a booking's start date */
+				}
 				const momentStart = moment(booking.startDate);
+				{
+					/* Generate MomentJS object of a booking's end date */
+				}
 				const momentEnd = moment(booking.endDate);
+				{
+					/* Calculate the date difference (in days) of the booking's duration */
+				}
 				let eventDuration = momentEnd.diff(momentStart, "days") + 1;
 				let timeText;
 
+				{
+					/* Checks if `booking` has a duration and store text accordingly */
+				}
 				if (booking.duration) {
 					timeText = `${booking.duration} HR / DAY`;
 				} else {
 					timeText = `${booking.startTime} - ${booking.endTime}`;
 				}
 
+				{
+					/* To avoid 0 day events (happens when `booking.end_date` === `booking.start_date`) */
+				}
 				if (eventDuration === 0) eventDuration = 1;
 
 				return (
 					<div
 						key={i}
 						className={eventClassName}
-						style={{
-							height: DAY_WIDTH / eventDateBooleans.length
-						}}
+						style={{ height: 180 / eventDateBooleans.length }}
 						onClick={e => handleEventClick(e, booking.id)}
 					>
 						{a[0] && (
