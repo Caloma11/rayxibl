@@ -20,20 +20,24 @@ export const CalendarDays = ({
 		<div className="daysCollection">
 			{numberOfWeeks.map((week, j) => {
 				return week.map((_, k) => {
-					const dayOfWeek = data[j][k];
-					const today = dayOfWeek.isSame(moment(), "day");
+					try {
+						const dayOfWeek = data[j][k];
+						const today = dayOfWeek.isSame(moment(), "day");
 
-					return (
-						<CalendarDay
-							handleDayClick={handleDayClick}
-							dayOfWeek={dayOfWeek}
-							today={today}
-							week={j}
-							day={k}
-							key={`${j}_${k}`}
-							bookings={profile.bookings}
-						/>
-					);
+						return (
+							<CalendarDay
+								handleDayClick={handleDayClick}
+								dayOfWeek={dayOfWeek}
+								today={today}
+								week={j}
+								day={k}
+								key={`${j}_${k}`}
+								bookings={profile.bookings}
+							/>
+						);
+					} catch (error) {
+						console.log(error);
+					}
 				});
 			})}
 		</div>
