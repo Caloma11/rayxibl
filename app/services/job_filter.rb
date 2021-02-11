@@ -26,7 +26,7 @@ class JobFilter
       if current_user.manager?
         @jobs = @jobs.includes(manager: { user: { avatar_attachment: :blob } }).active
       else
-        @jobs = @jobs.active
+        @jobs = @jobs.includes(:manager).active
       end
     end
 

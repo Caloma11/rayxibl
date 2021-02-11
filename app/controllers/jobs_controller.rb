@@ -3,7 +3,7 @@ class JobsController < ApplicationController
     if current_user.manager?
       @jobs = policy_scope(Job).includes(manager: { user: { avatar_attachment: :blob } }).active
     else
-      @jobs = policy_scope(Job).active
+      @jobs = policy_scope(Job).includes(:manager).active
     end
 
 
