@@ -11,6 +11,20 @@
                 <%= image_tag "icons/edit-white.svg", alt: "edit", width: 32, height: 32, class: "vertical-align-middle" %> EDIT
               <% end %>
             <% end %>
+            <% if policy(booking).accept_or_reject? %>
+              <%= simple_form_for booking, url: booking_update_status_path(booking) do |f| %>
+                <%= f.input :status, as: :hidden, input_html: { value: 1 } %>
+                <button class="action-link text-start w-100 textMd" type="submit">
+                  <%= image_tag "icons/checkmark.svg", alt: "Accept booking", class: "vertical-align-middle pl-1 mr-2", width: 18, height: 18 %> Accept
+                </button>
+              <% end %>
+              <%= simple_form_for booking, url: booking_update_status_path(booking) do |f| %>
+                <%= f.input :status, as: :hidden, input_html: { value: 2 } %>
+                <button class="action-link text-start w-100 textMd" type="submit">
+                  <%= image_tag "icons/cross-white.svg", alt: "Accept booking", class: "vertical-align-middle pl-1 mr-2", width: 18, height: 18 %> Reject
+                </button>
+              <% end %>
+            <% end %>
             <%= link_to conversation_path(booking_id: booking.id), class: "action-link" do %>
               <%= image_tag "icons/message-white.svg", alt: "message", class: "vertical-align-middle pl-1 mr-2" %> Message
             <% end %>

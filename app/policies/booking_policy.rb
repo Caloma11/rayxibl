@@ -25,6 +25,10 @@ class BookingPolicy < ApplicationPolicy
     is_booker? && before_start? && still_pending?
   end
 
+  def accept_or_reject?
+    still_pending? && is_freelancer?
+  end
+
   private
 
   def is_booker?
@@ -39,4 +43,7 @@ class BookingPolicy < ApplicationPolicy
     record.pending?
   end
 
+  def is_freelancer?
+    record.profile == user.profile
+  end
 end
