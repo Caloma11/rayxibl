@@ -1,6 +1,7 @@
 (() => {
   const jobsSection = document.querySelector(".jobs");
   const switches = document.querySelectorAll(".switch a");
+  const filterContent = document.getElementById("filter-content");
 
   jobsSection.innerHTML = "<%= j render partial: "jobs/job_cards", locals: { jobs: @jobs } %>";
 
@@ -12,5 +13,11 @@
       switchLink.classList.remove("btn-white");
       switchLink.classList.add("btn-transparent");
     }
-  })
+  });
+
+  if (!filterContent.classList.contains("none")) {
+    filterContent.classList.add("none");
+  }
+
+  window.moreTogglerMultiple(true);
 })();

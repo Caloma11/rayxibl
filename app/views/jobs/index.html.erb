@@ -4,7 +4,13 @@
       <%= image_tag "icons/left-arrow.svg", alt: "back button", width: 16, height: 16 %>
     <% end %>
     <h3>Job Posts</h3>
-    <button><%= image_tag "icons/search.svg", alt: "search", width: 16, height: 16 %></button>
+    <button id="filter-trigger" type="button">
+      <%= image_tag "icons/filter.svg", alt: "filter", width: 16, height: 16 %>
+    </button>
+
+    <div id="filter-content" class="none">
+      <%= render partial: "jobs/filter_content" %>
+    </div>
   </div>
 
   <section class="switch flex bg-blueish-gray py-1 my-3 px-3">

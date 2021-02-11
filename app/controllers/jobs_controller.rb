@@ -3,8 +3,9 @@ class JobsController < ApplicationController
     if current_user.manager?
       @jobs = policy_scope(Job).includes(manager: { user: { avatar_attachment: :blob } }).active
     else
-      @jobs = policy_scope(Job).active
+      @jobs = policy_scope(Job).includes(:manager).active
     end
+
 
     if params[:manager_id]
       @jobs = @jobs.where(manager_id: params[:manager_id])
@@ -19,6 +20,11 @@ class JobsController < ApplicationController
     if params[:applied] == "true"
       @jobs = @jobs.joins(:job_applications).where("job_applications.profile_id = :id", id: current_user.profile.id)
     end
+
+    if params[:job]
+      @jobs = JobFilter.new(@jobs, params[:job], current_user).call
+    end
+
 
     respond_to do |format|
       format.html

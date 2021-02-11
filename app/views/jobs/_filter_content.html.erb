@@ -1,0 +1,30 @@
+<div class="h-100">
+  <section class="head">
+    <button class="filter-exit"><%= image_tag "icons/cross.svg", alt: "close" %></button>
+    <p>FILTER</p>
+    <button style="opacity: 0; user-select: none"><%= image_tag "icons/cross.svg", alt: "close" %></button>
+  </section>
+
+  <section class="content">
+    <p class="title">Jobs</p>
+
+    <%= simple_form_for :job, url: jobs_path, method: :get, remote: true do |f| %>
+      <%= f.input :title, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :location, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" } %>
+      <%= f.input :expertise, required: false,
+                  wrapper_html: { class: "flex flex-column mb-3" },
+                  label: "Experience level",
+                  input_html: { multiple: true },
+                  collection: Profile.expertises %>
+
+      <div class="mt-5 mb-3 mx-3 px-3 flex justify-content-between">
+        <button type="submit" name="job[clear]" value="true" id="clear" class="btn btn-float red">Clear</button>
+        <%# DUMMY BUTTON FOR NOW %>
+        <button class="btn btn-float" style="user-select: none">Saved</button>
+      </div>
+      <%= f.submit "Show results", class: "uppercase btn btn-primary w-100 py-3" %>
+    <% end %>
+  </section>
+</div>

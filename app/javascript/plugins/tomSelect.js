@@ -6,6 +6,7 @@ export const initTomSelect = () => {
 	const profileExpertise = document.getElementById("profile_expertise");
 	const bookingSkills = document.getElementById("booking_skills");
 	const bookingExpertise = document.getElementById("booking_expertise");
+	const jobExpertise = document.getElementById("job_expertise");
 
 	if (profileSkills) {
 		new TomSelect(profileSkills, config);
@@ -21,5 +22,9 @@ export const initTomSelect = () => {
 
 	if (bookingExpertise) {
 		new TomSelect(bookingExpertise, config);
+	}
+
+	if (jobExpertise) {
+		new TomSelect(jobExpertise, config);
 	}
 };
