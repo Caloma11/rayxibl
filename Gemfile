@@ -22,6 +22,7 @@ gem 'devise_invitable'
 gem 'pundit'
 gem 'simple_form'
 gem 'aws-sdk-s3'
+gem 'sendgrid-ruby'
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
