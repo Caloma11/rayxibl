@@ -15,6 +15,42 @@
           </div>
         </div>
       </div>
+      <div class="relative">
+        <div class="none actions-container" data-id="<%= booking.id %>">
+          <div class="actions flex flex-column bookings-index">
+            <% if policy(booking).accept_or_reject? %>
+              <%= simple_form_for booking, url: booking_update_status_path(booking) do |f| %>
+                <%= f.input :status, as: :hidden, input_html: { value: 1 } %>
+                <button class="action-link text-start w-100 textMd" type="submit">
+                  <%= image_tag "icons/checkmark.svg", alt: "Accept booking", class: "vertical-align-middle pl-1 mr-2", width: 18, height: 18 %> Accept
+                </button>
+              <% end %>
+              <%= simple_form_for booking, url: booking_update_status_path(booking) do |f| %>
+                <%= f.input :status, as: :hidden, input_html: { value: 2 } %>
+                <button class="action-link text-start w-100 textMd" type="submit">
+                  <%= image_tag "icons/cross-white.svg", alt: "Accept booking", class: "vertical-align-middle pl-1 mr-2", width: 18, height: 18 %> Reject
+                </button>
+              <% end %>
+            <% end %>
+            <%= link_to edit_booking_path(booking), class: "action-link" do %>
+              <%= image_tag "icons/edit-white.svg", alt: "edit icon", width: 24, height: 24, class: "vertical-align-middle mr-2" %> Edit
+            <% end %>
+            <% convo ||= Conversation.find_by(manager: booking.manager, profile: booking.profile) %>
+            <% if convo %>
+              <%= link_to conversation_path(convo), class: "action-link" do %>
+                <%= image_tag "icons/message-white.svg", alt: "message icon", width: 16, height: 16, class: "vertical-align-middle mr-2 pl-1" %> Message
+              <% end %>
+            <% else %>
+              <%= link_to profile_conversations_path(conversation: { profile_id: booking.profile.id }, profile_id: booking.profile.id), method: :post, class: "action-link" do %>
+                <%= image_tag "icons/message-white.svg", alt: "message icon", width: 16, height: 16, class: "vertical-align-middle mr-2 pl-1" %> Message
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <button class="trigger" data-id="<%= booking.id %>">
+          <%= image_tag "icons/more.svg", alt: "more", width: 16, height: 16 %>
+        </button>
+      </div>
     </div>
   </div>
 </div>

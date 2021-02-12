@@ -8,7 +8,9 @@ class BookingsController < ApplicationController
                     .includes(profile: [user: { avatar_attachment: :blob }])
                     .today_and_after
     else
-      @bookings = policy_scope(current_user.profile.bookings).today_and_after
+      @bookings = policy_scope(current_user.profile.bookings)
+                    .includes(:manager, :profile)
+                    .today_and_after
     end
 
     if params[:status]
@@ -69,7 +71,8 @@ class BookingsController < ApplicationController
     authorize @booking
 
     if @booking.update(status: params[:booking][:status].to_i)
-      redirect_to conversation_path(@booking.message.conversation)
+      last_url = Rails.application.routes.recognize_path(request.referrer)
+      redirect_to last_url
     else
       render "conversations/show"
     end
