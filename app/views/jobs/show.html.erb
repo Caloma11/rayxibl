@@ -57,12 +57,7 @@
       <% end %>
     <% else %>
       <% if JobApplication.find_by(job: @job, profile: current_user.profile) %>
-        <button disabled class="btn btn-secondary my-3 w-100">
-          <div class="flex justify-content-center items-center">
-            <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
-            <span class="textWhite">You have already applied to this job</span>
-          </div>
-        </button>
+        <h5 class="uppercase textBetween text-dark-5 alternate semi-bold text-center">You have already applied to this job</h5>
       <% elsif current_user.freelancer? && current_user.find_connection(@job.manager.user) %>
         <%# Don't render button %>
       <% else %>
