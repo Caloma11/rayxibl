@@ -13,6 +13,10 @@ class ManagerPolicy < ApplicationPolicy
     user && !user.manager && !user.profile
   end
 
+  def update?
+    show?
+  end
+
   def new?
     # Conditions:
     # User is there

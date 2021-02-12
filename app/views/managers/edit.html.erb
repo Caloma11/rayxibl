@@ -1,0 +1,41 @@
+<div class="managerEdit w-100">
+  <%= simple_form_for @manager do |f| %>
+    <div class="profileBanner flex items-center justify-content-center relative" style="background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.56)), url('<%= @manager.user.avatar.service_url if @manager.user.avatar.attached? %>')">
+        <%= f.simple_fields_for :user_attributes do |uf| %>
+      <div class="camera">
+          <%= uf.input :avatar, as: :file, input_html: { class: 'none'}, label_html: { class: 'upload-photo'}, label: "#{(image_tag 'icons/camera', id: 'camera-icon', width: 32, height: 32)}".html_safe, required: false %>
+      </div>
+    </div>
+
+    <div class="profileHeader">
+        <%= uf.input :first_name, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", value: @manager.user.first_name }, wrapper_html: { class: "pr-3"} %>
+        <%= uf.input :last_name, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", value: @manager.user.last_name }, wrapper_html: { class: "pl-3 overflow-hidden"} %>
+        <%= f.input :id, as: :hidden, input_html: { value: current_user.id } %>
+      <% end %>
+    </div>
+
+    <%= f.input :job_title, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", value: @manager.job_title }, wrapper_html: { class: "px-3 overflow-hidden job-title"} %>
+
+    <%= f.simple_fields_for :company_attributes do |cf|%>
+      <div class="company-atttributes flex justify-content-between items-end">
+        <%= cf.input :name, label: "Company name", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", value: @manager.company.name }, wrapper_html: { class: "profession-edit px-3 overflow-hidden flex-grow-1 pb-3"}    %>
+
+        <% if @manager.company.logo.attached? %>
+          <%= cf.input :logo, as: :file, input_html: { class: 'none' }, label_html: { class: 'textBlue upload-photo flex flex-column justify-content-center items-center', id: "label-logo-placeholder"},label: "#{(image_tag @manager.company.logo.service_url, id: 'picture-placeholder-icon', width: 48, height: 48, class: "bg-none")}CHANGE".html_safe, wrapper_html: { class: "pr-3"} %>
+        <% else %>
+          <%= cf.input :logo, as: :file, input_html: { class: 'none' }, label_html: { class: 'upload-photo flex flex-column justify-content-center items-center', id: "label-logo-placeholder"},label: "#{(image_tag 'icons/picture-placeholder', id: 'picture-placeholder-icon', width: 28, height: 28)}LOGO".html_safe, wrapper_html: { class: "px-3"} %>
+        <% end %>
+
+
+      </div>
+
+    <% end %>
+
+    <div class="p-3 mt-4">
+      <button type="submit" class="btn btn-primary my-3 save w-100" />
+          <%= image_tag("icons/save", alt: "save", class: "mr-2") %>
+          SAVE
+      </button>
+    </div>
+<% end %>
+</div>
