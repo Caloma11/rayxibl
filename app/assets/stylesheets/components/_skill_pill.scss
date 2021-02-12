@@ -24,4 +24,8 @@
 		background: $flat-brown-5;
 		color: white;
 	}
+
+	&.freelancer {
+		@extend .mt-2, .mx-0, .mb-0;
+	}
 }

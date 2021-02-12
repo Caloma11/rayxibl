@@ -30,6 +30,15 @@
 .textLightBlack {
 	color: $light-black;
 }
+
+.text-dark-5 {
+	color: $flat-dark-5;
+
+	// For compatibility reasons
+	&.alternate {
+		color: #898994;
+	}
+}
 // End of text color
 
 // Text sizing

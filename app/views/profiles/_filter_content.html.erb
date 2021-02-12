@@ -36,7 +36,7 @@
         <div id="job-application-content" class="opaque h-0">
           <section class="jobs">
             <% @jobs.includes(:manager, job_applications: [profile: { user: :avatar_attachment }]).each do |job| %>
-              <%= render partial: "jobs/card", locals: { job: job, dummy_link: true } %>
+              <%= render partial: "jobs/manager_card", locals: { job: job, dummy_link: true } %>
             <% end %>
           </section>
         </div>

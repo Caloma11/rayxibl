@@ -29,6 +29,10 @@ class Profile < ApplicationRecord
 
   after_create :connect_with_inviter
 
+  def has_applied_for?(job)
+    job_applications.find_by(job: job, profile: self)
+  end
+
   def average_rating
     return 0 if ratings.size.zero?
     (ratings.pluck(:value).sum.to_f / ratings.size.to_f).round
