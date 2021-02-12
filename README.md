@@ -19,6 +19,8 @@
 
 - ~~As a freelancer, when you're already in the network of a company, you don't see their job postings under `/jobs` anymore~~
 
-- Purge CSS for production
+- ~~Purge CSS for production~~ -> Tried it, no difference cause we're not using a CSS framework
+- Add PWA
+- Add Meta tags
 - Use Cloudflare as asset hoster
 - ~~Add Accept/Reject booking in the widget (triple dot icon)~~
