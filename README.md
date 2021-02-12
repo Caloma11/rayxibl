@@ -9,7 +9,7 @@
 - Jobs#new page styling
 - Notifications system
 - Archiving jobs system -> (Is it there on both sides ?)
-- Accepting a booking => Both on freelancer`s dashboard and widget
+- Accepting a booking => Both on freelancer`s dashboard ~~and widget~~
 - Handle error on every form input
   ~~More on point 2 (nice to have behaviours):~~
 
@@ -21,4 +21,4 @@
 
 - Purge CSS for production
 - Use Cloudflare as asset hoster
-- Add Accept/Reject booking in the widget (triple dot icon)
+- ~~Add Accept/Reject booking in the widget (triple dot icon)~~
