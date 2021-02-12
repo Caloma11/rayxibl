@@ -1,5 +1,8 @@
 require "open-uri"
 
+User.reset_column_information
+Company.reset_column_information
+
 puts "[BEGIN] - Seeding started"
 
 def remove_everything!
