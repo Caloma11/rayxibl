@@ -9,6 +9,7 @@
 .action-button,
 .actions-container {
 	.actions {
+		z-index: 1;
 		background: rgba(20, 15, 38, 0.5);
 		backdrop-filter: blur(100px);
 		width: 200px;
