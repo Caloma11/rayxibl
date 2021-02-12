@@ -1,4 +1,4 @@
-<div class="bg-white shadow rounded p-3 mb-3 flex justify-content-between freelancer-job-card" data-path="<%= job_path(job) %>">
+<div class="bg-white shadow rounded p-3 mb-3 flex justify-content-between freelancer-job-card <%= current_user.profile.has_applied_for?(job) && "applied" %>" data-path="<%= job_path(job) %>">
   <div class="flex flex-column">
     <h3 class="m-0"><%= job.profession %></h3>
     <p class="uppercase textLightBlack my-2 textSm">Experience Level: <%= job.expertise %></p>
