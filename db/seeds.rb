@@ -179,12 +179,14 @@ JobApplication.create!(
 )
 puts "[END] - Creating a job application"
 
-puts "[BEGIN] - Creating a conversation"
-convo = Conversation.create!(
-  profile: profile,
-  manager: manager
-)
-puts "[END] - Creating a conversation"
+convo = Conversation.last
+# puts "[BEGIN] - Creating a conversation"
+# convo = Conversation.create!(
+#   profile: profile,
+#   manager: manager
+# )
+# puts "[END] - Creating a conversation"
+# Convo is created by JobApplication callback on create
 
 puts "[BEGIN] - Creating a booking"
 booking = Booking.create!(
