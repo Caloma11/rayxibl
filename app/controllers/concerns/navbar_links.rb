@@ -35,12 +35,6 @@ module NavbarLinks
       active_icon: "icons/dashboard-black.svg"
     },
     {
-      text: "Inbox",
-      icon: "icons/inbox.svg",
-      url: ROUTES.conversations_path,
-      active_icon: "icons/inbox-black.svg"
-    },
-    {
       text: "Clients",
       icon: "icons/people-gray.svg",
       url: ROUTES.managers_path,
@@ -48,9 +42,15 @@ module NavbarLinks
     },
     {
       text: "Gigs",
-      icon: "icons/gigs.svg",
+      icon: "icons/brief-gray.svg",
       url: ROUTES.jobs_path,
-      active_icon: "icons/gigs-black.svg"
+      active_icon: "icons/brief-black.svg"
+    },
+    {
+      text: "Inbox",
+      icon: "icons/inbox.svg",
+      url: ROUTES.conversations_path,
+      active_icon: "icons/inbox-black.svg"
     }
   ].freeze
 end
