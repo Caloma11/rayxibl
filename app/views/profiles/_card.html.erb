@@ -5,7 +5,7 @@
         <%= image_tag "icons/person-add.svg", alt: "connection add", class: "icon" %>
       <% end %>
     <% else %>
-      <%= link_to "#", class: "action" do %>
+      <%= link_to new_profile_booking_path(profile), class: "action" do %>
         <%= image_tag "icons/calendar.svg", alt: "calendar", class: "icon" %>
       <% end %>
     <% end %>
