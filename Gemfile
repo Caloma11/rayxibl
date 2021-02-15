@@ -23,6 +23,7 @@ gem 'pundit'
 gem 'simple_form'
 gem 'aws-sdk-s3'
 gem 'sendgrid-ruby'
+gem "serviceworker-rails"
 
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
