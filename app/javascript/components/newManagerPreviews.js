@@ -1,5 +1,8 @@
 const newManagerAvatarPreviewImage = () => {
-	const banner = document.querySelector(".managerNew .profileBanner");
+	const banner = document.querySelector(".managerNew .profileBanner") ||
+                 document.querySelector(".managerEdit .profileBanner");
+
+
 	const input = document.getElementById("manager_user_attributes_avatar");
 
 	const displayPreview = input => {
