@@ -36,6 +36,7 @@ class ApplicationController < ActionController::Base
   private
 
   def redirect_unless_completed
+    return if params[:action] == "mail" || params[:controller].match?(/custom/)
     return unless user_signed_in? && is_not_onboarding
     if current_user.manager? && !current_user.manager
       redirect_to new_manager_path

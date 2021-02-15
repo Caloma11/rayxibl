@@ -15,7 +15,7 @@ Rails.application.routes.draw do
   resources :bookings, only: %i[index show edit update]
   patch "/bookings/:id/update_status", to: "bookings#accept_or_reject", as: :booking_update_status
 
-  get "/mail", to: "pages#mail"
+  get "/mail", to: "pages#mail", as: :mail
 
   resources :jobs, only: %i[index show new create edit update] do
     resources :job_applications, only: %i[create]
@@ -51,6 +51,8 @@ Rails.application.routes.draw do
     patch "hide", as: :hide
     patch "show", as: :show
   end
+
+  post "custom_invitations", to: "custom_invitations#create", as: :home_invitation
 
   post "download_attachment/:id", to: "profile_attachments#download", as: :download_attachment
   post "booking_download_attachment/:id", to: "booking_attachments#download", as: :booking_download_attachment
