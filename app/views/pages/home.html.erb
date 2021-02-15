@@ -1,10 +1,12 @@
-<h1>This</h1>
-<h2>is</h2>
-<h3>the</h3>
-<h4>home</h4>
-<h5>page</h5>
-<% if user_signed_in? %>
-  <h3>You are logged in as: <%= current_user.first_name %> <%= current_user.last_name %></h3>
-  <p><%= current_user.email %></p>
-  <%= link_to "My profile", profile_path(current_user.profile) if current_user.freelancer? %>
-<% end %>
+<div class="homeWrapper">
+
+  <div class="homeTitle">
+    <h1>FLXIBL</h1>
+    <p>FREELANCE MANAGEMENT</p>
+  </div>
+
+  <div class="homeSubTitle">
+    Scale your freelance workforce
+  </div>
+
+</div>
