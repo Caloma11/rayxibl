@@ -1,15 +1,57 @@
-<h2><%= t "devise.invitations.edit.header" %></h2>
-
-<%= simple_form_for(resource, as: resource_name, url: invitation_path(resource_name), html: { method: :put }) do |f| %>
-  <%= f.error_notification %>
-  <%= f.hidden_field :invitation_token %>
-
-  <div class="form-inputs">
-    <%= f.input :password %>
-    <%= f.input :password_confirmation %>
+<div class="registration-page">
+  <div class="flex items-center justify-content-center p-3 pt-5 mb-5 W-100">
+    <h2 class="uppercase my-0">Tell us about yourself</h2>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit, t("devise.invitations.edit.submit_button") %>
+  <%= form_for(resource, as: resource_name, url: invitation_path(resource_name)) do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
+    <%= f.hidden_field :invitation_token %>
+
+    <div class="flex justify-content-center">
+      <div class="field mr-3">
+        <%= f.radio_button :role, "manager", required: true %>
+        <%= f.label :role, "I'm A Manager" %>
+      </div>
+
+      <div class="field">
+        <%= f.radio_button :role, "freelancer", required: true %>
+        <%= f.label :role, "I'm A Freelancer" %>
+      </div>
+    </div>
+
+    <div class="mx-3 mt-4">
+      <div class="flex mb-3">
+        <%= f.email_field :email, autofocus: true,
+                          autocomplete: "email",
+                          class: "w-100 bg-white py-3 textMd",
+                          placeholder: "alan@gmail.com",
+                          input_html: { value: resource.email }, disabled: true %>
+      </div>
+
+      <div class="flex mb-3">
+        <%= f.password_field :password,
+                             autocomplete: "new-password",
+                             class: "bg-white w-100 py-3 textMd",
+                             placeholder: "********" %>
+      </div>
+
+      <div>
+        <%= f.submit "Create account", class: "btn btn-primary w-100 py-3 textMd" %>
+        <div class="my-3 flex items-center justify-content-center">
+          <div class="mr-3" style="width: 40px; border-top: 1px solid black"></div>
+          <p class="m-0 textSm">OR</p>
+          <div class="ml-3" style="width: 40px; border-top: 1px solid black"></div>
+        </div>
+        <%= link_to "#", class: "btn btn-gray-gradient py-3" do %>
+          <%= image_tag "icons/google.svg", alt: "Google icon", width: 16, height: 16, class: "vertical-align-middle mr-1" %> Sign up with Google
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="mx-3 mt-4">
+    <p>
+      Already have an account? <%= link_to "Sign in", new_session_path(resource_name), class: "textBlue semi-bold" %>
+    </p>
   </div>
-<% end %>
+</div>

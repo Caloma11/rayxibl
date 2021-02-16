@@ -22,6 +22,6 @@ class PagesController < ApplicationController
 
   def mail
     data = Rails.application.routes.recognize_path(request.referrer)
-    redirect_to root_path if data[:controller] != "registrations" && data[:action] != "new"
+    redirect_to root_path if data[:controller] != "registrations" && data[:action] != "new" && params[:i] != "t"
   end
 end
