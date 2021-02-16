@@ -1,13 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Flxibl</title>
+    <title><%= meta_title %></title>
+    <meta name="description" content="<%= meta_description %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1; viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style"
+    content="black-translucent">
+    <link rel="manifest" href="<%= asset_path 'manifest.json' %>">
+    <%= render 'shared/ios_pwa_links' %>
+
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <%= javascript_include_tag 'application' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
