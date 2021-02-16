@@ -1,5 +1,10 @@
 <%= simple_form_for rating, remote: true do |f| %>
-  <% 5.times do |i| %>
+  <% rating.value.times do |i| %>
+    <button class="p-0 star-rating" type="button">
+      <%= image_tag "icons/colored-rating.svg", alt: "star rating" %>
+    </button>
+  <% end %>
+  <% (5 - rating.value).times do |i| %>
     <button class="p-0 star-rating" type="button">
       <%= image_tag "icons/rating.svg", alt: "rating" %>
     </button>
