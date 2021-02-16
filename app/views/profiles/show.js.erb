@@ -17,7 +17,7 @@
   }
 
   if (tabContent) {
-    tabContent.innerHTML = "<%= j render partial: "profiles/#{params[:tab] || "about"}_content" %>";
+    tabContent.innerHTML = "<%= j render partial: "profiles/#{params[:tab] || "about"}_content", locals: { profile: @profile } %>";
 
     if ("<%= params[:tab] %>" == "about" || <%= !params[:tab] %>) {
       addActiveClass(aboutTab);
@@ -28,6 +28,9 @@
     } else if ("<%= params[:tab] %>" == "notes") {
       addActiveClass(noteTab);
       [aboutTab, linkTab].forEach(removeActiveClass);
+      if (window.starRating) {
+        window.starRating();
+      }
     }
   }
 })();

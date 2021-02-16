@@ -29,6 +29,7 @@ import { bookingCardLink } from "../components/bookingCardLink";
 import { initModal } from "../components/modal";
 import { freelancerJobCardLink } from "../components/freelancerJobCardLinkage";
 import { error } from "../components/error";
+import { starRating } from "../components/starRating";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -68,6 +69,7 @@ document.addEventListener("turbolinks:load", () => {
 	initModal();
 	freelancerJobCardLink();
 	error();
+	window.starRating = starRating;
 
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;

@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   resources :companies, only: %i[create]
 
+  resources :ratings, only: %i[update]
+
   resources :profiles do
     resources :notes, only: %i[create]
     resources :ratings, only: %i[create]

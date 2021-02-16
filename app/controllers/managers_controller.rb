@@ -35,8 +35,6 @@ class ManagersController < ApplicationController
       flash[:notice] = "Manager profile succesfully updated."
       redirect_to edit_manager_path(@manager)
     else
-      binding.pry
-
       render 'edit'
     end
   end

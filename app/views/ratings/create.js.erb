@@ -1,0 +1,21 @@
+(() => {
+  const starsContainer = document.querySelector(".stars");
+  const formContainer = document.getElementById("rating-form-container");
+  const noteTab = document.getElementById("note-tab");
+
+  if (starsContainer) {
+    starsContainer.innerHTML = "<%= j render partial: "ratings/content", locals: { profile: @profile } %>";
+  }
+
+  if (formContainer) {
+    formContainer.innerHTML = "<%= j render partial: "ratings/update_form", locals: { rating: @rating } %>";
+  }
+
+  if (window.starRating) {
+    window.starRating();
+  }
+
+  if (noteTab) {
+    noteTab.innerText = `Reviews (<%= @profile.ratings.count %>)`;
+  }
+})()
