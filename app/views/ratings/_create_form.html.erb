@@ -1,9 +1,11 @@
 <%= simple_form_for [profile, Rating.new], remote: true do |f| %>
-  <% 5.times do |i| %>
-    <button class="p-0 star-rating" type="button">
-      <%= image_tag "icons/rating.svg", alt: "rating" %>
-    </button>
-  <% end %>
+  <div class="flex justify-content-center">
+    <% 5.times do |i| %>
+      <button class="p-0 star-rating mx-1" type="button">
+        <%= image_tag "icons/rating.svg", alt: "rating" %>
+      </button>
+    <% end %>
+  </div>
   <%= f.input :value, as: :hidden, wrapper: false %>
   <%= f.submit "Submit", id: "submit", class: "none" %>
 <% end %>
