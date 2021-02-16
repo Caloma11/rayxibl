@@ -5,10 +5,10 @@
 - Handle error on every form input
 - Remove users#sign_up -> Should be done through email confirmation.
 - Style landing page for desktop
-- Rating system -> ( Manager rates a freelancer, he cannot rate twice, but can update (destroy and create again) his previous rating of the freelancer )
 - Add validations
 - Profile sharing funccionality
 
+- ~~Rating system -> ( Manager rates a freelancer, he cannot rate twice, but can update (destroy and create again) his previous rating of the freelancer )~~
 - ~~In `/profiles`, AJAXify the tab switch (My networe buttons)~~
 - ~~In `/profiles/:id`, AJAXify the tab switch (About, Links & Notes)~~
 - ~~When pressing "add to network" (user plus icon) in `/profiles`, AJAXify it so that it gets added instantly in the "My network" section~~
