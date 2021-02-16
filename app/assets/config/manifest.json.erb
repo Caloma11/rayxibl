@@ -3,15 +3,24 @@
   "description": "Reduce your headcount and headache by building your very own freelance workforce. Flxibl is the most efficient way to manage your network of freelancers. Sign up for free today.",
   "display": "fullscreen",
   "name": "Flxibl",
+  "short_name": "Flxibl",
+  "theme_color": "#f9fbfe",
   "icons": [
     <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
     <% files.each_with_index do |file, index| %>
-      <% match = file.match(/.+-(?<size>\d{2,3}x\d{2,3}).png/) %>
+      <% match = file.match(/(apple|android|ms-icon|favicon|ms).+-(?<size>\d{2,3}x\d{2,3}).png/) %>
+      <% next unless match && match[:size] %>
       {
         "src": "<%= image_path "icons/#{file}" %>",
         "sizes": "<%= match && match[:size] %>",
         "type": "image/png"
       }<%= "," unless (files.size - 1) == index %>
     <% end %>
+    {
+      "src": "<%= image_path "icons/android-icon-192x192.png" %>",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
