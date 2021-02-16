@@ -9,4 +9,8 @@
   if (formContainer) {
     formContainer.innerHTML = "<%= j render partial: "ratings/update_form", locals: { rating: @rating } %>";
   }
+
+  if (window.starRating) {
+    window.starRating();
+  }
 })()

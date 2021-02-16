@@ -28,6 +28,9 @@
     } else if ("<%= params[:tab] %>" == "notes") {
       addActiveClass(noteTab);
       [aboutTab, linkTab].forEach(removeActiveClass);
+      if (window.starRating) {
+        window.starRating();
+      }
     }
   }
 })();
