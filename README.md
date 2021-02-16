@@ -6,7 +6,7 @@
 - Remove users#sign_up -> Should be done through email confirmation.
 - Style landing page for desktop
 - Add validations
-- Profile sharing funccionality
+- Profile sharing functionality
 
 - ~~Rating system -> ( Manager rates a freelancer, he cannot rate twice, but can update (destroy and create again) his previous rating of the freelancer )~~
 - ~~In `/profiles`, AJAXify the tab switch (My networe buttons)~~
