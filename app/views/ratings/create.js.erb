@@ -1,6 +1,7 @@
 (() => {
   const starsContainer = document.querySelector(".stars");
   const formContainer = document.getElementById("rating-form-container");
+  const noteTab = document.getElementById("note-tab");
 
   if (starsContainer) {
     starsContainer.innerHTML = "<%= j render partial: "ratings/content", locals: { profile: @profile } %>";
@@ -12,5 +13,9 @@
 
   if (window.starRating) {
     window.starRating();
+  }
+
+  if (noteTab) {
+    noteTab.innerText = `Reviews (<%= @profile.ratings.count %>)`;
   }
 })()
