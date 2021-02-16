@@ -1,31 +1,30 @@
-  <div class="step-1">
-    <%= simple_form_for @profile , url: profiles_path(step: "step_one") do |f| %>
-      <div class="profileBanner flex items-center justify-content-center relative" style="background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.56))">
-        <%= f.simple_fields_for :profile_user do |f| %>
-        <div class="camera">
-            <%= f.input :avatar, as: :file, input_html: { class: 'none'}, label_html: { class: 'upload-photo'}, label: "#{(image_tag 'icons/camera', id: 'camera-icon', width: 32, height: 32)}".html_safe, required: false %>
-        </div>
+<div class="step-1">
+  <%= simple_form_for @profile , url: profiles_path(step: "step_one") do |f| %>
+    <div class="profileBanner flex items-center justify-content-center relative" style="background-image: linear-gradient(0deg, rgba(255, 255, 255, 0.56), rgba(255, 255, 255, 0.56))">
+      <%= f.simple_fields_for :profile_user do |f| %>
+      <div class="camera">
+          <%= f.input :avatar, as: :file, input_html: { class: 'none'}, label_html: { class: 'upload-photo'}, label: "#{(image_tag 'icons/camera', id: 'camera-icon', width: 32, height: 32)}".html_safe, required: false %>
       </div>
+    </div>
 
-      <div class="profileHeader">
-          <%= f.input :first_name, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { value: @profile&.user&.first_name, class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "pr-3"} %>
-          <%= f.input :last_name, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { value: @profile&.user&.last_name, class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "pl-3 overflow-hidden"} %>
-        <% end %>
-      </div>
+    <div class="profileHeader">
+        <%= f.input :first_name, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { value: @profile&.user&.first_name, class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "pr-3"} %>
+        <%= f.input :last_name, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { value: @profile&.user&.last_name, class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "pl-3 overflow-hidden"} %>
+      <% end %>
+    </div>
 
-      <%= f.input :profession, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "profession-edit px-3 overflow-hidden"} %>
+    <%= f.input :profession, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "profession-edit px-3 overflow-hidden"} %>
 
-      <%= f.input :expertise, label: "Experience level", required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", id: "edit_profile_expertise" }, wrapper_html: { class: "px-3 overflow-hidden"}, collection: Profile::EXPERTISES %>
+    <%= f.input :expertise, label: "Experience level", required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", id: "edit_profile_expertise" }, wrapper_html: { class: "px-3 overflow-hidden"}, collection: Profile::EXPERTISES %>
 
-      <%= f.input :skill_list, label: "Key skills (max 5, comma separated)", required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", value: "#{@profile&.skill_list&.join(", ")}" }, wrapper_html: { class: "px-3 overflow-hidden"} %>
+    <%= f.input :skill_list, label: "Key skills (max 5, comma separated)", required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", value: "#{@profile&.skill_list&.join(", ")}" }, wrapper_html: { class: "px-3 overflow-hidden"} %>
 
 
-      <%= f.input :location, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg"}, wrapper_html: { class: "px-3 overflow-hidden"} %>
-      <div class="flex justify-content-end p-3 items-center">
-
+    <%= f.input :location, required: false, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg"}, wrapper_html: { class: "px-3 overflow-hidden"} %>
+    <div class="flex justify-content-end p-3 items-center">
       <%= button_to profiles_path(step: "step_one", profile_id: @profile.id), class: "next-step flex justify-content-center items-center", type: "submit" do %>
         <%= image_tag "icons/arrow-right.svg", alt: "submit", width: 16, height: 16 %>
       <% end %>
-
-      </div>
-<% end %>
+    </div>
+  <% end %>
+</div>
