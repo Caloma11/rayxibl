@@ -1,0 +1,12 @@
+(() => {
+  const starsContainer = document.querySelector(".stars");
+  const formContainer = document.getElementById("rating-form-container");
+
+  if (starsContainer) {
+    starsContainer.innerHTML = "<%= j render partial: "ratings/content", locals: { profile: @profile } %>";
+  }
+
+  if (formContainer) {
+    formContainer.innerHTML = "<%= j render partial: "ratings/update_form", locals: { rating: @rating } %>";
+  }
+})()

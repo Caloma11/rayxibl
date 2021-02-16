@@ -1,0 +1,4 @@
+<%= simple_form_for rating, remote: true do |f| %>
+  <%= f.input :value, collection: (0..5), required: false, label: false %>
+  <%= f.submit %>
+<% end %>

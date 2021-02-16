@@ -1,0 +1,10 @@
+<% profile.average_rating.to_i.times do %>
+  <%= render partial: "ratings/colored_star" %>
+<% end %>
+<% (5 - profile.average_rating.to_i).times do %>
+  <%= render partial: "ratings/star" %>
+<% end %>
+
+<span class="rating-size">(<%= profile.ratings.size %>)</span>
+
+<p class="textGray uppercase semi-bold text-center textSm"><%= profile.expertise %> level</p>

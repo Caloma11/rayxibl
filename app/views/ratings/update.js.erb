@@ -1,0 +1,6 @@
+(() => {
+  const starsContainer = document.querySelector(".stars");
+  if (starsContainer) {
+    starsContainer.innerHTML = "<%= j render partial: "ratings/content", locals: { profile: @rating.profile } %>";
+  }
+})()
