@@ -29,5 +29,10 @@
   <% end %>
 </div>
 
-
-
+<div id="rating-form-container">
+  <% if @my_rating %>
+    <%= render partial: "ratings/update_form", locals: { rating: @my_rating } %>
+  <% else %>
+    <%= render partial: "ratings/create_form", locals: { profile: @profile } %>
+  <% end %>
+</div>

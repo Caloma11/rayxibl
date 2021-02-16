@@ -41,14 +41,7 @@
     <div class="profileHeaderRight">
       <div class="flex items-center justify-content-center mt-3">
         <div class="stars">
-          <% @profile.average_rating.to_i.times do %>
-            <%= image_tag "icons/colored-rating.svg", alt: "rating" %>
-          <% end %>
-          <% (5 - @profile.average_rating.to_i).times do %>
-            <%= image_tag "icons/rating.svg", alt: "rating" %>
-          <% end %>
-          <span class="rating-size">(<%= @profile.ratings.size %>)</span>
-          <p class="textGray uppercase semi-bold text-center textSm"><%= @profile.expertise %> level</p>
+          <%= render partial: "ratings/content", locals: { profile: @profile } %>
         </div>
       </div>
     </div>
@@ -109,11 +102,11 @@
     <div class="profileTabs" id="tabs">
       <%= link_to "About", profile_path(@profile, tab: 'about', anchor: 'skills'), id: "about-tab", class: "tab #{'active' if params[:tab] == 'about' || !params[:tab] }", remote: true %>
       <%= link_to "Links", profile_path(@profile, tab: 'links', anchor: 'skills'), id: "link-tab", class: "tab #{'active' if params[:tab] == 'links' }", remote: true %>
-      <%= link_to "Notes (#{@notes.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), id: "note-tab", class: "tab #{'active' if params[:tab] == 'notes' }", remote: true %>
+      <%= link_to "Reviews (#{@ratings.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), id: "note-tab", class: "tab #{'active' if params[:tab] == 'notes' }", remote: true %>
     </div>
 
     <div class="p-3" id="tab-content">
-      <%= render "#{params[:tab] || 'about' }_content" %>
+      <%= render "#{params[:tab] || 'about' }_content", locals: { profile: @profile } %>
     </div>
 
   </div>
