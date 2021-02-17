@@ -15,7 +15,7 @@ class Job < ApplicationRecord
   has_many :profiles, through: :job_applications
   has_many_attached :attachments
 
-  validates :location, :profession, :expertise, :description, :rate, :expiration_date, presence: true
+  validates :location, :profession, :expertise, :description, :rate, :expiration_date, :start_date, :end_date, presence: true
 
   scope :active, -> { where("expiration_date > :today", today: Date.today) }
   scope :outside_connections, ->(profile) { where.not(manager_id: profile.managers.pluck(:id)) }

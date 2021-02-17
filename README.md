@@ -2,9 +2,13 @@
 - Notifications system
 - Archiving jobs system -> (Is it there on both sides ?)
 - Use Cloudflare as asset hoster
-- Handle error on every form input
+- Sign up with google
 - Style landing page for desktop
-- Add validations
+- Calculate booking price on bookings#new dynamically with js
+- More toggler on managers#index should have option of destroy connection ( freelancers side )
+
+- ~~Handle error on every form input~~
+- ~~Add validations~~
 - ~~Profile sharing functionality~~
 
 - ~~Remove users#sign_up -> Should be done through email confirmation.~~
