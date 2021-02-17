@@ -30,6 +30,7 @@ import { initModal } from "../components/modal";
 import { freelancerJobCardLink } from "../components/freelancerJobCardLinkage";
 import { error } from "../components/error";
 import { starRating } from "../components/starRating";
+import { initNewMessageCable } from "../channels/new_message_channel";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -69,6 +70,7 @@ document.addEventListener("turbolinks:load", () => {
 	initModal();
 	freelancerJobCardLink();
 	error();
+	initNewMessageCable();
 	window.starRating = starRating;
 
 	// For bookings/index.js.erb
