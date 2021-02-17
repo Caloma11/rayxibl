@@ -11,6 +11,7 @@ module ApplicationHelper
   def should_navbar?
     user_signed_in? &&
     !(params[:controller] == "conversations" && params[:action] == "show") &&
-    !(params[:action] == "new" || params[:action] == "edit")
+    !(params[:action] == "new" || params[:action] == "edit") &&
+    !(current_page?("/"))
   end
 end
