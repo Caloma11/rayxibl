@@ -7,7 +7,8 @@
 - Sign up with google
 - Style landing page for desktop
 - Calculate booking price on bookings#new dynamically with js
-- ~~Notifications system~~
+- Notifications system
+
 - ~~More toggler on managers#index should have option of destroy connection ( freelancers side )~~
 
 - ~~Handle error on every form input~~
