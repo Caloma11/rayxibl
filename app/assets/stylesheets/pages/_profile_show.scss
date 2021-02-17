@@ -97,6 +97,9 @@
   position: absolute;
   top: 8px;
   width: -webkit-fill-available;
+  width: -moz-available;
+  width: fill-available;
+
 }
 
 @media (min-width: 688px) {

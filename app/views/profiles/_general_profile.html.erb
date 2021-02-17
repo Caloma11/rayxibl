@@ -72,11 +72,11 @@
       <% conversation ||= current_user.conversation_with(@profile.user) %>
       <% if conversation %>
         <%= link_to conversation_path(conversation), class: "btn-lg px-0 btn-white" do %>
-          <%= image_tag "icons/message.svg", alt: "message" %> Message
+          <%= image_tag "icons/message.svg", alt: "message" %> MESSAGE
         <% end %>
       <% else %>
         <%= link_to profile_conversations_path(@profile, conversation: { profile_id: @profile.id }), method: :post, class: "btn-lg px-0 btn-white" do %>
-          <%= image_tag "icons/message.svg", alt: "message" %> Message
+          <%= image_tag "icons/message.svg", alt: "message" %> MESSAGE
         <% end %>
       <% end %>
 
