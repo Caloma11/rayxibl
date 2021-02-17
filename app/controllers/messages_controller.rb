@@ -7,6 +7,11 @@ class MessagesController < ApplicationController
     authorize @message
 
     if @message.save
+      if current_user == @conversation.manager.user
+        @message.notify_new_message(@conversation.profile.user)
+      else
+        @message.notify_new_message(@conversation.manager.user)
+      end
       redirect_to conversation_path(@conversation, anchor: "message-#{@message.id}")
     else
       render "conversations/show"

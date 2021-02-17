@@ -2,7 +2,7 @@
   <% if user_signed_in? %>
     <% links ||= current_user.manager? ? NavbarLinks::MANAGER_NAVBAR_LINKS : NavbarLinks::FREELANCER_NAVBAR_LINKS %>
     <% links.each do |link| %>
-      <%= link_to link[:url], class: "nav-link" do %>
+      <%= link_to link[:url], class: "nav-link", data: { current_user_id: current_user.id }, id: link[:text] == "Inbox" ? "inbox-user" : nil do %>
         <% if request.url.include?(link[:url]) %>
           <%= image_tag link[:active_icon], alt: link[:text], class: "nav-icon" %>
         <% else %>
