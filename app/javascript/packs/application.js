@@ -28,7 +28,7 @@ import { initNewManagerPreviews } from "../components/newManagerPreviews";
 import { bookingCardLink } from "../components/bookingCardLink";
 import { initModal } from "../components/modal";
 import { freelancerJobCardLink } from "../components/freelancerJobCardLinkage";
-import { error } from "../components/error";
+import { error, registerError } from "../components/error";
 import { starRating } from "../components/starRating";
 import { initNewMessageCable } from "../channels/new_message_channel";
 
@@ -71,6 +71,7 @@ document.addEventListener("turbolinks:load", () => {
 	freelancerJobCardLink();
 	error();
 	initNewMessageCable();
+	registerError();
 	window.starRating = starRating;
 
 	// For bookings/index.js.erb

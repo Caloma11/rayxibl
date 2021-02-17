@@ -1,10 +1,11 @@
 module SendgridMailer
-  class Onboarding < SendgridMailer::Base
-    attr_reader :mail
+  class CompanyInvite < SendgridMailer::Base
+    attr_reader :sender
 
-    def initialize(user)
+    def initialize(sender, user)
       super(user)
-      self.mail.template_id = TEMPLATES[:welcome]
+      @sender = sender
+      self.mail.template_id = TEMPLATES[:company_invite]
     end
 
     def call
@@ -17,7 +18,10 @@ module SendgridMailer
 
     def attach_personalization!
       data = {
-        first_name: user.email,
+        first_name: sender.first_name,
+        full_name: sender.display_name,
+        company_name: sender.company.name,
+        receiver_email: user.email,
         url: ROUTES.accept_user_invitation_url({ **routes_host, invitation_token: user.raw_invitation_token })
       }
       personalization.add_dynamic_template_data(data)
