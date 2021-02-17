@@ -34,12 +34,13 @@ class Users::InvitationsController < Devise::InvitationsController
         u.role = "freelancer"
         u.skip_invitation = true
       end
-      SendgridMailer::CompanyInvite.new(current_user, resource).call
+      SendgridMailer::FreelancerInvite.new(current_user, resource).call
     elsif params[:inviter] == "manager" && params[:invitee] == "manager"
       self.resource = invite_resource do |u|
         u.role = "manager"
         u.skip_invitation = true
       end
+      SendgridMailer::CompanyInvite.new(current_user, resource).call
     else
       self.resource = invite_resource
     end
