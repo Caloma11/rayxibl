@@ -77,6 +77,18 @@ $day-header-height: 60px;
 
 					width: 100px;
 
+					&.today {
+						@extend .justify-content-start;
+
+						height: 60px;
+
+						span {
+							@extend .textMd, .mt-0;
+
+							color: $blue-2;
+						}
+					}
+
 					img {
 						width: 48px;
 						height: 48px;
@@ -113,6 +125,8 @@ $day-header-height: 60px;
 					border: 1px solid transparent;
 
 					span {
+						@extend .textMd;
+
 						color: #8a9099;
 						font-weight: 500;
 
@@ -125,7 +139,6 @@ $day-header-height: 60px;
 						@extend .bold, .flex, .justify-content-center, .items-center;
 
 						width: 40px;
-						height: 40px;
 						border-radius: $radius-md;
 						color: #4f4f4f;
 						font-weight: 600;

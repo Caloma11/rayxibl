@@ -17,7 +17,9 @@ const CalendarProfile = ({ avatar, displayName, profession }) => {
 export const CalendarProfiles = ({ profiles }) => {
 	return (
 		<div className="profiles">
-			<div className="week blank"></div>
+			<div className="week profile today">
+				<span className="uppercase">Today</span>
+			</div>
 			{profiles.map(profile => (
 				<CalendarProfile {...profile} key={profile.id} />
 			))}
