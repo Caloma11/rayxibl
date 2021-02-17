@@ -35,6 +35,7 @@ export const editBookingFlatpickr = () => {
 			dateFormat: "d-m-Y",
 			altFormat: "d M",
 			altInput: true,
+      minDate: new Date,
 			locale: {
 				rangeSeparator: "  -  "
 			},
