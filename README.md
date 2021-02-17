@@ -4,7 +4,7 @@
 - Use Cloudflare as asset hoster
 - Sign up with google
 - Style landing page for desktop
-
+- Calculate booking price on bookings#new dynamically with js
 
 - ~~Handle error on every form input~~
 - ~~Add validations~~
