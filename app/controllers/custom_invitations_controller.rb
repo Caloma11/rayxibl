@@ -4,10 +4,10 @@ class CustomInvitationsController < ApplicationController
 
   def create
     user = User.invite!(email: params[:resource][:email]) do |u|
-      u.skip_invitation = true
+      u.skip_invitation = true if Rails.env.production?
     end
     if user.valid?
-      SendgridMailer::Onboarding.new(user).call
+      SendgridMailer::Onboarding.new(user).call if Rails.env.production?
       redirect_to mail_path(i: "t")
     else
       flash[:alert] = "Email is not valid"
