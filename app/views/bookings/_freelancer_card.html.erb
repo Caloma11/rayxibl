@@ -32,9 +32,6 @@
                 </button>
               <% end %>
             <% end %>
-            <%= link_to edit_booking_path(booking), class: "action-link" do %>
-              <%= image_tag "icons/edit-white.svg", alt: "edit icon", width: 24, height: 24, class: "vertical-align-middle mr-2" %> Edit
-            <% end %>
             <% convo ||= Conversation.find_by(manager: booking.manager, profile: booking.profile) %>
             <% if convo %>
               <%= link_to conversation_path(convo), class: "action-link" do %>

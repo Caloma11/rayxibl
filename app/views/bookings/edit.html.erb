@@ -36,6 +36,10 @@
     </div>
 
     <%= simple_form_for @booking, html: { class: "mt-3" } do |f| %>
+      <% if current_user.freelancer? %>
+      <fieldset disabled="disabled">
+      <% end %>
+
       <div class="mx-3">
         <%= f.input :title, required: false,
                     label: "Project/Client",
@@ -94,6 +98,9 @@
       <div class="mx-3">
         <button class="btn btn-primary w-100 py-3" type="submit"><%= image_tag "icons/paperplane.svg", alt: "update", width: 24, height: 24, class: "vertical-align-middle" %> Update request</button>
       </div>
+    <% end %>
+    <% if current_user.freelancer? %>
+      </fieldset>
     <% end %>
   </section>
 </div>

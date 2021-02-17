@@ -1,7 +1,7 @@
 <div class="generalProfile w-100">
 
   <div class="profileBanner" style="background-image: linear-gradient(rgba(0,0,0,0.4), rgba(255,255,255,0.2)), url(<%= avatar_url(@profile) %>)">
-    <div class="headerOptions flex w-100 justify-content-between p-3">
+    <div class="headerOptions border-box flex w-100 justify-content-between p-3">
       <div>
         <%= link_to :back do %>
           <%= image_tag "icons/left-arrow-white.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm" %>
@@ -13,7 +13,7 @@
             <div class="actions flex flex-column job-show">
               <% connection ||= current_user.find_connection(@profile.user) %>
               <% if connection %>
-                <%= button_to connection_path(connection), method: :delete, class: "action-link flex items-center w-100", remote: true do %>
+                <%= button_to connection_path(connection), method: :delete, class: "action-link flex items-center w-100 textMd", remote: true do %>
                   <%= image_tag "icons/user-minus", alt: "remove user", width: 24, height: 24, class: "mr-3" %>
                   REMOVE
                 <% end %>
@@ -72,11 +72,11 @@
       <% conversation ||= current_user.conversation_with(@profile.user) %>
       <% if conversation %>
         <%= link_to conversation_path(conversation), class: "btn-lg px-0 btn-white" do %>
-          <%= image_tag "icons/message.svg", alt: "message" %> Message
+          <%= image_tag "icons/message.svg", alt: "message" %> MESSAGE
         <% end %>
       <% else %>
         <%= link_to profile_conversations_path(@profile, conversation: { profile_id: @profile.id }), method: :post, class: "btn-lg px-0 btn-white" do %>
-          <%= image_tag "icons/message.svg", alt: "message" %> Message
+          <%= image_tag "icons/message.svg", alt: "message" %> MESSAGE
         <% end %>
       <% end %>
 

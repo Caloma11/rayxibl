@@ -30,6 +30,7 @@ import { initModal } from "../components/modal";
 import { freelancerJobCardLink } from "../components/freelancerJobCardLinkage";
 import { error, registerError } from "../components/error";
 import { starRating } from "../components/starRating";
+import { initFirefoxFixer } from "../components/firefoxFixer";
 import { initNewMessageCable } from "../channels/new_message_channel";
 
 require("@rails/ujs").start();
@@ -70,6 +71,7 @@ document.addEventListener("turbolinks:load", () => {
 	initModal();
 	freelancerJobCardLink();
 	error();
+  initFirefoxFixer();
 	initNewMessageCable();
 	registerError();
 	window.starRating = starRating;
@@ -78,3 +80,4 @@ document.addEventListener("turbolinks:load", () => {
 	window.moreTogglerMultiple = moreTogglerMultiple;
 	window.toBindMoreTogglerMultiple = toBindMoreTogglerMultiple;
 });
+

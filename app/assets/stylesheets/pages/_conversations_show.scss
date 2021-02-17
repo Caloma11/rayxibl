@@ -31,6 +31,8 @@
     position: fixed;
     flex-grow: 1;
     width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
     z-index: 2;
     background-color: white;
   }
@@ -41,6 +43,9 @@
     bottom: 0;
     background-color: white;
     width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+
   }
 
   .action {
@@ -49,4 +54,15 @@
       background-color: rgba(202, 207, 251, .4);
     }
   }
+  @media (min-width: 600px) {
+    .convo-header, .message-form {
+      left: 0;
+    }
+
+    .company-logo {
+      margin-left: 64px;
+    }
+  }
 }
+
+
