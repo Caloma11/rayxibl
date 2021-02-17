@@ -43,7 +43,7 @@ const initMobileShareButtons = () => {
 const initShareButtons = () => {
   if (checkMobile()) {
 
-    if (true) {
+    if (navigator.share) {
       initMobileShareButtons();
     } else {
       console.log("Is mobile but can't share");
