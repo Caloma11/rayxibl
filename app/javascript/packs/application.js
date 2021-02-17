@@ -30,6 +30,7 @@ import { initModal } from "../components/modal";
 import { freelancerJobCardLink } from "../components/freelancerJobCardLinkage";
 import { error } from "../components/error";
 import { starRating } from "../components/starRating";
+import { initFirefoxFixer } from "../components/firefoxFixer";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -69,9 +70,11 @@ document.addEventListener("turbolinks:load", () => {
 	initModal();
 	freelancerJobCardLink();
 	error();
+  initFirefoxFixer();
 	window.starRating = starRating;
 
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
 	window.toBindMoreTogglerMultiple = toBindMoreTogglerMultiple;
 });
+
