@@ -115,7 +115,7 @@ export const CalendarDay = ({
 						{a[0] && (
 							<div
 								className="event-details"
-								style={{ width: DAY_WIDTH * eventDuration }}
+								style={{ width: DAY_WIDTH * eventDuration - 4 }}
 							>
 								<p className="title">
 									{truncate(booking.title, { scale: eventDuration })}
