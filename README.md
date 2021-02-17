@@ -2,10 +2,12 @@
 - Notifications system
 - Archiving jobs system -> (Is it there on both sides ?)
 - Use Cloudflare as asset hoster
-- Handle error on every form input
-- Style landing page for desktop
-- Add validations
 - Sign up with google
+- Style landing page for desktop
+
+
+- ~~Handle error on every form input~~
+- ~~Add validations~~
 - ~~Profile sharing functionality~~
 
 - ~~Remove users#sign_up -> Should be done through email confirmation.~~
