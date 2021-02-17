@@ -3,8 +3,11 @@ class CustomInvitationsController < ApplicationController
   skip_after_action :verify_authorized
 
   def create
-    user = User.invite!(email: params[:resource][:email])
+    user = User.invite!(email: params[:resource][:email]) do |u|
+      u.skip_invitation = true
+    end
     if user.valid?
+      SendgridMailer::Onboarding.new(user).call
       redirect_to mail_path(i: "t")
     else
       flash[:alert] = "Email is not valid"
