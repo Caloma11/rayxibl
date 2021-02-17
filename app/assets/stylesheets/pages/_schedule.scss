@@ -36,6 +36,27 @@ $day-header-height: 60px;
 			width: 100%;
 		}
 
+		.month-selection {
+			h3 {
+				@extend .semi-bold;
+			}
+
+			.selector-wrapper {
+				@extend .shadow, .p-3, .rounded;
+
+				position: absolute;
+				bottom: -100px;
+				left: 50px;
+				z-index: 1;
+				background: white;
+			}
+
+			.months-grid {
+				display: grid;
+				grid-template-columns: repeat(4, auto);
+			}
+		}
+
 		#booking-form-container {
 			@extend .pb-5;
 

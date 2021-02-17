@@ -40,3 +40,18 @@ export const EXPERTISES = [
 	"pro"
 ];
 export const STATUSES = ["", "pending", "accepted", "rejected", "all"];
+
+export const MONTHS = [
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December"
+];

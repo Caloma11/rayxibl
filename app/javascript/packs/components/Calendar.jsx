@@ -9,6 +9,7 @@ import { CalendarDays } from "./CalendarDays";
 import { CalendarDayHeaders } from "./CalendarDayHeaders";
 import { CalendarProfiles } from "./CalendarProfiles";
 import { CalendarFilter } from "./CalendarFilter";
+import { CalendarMonthSelection } from "./CalendarMonthSelection";
 
 const moment = extendMoment(Moment);
 
@@ -115,7 +116,11 @@ const Calendar = () => {
 			{showForm && formDetails && Object.keys(formDetails).length > 0 && (
 				<BookingForm formDetails={formDetails} setShowForm={setShowForm} />
 			)}
-			<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
+			<div className="flex justify-content-between items-center relative">
+				<div style={{ width: 70, height: 70 }}></div>
+				<CalendarMonthSelection />
+				<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
+			</div>
 			<div
 				className={`calendarContainer ${showForm ? "none" : ""}`}
 				onScroll={handleScroll}
