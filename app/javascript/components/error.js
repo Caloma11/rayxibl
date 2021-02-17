@@ -16,3 +16,12 @@ export const error = () => {
 		}
 	});
 };
+
+export const registerError = () => {
+	const emailInput = document.getElementById("resource_email");
+	const alertNode = document.querySelector(".alert");
+
+	if (emailInput && alertNode) {
+		emailInput.classList.add("error");
+	}
+};

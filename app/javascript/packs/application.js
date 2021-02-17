@@ -28,7 +28,7 @@ import { initNewManagerPreviews } from "../components/newManagerPreviews";
 import { bookingCardLink } from "../components/bookingCardLink";
 import { initModal } from "../components/modal";
 import { freelancerJobCardLink } from "../components/freelancerJobCardLinkage";
-import { error } from "../components/error";
+import { error, registerError } from "../components/error";
 import { starRating } from "../components/starRating";
 
 require("@rails/ujs").start();
@@ -69,6 +69,7 @@ document.addEventListener("turbolinks:load", () => {
 	initModal();
 	freelancerJobCardLink();
 	error();
+	registerError();
 	window.starRating = starRating;
 
 	// For bookings/index.js.erb
