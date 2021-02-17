@@ -14,10 +14,10 @@ const CalendarProfile = ({ avatar, displayName, profession }) => {
 	);
 };
 
-export const CalendarProfiles = ({ profiles }) => {
+export const CalendarProfiles = ({ profiles, moveToToday }) => {
 	return (
 		<div className="profiles">
-			<div className="week profile today">
+			<div className="week profile today" onClick={moveToToday}>
 				<span className="uppercase">Today</span>
 			</div>
 			{profiles.map(profile => (

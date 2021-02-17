@@ -73,6 +73,10 @@ const Calendar = () => {
 		}
 	};
 
+	const moveToToday = e => {
+		console.log(e);
+	};
+
 	useEffect(() => {
 		(async () => {
 			try {
@@ -112,7 +116,7 @@ const Calendar = () => {
 				className={`calendarContainer ${showForm ? "none" : ""}`}
 				onScroll={handleScroll}
 			>
-				<CalendarProfiles profiles={profiles} />
+				<CalendarProfiles profiles={profiles} moveToToday={moveToToday} />
 				<div className="allDays">
 					<CalendarDayHeaders data={data} weekOffset={weekOffset} />
 					{profiles.length > 0 ? (
