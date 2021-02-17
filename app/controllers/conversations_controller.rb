@@ -40,6 +40,7 @@ class ConversationsController < ApplicationController
     end
     authorize @conversation
     @other_person = @conversation.other_person(current_user)
+    @conversation.messages.unread.update_all(read: true)
     @message = Message.new
   end
 

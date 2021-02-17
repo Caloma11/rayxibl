@@ -1,11 +1,13 @@
 # Future TODO List
 - Notifications system
-- Archiving jobs system -> (Is it there on both sides ?)
+- Archiving jobs system -> A manager can archive jobs, which just changes where they're displayed
+ -- Bookings => Rejected, expired, cancelled bookings should all fall into the `archived` category, but nobody manually does so.
+- Add to google calendar through booking widget on conversations#show 
 - Use Cloudflare as asset hoster
 - Sign up with google
 - Style landing page for desktop
 - Calculate booking price on bookings#new dynamically with js
-- More toggler on managers#index should have option of destroy connection ( freelancers side )
+- ~~More toggler on managers#index should have option of destroy connection ( freelancers side )~~
 
 - ~~Handle error on every form input~~
 - ~~Add validations~~

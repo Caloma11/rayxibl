@@ -8,6 +8,27 @@ class Message < ApplicationRecord
   # Message#content needs to exist if there is no `booking`
   validates :content, presence: true, if: Proc.new { |msg| msg.booking.nil? }
 
+  scope :unread, -> { where(read: false) }
+
+  class << self
+    def unread_user_scoped_count(current_user)
+      data = {
+        manager_id: current_user.manager&.id,
+        profile_id: current_user.profile&.id
+      }
+
+      joins(:conversation)
+        .where(
+          "conversations.manager_id = :manager_id OR conversations.profile_id = :profile_id", data
+        )
+        .count
+    end
+  end
+
+  def notify_new_message(current_user)
+    ActionCable.server.broadcast("user_#{current_user.id}_new_messages", count: self.class.unread_user_scoped_count(current_user))
+  end
+
   private
 
   def broadcast

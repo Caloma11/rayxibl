@@ -1,0 +1,10 @@
+.notification {
+	@extend .rounded, .p-1;
+
+	background: $blue-2;
+	color: white;
+	font-size: 12px;
+	position: absolute;
+	top: -6px;
+	right: -22px;
+}
