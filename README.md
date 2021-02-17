@@ -5,7 +5,7 @@
 - Handle error on every form input
 - Style landing page for desktop
 - Add validations
-- Profile sharing functionality
+- ~~Profile sharing functionality~~
 
 - ~~Remove users#sign_up -> Should be done through email confirmation.~~
 - ~~Rating system -> ( Manager rates a freelancer, he cannot rate twice, but can update (destroy and create again) his previous rating of the freelancer )~~
