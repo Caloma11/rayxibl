@@ -9,6 +9,8 @@ const initShareButtons = () => {
       url: link.dataset.url
     }
 
+    console.log({shareData})
+
   //   // Must be triggered some kind of "user activation"
   //   link.addEventListener('click', async () => {
   //     try {
