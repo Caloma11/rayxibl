@@ -32,6 +32,7 @@ import { error, registerError } from "../components/error";
 import { starRating } from "../components/starRating";
 import { initFirefoxFixer } from "../components/firefoxFixer";
 import { initNewMessageCable } from "../channels/new_message_channel";
+import { initShareButtons } from "../components/shareButtons";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -74,8 +75,8 @@ document.addEventListener("turbolinks:load", () => {
   initFirefoxFixer();
 	initNewMessageCable();
 	registerError();
+  initShareButtons();
 	window.starRating = starRating;
-
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
 	window.toBindMoreTogglerMultiple = toBindMoreTogglerMultiple;

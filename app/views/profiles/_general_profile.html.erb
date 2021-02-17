@@ -19,7 +19,7 @@
                 <% end %>
               <% end %>
               <%= link_to "#", class: "action-link flex items-center w-100" do %>
-                <%= image_tag "icons/share-white", alt: "share profile", width: 24, height: 24, class: "mr-3" %>
+                <%= image_tag "icons/share-white", alt: "share profile", width: 24, height: 24, class: "mr-3 share-link", data: { url: "https://www.flxibl.io/profiles/#{@profile.id}", title: "#{@profile.display_name}'s' profile from flxibl.io", text: @profile.overview } %>
                 SHARE
               <% end %>
             </div>
