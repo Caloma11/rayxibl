@@ -42,6 +42,8 @@ Rails.application.routes.draw do
 
   resources :connections, only: %i[destroy]
 
+  delete "connections/:id/as_fl", to: "connections#destroy_as_fl", as: :connection_as_fl
+
   resources :managers, except: %i[destroy]
   resources :conversations, only: %i[index show] do
     resources :messages, only: %i[create]

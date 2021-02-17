@@ -7,6 +7,10 @@
     <div class="relative">
       <div class="none actions-container" data-id="<%= manager.id %>">
         <div class="actions flex flex-column bookings-index">
+          <%= button_to connection_as_fl_path(current_user.find_connection(manager.user)), class: "action-link text-start w-100 textMd", method: :delete do %>
+            <%= image_tag "icons/trash-white.svg", alt: "trash icon", width: 24, height: 24, class: "pb-1 vertical-align-middle mr-2" %>
+            Remove
+          <% end %>
         </div>
       </div>
       <button data-id="<%= manager.id %>" class="trigger"><%= image_tag "icons/more.svg", alt: "sub-menu", width: 24, height: 24 %></button>
