@@ -5,6 +5,7 @@
 - Handle error on every form input
 - Style landing page for desktop
 - Add validations
+- Sign up with google
 - ~~Profile sharing functionality~~
 
 - ~~Remove users#sign_up -> Should be done through email confirmation.~~
