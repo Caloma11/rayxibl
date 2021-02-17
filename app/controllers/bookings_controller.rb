@@ -42,7 +42,6 @@ class BookingsController < ApplicationController
     @profile = Profile.find(params[:profile_id])
     @booking.profile = @profile
     authorize @booking
-    # CALCULATE TOTAL_PRICE HERE
     if @booking.save
       redirect_to booking_path(@booking)
     else
