@@ -8,15 +8,21 @@
   "start_url": ".",
   "orientation": "portrait",
   "icons": [
-    <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
+    <% files = Dir.entries(Rails.root.join("app/assets/images/manifest_icons/")) %>
     <% files.each_with_index do |file, index| %>
       <% match = file.match(/(apple|android|ms-icon|favicon|ms).+-(?<size>\d{2,3}x\d{2,3}).png/) %>
       <% next unless match && match[:size] %>
       {
-        "src": "<%= image_path "icons/#{file}" %>",
+        "src": "<%= image_path "manifest_icons/#{file}" %>",
         "sizes": "<%= match && match[:size] %>",
         "type": "image/png"
       }<%= "," unless (files.size - 1) == index %>
-    <% end %>
+    <% end %>,
+    {
+      "src": "<%= image_path "manifest_icons/android-icon-192x192.png" %>",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }
