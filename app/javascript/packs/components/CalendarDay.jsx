@@ -3,7 +3,7 @@ import moment from "moment";
 import { truncate } from "../../utils/truncate";
 
 const START_EVENT_CLASS_NAMES = "rounded-top-left rounded-bottom-left pl-1";
-const EVENT_CLASS_NAMES = "event py-1";
+const EVENT_CLASS_NAMES = "event";
 const END_EVENT_CLASS_NAMES = "rounded-top-right rounded-bottom-right";
 
 const determineColor = status => {
@@ -109,7 +109,7 @@ export const CalendarDay = ({
 					<div
 						key={i}
 						className={eventClassName}
-						style={{ height: 180 / eventDateBooleans.length }}
+						style={{ height: 40 }}
 						onClick={e => handleEventClick(e, booking.id)}
 					>
 						{a[0] && (

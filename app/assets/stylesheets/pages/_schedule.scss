@@ -75,6 +75,8 @@ $day-header-height: 60px;
 						.px-1,
 						.text-center;
 
+					width: 100px;
+
 					img {
 						width: 48px;
 						height: 48px;
@@ -158,6 +160,10 @@ $day-header-height: 60px;
 
 						background: $flat-orange-5;
 						border-top: 8px solid $flat-orange-3;
+
+						.event-details {
+							background: $flat-orange-5;
+						}
 
 						&.red {
 							background: $flat-red-5;
