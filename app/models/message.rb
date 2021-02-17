@@ -8,6 +8,8 @@ class Message < ApplicationRecord
   # Message#content needs to exist if there is no `booking`
   validates :content, presence: true, if: Proc.new { |msg| msg.booking.nil? }
 
+  scope :unread, -> { where(read: false) }
+
   private
 
   def broadcast
