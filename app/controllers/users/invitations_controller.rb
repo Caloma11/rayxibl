@@ -25,11 +25,21 @@ class Users::InvitationsController < Devise::InvitationsController
   def create
     # Custom attributes for different types of invitations
     if params[:inviter] == "freelancer" && params[:invitee] == "manager"
-      self.resource = invite_resource { |u| u.role = "manager" }
+      self.resource = invite_resource do |u|
+        u.role = "manager"
+        u.skip_invitation = true
+      end
     elsif params[:inviter] == "manager" && params[:invitee] == "freelancer"
-      self.resource = invite_resource { |u| u.role = "freelancer" }
+      self.resource = invite_resource do |u|
+        u.role = "freelancer"
+        u.skip_invitation = true
+      end
+      SendgridMailer::CompanyInvite.new(current_user, resource).call
     elsif params[:inviter] == "manager" && params[:invitee] == "manager"
-      self.resource = invite_resource { |u| u.role = "manager" }
+      self.resource = invite_resource do |u|
+        u.role = "manager"
+        u.skip_invitation = true
+      end
     else
       self.resource = invite_resource
     end

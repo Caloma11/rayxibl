@@ -2,7 +2,9 @@ module SendgridMailer
   SENDER_EMAIL = "info@flxibl.io"
   SENDER_NAME = "Flxibl Team"
   TEMPLATES = {
-    welcome: "d-6c9645400baa4e41811c746a4ff9c190"
+    welcome: "d-6c9645400baa4e41811c746a4ff9c190",
+    company_invite: "d-9f4a6789c6bd48f791393d0b5c227a04",
+    freelancer_invite: "d-fb2ea0b85e0b42f5b900ad0d32956ebd"
   }
   ROUTES = Rails.application.routes.url_helpers
 
