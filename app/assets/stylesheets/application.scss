@@ -28,7 +28,6 @@ body {
 
 .yielded-content {
 	flex: 1 0 auto;
-  @extend .py-3;
 }
 
   @media (min-width: 600px) {
