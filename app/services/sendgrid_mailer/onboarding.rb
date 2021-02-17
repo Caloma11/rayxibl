@@ -17,8 +17,11 @@ module SendgridMailer
     private
 
     def attach_personalization!
-      # TODO: Add this once template is finished
-      personalization.add_dynamic_template_data(name: user.display_name)
+      data = {
+        first_name: user.email,
+        url: ROUTES.accept_user_invitation_url({ **routes_host, invitation_token: user.raw_invitation_token })
+      }
+      personalization.add_dynamic_template_data(data)
       mail.add_personalization(personalization)
     end
   end

@@ -23,5 +23,15 @@ module SendgridMailer
       @personalization = Personalization.new
       @personalization.add_to(@to)
     end
+
+    private
+
+    def routes_host
+      if Rails.env.development?
+        { host: "http://localhost:3000" }
+      else
+        { host: ENV["STAGING"] ? "https://flxibl-staging.herokuapp.com" : "https://flxibl.io" }
+      end
+    end
   end
 end
