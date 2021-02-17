@@ -13,7 +13,7 @@
 
   <div class="homeBottom flex justify-content-center px-4">
     <%= simple_form_for :resource, url: home_invitation_path, html: { class: "w-100"}, method: :post do |f| %>
-      <%= f.input :email, label: false, input_html: { class: "w-100 border-box mb-2 lg"}%>
+      <%= f.input :email, label: false, input_html: { class: "w-100 border-box mb-2 lg", placeholder: "Email address" } %>
       <%= f.submit "Sign up for free",   class: "w-100 btn btn-primary" %>
     <% end %>
   </div>
