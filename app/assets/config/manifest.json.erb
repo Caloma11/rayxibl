@@ -5,6 +5,8 @@
   "name": "Flxibl",
   "short_name": "Flxibl",
   "theme_color": "#f9fbfe",
+  "start_url": ".",
+  "orientation": "portrait",
   "icons": [
     <% files = Dir.entries(Rails.root.join("app/assets/images/icons/")).select {|f| !File.directory? f} %>
     <% files.each_with_index do |file, index| %>
@@ -16,11 +18,5 @@
         "type": "image/png"
       }<%= "," unless (files.size - 1) == index %>
     <% end %>
-    {
-      "src": "<%= image_path "icons/android-icon-192x192.png" %>",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "maskable"
-    }
   ]
 }
