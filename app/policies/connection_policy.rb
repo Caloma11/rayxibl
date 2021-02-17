@@ -16,4 +16,8 @@ class ConnectionPolicy < ApplicationPolicy
   def destroy?
     record.company == user.manager.company
   end
+
+  def destroy_as_fl?
+    record.profile.user == user
+  end
 end

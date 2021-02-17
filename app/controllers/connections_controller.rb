@@ -1,5 +1,5 @@
 class ConnectionsController < ApplicationController
-  before_action :set_connection, only: :destroy
+  before_action :set_connection, only: [:destroy, :destroy_as_fl]
 
   def create
     @profile = Profile.find(params[:profile_id])
@@ -44,6 +44,12 @@ class ConnectionsController < ApplicationController
       format.html { redirect_to profile_path(@connection.profile) }
       format.js
     end
+  end
+
+  def destroy_as_fl
+    @connection.destroy
+    flash[:notice] = "You have been removed from #{@connection.company.name}'s network"
+    redirect_to managers_path
   end
 
   private
