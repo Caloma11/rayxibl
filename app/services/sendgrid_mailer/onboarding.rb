@@ -4,14 +4,13 @@ module SendgridMailer
 
     def initialize(user)
       super(user)
-      # TODO: Change to `TEMPLATES[:welcome]` once finished
-      self.mail.template_id = TEMPLATES[:test]
+      self.mail.template_id = TEMPLATES[:welcome]
     end
 
     def call
       attach_personalization!
       sg = SendGrid::API.new(api_key: @api_key)
-      sg.client.mail._("send").post(request_body: mail.to_json)
+      resp = sg.client.mail._("send").post(request_body: mail.to_json)
     end
 
     private
