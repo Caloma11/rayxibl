@@ -51,6 +51,7 @@ class BookingsController < ApplicationController
 
   def show
     authorize @booking
+    render 'edit'
   end
 
   def edit
