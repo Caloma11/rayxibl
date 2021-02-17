@@ -1,6 +1,6 @@
 import Moment from "moment";
 import { extendMoment } from "moment-range";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import { initialDays } from "../../utils/initialDays";
@@ -27,6 +27,7 @@ const Calendar = () => {
 	const lastRenderedWeek = initialDays[initialDays.length - 1];
 	const lastRenderedDay = lastRenderedWeek[lastRenderedWeek.length - 1];
 	const [weekCounter, setWeekCounter] = useState(lastRenderedDay.week() + 1);
+	const calendarContainerRef = useRef(null);
 
 	const generateData = () => {
 		const final = [];
@@ -73,8 +74,11 @@ const Calendar = () => {
 		}
 	};
 
-	const moveToToday = e => {
-		console.log(e);
+	const moveToToday = () => {
+		const todayCell = document.querySelector(".day.today");
+		calendarContainerRef.current.scrollTo({
+			left: todayCell.offsetLeft - 108
+		});
 	};
 
 	useEffect(() => {
@@ -115,6 +119,7 @@ const Calendar = () => {
 			<div
 				className={`calendarContainer ${showForm ? "none" : ""}`}
 				onScroll={handleScroll}
+				ref={calendarContainerRef}
 			>
 				<CalendarProfiles profiles={profiles} moveToToday={moveToToday} />
 				<div className="allDays">
