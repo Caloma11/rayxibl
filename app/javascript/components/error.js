@@ -23,5 +23,6 @@ export const registerError = () => {
 
 	if (emailInput && alertNode) {
 		emailInput.classList.add("error");
+		alertNode.classList.add("none");
 	}
 };
