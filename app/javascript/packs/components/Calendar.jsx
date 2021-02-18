@@ -28,6 +28,9 @@ const Calendar = () => {
 	const lastRenderedWeek = initialDays[initialDays.length - 1];
 	const lastRenderedDay = lastRenderedWeek[lastRenderedWeek.length - 1];
 	const [weekCounter, setWeekCounter] = useState(lastRenderedDay.week() + 1);
+	const today = moment();
+	const [month, setMonth] = useState(today.format("MMMM"));
+	const [year, setYear] = useState(parseInt(today.format("YYYY"), 10));
 	const calendarContainerRef = useRef(null);
 
 	const generateData = () => {
@@ -119,7 +122,12 @@ const Calendar = () => {
 			)}
 			<div className="flex justify-content-between items-center relative">
 				<div style={{ width: 70, height: 70 }}></div>
-				<CalendarMonthSelection />
+				<CalendarMonthSelection
+					month={month}
+					setMonth={setMonth}
+					year={year}
+					setYear={setYear}
+				/>
 				<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
 			</div>
 			<div

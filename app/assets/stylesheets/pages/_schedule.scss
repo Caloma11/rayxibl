@@ -42,7 +42,7 @@ $day-header-height: 60px;
 			}
 
 			.selector-wrapper {
-				@extend .shadow, .p-3, .rounded;
+				@extend .shadow, .p-2, .rounded;
 
 				position: absolute;
 				bottom: -100px;
@@ -54,6 +54,17 @@ $day-header-height: 60px;
 			.months-grid {
 				display: grid;
 				grid-template-columns: repeat(4, auto);
+
+				.month {
+					@extend .p-1;
+
+					&.current-month {
+						@extend .rounded;
+
+						color: white;
+						background-color: $blue-2;
+					}
+				}
 			}
 		}
 
@@ -146,7 +157,7 @@ $day-header-height: 60px;
 					border: 1px solid transparent;
 
 					span {
-						@extend .textMd;
+						@extend .textSm;
 
 						color: #8a9099;
 						font-weight: 500;
@@ -163,6 +174,7 @@ $day-header-height: 60px;
 						border-radius: $radius-md;
 						color: #4f4f4f;
 						font-weight: 600;
+						font-size: 18px;
 
 						&.today {
 							color: $blue-2;
