@@ -7,6 +7,7 @@ module Bookings
     end
 
     def determine_total_price
+      return unless billable
       # fixed price
       if ["fixed price", 2].include? price_type
         self.total_price = price
