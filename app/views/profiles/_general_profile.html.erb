@@ -7,18 +7,18 @@
           <%= image_tag "icons/left-arrow-white.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm" %>
         <% end %>
       </div>
-      <% if current_user.manager? %>
+      <% if current_user&.manager? || !current_user %>
         <div class="relative">
           <div class="none actions-container">
             <div class="actions flex flex-column job-show">
-              <% connection ||= current_user.find_connection(@profile.user) %>
+              <% connection ||= current_user&.find_connection(@profile.user) %>
               <% if connection %>
                 <%= button_to connection_path(connection), method: :delete, class: "action-link flex items-center w-100 textMd", remote: true do %>
                   <%= image_tag "icons/user-minus", alt: "remove user", width: 24, height: 24, class: "mr-3" %>
                   REMOVE
                 <% end %>
               <% end %>
-              <%= link_to "#", class: "action-link share-link flex items-center w-100", data: { url: "https://www.flxibl.io/profiles/#{@profile.id}", title: "#{@profile.display_name}'s' profile on flxibl", text: @profile.overview.truncate(120) } do %>
+              <%= link_to "#", class: "action-link share-link flex items-center w-100", data: { url: "https://www.flxibl.io/profiles/#{@profile.id}", title: "#{@profile.display_name}'s' profile on flxibl", text: @profile.overview&.truncate(120) } do %>
                 <%= image_tag "icons/share-white", alt: "share profile", width: 24, height: 24, class: "mr-3" %>
                 SHARE
               <% end %>
@@ -51,7 +51,7 @@
 
   <!-- Add or Book button -->
   <div class="profileButtons flex justify-content-around p-3 pt-0">
-    <% if current_user.manager? %>
+    <% if current_user&.manager? %>
       <% if @connection %>
         <%#= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
         <%= link_to new_profile_booking_path(@profile), class: "mr-3", class: "btn-lg px-0 btn-primary" do %>
@@ -102,7 +102,7 @@
     <div class="profileTabs" id="tabs">
       <%= link_to "About", profile_path(@profile, tab: 'about', anchor: 'skills'), id: "about-tab", class: "tab #{'active' if params[:tab] == 'about' || !params[:tab] }", remote: true %>
       <%= link_to "Links", profile_path(@profile, tab: 'links', anchor: 'skills'), id: "link-tab", class: "tab #{'active' if params[:tab] == 'links' }", remote: true %>
-      <%= link_to "Reviews (#{@ratings.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), id: "note-tab", class: "tab #{'active' if params[:tab] == 'notes' }", remote: true %>
+      <%= link_to "Reviews (#{@ratings&.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), id: "note-tab", class: "tab #{'active' if params[:tab] == 'notes' }", remote: true %>
     </div>
 
     <div class="p-3" id="tab-content">
