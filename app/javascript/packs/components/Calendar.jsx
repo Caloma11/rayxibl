@@ -78,7 +78,8 @@ const Calendar = () => {
 	const moveToToday = () => {
 		const todayCell = document.querySelector(".day.today");
 		calendarContainerRef.current.scrollTo({
-			left: todayCell.offsetLeft - 108
+			left: todayCell.offsetLeft - 108,
+			behavior: "smooth"
 		});
 	};
 
