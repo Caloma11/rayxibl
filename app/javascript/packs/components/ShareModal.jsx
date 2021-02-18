@@ -98,7 +98,7 @@ const ShareModal = () => {
                 className="shareBtn"
                 title={data.title}
                 url={data.url}
-                quote={data.text}
+                quote={data.title}
               >
                 <FacebookIcon size={32} round={true} />
                 Share on Facebook
@@ -107,20 +107,11 @@ const ShareModal = () => {
                 className="shareBtn"
                 url={data.url}
                 title={data.title}
-                quote={data.text}
+                quote={data.title}
               >
                 <WhatsappIcon size={32} round={true} />
                 Share on WhatsApp
               </WhatsappShareButton>
-              <FacebookMessengerShareButton
-                className="shareBtn"
-                url={data.url}
-                title={data.title}
-                quote={data.text}
-              >
-                <FacebookMessengerIcon size={32} round={true} />
-                Share on Messenger
-              </FacebookMessengerShareButton>
               <button
                 className="react-share__ShareButton shareBtn copyLink"
                 onClick={copyLink}
