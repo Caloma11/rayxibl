@@ -30,9 +30,13 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 
 		const formData = new FormData(formRef.current);
 		formData.append("booking[profile_id]", profile.id);
-		await axios.post("/api/v1/bookings", formData);
-
-		window.location = "/schedule";
+		try {
+			const response = await axios.post("/api/v1/bookings", formData);
+			console.log(response);
+			window.location = "/schedule";
+		} catch (error) {
+			// console.log(formData);
+		}
 	};
 
 	// useEffect(() => {
