@@ -89,7 +89,6 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 							type="text"
 							value={title}
 							onChange={e => setTitle(e.target.value)}
-							placeholder="Ecommerce shoot"
 						/>
 					</div>
 					<div className="input-wrapper">
@@ -99,7 +98,6 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 							name="booking[description]"
 							value={description}
 							onChange={e => setDescription(e.target.value)}
-							placeholder="Subtly charming bacon evangelist. Coffee guru. Twitter junkie. Lifelong travel ninja. Subtly charming bacon evangelist. Coffee guru. Twitter junkie. Lifelong travel ninja."
 							rows={5}
 						></textarea>
 					</div>
