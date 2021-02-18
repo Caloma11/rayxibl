@@ -16,7 +16,7 @@
         "src": "<%= image_path "manifest_icons/#{file}" %>",
         "sizes": "<%= match && match[:size] %>",
         "type": "image/png"
-      }<%= "," unless (files.size - 1) == index %>
+      },
     <% end %>
     {
       "src": "<%= image_path "manifest_icons/android-icon-192x192.png" %>",
