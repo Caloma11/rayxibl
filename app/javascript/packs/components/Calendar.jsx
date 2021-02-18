@@ -10,14 +10,40 @@ import { CalendarDayHeaders } from "./CalendarDayHeaders";
 import { CalendarProfiles } from "./CalendarProfiles";
 import { CalendarFilter } from "./CalendarFilter";
 import { CalendarMonthSelection } from "./CalendarMonthSelection";
+import { MONTHS } from "../../utils/constants";
+import useDidMountEffect from "../hooks/useDidMountEffect";
 
 const moment = extendMoment(Moment);
+
+window.moment = moment;
+
+const generateJumpData = chosenMonth => {
+	const final = [];
+	const startWeek = chosenMonth.startOf("month").week();
+	const endWeek = chosenMonth.endOf("month").week();
+
+	for (let week = startWeek; week < endWeek; week += 1) {
+		const day = Array(7)
+			.fill(0)
+			.map((n, i) =>
+				moment()
+					.week(week)
+					.startOf("week")
+					.clone()
+					.add(n + i, "day")
+			);
+		final.push(day);
+	}
+
+	return final;
+};
 
 const Calendar = () => {
 	const [loading, setLoading] = useState(true);
 	const [profiles, setProfiles] = useState([]);
 	const [bookings, setBookings] = useState([]);
 	const [data, setData] = useState(initialDays);
+	// Start to be used after reaching the next month
 	const [monthOffset, setMonthOffset] = useState(1);
 	const [weekOffset, setWeekOffset] = useState(1);
 	const [numberOfWeeks, setNumberOfWeeks] = useState(
@@ -58,6 +84,21 @@ const Calendar = () => {
 		return final;
 	};
 
+	const addNewMonth = (jump = false) => {
+		if (jump) {
+			const momentDate = moment(
+				`${year}-${MONTHS.indexOf(month) + 1}-1`,
+				"YYYY-M-D"
+			);
+			const newDays = generateJumpData(momentDate);
+			setData(newDays);
+		} else {
+			setMonthOffset(prevState => prevState + 1);
+			const newDays = generateData();
+			setData(prevState => [...prevState, ...newDays]);
+		}
+	};
+
 	const handleScroll = e => {
 		const reachedEnd =
 			e.currentTarget.scrollWidth - e.currentTarget.scrollLeft <=
@@ -71,9 +112,7 @@ const Calendar = () => {
 
 			// Happens every 4 weeks
 			if (weekOffset % 4 === 0) {
-				setMonthOffset(prevState => prevState + 1);
-				const newDays = generateData();
-				setData(prevState => [...prevState, ...newDays]);
+				addNewMonth();
 			}
 		}
 	};
@@ -103,6 +142,10 @@ const Calendar = () => {
 			setLoading(false);
 		})();
 	}, []);
+
+	useDidMountEffect(() => {
+		addNewMonth(true);
+	}, [month]);
 
 	if (loading) {
 		return (

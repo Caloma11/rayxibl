@@ -1,16 +1,16 @@
 import React, { useState } from "react";
 import { MONTHS } from "../../utils/constants";
+import blackCross from "../images/black-cross.svg";
+import downChevron from "../images/down-chevron.svg";
 import leftArrow from "../images/left-arrow.svg";
 import rightArrow from "../images/right-arrow.svg";
-import downChevron from "../images/down-chevron.svg";
-import blackCross from "../images/black-cross.svg";
 
 export const CalendarMonthSelection = ({ month, setMonth, year, setYear }) => {
 	const [show, setShow] = useState(false);
 
 	return (
 		<div className="month-selection">
-			<div className="flex items-center" onClick={() => setShow(prev => !prev)}>
+			<div className="flex items-center" onClick={() => setShow(true)}>
 				<h3 className="uppercase m-0">
 					{month} {year}
 				</h3>
