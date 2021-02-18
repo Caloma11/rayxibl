@@ -28,7 +28,7 @@
             <%= link_to edit_job_path(@job), class: "action-link" do %>
               EDIT
             <% end %>
-            <%= link_to "#", class: "action-link" do %>
+            <%= link_to "#", class: "action-link share-link", data: { url: "https://www.flxibl.io/jobs/#{@job.id}", title: "Shared job from flxibl app", text: @job.description.truncate(120) } do %>
               SHARE
             <% end %>
             <%= link_to "#", class: "action-link" do %>
@@ -131,3 +131,6 @@
     </div>
   </div>
 </div>
+
+<div class="shareModalContainer"></div>
+<%= javascript_pack_tag "components/ShareModal" %>

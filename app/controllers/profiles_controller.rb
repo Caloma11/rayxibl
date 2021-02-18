@@ -1,5 +1,7 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update]
+  skip_before_action :authenticate_user!, only: [:show]
+
   def index
     redirect_to dashboard_path if current_user.freelancer?
 
@@ -20,11 +22,12 @@ class ProfilesController < ApplicationController
   end
 
   def show
-    @connection = current_user.find_connection(@profile.user)
-    @notes = current_user.manager.notes_of(@profile).includes([:manager]) if current_user.manager?
     @ratings = @profile.ratings
-    @my_rating = @ratings.find_by(manager: current_user.manager, profile: @profile)
-
+    if current_user
+      @connection = current_user.find_connection(@profile.user)
+      @notes = current_user.manager.notes_of(@profile).includes([:manager]) if current_user.manager?
+      @my_rating = @ratings.find_by(manager: current_user.manager, profile: @profile)
+    end
     @links = @profile.profile_attachments.where.not(url: nil)
     @documents = @profile.profile_attachments.where(url: nil)
 

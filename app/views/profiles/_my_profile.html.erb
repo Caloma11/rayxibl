@@ -34,9 +34,9 @@
 
   <!-- Buttons -->
 
-  <!-- Add or Book button -->
+  <!-- Share button -->
   <div class="profileButtons flex justify-content-around p-3 pt-0">
-    <%= link_to "#", class: "mr-3", class: "btn-lg px-0 btn-primary" do %>
+    <%= link_to "#", class: "btn-lg px-0 btn-primary share-link", data: { url: "https://www.flxibl.io/profiles/#{@profile.id}", title: "#{@profile.display_name}'s' profile on flxibl", text: @profile.overview.truncate(120) }  do %>
         <%= image_tag "icons/share-white.svg", alt: "Share profile" %>
         <p class="textWhite">SHARE</p>
     <% end %>

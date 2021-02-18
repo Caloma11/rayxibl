@@ -75,7 +75,6 @@ document.addEventListener("turbolinks:load", () => {
 	initNewMessageCable();
 	registerError();
 	window.starRating = starRating;
-
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
 	window.toBindMoreTogglerMultiple = toBindMoreTogglerMultiple;
