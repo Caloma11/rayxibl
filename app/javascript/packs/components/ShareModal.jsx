@@ -7,7 +7,7 @@ import {
 import ReactDOM from "react-dom";
 import { FacebookMessengerIcon, WhatsappIcon, FacebookIcon } from "react-share";
 import Clipboard from "./Clipboard";
-import CloseIcon from "../images/cross.svg";
+import CloseIcon from "../images/gray-cross.svg";
 import Share from "../images/share.svg";
 
 const ShareModal = () => {

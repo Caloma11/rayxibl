@@ -8,7 +8,7 @@ const Clipboard = () => (
       height="32"
       viewBox="0 0 32 32"
       fill="none"
-      stroke="#FFF"
+      stroke="#828282"
       strokeWidth="2"
       strokeLinecap="round"
       strokeLinejoin="round"

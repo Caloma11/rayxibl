@@ -1,38 +1,29 @@
-// .share-link-modal {
-//   position: fixed;
-//   width: 100vw;
-//   height: 100vh;
-//   display: flex;
-//   justify-content: space-between;
-//   flex-direction: column;
-//   align-items: center;
-//   background-color: rgba(47, 47, 62, .8);
-//   z-index: 4;
-// }
-
 .linkModalBg {
   position: fixed;
   width: 100%;
   height: 100vh;
-  background: #00000099;
+  background: rgba(47, 47, 62, .8);
   top: 0;
   left: 0;
   z-index: 3;
+  display: flex;
+  justify-content: center;
   .linkModal {
     position: fixed;
     color: white;
     border: none;
     width: 90%;
-    background: black;
+    background: $light-gray;
+    border-radius: 8px;
     z-index: 9999999;
     top: 20%;
     margin: 0 auto;
-    left: 5%;
+    // left: 5%;
     .shareLinks {
       display: flex;
       flex-direction: column;
       justify-content: center;
-      padding: 30px;
+      padding: 64px 32px;
       // @include for-phone-only {
       //   padding: 45px 0px;
       // }
@@ -41,7 +32,7 @@
       button {
         border-radius: 40px;
         margin: 10px 0;
-        border: 1px solid red !important;
+        border: 1px solid $gray !important;
         width: 90% !important;
         background-color: transparent !important;
         padding: 10px !important;
@@ -73,7 +64,8 @@
       top: 0px !important;
       right: 10px !important;
       width: 20px !important;
-
+      padding: 16px 8px;
+      margin-bottom: 32px;
       object-fit: scale-down;
     }
   }
@@ -101,6 +93,14 @@
     svg,
     img {
       margin-right: 0 !important;
+    }
+  }
+}
+
+@media (min-width: 800px) {
+  .linkModalBg {
+    .linkModal {
+      width: 60%;
     }
   }
 }
