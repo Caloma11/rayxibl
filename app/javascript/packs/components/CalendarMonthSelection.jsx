@@ -24,12 +24,16 @@ export const CalendarMonthSelection = ({ month, setMonth, year, setYear }) => {
 			</div>
 			{show && (
 				<div className="flex flex-column items-center selector-wrapper">
-					<div className="flex w-100 justify-content-between items-center mb-3">
-						<button type="button" onClick={() => setShow(false)}>
+					<div className="flex w-100 justify-content-between items-center mb-3 pt-2">
+						<button
+							className="ml-3"
+							type="button"
+							onClick={() => setShow(false)}
+						>
 							<img
 								src={blackCross}
-								width={16}
-								height={16}
+								width={12}
+								height={12}
 								alt="Close dropdown"
 							/>
 						</button>
@@ -43,7 +47,10 @@ export const CalendarMonthSelection = ({ month, setMonth, year, setYear }) => {
 								/>
 							</button>
 							<span>{year}</span>
-							<button onClick={() => setYear(prev => prev + 1)}>
+							<button
+								className="mr-3"
+								onClick={() => setYear(prev => prev + 1)}
+							>
 								<img src={rightArrow} alt="next year" width={12} height={12} />
 							</button>
 						</div>
