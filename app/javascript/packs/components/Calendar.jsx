@@ -17,7 +17,7 @@ const moment = extendMoment(Moment);
 
 window.moment = moment;
 
-const generateJumpData = chosenMonth => {
+const generateJumpData = (chosenMonth, year) => {
 	const final = [];
 	const startWeek = chosenMonth.startOf("month").week();
 	const endWeek = chosenMonth.endOf("month").week();
@@ -31,6 +31,7 @@ const generateJumpData = chosenMonth => {
 					.startOf("week")
 					.clone()
 					.add(n + i, "day")
+					.year(year)
 			);
 		final.push(day);
 	}
@@ -90,7 +91,7 @@ const Calendar = () => {
 				`${year}-${MONTHS.indexOf(month) + 1}-1`,
 				"YYYY-M-D"
 			);
-			const newDays = generateJumpData(momentDate);
+			const newDays = generateJumpData(momentDate, year);
 			setData(newDays);
 		} else {
 			setMonthOffset(prevState => prevState + 1);
@@ -145,7 +146,7 @@ const Calendar = () => {
 
 	useDidMountEffect(() => {
 		addNewMonth(true);
-	}, [month]);
+	}, [month, year]);
 
 	if (loading) {
 		return (
