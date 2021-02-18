@@ -59,6 +59,7 @@ const Calendar = () => {
 	const [month, setMonth] = useState(today.format("MMMM"));
 	const [year, setYear] = useState(parseInt(today.format("YYYY"), 10));
 	const calendarContainerRef = useRef(null);
+	const forceTodayRef = useRef(false);
 
 	const generateData = () => {
 		const final = [];
@@ -119,11 +120,19 @@ const Calendar = () => {
 	};
 
 	const moveToToday = () => {
-		const todayCell = document.querySelector(".day.today");
-		calendarContainerRef.current.scrollTo({
-			left: todayCell.offsetLeft - 108,
-			behavior: "smooth"
-		});
+		if (year !== parseInt(moment().format("YYYY"), 10)) {
+			forceTodayRef.current = true;
+			const today = moment();
+			setMonth(today.format("MMMM"));
+			setYear(parseInt(today.format("YYYY"), 10));
+			setData(initialDays);
+		} else {
+			const todayCell = document.querySelector(".day.today");
+			calendarContainerRef.current.scrollTo({
+				left: todayCell.offsetLeft - 108,
+				behavior: "smooth"
+			});
+		}
 	};
 
 	useEffect(() => {
@@ -145,8 +154,25 @@ const Calendar = () => {
 	}, []);
 
 	useDidMountEffect(() => {
-		addNewMonth(true);
+		if (!forceTodayRef.current) {
+			addNewMonth(true);
+		}
 	}, [month, year]);
+
+	useDidMountEffect(() => {
+		const dates = data.flat().map(date => date.format("YYYY-MM-DD"));
+		const today = moment().format("YYYY-MM-DD");
+
+		if (dates.includes(today) && forceTodayRef.current) {
+			const todayCell = document.querySelector(".day.today");
+			calendarContainerRef.current.scrollTo({
+				left: todayCell.offsetLeft - 108,
+				behavior: "smooth"
+			});
+		}
+
+		forceTodayRef.current = false;
+	}, [data]);
 
 	if (loading) {
 		return (
