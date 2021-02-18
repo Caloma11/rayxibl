@@ -21,6 +21,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 	const [priceType, setPriceType] = useState(-1);
 	const [totalPrice, setTotalPrice] = useState(null);
 	const [attachments, setAttachments] = useState([]);
+	const [errors, setErrors] = useState({});
 	const formRef = useRef(null);
 
 	const { profile, date } = formDetails;
@@ -30,13 +31,11 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 
 		const formData = new FormData(formRef.current);
 		formData.append("booking[profile_id]", profile.id);
-		try {
-			const response = await axios.post("/api/v1/bookings", formData);
-			console.log(response);
-			window.location = "/schedule";
-		} catch (error) {
-			// console.log(formData);
+		const { data } = await axios.post("/api/v1/bookings", formData);
+		if ("errors" in data) {
+			setErrors(data.errors);
 		}
+		// window.location = "/schedule";
 	};
 
 	// useEffect(() => {

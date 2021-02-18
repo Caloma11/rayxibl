@@ -26,6 +26,6 @@ class Api::V1::BookingsController < Api::V1::BaseController
   end
 
   def render_error
-    render json: { errors: @booking.errors.full_messages }, status: :unprocessable_entity
+    render json: { errors: @booking.errors }
   end
 end
