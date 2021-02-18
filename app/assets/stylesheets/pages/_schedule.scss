@@ -36,6 +36,38 @@ $day-header-height: 60px;
 			width: 100%;
 		}
 
+		.month-selection {
+			h3 {
+				@extend .semi-bold;
+			}
+
+			.selector-wrapper {
+				@extend .shadow, .p-2, .rounded;
+
+				position: absolute;
+				bottom: -100px;
+				left: 50px;
+				z-index: 1;
+				background: white;
+			}
+
+			.months-grid {
+				display: grid;
+				grid-template-columns: repeat(4, auto);
+
+				.month {
+					@extend .p-1;
+
+					&.current-month {
+						@extend .rounded;
+
+						color: white;
+						background-color: $blue-2;
+					}
+				}
+			}
+		}
+
 		#booking-form-container {
 			@extend .pb-5;
 
@@ -75,6 +107,20 @@ $day-header-height: 60px;
 						.px-1,
 						.text-center;
 
+					width: 100px;
+
+					&.today {
+						@extend .justify-content-start;
+
+						height: 60px;
+
+						span {
+							@extend .textMd, .mt-0;
+
+							color: $blue-2;
+						}
+					}
+
 					img {
 						width: 48px;
 						height: 48px;
@@ -111,6 +157,8 @@ $day-header-height: 60px;
 					border: 1px solid transparent;
 
 					span {
+						@extend .textSm;
+
 						color: #8a9099;
 						font-weight: 500;
 
@@ -123,10 +171,10 @@ $day-header-height: 60px;
 						@extend .bold, .flex, .justify-content-center, .items-center;
 
 						width: 40px;
-						height: 40px;
 						border-radius: $radius-md;
 						color: #4f4f4f;
 						font-weight: 600;
+						font-size: 18px;
 
 						&.today {
 							color: $blue-2;
@@ -159,14 +207,26 @@ $day-header-height: 60px;
 						background: $flat-orange-5;
 						border-top: 8px solid $flat-orange-3;
 
+						.event-details {
+							background: $flat-orange-5;
+						}
+
 						&.red {
 							background: $flat-red-5;
 							border-top-color: $flat-red-3;
+
+							.event-details {
+								background: $flat-red-5;
+							}
 						}
 
 						&.green {
 							background: $flat-green-5;
 							border-top-color: $flat-green-3;
+
+							.event-details {
+								background: $flat-green-5;
+							}
 						}
 
 						.event-details {

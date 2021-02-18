@@ -1,6 +1,6 @@
 import Moment from "moment";
 import { extendMoment } from "moment-range";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import ReactDOM from "react-dom";
 import axios from "axios";
 import { initialDays } from "../../utils/initialDays";
@@ -9,14 +9,42 @@ import { CalendarDays } from "./CalendarDays";
 import { CalendarDayHeaders } from "./CalendarDayHeaders";
 import { CalendarProfiles } from "./CalendarProfiles";
 import { CalendarFilter } from "./CalendarFilter";
+import { CalendarMonthSelection } from "./CalendarMonthSelection";
+import { MONTHS } from "../../utils/constants";
+import useDidMountEffect from "../hooks/useDidMountEffect";
 
 const moment = extendMoment(Moment);
+
+window.moment = moment;
+
+const generateJumpData = (chosenMonth, year) => {
+	const final = [];
+	const startWeek = chosenMonth.startOf("month").week();
+	const endWeek = chosenMonth.endOf("month").week();
+
+	for (let week = startWeek; week < endWeek; week += 1) {
+		const day = Array(7)
+			.fill(0)
+			.map((n, i) =>
+				moment()
+					.week(week)
+					.startOf("week")
+					.clone()
+					.add(n + i, "day")
+					.year(year)
+			);
+		final.push(day);
+	}
+
+	return final;
+};
 
 const Calendar = () => {
 	const [loading, setLoading] = useState(true);
 	const [profiles, setProfiles] = useState([]);
 	const [bookings, setBookings] = useState([]);
 	const [data, setData] = useState(initialDays);
+	// Start to be used after reaching the next month
 	const [monthOffset, setMonthOffset] = useState(1);
 	const [weekOffset, setWeekOffset] = useState(1);
 	const [numberOfWeeks, setNumberOfWeeks] = useState(
@@ -27,6 +55,11 @@ const Calendar = () => {
 	const lastRenderedWeek = initialDays[initialDays.length - 1];
 	const lastRenderedDay = lastRenderedWeek[lastRenderedWeek.length - 1];
 	const [weekCounter, setWeekCounter] = useState(lastRenderedDay.week() + 1);
+	const today = moment();
+	const [month, setMonth] = useState(today.format("MMMM"));
+	const [year, setYear] = useState(parseInt(today.format("YYYY"), 10));
+	const calendarContainerRef = useRef(null);
+	const forceTodayRef = useRef(false);
 
 	const generateData = () => {
 		const final = [];
@@ -53,6 +86,21 @@ const Calendar = () => {
 		return final;
 	};
 
+	const addNewMonth = (jump = false) => {
+		if (jump) {
+			const momentDate = moment(
+				`${year}-${MONTHS.indexOf(month) + 1}-1`,
+				"YYYY-M-D"
+			);
+			const newDays = generateJumpData(momentDate, year);
+			setData(newDays);
+		} else {
+			setMonthOffset(prevState => prevState + 1);
+			const newDays = generateData();
+			setData(prevState => [...prevState, ...newDays]);
+		}
+	};
+
 	const handleScroll = e => {
 		const reachedEnd =
 			e.currentTarget.scrollWidth - e.currentTarget.scrollLeft <=
@@ -66,10 +114,24 @@ const Calendar = () => {
 
 			// Happens every 4 weeks
 			if (weekOffset % 4 === 0) {
-				setMonthOffset(prevState => prevState + 1);
-				const newDays = generateData();
-				setData(prevState => [...prevState, ...newDays]);
+				addNewMonth();
 			}
+		}
+	};
+
+	const moveToToday = () => {
+		if (year !== parseInt(moment().format("YYYY"), 10)) {
+			forceTodayRef.current = true;
+			const today = moment();
+			setMonth(today.format("MMMM"));
+			setYear(parseInt(today.format("YYYY"), 10));
+			setData(initialDays);
+		} else {
+			const todayCell = document.querySelector(".day.today");
+			calendarContainerRef.current.scrollTo({
+				left: todayCell.offsetLeft - 108,
+				behavior: "smooth"
+			});
 		}
 	};
 
@@ -91,6 +153,27 @@ const Calendar = () => {
 		})();
 	}, []);
 
+	useDidMountEffect(() => {
+		if (!forceTodayRef.current) {
+			addNewMonth(true);
+		}
+	}, [month, year]);
+
+	useDidMountEffect(() => {
+		const dates = data.flat().map(date => date.format("YYYY-MM-DD"));
+		const today = moment().format("YYYY-MM-DD");
+
+		if (dates.includes(today) && forceTodayRef.current) {
+			const todayCell = document.querySelector(".day.today");
+			calendarContainerRef.current.scrollTo({
+				left: todayCell.offsetLeft - 108,
+				behavior: "smooth"
+			});
+		}
+
+		forceTodayRef.current = false;
+	}, [data]);
+
 	if (loading) {
 		return (
 			<section
@@ -107,12 +190,22 @@ const Calendar = () => {
 			{showForm && formDetails && Object.keys(formDetails).length > 0 && (
 				<BookingForm formDetails={formDetails} setShowForm={setShowForm} />
 			)}
-			<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
+			<div className="flex justify-content-between items-center relative">
+				<div style={{ width: 70, height: 70 }}></div>
+				<CalendarMonthSelection
+					month={month}
+					setMonth={setMonth}
+					year={year}
+					setYear={setYear}
+				/>
+				<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
+			</div>
 			<div
 				className={`calendarContainer ${showForm ? "none" : ""}`}
 				onScroll={handleScroll}
+				ref={calendarContainerRef}
 			>
-				<CalendarProfiles profiles={profiles} />
+				<CalendarProfiles profiles={profiles} moveToToday={moveToToday} />
 				<div className="allDays">
 					<CalendarDayHeaders data={data} weekOffset={weekOffset} />
 					{profiles.length > 0 ? (
