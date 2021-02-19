@@ -88,6 +88,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 							type="text"
 							value={title}
 							onChange={e => setTitle(e.target.value)}
+							className={"title" in errors ? "error" : ""}
 						/>
 					</div>
 					<div className="input-wrapper">
@@ -98,6 +99,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 							value={description}
 							onChange={e => setDescription(e.target.value)}
 							rows={5}
+							className={"description" in errors ? "error" : ""}
 						></textarea>
 					</div>
 					<BookingFormDates
@@ -114,6 +116,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 						setStartDate={setStartDate}
 						endDate={endDate}
 						setEndDate={setEndDate}
+						errors={errors}
 					/>
 					<BookingFormPricing
 						billable={billable}

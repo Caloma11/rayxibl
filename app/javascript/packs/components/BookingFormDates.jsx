@@ -14,7 +14,8 @@ export const BookingFormDates = ({
 	startDate,
 	setStartDate,
 	endDate,
-	setEndDate
+	setEndDate,
+	errors
 }) => {
 	useEffect(() => {
 		if (chosenDate) {
@@ -90,6 +91,7 @@ export const BookingFormDates = ({
 						type="date"
 						value={startDate}
 						onChange={e => setStartDate(e.target.value)}
+						className={Object.keys(errors).includes("end_date") ? "error" : ""}
 					/>
 				</div>
 				<div className="input-wrapper">
@@ -100,6 +102,7 @@ export const BookingFormDates = ({
 						type="date"
 						value={endDate}
 						onChange={e => setEndDate(e.target.value)}
+						className={Object.keys(errors).includes("end_date") ? "error" : ""}
 					/>
 				</div>
 			</div>
