@@ -61,6 +61,28 @@ const Calendar = () => {
 	const calendarContainerRef = useRef(null);
 	const forceTodayRef = useRef(false);
 
+	const generatePreviousData = () => {
+		const final = [];
+		const endDate = data[0][0].subtract(1, "d");
+		const endDateWeek = endDate.week();
+		const startDateWeek = endDate.clone().subtract(4, "week").week();
+
+		for (let week = startDateWeek; week <= endDateWeek; week += 1) {
+			const day = Array(7)
+				.fill(0)
+				.map((n, i) =>
+					moment()
+						.week(week)
+						.startOf("week")
+						.clone()
+						.add(n + i, "day")
+				);
+			final.push(day);
+		}
+
+		return final;
+	};
+
 	const generateData = () => {
 		const final = [];
 		const withMonthOffset = moment().add(monthOffset, "M");
@@ -105,6 +127,7 @@ const Calendar = () => {
 		const reachedEnd =
 			e.currentTarget.scrollWidth - e.currentTarget.scrollLeft <=
 			e.currentTarget.offsetWidth + 20;
+		const atBeginning = e.currentTarget.scrollLeft === 0;
 
 		// TODO: Handle next year
 		// Problem right now is: <CalendarDayHeader /> visually breaks (offset)
@@ -116,6 +139,9 @@ const Calendar = () => {
 			if (weekOffset % 4 === 0) {
 				addNewMonth();
 			}
+		} else if (atBeginning) {
+			const previousDays = generatePreviousData();
+			setData(prev => [...previousDays, ...prev]);
 		}
 	};
 
