@@ -62,7 +62,7 @@ export const CalendarMonthSelection = ({ month, setMonth, year, setYear }) => {
 						{MONTHS.map((mo, i) => (
 							<div
 								key={i}
-								className={`uppercase mx-3 mb-2 month ${
+								className={`text-center uppercase mx-3 mb-2 month ${
 									month === mo ? "current-month" : ""
 								}`}
 								onClick={() => setMonth(mo)}

@@ -120,18 +120,22 @@ const Calendar = () => {
 	};
 
 	const moveToToday = () => {
+		forceTodayRef.current = true;
+		const today = moment();
+		setMonth(today.format("MMMM"));
+		setYear(parseInt(today.format("YYYY"), 10));
 		if (year !== parseInt(moment().format("YYYY"), 10)) {
-			forceTodayRef.current = true;
-			const today = moment();
-			setMonth(today.format("MMMM"));
-			setYear(parseInt(today.format("YYYY"), 10));
 			setData(initialDays);
 		} else {
 			const todayCell = document.querySelector(".day.today");
-			calendarContainerRef.current.scrollTo({
-				left: todayCell.offsetLeft - 108,
-				behavior: "smooth"
-			});
+			if (!todayCell) {
+				setData(initialDays);
+			} else {
+				calendarContainerRef.current.scrollTo({
+					left: todayCell.offsetLeft - 108,
+					behavior: "smooth"
+				});
+			}
 		}
 	};
 
