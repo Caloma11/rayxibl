@@ -192,7 +192,6 @@ const Calendar = () => {
 			addNewMonth(true);
 		}
 
-		forceTodayRef.current = false;
 		moveMonthRef.current = false;
 	}, [month, year]);
 
@@ -200,6 +199,7 @@ const Calendar = () => {
 		const dates = data.flat().map(date => date.format("YYYY-MM-DD"));
 		const today = moment().format("YYYY-MM-DD");
 
+		console.log(forceTodayRef);
 		if (dates.includes(today) && forceTodayRef.current) {
 			const todayCell = document.querySelector(".day.today");
 			calendarContainerRef.current.scrollTo({
