@@ -9,7 +9,8 @@ export const BookingFormPricing = ({
 	setPrice,
 	priceType,
 	setPriceType,
-	totalPrice
+	totalPrice,
+	errors
 }) => {
 	return (
 		<>
@@ -39,14 +40,14 @@ export const BookingFormPricing = ({
 							value={price}
 							onChange={e => setPrice(e.target.value)}
 							placeholder="250"
-							className="mr-3"
+							className={`mr-3 ${"price" in errors ? "error" : ""}`}
 						/>
 						<select
 							id="booking_price_type"
 							name="booking[price_type]"
 							value={priceType}
 							onChange={e => setPriceType(e.target.value)}
-							className="mr-3"
+							className={`mr-3 ${"price_type" in errors ? "error" : ""}`}
 						>
 							{PRICE_TYPES.map(({ text, value }) => (
 								<option value={value} key={value}>
