@@ -126,6 +126,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 						priceType={priceType}
 						setPriceType={setPriceType}
 						totalPrice={totalPrice}
+						errors={errors}
 					/>
 					<BookingFormAttachments setAttachments={setAttachments} />
 				</div>

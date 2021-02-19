@@ -1,11 +1,11 @@
 class Api::V1::BookingsController < Api::V1::BaseController
   def create
     @booking = Booking.new(booking_params)
-    @booking.price_type = params[:booking][:price_type].to_i
+    price_type = params[:booking][:price_type].to_i
+    @booking.price_type = price_type if price_type != -1
     @booking.manager = current_user.manager
 
     authorize @booking
-
 
     if @booking.save
       render json: @booking
