@@ -117,6 +117,11 @@ const Calendar = () => {
 				"YYYY-M-D"
 			);
 			const newDays = generateJumpData(momentDate, year);
+			const lastWeekOfNewData = newDays[newDays.length - 1];
+			const lastDayOfNewData = lastWeekOfNewData[lastWeekOfNewData.length - 1];
+
+			setMonthOffset(parseInt(lastDayOfNewData.format("M"), 10));
+			setWeekCounter(lastDayOfNewData.clone().week() + 1);
 			setData(newDays);
 		} else {
 			setMonthOffset(prevState => prevState + 1);
@@ -199,7 +204,6 @@ const Calendar = () => {
 		const dates = data.flat().map(date => date.format("YYYY-MM-DD"));
 		const today = moment().format("YYYY-MM-DD");
 
-		console.log(forceTodayRef);
 		if (dates.includes(today) && forceTodayRef.current) {
 			const todayCell = document.querySelector(".day.today");
 			calendarContainerRef.current.scrollTo({
