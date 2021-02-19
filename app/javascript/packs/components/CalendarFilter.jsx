@@ -19,13 +19,11 @@ export const CalendarFilter = ({ bookings, setProfiles }) => {
 
 	return (
 		<div id="calendar-filter">
-			{!show && (
-				<div className="flex justify-content-end m-3">
-					<button onClick={() => setShow(prev => !prev)}>
-						<img src={filterSvg} alt="filter" width={24} height={24} />
-					</button>
-				</div>
-			)}
+			<div className="flex justify-content-end m-3">
+				<button onClick={() => setShow(prev => !prev)}>
+					<img src={filterSvg} alt="filter" width={24} height={24} />
+				</button>
+			</div>
 
 			{show && (
 				<div className="filter-overlay">
@@ -34,7 +32,9 @@ export const CalendarFilter = ({ bookings, setProfiles }) => {
 							<img src={crossDarkSvg} alt="exit" />
 						</button>
 						<p>FREELANCERS</p>
-						<button style={{ width: 32 }}> </button>
+						<button className={show ? "noSelect" : ""} style={{ width: 32 }}>
+							{" "}
+						</button>
 					</section>
 					<section className="content">
 						<CalendarProfileFilter

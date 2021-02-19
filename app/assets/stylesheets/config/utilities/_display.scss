@@ -181,6 +181,7 @@
 	-moz-user-select: none;
 	-ms-user-select: none;
 	user-select: none;
+	outline: none;
 }
 
 .overflow-hidden {
@@ -192,11 +193,11 @@
 }
 
 .bg-none {
-  background-color: transparent !important;
+	background-color: transparent !important;
 }
 
 fieldset {
-  border: none;
-  margin: 0;
-  padding: 0;
+	border: none;
+	margin: 0;
+	padding: 0;
 }
