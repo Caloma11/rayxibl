@@ -144,7 +144,6 @@ const Calendar = () => {
 			const previousDays = generatePreviousData();
 			setWeekOffset(prevState => prevState + 1);
 			setNumberOfWeeks(prevState => [[...Array(7).fill(0)], ...prevState]);
-			// console.log(data);
 			setData(prev => [...previousDays, ...prev]);
 		}
 	};
