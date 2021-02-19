@@ -65,9 +65,10 @@ const Calendar = () => {
 		const final = [];
 		const endDate = data[0][0].subtract(1, "d");
 		const endDateWeek = endDate.week();
-		const startDateWeek = endDate.clone().subtract(4, "week").week();
+		const startDate = endDate.clone().subtract(1, "week");
+		const startDateWeek = startDate.week();
 
-		for (let week = startDateWeek; week <= endDateWeek; week += 1) {
+		for (let week = startDateWeek; week < endDateWeek; week += 1) {
 			const day = Array(7)
 				.fill(0)
 				.map((n, i) =>
