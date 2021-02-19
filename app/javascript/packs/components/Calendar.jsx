@@ -63,12 +63,12 @@ const Calendar = () => {
 
 	const generatePreviousData = () => {
 		const final = [];
-		const endDate = data[0][0].subtract(1, "d");
+		const endDate = data[0][0].clone().subtract(1, "d");
 		const endDateWeek = endDate.week();
 		const startDate = endDate.clone().subtract(1, "week");
-		const startDateWeek = startDate.week();
+		const startDateWeek = startDate.week() + 1;
 
-		for (let week = startDateWeek; week < endDateWeek; week += 1) {
+		for (let week = startDateWeek; week <= endDateWeek; week += 1) {
 			const day = Array(7)
 				.fill(0)
 				.map((n, i) =>
@@ -144,6 +144,7 @@ const Calendar = () => {
 			const previousDays = generatePreviousData();
 			setWeekOffset(prevState => prevState + 1);
 			setNumberOfWeeks(prevState => [[...Array(7).fill(0)], ...prevState]);
+			// console.log(data);
 			setData(prev => [...previousDays, ...prev]);
 		}
 	};
