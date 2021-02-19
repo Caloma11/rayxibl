@@ -60,6 +60,7 @@ const Calendar = () => {
 	const [year, setYear] = useState(parseInt(today.format("YYYY"), 10));
 	const calendarContainerRef = useRef(null);
 	const forceTodayRef = useRef(false);
+	const moveMonthRef = useRef(false);
 
 	const generatePreviousData = () => {
 		const final = [];
@@ -187,9 +188,12 @@ const Calendar = () => {
 	}, []);
 
 	useDidMountEffect(() => {
-		if (!forceTodayRef.current) {
+		if (!forceTodayRef.current || moveMonthRef.current) {
 			addNewMonth(true);
 		}
+
+		forceTodayRef.current = false;
+		moveMonthRef.current = false;
 	}, [month, year]);
 
 	useDidMountEffect(() => {
@@ -230,6 +234,7 @@ const Calendar = () => {
 					setMonth={setMonth}
 					year={year}
 					setYear={setYear}
+					ref={moveMonthRef}
 				/>
 				<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
 			</div>
