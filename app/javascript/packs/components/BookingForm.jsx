@@ -21,6 +21,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 	const [priceType, setPriceType] = useState(-1);
 	const [totalPrice, setTotalPrice] = useState(null);
 	const [attachments, setAttachments] = useState([]);
+	const [errors, setErrors] = useState({});
 	const formRef = useRef(null);
 
 	const { profile, date } = formDetails;
@@ -30,9 +31,11 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 
 		const formData = new FormData(formRef.current);
 		formData.append("booking[profile_id]", profile.id);
-		await axios.post("/api/v1/bookings", formData);
-
-		window.location = "/schedule";
+		const { data } = await axios.post("/api/v1/bookings", formData);
+		if ("errors" in data) {
+			setErrors(data.errors);
+		}
+		// window.location = "/schedule";
 	};
 
 	// useEffect(() => {
@@ -85,7 +88,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 							type="text"
 							value={title}
 							onChange={e => setTitle(e.target.value)}
-							placeholder="Ecommerce shoot"
+							className={"title" in errors ? "error" : ""}
 						/>
 					</div>
 					<div className="input-wrapper">
@@ -95,8 +98,8 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 							name="booking[description]"
 							value={description}
 							onChange={e => setDescription(e.target.value)}
-							placeholder="Subtly charming bacon evangelist. Coffee guru. Twitter junkie. Lifelong travel ninja. Subtly charming bacon evangelist. Coffee guru. Twitter junkie. Lifelong travel ninja."
 							rows={5}
+							className={"description" in errors ? "error" : ""}
 						></textarea>
 					</div>
 					<BookingFormDates
@@ -113,6 +116,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 						setStartDate={setStartDate}
 						endDate={endDate}
 						setEndDate={setEndDate}
+						errors={errors}
 					/>
 					<BookingFormPricing
 						billable={billable}
@@ -122,6 +126,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 						priceType={priceType}
 						setPriceType={setPriceType}
 						totalPrice={totalPrice}
+						errors={errors}
 					/>
 					<BookingFormAttachments setAttachments={setAttachments} />
 				</div>

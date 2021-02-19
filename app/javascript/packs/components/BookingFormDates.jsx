@@ -14,7 +14,8 @@ export const BookingFormDates = ({
 	startDate,
 	setStartDate,
 	endDate,
-	setEndDate
+	setEndDate,
+	errors
 }) => {
 	useEffect(() => {
 		if (chosenDate) {
@@ -44,7 +45,7 @@ export const BookingFormDates = ({
 				{specificHour ? (
 					<>
 						<div className="input-wrapper mr-3">
-							<label htmlFor="booking_start_time">Starting time</label>
+							<label htmlFor="booking_start_time">Start time</label>
 							<input
 								id="booking_start_time"
 								name="booking[start_time]"
@@ -68,7 +69,7 @@ export const BookingFormDates = ({
 					</>
 				) : (
 					<div className="input-wrapper">
-						<label htmlFor="booking_duration">Duration (in hours)</label>
+						<label htmlFor="booking_duration">Hours per day</label>
 						<input
 							id="booking_duration"
 							name="booking[duration]"
@@ -83,13 +84,14 @@ export const BookingFormDates = ({
 			</div>
 			<div className="flex">
 				<div className="input-wrapper mr-3">
-					<label htmlFor="booking_start_date">Starting date</label>
+					<label htmlFor="booking_start_date">Start date</label>
 					<input
 						id="booking_start_date"
 						name="booking[start_date]"
 						type="date"
 						value={startDate}
 						onChange={e => setStartDate(e.target.value)}
+						className={Object.keys(errors).includes("end_date") ? "error" : ""}
 					/>
 				</div>
 				<div className="input-wrapper">
@@ -100,6 +102,7 @@ export const BookingFormDates = ({
 						type="date"
 						value={endDate}
 						onChange={e => setEndDate(e.target.value)}
+						className={Object.keys(errors).includes("end_date") ? "error" : ""}
 					/>
 				</div>
 			</div>
