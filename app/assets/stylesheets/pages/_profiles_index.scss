@@ -47,4 +47,29 @@
       }
     }
   }
+
+  .manager-actions-wrapper {
+    position: fixed;
+    bottom: 352px;
+    right: 24px;
+  }
+
+  #manager-actions-button {
+    position: fixed;
+    bottom: 88px;
+    right: 24px;
+    background-color: $blue-2;
+    padding: 16px;
+    z-index: 3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+  }
+
+  .add-free {
+    position: sticky;
+    bottom: 80px;
+    right: 24px;
+  }
 }

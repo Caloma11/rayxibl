@@ -22,6 +22,7 @@
     <% unless params[:ob].present? && params[:ob] == "t" %>
       <%= render partial: "profiles/cards", locals: { profiles: @profiles } %>
     <% else %>
+      <!-- Put overlay after manager's sign in -->
       <div class="profiles-overlay flex flex-column items-center justify-content-start">
         <p class="main-text">
           Your network of freelancers will be stored here
@@ -29,12 +30,8 @@
         <div class="flex-grow-1">
           <%= image_tag "icons/agenda.svg", alt: "agenda.svg" %>
         </div>
-        <p class="main-text add-free">
-          Add freelancers:
-        </p>
       </div>
     <% end %>
-  </section>
 
   <% unless params[:ob].present? && params[:ob] == "t" %>
     <div class="add-more flex flex-column items-center justify-content-center">
@@ -48,3 +45,4 @@
   </div>
 </div>
 
+<%= javascript_pack_tag "components/ActionButton" %>
