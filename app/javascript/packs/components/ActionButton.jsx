@@ -45,7 +45,7 @@ const ActionButton = () => {
     }
 			{open && (
 				<div className="actions flex flex-column">
-					<a className="action-link flex items-center justify-content-between" href="/users/invitations/new">
+					<a className="action-link flex items-center justify-content-between" href="/invite">
           <img
             className=""
             src={mail}
