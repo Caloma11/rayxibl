@@ -3,6 +3,12 @@ class CustomInvitationsController < ApplicationController
   skip_after_action :verify_authorized
 
   def create
+    if User.find_by(email: params[:resource][:email])
+      flash[:alert] = "Email is already in use."
+      redirect_to root_path
+      return false
+    end
+
     user = User.invite!(email: params[:resource][:email]) do |u|
       u.skip_invitation = true if Rails.env.production?
     end
@@ -15,3 +21,4 @@ class CustomInvitationsController < ApplicationController
     end
   end
 end
+
