@@ -12,8 +12,14 @@ class ProfilesController < ApplicationController
       profile = policy_scope(Profile)
     end
 
-    @profiles = ProfileFilter.new(profile, params, current_user).call
-    @jobs = current_user.manager.jobs
+
+    unless params[:ob].present? && params[:ob] == "t"
+      @profiles = ProfileFilter.new(profile, params, current_user).call
+      @jobs = current_user.manager.jobs
+    else
+      @profiles = Profile.none
+      @jobs = Job.none
+    end
 
     respond_to do |format|
       format.html

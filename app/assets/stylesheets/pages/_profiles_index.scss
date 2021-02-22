@@ -30,4 +30,21 @@
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 	}
+
+  .profiles-overlay {
+    width: 100%;
+    height: 80vh;
+    background-image: asset_url('overlay-freelancers');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    grid-column-start: 1;
+    grid-column-end: 3;
+    p.main-text {
+      @extend .textBlue, .textLg, .text-center, .bold;
+      &.add-free {
+        margin-bottom: 40%;
+      }
+    }
+  }
 }
