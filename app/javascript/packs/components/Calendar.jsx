@@ -17,28 +17,6 @@ const moment = extendMoment(Moment);
 
 window.moment = moment;
 
-const generateJumpData = (chosenMonth, year) => {
-	const final = [];
-	const startWeek = chosenMonth.startOf("month").week();
-	const endWeek = chosenMonth.endOf("month").week();
-
-	for (let week = startWeek; week < endWeek; week += 1) {
-		const day = Array(7)
-			.fill(0)
-			.map((n, i) =>
-				moment()
-					.week(week)
-					.startOf("week")
-					.clone()
-					.add(n + i, "day")
-					.year(year)
-			);
-		final.push(day);
-	}
-
-	return final;
-};
-
 const Calendar = () => {
 	const [loading, setLoading] = useState(true);
 	const [profiles, setProfiles] = useState([]);
@@ -61,6 +39,40 @@ const Calendar = () => {
 	const calendarContainerRef = useRef(null);
 	const forceTodayRef = useRef(false);
 	const moveMonthRef = useRef(false);
+
+	const generateJumpData = chosenMonth => {
+		const final = [];
+		const startWeek = chosenMonth.startOf("month").week();
+		let endWeek = chosenMonth.endOf("month").week();
+
+		if (endWeek === 1) {
+			// Last week of the year
+			endWeek = 54;
+		}
+
+		for (let week = startWeek; week < endWeek; week += 1) {
+			const day = Array(7)
+				.fill(0)
+				.map((n, i) =>
+					moment()
+						.week(week)
+						.startOf("week")
+						.clone()
+						.add(n + i, "day")
+						.year(year)
+				);
+			final.push(day);
+		}
+
+		if (endWeek === 54) {
+			const lastWeekOfYear = final[final.length - 1];
+			let lastDayOfYear = lastWeekOfYear[lastWeekOfYear.length - 1];
+			// This mutates the last element within the `final` variable
+			lastDayOfYear = lastDayOfYear.add(1, "y");
+		}
+
+		return final;
+	};
 
 	const generatePreviousData = () => {
 		const final = [];
@@ -116,7 +128,7 @@ const Calendar = () => {
 				`${year}-${MONTHS.indexOf(month) + 1}-1`,
 				"YYYY-M-D"
 			);
-			const newDays = generateJumpData(momentDate, year);
+			const newDays = generateJumpData(momentDate);
 			const lastWeekOfNewData = newDays[newDays.length - 1];
 			const lastDayOfNewData = lastWeekOfNewData[lastWeekOfNewData.length - 1];
 
