@@ -147,9 +147,10 @@ const Calendar = () => {
 			e.currentTarget.scrollWidth - e.currentTarget.scrollLeft <=
 			e.currentTarget.offsetWidth + 20;
 		const atBeginning = e.currentTarget.scrollLeft === 0;
+		const { scrollTop } = e.currentTarget;
 
-		// TODO: Handle next year
-		// Problem right now is: <CalendarDayHeader /> visually breaks (offset)
+		if (scrollTop > 0) return;
+
 		if (reachedEnd && monthOffset <= 12) {
 			setWeekOffset(prevState => prevState + 1);
 			setNumberOfWeeks(prevState => [...prevState, [...Array(7).fill(0)]]);
@@ -158,7 +159,7 @@ const Calendar = () => {
 			if (weekOffset % 4 === 0) {
 				addNewMonth();
 			}
-		} else if (atBeginning) {
+		} else if (atBeginning && scrollTop === window.pageYOffset) {
 			const previousDays = generatePreviousData();
 			setWeekOffset(prevState => prevState + 1);
 			setNumberOfWeeks(prevState => [[...Array(7).fill(0)], ...prevState]);
