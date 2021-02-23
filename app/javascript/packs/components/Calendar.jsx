@@ -15,29 +15,7 @@ import useDidMountEffect from "../hooks/useDidMountEffect";
 
 const moment = extendMoment(Moment);
 
-window.moment = moment;
-
-const generateJumpData = (chosenMonth, year) => {
-	const final = [];
-	const startWeek = chosenMonth.startOf("month").week();
-	const endWeek = chosenMonth.endOf("month").week();
-
-	for (let week = startWeek; week < endWeek; week += 1) {
-		const day = Array(7)
-			.fill(0)
-			.map((n, i) =>
-				moment()
-					.week(week)
-					.startOf("week")
-					.clone()
-					.add(n + i, "day")
-					.year(year)
-			);
-		final.push(day);
-	}
-
-	return final;
-};
+// window.moment = moment;
 
 const Calendar = () => {
 	const [loading, setLoading] = useState(true);
@@ -62,6 +40,40 @@ const Calendar = () => {
 	const forceTodayRef = useRef(false);
 	const moveMonthRef = useRef(false);
 
+	const generateJumpData = chosenMonth => {
+		const final = [];
+		const startWeek = chosenMonth.startOf("month").week();
+		let endWeek = chosenMonth.endOf("month").week();
+
+		if (endWeek === 1) {
+			// Last week of the year
+			endWeek = 54;
+		}
+
+		for (let week = startWeek; week < endWeek; week += 1) {
+			const day = Array(7)
+				.fill(0)
+				.map((n, i) =>
+					moment()
+						.week(week)
+						.startOf("week")
+						.clone()
+						.add(n + i, "day")
+						.year(year)
+				);
+			final.push(day);
+		}
+
+		if (endWeek === 54) {
+			const lastWeekOfYear = final[final.length - 1];
+			let lastDayOfYear = lastWeekOfYear[lastWeekOfYear.length - 1];
+			// This mutates the last element within the `final` variable
+			lastDayOfYear = lastDayOfYear.add(1, "y");
+		}
+
+		return final;
+	};
+
 	const generatePreviousData = () => {
 		const final = [];
 		const endDate = data[0][0].clone().subtract(1, "d");
@@ -79,6 +91,34 @@ const Calendar = () => {
 						.clone()
 						.add(n + i, "day")
 				);
+			final.push(day);
+		}
+
+		return final;
+	};
+
+	const generateNextYearData = () => {
+		const final = [];
+		const endOfJanuary = moment().startOf("y").endOf("M").week();
+
+		for (let week = 1; week < endOfJanuary; week += 1) {
+			const day = Array(7)
+				.fill(0)
+				.map((n, i) => {
+					const d = moment()
+						.week(week)
+						.startOf("week")
+						.clone()
+						.add(n + i, "day")
+						.year(year);
+
+					if (d.format("M") === "1") {
+						d.year(year + 1);
+					}
+
+					return d;
+				});
+
 			final.push(day);
 		}
 
@@ -116,7 +156,7 @@ const Calendar = () => {
 				`${year}-${MONTHS.indexOf(month) + 1}-1`,
 				"YYYY-M-D"
 			);
-			const newDays = generateJumpData(momentDate, year);
+			const newDays = generateJumpData(momentDate);
 			const lastWeekOfNewData = newDays[newDays.length - 1];
 			const lastDayOfNewData = lastWeekOfNewData[lastWeekOfNewData.length - 1];
 
@@ -145,7 +185,23 @@ const Calendar = () => {
 
 			// Happens every 4 weeks
 			if (weekOffset % 4 === 0) {
-				addNewMonth();
+				const lastWeek = data[data.length - 1];
+				const lastDay = lastWeek[lastWeek.length - 1];
+
+				if (lastDay.format("DD-MM") === "01-01") {
+					const nextYear = generateNextYearData();
+					setWeekOffset(1);
+					setNumberOfWeeks(Array(1).fill(Array(7).fill(0)));
+					setData(nextYear);
+					forceTodayRef.current = true;
+					moveMonthRef.current = false;
+					setMonth("January");
+					setYear(prev => prev + 1);
+					forceTodayRef.current = false;
+					moveMonthRef.current = true;
+				} else {
+					addNewMonth();
+				}
 			}
 		} else if (atBeginning && scrollTop === window.pageYOffset) {
 			const previousDays = generatePreviousData();
