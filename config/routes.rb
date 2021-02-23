@@ -31,7 +31,7 @@ Rails.application.routes.draw do
     resources :profile_attachments, only: %i[create]
     resources :connections, only: %i[create] do
       collection do
-        post :ajax, to: "connections#ajax_create" ,as: :ajax
+        post :ajax, to: "connections#ajax_create", as: :ajax
       end
     end
     resources :bookings, only: %i[new create]
