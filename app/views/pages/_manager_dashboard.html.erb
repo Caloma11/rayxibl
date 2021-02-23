@@ -48,8 +48,8 @@
           <p class="subtitle m-0"><%= pluralize @bookings.rejected.count, "booking" %></p>
         </div>
       </div>
-      <%= link_to bookings_path(status: 2) do %>
-        <%= image_tag "icons/right-arrow.svg", alt: "rejected bookings" %>
+      <%= link_to bookings_path(status: 3) do %>
+        <%= image_tag "icons/right-arrow.svg", alt: "canceled bookings" %>
       <% end %>
     </div>
 
