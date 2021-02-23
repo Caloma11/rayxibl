@@ -22,9 +22,9 @@ const ShareModal = () => {
 
 	const buildData = () => {
 		const element = document.querySelector(".share-link");
-		data.title = element?.dataset?.title;
-		data.text = element?.dataset?.text;
-		data.url = element?.dataset?.url;
+		data.title = element.dataset.title;
+		data.text = element.dataset.text;
+		data.url = element.dataset.url;
 	};
 
 	const copyLink = async () => {
@@ -59,7 +59,7 @@ const ShareModal = () => {
 
 	const initMobileShareButtons = data => {
 		const element = document.querySelector(".share-link");
-		element?.addEventListener("click", async e => {
+		element.addEventListener("click", async e => {
 			e.preventDefault();
 			if (checkMobile()) {
 				if (navigator.share) {
