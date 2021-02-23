@@ -1,6 +1,13 @@
 input,
 textarea,
 select {
+	&[type="checkbox"] {
+		&.big {
+			width: 24px;
+			height: 24px;
+		}
+	}
+
 	background-color: #f4f6f9;
 	border: none;
 	border-radius: $radius-md;
