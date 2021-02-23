@@ -32,6 +32,7 @@ import { error, registerError } from "../components/error";
 import { starRating } from "../components/starRating";
 import { initFirefoxFixer } from "../components/firefoxFixer";
 import { initNewMessageCable } from "../channels/new_message_channel";
+import { initDismissAlert } from "../components/dismissAlert";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -62,6 +63,7 @@ document.addEventListener("turbolinks:load", () => {
 	editBookingFlatpickr();
 	conversationFilter();
 	initNewManagerPreviews();
+  initDismissAlert();
 	if (/profiles\/\d+\/edit/.test(window.location.href)) {
 		toBindMoreTogglerMultiple();
 	} else {

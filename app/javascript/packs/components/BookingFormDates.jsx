@@ -45,7 +45,7 @@ export const BookingFormDates = ({
 				{specificHour ? (
 					<>
 						<div className="input-wrapper mr-3">
-							<label htmlFor="booking_start_time">Start time</label>
+							<label htmlFor="booking_start_time">Starting time</label>
 							<input
 								id="booking_start_time"
 								name="booking[start_time]"
@@ -56,7 +56,7 @@ export const BookingFormDates = ({
 							/>
 						</div>
 						<div className="input-wrapper mr-3">
-							<label htmlFor="booking_end_time">End time</label>
+							<label htmlFor="booking_end_time">Ending time</label>
 							<input
 								id="booking_end_time"
 								name="booking[end_time]"
@@ -69,7 +69,7 @@ export const BookingFormDates = ({
 					</>
 				) : (
 					<div className="input-wrapper">
-						<label htmlFor="booking_duration">Hours per day</label>
+						<label htmlFor="booking_duration">Duration (in hours)</label>
 						<input
 							id="booking_duration"
 							name="booking[duration]"
@@ -84,7 +84,7 @@ export const BookingFormDates = ({
 			</div>
 			<div className="flex">
 				<div className="input-wrapper mr-3">
-					<label htmlFor="booking_start_date">Start date</label>
+					<label htmlFor="booking_start_date">Starting date</label>
 					<input
 						id="booking_start_date"
 						name="booking[start_date]"
@@ -95,7 +95,7 @@ export const BookingFormDates = ({
 					/>
 				</div>
 				<div className="input-wrapper">
-					<label htmlFor="booking_end_date">End date</label>
+					<label htmlFor="booking_end_date">Ending date</label>
 					<input
 						id="booking_end_date"
 						name="booking[end_date]"

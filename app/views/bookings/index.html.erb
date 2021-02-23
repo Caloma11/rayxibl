@@ -21,7 +21,7 @@
       <%= link_to "Pending", bookings_path(status: 0),
                   remote: true, data: { status: 0 },
                   class: "flex items-center btn #{params[:status] == "0" ? "btn-white" : "btn-transparent"}" %>
-      <%= link_to "Rejected", bookings_path(status: 2),
+      <%= link_to "Cancelled", bookings_path(status: 2),
                   remote: true, data: { status: 2 },
                   class: "flex items-center btn #{params[:status] == "2" ? "btn-white" : "btn-transparent"}" %>
       <%= link_to "All", bookings_path(status: -1),

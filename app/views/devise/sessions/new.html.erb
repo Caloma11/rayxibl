@@ -3,10 +3,12 @@
     <%= link_to root_path do %>
       <%= image_tag "icons/left-arrow.svg", width: 24, height: 24, alt: "back link" %>
     <% end %>
-    <h2 class="uppercase my-0">Sign in</h2>
+    <div style="width: 32px"></div>
     <div style="width: 32px"></div>
   </div>
 
+
+  <h1 class="text-center textLg mb-5">Welcome back</h1>
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="mx-3">
       <div class="flex mb-3">

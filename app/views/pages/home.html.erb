@@ -1,22 +1,30 @@
-<div class="homeWrapper">
+<div class="dynamic-flex">
+  <div class="homeWrapper">
+    <div class="homeTitle flex justify-content-center items-center flex-column">
+      <%= image_tag "icons/flxibl-logo", alt: "flxibl-logo", id: "logo" %>
+      <p>FREELANCE MANAGEMENT</p>
+    </div>
 
-  <div class="homeTitle flex justify-content-center items-center flex-column">
-    <%= image_tag "icons/flxibl-logo", alt: "flxibl-logo", id: "logo" %>
-    <p>FREELANCE MANAGEMENT</p>
+    <div class="homeSubTitle">
+     <p>
+       Scale your freelance <br> workforce
+     </p>
+    </div>
+
+    <div class="homeBottom flex justify-content-center px-4">
+      <%= simple_form_for :resource, url: home_invitation_path, html: { class: "w-100"}, method: :post do |f| %>
+        <%= f.input :email, label: false, input_html: { class: "w-100 border-box mb-2 lg", placeholder: "Email address" } %>
+        <%= f.submit "Sign up for free",   class: "w-100 btn btn-primary" %>
+      <% end %>
+    </div>
+    <p class="text-center none desktop-sign-in">
+      Already have an account? <%= link_to "Sign in", new_session_path(User), class: "textBlue semi-bold" %>
+    </p>
+  </div>
+  <div class="desktop-right none" style="height: 100vh">
+    <%= image_tag "flying-iphone.png", alt: "flying iphone" %>
   </div>
 
-  <div class="homeSubTitle">
-   <p>
-     Scale your freelance <br> workforce
-   </p>
-  </div>
-
-  <div class="homeBottom flex justify-content-center px-4">
-    <%= simple_form_for :resource, url: home_invitation_path, html: { class: "w-100"}, method: :post do |f| %>
-      <%= f.input :email, label: false, input_html: { class: "w-100 border-box mb-2 lg", placeholder: "Email address" } %>
-      <%= f.submit "Sign up for free",   class: "w-100 btn btn-primary" %>
-    <% end %>
-  </div>
 </div>
 
 <div class="py-2 homeFooter">

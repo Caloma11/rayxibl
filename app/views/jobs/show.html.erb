@@ -1,10 +1,10 @@
 <div class="job-show">
   <div class="mx-3 pt-3 mt-3 flex justify-content-between items-start">
-    <div class="flex items-start">
+    <div class="flex items-start w-100">
       <%= link_to :back do %>
         <%= image_tag "icons/left-arrow.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm" %>
       <% end %>
-      <div class="flex items-start ml-3">
+      <div class="flex items-start ml-3 flex-grow-1">
         <div class="flex flex-column justify-content-center items-center mr-2">
           <% if @job.company.logo.attached? %>
             <div class="company-logo" style="background-image: url(<%= @job.company.logo.service_url %>)">
@@ -20,8 +20,13 @@
           <p class="m-0 textGray"><%= @job.location %></p>
         </div>
       </div>
+      <% if !user_signed_in? || current_user.profile %>
+        <%= link_to "#", class: "action-link share-link", data: { url: "https://www.flxibl.io/jobs/#{@job.id}", title: "Shared job from flxibl app", text: @job.description.truncate(120) } do %>
+          <%= image_tag "icons/share", alt: "share", width: 24, height: 24 %>
+        <% end %>
+      <% end %>
     </div>
-    <% if @job.manager == current_user.manager %>
+    <% if user_signed_in? && @job.manager == current_user.manager %>
       <div class="relative">
         <div class="none actions-container">
           <div class="actions flex flex-column job-show">
@@ -48,7 +53,9 @@
   </div>
 
   <section class="mx-3">
-    <% if current_user.manager? %>
+    <% if !user_signed_in? %>
+      <% false %>
+    <% elsif current_user.manager? %>
       <%= link_to profiles_path(job_id: @job.id), class: "btn btn-secondary mt-4 mb-3 mx-3" do %>
         <div class="flex justify-content-center items-center">
           <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
@@ -69,19 +76,26 @@
         </button>
       <% end %>
     <% end %>
-    <div class="applicant-avatars">
-      <% @job.job_applications.includes(profile: [user: { avatar_attachment: :blob }]).limit(5).each do |ja| %>
-        <%= render partial: "profiles/small_avatar", locals: { profile: ja.profile, size: 16 } %>
-      <% end %>
-      <% last_application ||= @job.job_applications.last %>
-      <% if last_application && (@job.job_applications.count - 5).positive? %>
-        <div class="small-avatar">
-          <div class="last-avatar" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= avatar_url(last_application.profile) %>');">
-            + <%= @job.job_applications.count - 5 %>
+    <% if user_signed_in? %>
+      <div class="applicant-avatars">
+        <% @job.job_applications.includes(profile: [user: { avatar_attachment: :blob }]).limit(5).each do |ja| %>
+          <%= render partial: "profiles/small_avatar", locals: { profile: ja.profile, size: 16 } %>
+        <% end %>
+        <% last_application ||= @job.job_applications.last %>
+        <% if last_application && (@job.job_applications.count - 5).positive? %>
+          <div class="small-avatar">
+            <div class="last-avatar" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url('<%= avatar_url(last_application.profile) %>');">
+              + <%= @job.job_applications.count - 5 %>
+            </div>
           </div>
-        </div>
+        <% end %>
+      </div>
+    <% else %>
+      <%= link_to new_user_session_path, class: "action-link flex items-center w-100 btn btn-primary textWhite py-3 w-100 border-box justify-content-center my-4" do %>
+        <%= image_tag "icons/zap-white", alt: "zap profile", width: 32, height: 32, class: "mr-3" %>
+        SIGN IN TO APPLY
       <% end %>
-    </div>
+    <% end %>
   </section>
 
   <section class="text-block mx-3 mb-3 uppercase">
@@ -110,27 +124,28 @@
   </section>
 </div>
 
-<div class="none" id="modal-content">
-  <div class="card-content">
-    <%= image_tag "message-bubble.svg", alt: "message bubble", id: "bubble" %>
-    <div class="text-center">
-      <h1 class="textLg textDarkOne mt-0">Sell yourself</h1>
-      <p class="textLightBlack">In less than 200 words, let <%= @job.manager.company.name %> know why they should hire you</p>
-      <%= simple_form_for [@job, JobApplication.new], html: { class: "flex flex-column items-center justify-content-center" } do |f| %>
-        <%= f.input :cover_letter, label: false,
-                    input_html: { rows: 4, placeholder: "Subtly charming bacon evangelist. Coffee guru. Twitter junkie. Lifelong travel ninja. Subtly charming bacon evangelist. Coffee guru. Twitter junkie. Lifelong travel ninja." } %>
+<% if user_signed_in?  && current_user.profile %>
+  <div class="none" id="modal-content">
+    <div class="card-content">
+      <%= image_tag "message-bubble.svg", alt: "message bubble", id: "bubble" %>
+      <div class="text-center">
+        <h1 class="textLg textDarkOne mt-0">Sell yourself</h1>
+        <p class="textLightBlack">In less than 200 words, let <%= @job.manager.company.name %> know why they should hire you</p>
+        <%= simple_form_for [@job, JobApplication.new], html: { class: "flex flex-column items-center justify-content-center" } do |f| %>
+          <%= f.input :cover_letter, label: false,
+                      input_html: { rows: 4, placeholder: "Subtly charming bacon evangelist. Coffee guru. Twitter junkie. Lifelong travel ninja. Subtly charming bacon evangelist. Coffee guru. Twitter junkie. Lifelong travel ninja." } %>
 
-        <button type="submit" class="uppercase btn btn-white w-100 mt-3">
-          <%= image_tag "icons/message.svg", alt: "Send application", class: "vertical-align-middle" %> Send
-        </button>
-      <% end %>
-      <div class="flex justify-content-center mt-3">
-        <button type="button" id="modal-exit" class="btn btn-float blue textMd">Skip</button>
+          <button type="submit" class="uppercase btn btn-white w-100 mt-3">
+            <%= image_tag "icons/message.svg", alt: "Send application", class: "vertical-align-middle" %> Send
+          </button>
+        <% end %>
+        <div class="flex justify-content-center mt-3">
+          <button type="button" id="modal-exit" class="btn btn-float blue textMd">Skip</button>
+        </div>
+
       </div>
-
     </div>
   </div>
-</div>
-
+<% end %>
 <div class="shareModalContainer"></div>
 <%= javascript_pack_tag "components/ShareModal" %>

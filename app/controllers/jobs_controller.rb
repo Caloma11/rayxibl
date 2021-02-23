@@ -1,4 +1,6 @@
 class JobsController < ApplicationController
+  skip_before_action :authenticate_user!, only: [:show]
+
   def index
     if current_user.manager?
       @jobs = policy_scope(Job).includes(manager: { user: { avatar_attachment: :blob } }).active
