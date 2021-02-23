@@ -111,7 +111,7 @@
     <div class="profileTabs" id="tabs">
       <%= link_to "About", profile_path(@profile, tab: 'about', anchor: 'skills'), id: "about-tab", class: "tab #{'active' if params[:tab] == 'about' || !params[:tab] }", remote: true %>
       <%= link_to "Links", profile_path(@profile, tab: 'links', anchor: 'skills'), id: "link-tab", class: "tab #{'active' if params[:tab] == 'links' }", remote: true %>
-      <%= link_to "Reviews (#{@ratings&.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), id: "note-tab", class: "tab #{'active' if params[:tab] == 'notes' }", remote: true %>
+      <%= link_to "Ratings (#{@ratings&.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), id: "note-tab", class: "tab #{'active' if params[:tab] == 'notes' }", remote: true %>
     </div>
 
     <div class="p-3" id="tab-content">

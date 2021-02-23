@@ -1,9 +1,10 @@
-<h3 class=""><small class="textGray">ONLY VISIBLE TO YOUR TEAM</small></h3>
-
-<%= link_to "ADD A NOTE", "#note_content", class: "btn btn-note py-3"  %>
+<% if user_signed_in? %>
+  <h3 class=""><small class="textGray">ONLY VISIBLE TO YOUR TEAM</small></h3>
+  <%= link_to "ADD A NOTE", "#note_content", class: "btn btn-note py-3"  %>
+<% end %>
 
 <div class="notesContainer mt-3">
-  <% if current_user.manager? %>
+  <% if user_signed_in? && current_user.manager? %>
     <% @notes.each do |note| %>
       <div class="flex p-3">
         <% if note.manager.user.avatar.attached? %>
@@ -29,13 +30,15 @@
   <% end %>
 </div>
 
-<div class="form-wrapper">
-  <p class="text-center uppercase mt-0 mb-3 textBetween">Star ratings are visible on Gauthiers profile</p>
-  <div id="rating-form-container">
-    <% if @my_rating %>
-      <%= render partial: "ratings/update_form", locals: { rating: @my_rating } %>
-    <% else %>
-      <%= render partial: "ratings/create_form", locals: { profile: @profile } %>
-    <% end %>
+<% if user_signed_in? %>
+  <div class="form-wrapper">
+    <p class="text-center uppercase mt-0 mb-3 textBetween">Star ratings are visible on Gauthiers profile</p>
+    <div id="rating-form-container">
+      <% if @my_rating %>
+        <%= render partial: "ratings/update_form", locals: { rating: @my_rating } %>
+      <% else %>
+        <%= render partial: "ratings/create_form", locals: { profile: @profile } %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% end %>
