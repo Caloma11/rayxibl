@@ -1,0 +1,19 @@
+.alert {
+    text-transform: uppercase;
+    position: fixed;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 8px;
+    z-index: 4;
+  &.alert-warning {
+    background-color: $flat-red;
+    color: $wine-red;
+  }
+
+  &.alert-info {
+    background-color: $flat-green-5;
+    color: $leaf-green;
+  }
+
+}
