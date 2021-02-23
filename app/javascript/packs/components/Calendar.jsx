@@ -97,6 +97,34 @@ const Calendar = () => {
 		return final;
 	};
 
+	const generateNextYearData = () => {
+		const final = [];
+		const endOfJanuary = moment().startOf("y").endOf("M").week();
+
+		for (let week = 1; week < endOfJanuary; week += 1) {
+			const day = Array(7)
+				.fill(0)
+				.map((n, i) => {
+					const d = moment()
+						.week(week)
+						.startOf("week")
+						.clone()
+						.add(n + i, "day")
+						.year(year);
+
+					if (d.format("M") === "1") {
+						d.year(year + 1);
+					}
+
+					return d;
+				});
+
+			final.push(day);
+		}
+
+		return final;
+	};
+
 	const generateData = () => {
 		const final = [];
 		const withMonthOffset = moment().add(monthOffset, "M");
@@ -157,7 +185,23 @@ const Calendar = () => {
 
 			// Happens every 4 weeks
 			if (weekOffset % 4 === 0) {
-				addNewMonth();
+				const lastWeek = data[data.length - 1];
+				const lastDay = lastWeek[lastWeek.length - 1];
+
+				if (lastDay.format("DD-MM") === "01-01") {
+					const nextYear = generateNextYearData();
+					setWeekOffset(1);
+					setNumberOfWeeks(Array(1).fill(Array(7).fill(0)));
+					setData(nextYear);
+					forceTodayRef.current = true;
+					moveMonthRef.current = false;
+					setMonth("January");
+					setYear(prev => prev + 1);
+					forceTodayRef.current = false;
+					moveMonthRef.current = true;
+				} else {
+					addNewMonth();
+				}
 			}
 		} else if (atBeginning && scrollTop === window.pageYOffset) {
 			const previousDays = generatePreviousData();
@@ -206,6 +250,7 @@ const Calendar = () => {
 	}, []);
 
 	useDidMountEffect(() => {
+		console.log(!forceTodayRef.current || moveMonthRef.current);
 		if (!forceTodayRef.current || moveMonthRef.current) {
 			addNewMonth(true);
 		}
