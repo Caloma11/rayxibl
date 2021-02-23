@@ -12,6 +12,7 @@
             <%= link_to "My profile", profile_path(current_user.profile), class: "action-link" %>
           <% end %>
           <%= link_to "Settings", "#", class: "action-link" %>
+          <%= button_to "Sign out", destroy_user_session_path, method: :delete, class: "action-link btn-unstyled textMd" %>
         </div>
       </div>
       <button class="trigger">

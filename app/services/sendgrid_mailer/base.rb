@@ -29,7 +29,7 @@ module SendgridMailer
       if Rails.env.development?
         { host: "http://localhost:3000" }
       else
-        { host: ENV["STAGING"] ? "https://flxibl-staging.herokuapp.com" : "https://flxibl.io" }
+        { host: ENV["STAGING"] ? "https://flxibl-staging.herokuapp.com" : "https://www.flxibl.io" }
       end
     end
   end

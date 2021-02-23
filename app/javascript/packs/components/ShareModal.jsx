@@ -68,7 +68,7 @@ const ShareModal = () => {
           if (navigator.share) {
             navigator.share({
               title: data.title,
-              text: data.tile, // Had to use title here for some reason
+              text: data.title, // Had to use title here for some reason
               url: data.url
             });
           } else {

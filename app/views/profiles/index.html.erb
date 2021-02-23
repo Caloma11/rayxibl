@@ -22,6 +22,11 @@
     <%= render partial: "profiles/cards", locals: { profiles: @profiles } %>
   </section>
 
+  <div class="add-more flex flex-column items-center justify-content-center">
+    <p class="text-center textBlue bold textLg">Find more freelancers by posting a job</p>
+    <%= image_tag "icons/phone-hand.svg", alt: "phone-hand", width: 312, height: 312 %>
+  </div>
+
   <div class="none" id="filter-content">
     <%= render partial: "profiles/filter_content" %>
   </div>

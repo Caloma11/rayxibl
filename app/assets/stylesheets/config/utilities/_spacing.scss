@@ -206,7 +206,7 @@ $spacing-5: calc(#{$base-spacing} * 16);
 }
 
 .pt-3 {
-	padding-top: $spacing-3;
+	padding-top: $spacing-3 !important;
 }
 
 .pt-4 {
@@ -232,7 +232,7 @@ $spacing-5: calc(#{$base-spacing} * 16);
 }
 
 .pb-3 {
-	padding-bottom: $spacing-3;
+	padding-bottom: $spacing-3 !important;
 }
 
 .pb-4 {

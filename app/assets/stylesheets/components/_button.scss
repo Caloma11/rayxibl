@@ -71,4 +71,14 @@ input[type="submit"] {
 		background: linear-gradient(135deg, #6c7580 3.76%, #262b34 97.26%);
 		color: $light-gray;
 	}
+
+  &.btn-unstyled {
+    &:active, &:focus {
+      background-color: inherit;
+      border: none;
+      font-size: inherit;
+      text-transform: uppercase;
+      outline: none;
+    }
+  }
 }

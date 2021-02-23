@@ -27,15 +27,10 @@
   <body>
     <%= render 'shared/flashes' %>
     <div class="yielded-content">
-      <div class="contained">
+      <div class="<%= current_page?('/') ? 'home-contained' : 'contained' %>">
         <%= yield %>
       </div>
     </div>
-    <% if user_signed_in? %>
-      <%= link_to "SIGN OUT BUTTON", destroy_user_session_path, method: :delete %>
-    <% else %>
-      <%#= link_to "SIGN IN BUTTON", new_user_session_path %>
-    <% end %>
     <% if should_navbar? %>
       <%= render partial: "shared/navbar" %>
     <% end %>

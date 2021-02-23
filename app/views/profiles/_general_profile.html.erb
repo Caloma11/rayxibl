@@ -5,9 +5,14 @@
       <div>
         <%= link_to :back do %>
           <%= image_tag "icons/left-arrow-white.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm" %>
-        <% end %>
       </div>
-      <% if current_user&.manager? || !current_user %>
+        <% end %>
+        <% if !user_signed_in? %>
+          <%= link_to "#", class: "action-link share-link flex items-center", data: { url: "https://www.flxibl.io/profiles/#{@profile.id}", title: "#{@profile.display_name}'s' profile on flxibl", text: @profile.overview&.truncate(120) } do %>
+          <%= image_tag "icons/share-white", alt: "share profile", width: 32, height: 32, class: "mr-3" %>
+          <% end %>
+        <% end %>
+      <% if current_user&.manager? %>
         <div class="relative">
           <div class="none actions-container">
             <div class="actions flex flex-column job-show">
@@ -51,7 +56,11 @@
 
   <!-- Add or Book button -->
   <div class="profileButtons flex justify-content-around p-3 pt-0">
-    <% if current_user&.manager? %>
+  <% if !user_signed_in? %>
+    <%= link_to new_user_session_path, class: "action-link flex items-center w-100 btn btn-primary textWhite py-3" do %>
+      LOGIN TO BOOK <%= @profile.user&.first_name&.upcase %>
+    <% end %>
+    <% elsif current_user&.manager? %>
       <% if @connection %>
         <%#= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
         <%= link_to new_profile_booking_path(@profile), class: "mr-3", class: "btn-lg px-0 btn-primary" do %>

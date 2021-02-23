@@ -6,10 +6,6 @@
 	display: block;
 }
 
-.none {
-	display: none !important;
-}
-
 .inline-flex {
 	display: inline-flex;
 }
@@ -19,7 +15,7 @@
 }
 
 .flex {
-	display: flex;
+	display: flex !important;
 
 	&.flex-column {
 		flex-direction: column;
@@ -32,6 +28,10 @@
 	&.flex-column-reverse {
 		flex-direction: column-reverse;
 	}
+}
+
+.none {
+  display: none !important;
 }
 
 .self-centered {
