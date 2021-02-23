@@ -7,12 +7,14 @@ export const initModal = () => {
 		// Do something
 		toggler.addEventListener("click", () => {
 			content.classList.toggle("none");
+      content.classList.toggle("flex");
 		});
 	}
 
 	if (exit && content) {
 		exit.addEventListener("click", () => {
 			content.classList.add("none");
+      content.classList.remove("flex");
 		});
 	}
 };
