@@ -250,7 +250,6 @@ const Calendar = () => {
 	}, []);
 
 	useDidMountEffect(() => {
-		console.log(!forceTodayRef.current || moveMonthRef.current);
 		if (!forceTodayRef.current || moveMonthRef.current) {
 			addNewMonth(true);
 		}
