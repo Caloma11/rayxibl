@@ -15,7 +15,7 @@ import useDidMountEffect from "../hooks/useDidMountEffect";
 
 const moment = extendMoment(Moment);
 
-window.moment = moment;
+// window.moment = moment;
 
 const Calendar = () => {
 	const [loading, setLoading] = useState(true);
