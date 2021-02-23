@@ -2,6 +2,7 @@ class CustomInvitationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
   skip_after_action :verify_authorized, only: [:create]
 
+  # Homepage create
   def create
     if User.find_by(email: params[:resource][:email])
       flash[:alert] = "Email is already in use."
@@ -23,6 +24,17 @@ class CustomInvitationsController < ApplicationController
 
   def new
     authorize :invite, policy_class: CustomInvitationPolicy
+  end
+
+
+  def ajax_create
+    authorize :invite, policy_class: CustomInvitationPolicy
+    @email = params[:invitation][:email]
+    return if params[:invitation][:email] == ""
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 end
 
