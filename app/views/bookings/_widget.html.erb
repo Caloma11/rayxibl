@@ -1,7 +1,7 @@
-<div class="booking-widget rounded shadow p-3 <%= booking.status %>">
-  <div class="flex justify-content-between items-center">
+<div class="booking-widget rounded shadow">
+  <div class="flex justify-content-between items-center title <%= booking.status %>">
     <h3 class="m-0"><%= booking.title %></h3>
-    <div class="flex items-center mb-2">
+    <div class="flex items-center">
       <%= image_tag avatar_url(booking.profile), alt: "profile avatar", class: "avatar avatar-circle small" %>
       <div class="relative">
         <div class="none actions-container">
@@ -36,50 +36,72 @@
     </div>
   </div>
 
-  <div class="box">
-    <div class="flex items-center">
-      <div class="flex flex-column mr-2">
-        <p class="m-0 textSm textLightBlack uppercase"><%= booking.start_date.strftime("%b") %></p>
-        <p class="m-0 textLg bold"><%= booking.start_date.strftime("%d") %></p>
+  <div class="px-3 pb-3">
+    <div class="box">
+      <div class="flex items-center justify-content-center">
+        <div class="flex flex-column mr-2">
+          <p class="m-0 textSm textLightBlack uppercase"><%= booking.start_date.strftime("%b") %></p>
+          <p class="m-0 textLg bold"><%= booking.start_date.strftime("%d") %></p>
+        </div>
+
+        <p class="m-0 textLg">-</p>
+
+        <div class="m-0 ml-2">
+          <p class="m-0 textSm textLightBlack uppercase"><%= booking.end_date.strftime("%b") %></p>
+          <p class="m-0 textLg bold"><%= booking.end_date.strftime("%d") %></p>
+        </div>
       </div>
-
-      <p class="m-0 textLg">-</p>
-
-      <div class="m-0 ml-2">
-        <p class="m-0 textSm textLightBlack uppercase"><%= booking.end_date.strftime("%b") %></p>
-        <p class="m-0 textLg bold"><%= booking.end_date.strftime("%d") %></p>
+      <div class="flex flex-column justify-content-center items-center bg-blueish-gray rounded h-100">
+        <p class="uppercase m-0 bold"><%= booking.number_of_days %> days</p>
+        <p class="m-0"><%= booking.short_date_time %></p>
       </div>
     </div>
-    <div class="flex flex-column bg-blueish-gray rounded p-2">
-      <p class="uppercase m-0 bold"><%= booking.number_of_days %> days</p>
-      <p class="m-0"><%= booking.short_date_time %></p>
-    </div>
-  </div>
 
-  <div class="box">
-    <div class="flex flex-column mr-2">
-      <p class="m-0 textSm textLightBlack uppercase">Total price</p>
-      <p class="m-0 textLg bold">$<%= booking.total_price %></p>
+    <div class="box">
+      <div class="flex flex-column justify-content-center items-center mr-2">
+        <p class="m-0 textSm textLightBlack uppercase">Total price</p>
+        <p class="m-0 textLg bold">$<%= booking.total_price %></p>
+      </div>
+      <div class="flex flex-column justify-content-center items-center bg-blueish-gray rounded h-100">
+        <p class="uppercase m-0 bold"><%= booking.price %> <%= booking.price_type %></p>
+      </div>
     </div>
-    <div class="flex flex-column bg-blueish-gray rounded p-2">
-      <p class="uppercase m-0 bold"><%= booking.price %> <%= booking.price_type %></p>
-    </div>
-  </div>
 
-  <p class="my-3"><%= booking.description %></p>
-  <% if booking.attachments.attached? %>
-    <div class="flex flex-column">
-      <% booking.attachments.each do |attachment| %>
-        <%= link_to "#", class: "btn btn-float blue text-center textMd attachment" do %>
-          <%= image_tag "icons/download-blue.svg", alt: "download attachment", width: 32, height: 32, class: "vertical-align-middle" %>
-          <%= attachment.blob.filename %>
+    <p class="my-3"><%= booking.description %></p>
+    <% if booking.attachments.attached? %>
+      <div class="flex flex-column">
+        <% booking.attachments.each do |attachment| %>
+          <%= link_to "#", class: "btn btn-float blue text-center textMd attachment" do %>
+            <%= image_tag "icons/download-blue.svg", alt: "download attachment", width: 32, height: 32, class: "vertical-align-middle" %>
+            <%= attachment.blob.filename %>
+          <% end %>
         <% end %>
-      <% end %>
+      </div>
+    <% end %>
+    <div>
+      <p class="textLightBlack mb-0">Location</p>
+      <p class="textBlue mb-0 mt-1"><%= booking.profile.location %></p>
     </div>
-  <% end %>
-  <div>
-    <p class="textLightBlack mb-0">Location</p>
-    <p class="textBlue"><%= booking.profile.location %></p>
+    <% if policy(booking).cancel? %>
+      <%= link_to "Cancel", "#", class: "btn btn-float red text-center" %>
+    <% end %>
+
+    <% if policy(booking).accept_or_reject? %>
+      <div class="actions">
+        <%= simple_form_for booking, url: booking_update_status_path(booking) do |f| %>
+          <%= f.input :status, as: :hidden, input_html: { value: 2 } %>
+          <button class="action reject w-100 textMd" type="submit">
+            <%= image_tag "icons/cross-white.svg", alt: "Accept booking", class: "vertical-align-middle pl-1 mr-2", width: 18, height: 18 %> Reject
+          </button>
+        <% end %>
+        <%= simple_form_for booking, url: booking_update_status_path(booking) do |f| %>
+          <%= f.input :status, as: :hidden, input_html: { value: 1 } %>
+          <button class="action accept w-100 textMd" type="submit">
+            <%= image_tag "icons/checkmark.svg", alt: "Accept booking", class: "vertical-align-middle pl-1 mr-2", width: 18, height: 18 %> Accept
+          </button>
+        <% end %>
+      </div>
+    <% end %>
   </div>
   <% if policy(booking).cancel? %>
     <%= link_to "Cancel", booking_cancel_path(booking), method: :patch, class: "btn btn-float red text-center" %>

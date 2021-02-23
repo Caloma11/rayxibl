@@ -16,13 +16,13 @@ input[type="submit"] {
 		padding: 8px 16px;
 	}
 
-  &.btn-centered {
-    text-transform: uppercase;
-    font-weight: 500;
-    border-radius: 8px;
-    color: #2f2f3e;
-    padding: 8px 16px;
-  }
+	&.btn-centered {
+		text-transform: uppercase;
+		font-weight: 500;
+		border-radius: 8px;
+		color: #2f2f3e;
+		padding: 8px 16px;
+	}
 
 	&.btn-lg {
 		@extend .btn;
@@ -72,13 +72,30 @@ input[type="submit"] {
 		color: $light-gray;
 	}
 
-  &.btn-unstyled {
-    &:active, &:focus {
-      background-color: inherit;
-      border: none;
-      font-size: inherit;
-      text-transform: uppercase;
-      outline: none;
-    }
-  }
+	&.btn-unstyled {
+		&:active,
+		&:focus {
+			background-color: inherit;
+			border: none;
+			font-size: inherit;
+			text-transform: uppercase;
+			outline: none;
+		}
+	}
+
+	&.gradient-red {
+		background: linear-gradient(
+			180deg,
+			rgba(255, 107, 111, 0.8) 0%,
+			#ff6b6f 100%
+		);
+	}
+
+	&.gradient-green {
+		background: linear-gradient(
+			158.53deg,
+			rgba(30, 215, 166, 0.8) 1.72%,
+			#1ed7a6 114.07%
+		);
+	}
 }
