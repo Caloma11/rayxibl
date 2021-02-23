@@ -60,6 +60,30 @@ const Calendar = () => {
 	const [year, setYear] = useState(parseInt(today.format("YYYY"), 10));
 	const calendarContainerRef = useRef(null);
 	const forceTodayRef = useRef(false);
+	const moveMonthRef = useRef(false);
+
+	const generatePreviousData = () => {
+		const final = [];
+		const endDate = data[0][0].clone().subtract(1, "d");
+		const endDateWeek = endDate.week();
+		const startDate = endDate.clone().subtract(1, "week");
+		const startDateWeek = startDate.week() + 1;
+
+		for (let week = startDateWeek; week <= endDateWeek; week += 1) {
+			const day = Array(7)
+				.fill(0)
+				.map((n, i) =>
+					moment()
+						.week(week)
+						.startOf("week")
+						.clone()
+						.add(n + i, "day")
+				);
+			final.push(day);
+		}
+
+		return final;
+	};
 
 	const generateData = () => {
 		const final = [];
@@ -93,6 +117,11 @@ const Calendar = () => {
 				"YYYY-M-D"
 			);
 			const newDays = generateJumpData(momentDate, year);
+			const lastWeekOfNewData = newDays[newDays.length - 1];
+			const lastDayOfNewData = lastWeekOfNewData[lastWeekOfNewData.length - 1];
+
+			setMonthOffset(parseInt(lastDayOfNewData.format("M"), 10));
+			setWeekCounter(lastDayOfNewData.clone().week() + 1);
 			setData(newDays);
 		} else {
 			setMonthOffset(prevState => prevState + 1);
@@ -105,9 +134,11 @@ const Calendar = () => {
 		const reachedEnd =
 			e.currentTarget.scrollWidth - e.currentTarget.scrollLeft <=
 			e.currentTarget.offsetWidth + 20;
+		const atBeginning = e.currentTarget.scrollLeft === 0;
+		const { scrollTop } = e.currentTarget;
 
-		// TODO: Handle next year
-		// Problem right now is: <CalendarDayHeader /> visually breaks (offset)
+		if (scrollTop > 0) return;
+
 		if (reachedEnd && monthOffset <= 12) {
 			setWeekOffset(prevState => prevState + 1);
 			setNumberOfWeeks(prevState => [...prevState, [...Array(7).fill(0)]]);
@@ -116,6 +147,11 @@ const Calendar = () => {
 			if (weekOffset % 4 === 0) {
 				addNewMonth();
 			}
+		} else if (atBeginning && scrollTop === window.pageYOffset) {
+			const previousDays = generatePreviousData();
+			setWeekOffset(prevState => prevState + 1);
+			setNumberOfWeeks(prevState => [[...Array(7).fill(0)], ...prevState]);
+			setData(prev => [...previousDays, ...prev]);
 		}
 	};
 
@@ -158,9 +194,11 @@ const Calendar = () => {
 	}, []);
 
 	useDidMountEffect(() => {
-		if (!forceTodayRef.current) {
+		if (!forceTodayRef.current || moveMonthRef.current) {
 			addNewMonth(true);
 		}
+
+		moveMonthRef.current = false;
 	}, [month, year]);
 
 	useDidMountEffect(() => {
@@ -201,6 +239,7 @@ const Calendar = () => {
 					setMonth={setMonth}
 					year={year}
 					setYear={setYear}
+					ref={moveMonthRef}
 				/>
 				<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
 			</div>
