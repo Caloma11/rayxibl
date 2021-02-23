@@ -38,3 +38,77 @@
 .homeFooter {
   background-image: radial-gradient(rgba(255, 255, 255, 1), rgba(244, 246, 249, .6));
 }
+
+@media (min-width: 800px) {
+  .dynamic-flex {
+    display: flex;
+    width: 100vw;
+    max-width:100%;
+    overflow: hidden;
+    height: 100vh;
+  }
+
+  .desktop-right {
+    flex-grow: 1;
+    display: flex !important;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+    padding-top: 32px;
+    img {
+      width: 70%;
+    }
+  }
+
+  .homeWrapper {
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding-top: 48px;
+    padding-bottom: 32px;
+    box-sizing: border-box;
+    background-image: none;
+    .homeSubTitle {
+      font-size: 32px;
+    }
+    .homeTitle {
+      p {
+        font-size: 24px;
+      }
+      img {
+        height: 240px !important;
+      }
+    }
+  }
+
+  .homeBottom {
+    input {
+      height: 48px;
+      font-size: 18px;
+    }
+
+    form {
+      padding: 0 64px;
+    }
+  }
+
+  .home-contained {
+    width: 100vw !important;
+    max-width:100%;
+    background-image: asset_url('bubbles.png');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+  }
+
+  .desktop-sign-in {
+    display: block !important;
+    font-size: 18px;
+  }
+
+  .homeFooter {
+    display: none;
+  }
+}
+

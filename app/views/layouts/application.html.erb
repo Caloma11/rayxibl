@@ -27,7 +27,7 @@
   <body>
     <%= render 'shared/flashes' %>
     <div class="yielded-content">
-      <div class="contained">
+      <div class="<%= current_page?('/') ? 'home-contained' : 'contained' %>">
         <%= yield %>
       </div>
     </div>
