@@ -22,7 +22,7 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def cancel?
-    is_booker? && before_start? && still_pending?
+    is_booker? && still_pending?
   end
 
   def accept_or_reject?

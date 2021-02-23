@@ -82,6 +82,6 @@
     <p class="textBlue"><%= booking.profile.location %></p>
   </div>
   <% if policy(booking).cancel? %>
-    <%= link_to "Cancel", "#", class: "btn btn-float red text-center" %>
+    <%= link_to "Cancel", booking_cancel_path(booking), method: :patch, class: "btn btn-float red text-center" %>
   <% end %>
 </div>
