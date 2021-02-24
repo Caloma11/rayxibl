@@ -1,12 +1,10 @@
 (() => {
-  console.log(8128213)
   const email = "<%= @email %>";
   const emailInput = document.getElementById("invitation_email");
   const resent = "<%= @resent %>";
 
   if (resent === "true") {
     const resentLink = document.querySelector(`.invitedWrapper a[data-email='${email}']`);
-    console.log(resentLink)
     resentLink.innerText = "RESENT";
     resentLink.disabled = true;
     resentLink.classList.add("textGray");
