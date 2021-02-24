@@ -33,6 +33,7 @@ import { starRating } from "../components/starRating";
 import { initFirefoxFixer } from "../components/firefoxFixer";
 import { initNewMessageCable } from "../channels/new_message_channel";
 import { initDismissAlert } from "../components/dismissAlert";
+import { liveBookingPrice } from "../components/liveBookingPrice";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -63,7 +64,8 @@ document.addEventListener("turbolinks:load", () => {
 	editBookingFlatpickr();
 	conversationFilter();
 	initNewManagerPreviews();
-  initDismissAlert();
+	initDismissAlert();
+	liveBookingPrice();
 	if (/profiles\/\d+\/edit/.test(window.location.href)) {
 		toBindMoreTogglerMultiple();
 	} else {
@@ -73,7 +75,7 @@ document.addEventListener("turbolinks:load", () => {
 	initModal();
 	freelancerJobCardLink();
 	error();
-  initFirefoxFixer();
+	initFirefoxFixer();
 	initNewMessageCable();
 	registerError();
 	window.starRating = starRating;
@@ -81,4 +83,3 @@ document.addEventListener("turbolinks:load", () => {
 	window.moreTogglerMultiple = moreTogglerMultiple;
 	window.toBindMoreTogglerMultiple = toBindMoreTogglerMultiple;
 });
-
