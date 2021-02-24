@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   enum role: ROLES
 
+  validates :preferred_currency, presence: true, inclusion: { in: CURRENCIES }
+
   def display_name
     "#{first_name} #{last_name}"
   end
