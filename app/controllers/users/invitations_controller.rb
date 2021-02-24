@@ -50,9 +50,9 @@ class Users::InvitationsController < Devise::InvitationsController
       self.resource = invite_resource do |u|
         u.email = @email
         u.role = "freelancer"
-        u.skip_invitation = true  # if Rails.env.production?
+        u.skip_invitation = true if Rails.env.production?
       end
-      SendgridMailer::FreelancerInvite.new(current_user, resource).call #if Rails.env.production?
+      SendgridMailer::FreelancerInvite.new(current_user, resource).call if Rails.env.production?
     elsif params[:inviter] == "manager" && params[:invitee] == "manager"
       self.resource = invite_resource do |u|
         u.email = @email
