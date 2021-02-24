@@ -1,17 +1,18 @@
 .profile-card {
 	border-bottom: 1px solid #f4f6f9;
 	padding: 16px;
-  height: 320px;
-  display: flex;
-  flex-direction: column;
+	height: 320px;
+	display: flex;
+	flex-direction: column;
 
-  .profile-card-avatar {
-    object-fit: contain;
-    @extend .rounded-square;
-    box-shadow: 0px 3px 8px -1px rgba(50, 51, 9, .2);
-    background-position: center;
-    background-size: cover;
-  }
+	.profile-card-avatar {
+		@extend .rounded-square;
+
+		object-fit: contain;
+		box-shadow: 0px 3px 8px -1px rgba(50, 51, 9, 0.2);
+		background-position: center;
+		background-size: cover;
+	}
 
 	&:nth-child(odd) {
 		border-right: 1px solid#f4f6f9;
