@@ -16,4 +16,8 @@ class UserPolicy < ApplicationPolicy
   def update_password?
     user.present?
   end
+
+  def update?
+    user.present?
+  end
 end
