@@ -19,16 +19,30 @@
   </section>
 
   <section class="cards">
-    <%= render partial: "profiles/cards", locals: { profiles: @profiles } %>
-  </section>
+    <% unless params[:ob].present? && params[:ob] == "t" %>
+      <%= render partial: "profiles/cards", locals: { profiles: @profiles } %>
+    <% else %>
+      <!-- Put overlay after manager's sign in -->
+      <div class="profiles-overlay flex flex-column items-center justify-content-start">
+        <p class="main-text">
+          Your network of freelancers will be stored here
+        </p>
+        <div class="flex-grow-1">
+          <%= image_tag "icons/agenda.svg", alt: "agenda.svg" %>
+        </div>
+      </div>
+    <% end %>
 
-  <div class="add-more flex flex-column items-center justify-content-center">
-    <p class="text-center textBlue bold textLg">Find more freelancers by posting a job</p>
-    <%= image_tag "icons/phone-hand.svg", alt: "phone-hand", width: 312, height: 312 %>
-  </div>
+  <% unless params[:ob].present? && params[:ob] == "t" %>
+    <div class="add-more flex flex-column items-center justify-content-center">
+      <p class="text-center textBlue bold textLg">Find more freelancers by posting a job</p>
+      <%= image_tag "icons/phone-hand.svg", alt: "phone-hand", width: 312, height: 312 %>
+    </div>
+  <% end %>
 
   <div class="none" id="filter-content">
     <%= render partial: "profiles/filter_content" %>
   </div>
 </div>
 
+<%= javascript_pack_tag "components/ActionButton" %>

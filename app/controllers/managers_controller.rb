@@ -50,7 +50,7 @@ class ManagersController < ApplicationController
     current_user.update(manager_params[:user_attributes])
     @manager.user = current_user
     if @manager.save
-      redirect_to dashboard_path(@manager)
+      redirect_to profiles_path(ob: "t")
     else
       render 'new'
     end

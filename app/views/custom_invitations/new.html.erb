@@ -1,0 +1,29 @@
+<div class="invitationsWrapper p-3">
+  <div class="invitations-overlay"></div>
+  <div class="fakeModal py-3">
+    <%= link_to profiles_path do %>
+      <%= image_tag "icons/cross.svg", alt: "cross", class: "close-fake-modal", width: 18, height: 18 %>
+    <% end %>
+    <h1 class="text-center textLg mt-4">Email invites</h1>
+    <div class="fakeModalInner flex flex-column items-center justify-content-around">
+      <%= simple_form_for :invitation, url: user_invitation_path(inviter: "manager", invitee: "freelancer"), method: :post, remote: true do |f| %>
+        <div class="form-group relative">
+          <%= f.input :email, placeholder: "Email address..", label: false, input_html: { class: "relative", name: "user[email]"  } %>
+          <%= button_tag type: "submit" do %>
+            <%= image_tag "icons/person-add.svg", alt: "alttext", id: "invitation-add-btn", width: 28, height: 28, class: "mt-1" %>
+          <% end %>
+        </div>
+      <% end %>
+      <!-- OR separator -->
+      <div class="or-separator flex w-100 justify-content-center items-center">
+        <div class="line"></div>
+        <p>OR</p>
+        <div class="line"></div>
+      </div>
+      <div class="flex flex-column justify-content-center items-center">
+        <%= image_tag "icons/starry-folder.svg", alt: "folder", width: 128  , height: 128  %>
+        <p class="textMd invite-multiple textBlue bold text-center px-3">Invite multiple freelancers by uploading a CSV</p>
+      </div>
+    </div>
+  </div>
+</div>
