@@ -34,6 +34,7 @@ import { initFirefoxFixer } from "../components/firefoxFixer";
 import { initNewMessageCable } from "../channels/new_message_channel";
 import { initDismissAlert } from "../components/dismissAlert";
 import { liveBookingPrice } from "../components/liveBookingPrice";
+import { initUploadCSV } from "../components/uploadCSV";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -78,6 +79,7 @@ document.addEventListener("turbolinks:load", () => {
 	initFirefoxFixer();
 	initNewMessageCable();
 	registerError();
+  initUploadCSV();
 	window.starRating = starRating;
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;

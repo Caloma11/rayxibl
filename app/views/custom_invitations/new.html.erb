@@ -20,8 +20,27 @@
         <p>OR</p>
         <div class="line"></div>
       </div>
-      <div class="flex flex-column justify-content-center items-center">
-        <%= image_tag "icons/starry-folder.svg", alt: "folder", width: 128  , height: 128  %>
+      <div class="csv-upload-container w-100 flex flex-column justify-content-center items-center">
+
+        <%= simple_form_for :bulk_invitation, url: :bulk_invitation, method: :post do |f| %>
+          <%= f.input :csv_file, as: :file, input_html: { accept: ".csv",class: 'none'}, label_html: { class: 'upload-csv'}, label: "#{(image_tag 'icons/starry-folder.svg', width: 128, height: 128)}".html_safe, required: false, wrapper_html: { class: "flex justify-content-center items-center"}  %>
+
+        <div class="buttons none py-3">
+          <div class="btn-centered btn-white mb-3 flex items-center justify-content-center w-100 border-box textBetween" >
+            <div class="flex justify-content-center items-center textWhite flex-grow-1">
+                <%= image_tag "icons/document.svg", width: 32, height: 32, class: "mr-2" %>
+                <span id="csv_text_preview" class="uppercase textBlue border">my_freelancers.svg</span>
+            </div>
+          </div>
+
+          <div class="btn-centered py-3 btn-primary mb-3 flex items-center justify-content-center w-100 border-box textBetween" id="upload-csv-btn">
+            <div class="flex justify-content-center items-center textWhite flex-grow-1">
+              <%= f.submit "SEND INVITES", class: "textWhite p-0" %>
+            </div>
+          </div>
+
+        <% end %>
+        </div>
         <p class="textMd invite-multiple textBlue bold text-center px-3">Invite multiple freelancers by uploading a CSV</p>
       </div>
     </div>
