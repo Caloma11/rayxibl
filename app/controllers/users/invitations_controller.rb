@@ -1,4 +1,5 @@
 class Users::InvitationsController < Devise::InvitationsController
+  skip_before_action :redirect_unless_completed
 
   # After an invitation is created and sent, the inviter will be redirected here
   def after_invite_path_for(inviter, invitee)
@@ -23,20 +24,38 @@ class Users::InvitationsController < Devise::InvitationsController
 
   # POST /resource/invitation
   def create
+    authorize :invite, policy_class: CustomInvitationPolicy
+    @email = params[:user][:email]
+
+    # Resend logic
+    if params[:r] == "t"
+      @user = User.find_by(email: @email)
+      if (@email && !@user&.manager && !@user&.profile)
+        @user.destroy
+        @resent = true
+      end
+    end
+
+    @email = "" if !@email.match?(URI::MailTo::EMAIL_REGEXP)
+    return false if @email == ""
+
     # Custom attributes for different types of invitations
     if params[:inviter] == "freelancer" && params[:invitee] == "manager"
       self.resource = invite_resource do |u|
+        u.email = @email
         u.role = "manager"
         u.skip_invitation = true if Rails.env.production?
       end
     elsif params[:inviter] == "manager" && params[:invitee] == "freelancer"
       self.resource = invite_resource do |u|
+        u.email = @email
         u.role = "freelancer"
-        u.skip_invitation = true if Rails.env.production?
+        u.skip_invitation = true  # if Rails.env.production?
       end
-      SendgridMailer::FreelancerInvite.new(current_user, resource).call if Rails.env.production?
+      SendgridMailer::FreelancerInvite.new(current_user, resource).call #if Rails.env.production?
     elsif params[:inviter] == "manager" && params[:invitee] == "manager"
       self.resource = invite_resource do |u|
+        u.email = @email
         u.role = "manager"
         u.skip_invitation = true if Rails.env.production?
       end
@@ -45,23 +64,14 @@ class Users::InvitationsController < Devise::InvitationsController
       self.resource = invite_resource
     end
 
-    # Standard code from gem
     resource_invited = resource.errors.empty?
 
     yield resource if block_given?
+    @email = "" unless resource_invited
 
-
-    if resource_invited
-      if is_flashing_format? && self.resource.invitation_sent_at
-        set_flash_message :notice, :send_instructions, email: self.resource.email
-      end
-      if self.method(:after_invite_path_for).arity == 1
-        respond_with resource, location: after_invite_path_for(current_inviter)
-      else
-        respond_with resource, location: after_invite_path_for(current_inviter, resource)
-      end
-    else
-      respond_with_navigational(resource) { render :new }
+    respond_to do |format|
+      format.html
+      format.js
     end
   end
 end

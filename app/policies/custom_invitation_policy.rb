@@ -3,7 +3,11 @@ class CustomInvitationPolicy < ApplicationPolicy
     user && user.manager?
   end
 
-  def ajax_create?
+  def create?
+    new?
+  end
+
+  def resend?
     new?
   end
 end

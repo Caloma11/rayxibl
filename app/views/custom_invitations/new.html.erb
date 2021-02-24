@@ -6,9 +6,9 @@
     <% end %>
     <h1 class="text-center textLg mt-4">Email invites</h1>
     <div class="fakeModalInner flex flex-column items-center justify-content-around">
-      <%= simple_form_for :invitation, url: ajax_invitations_path, method: :post, remote: true do |f| %>
+      <%= simple_form_for :invitation, url: user_invitation_path(inviter: "manager", invitee: "freelancer"), method: :post, remote: true do |f| %>
         <div class="form-group relative">
-          <%= f.input :email, placeholder: "Email address..", label: false, input_html: { class: "relative"} %>
+          <%= f.input :email, placeholder: "Email address..", label: false, input_html: { class: "relative", name: "user[email]"  } %>
           <%= button_tag type: "submit" do %>
             <%= image_tag "icons/person-add.svg", alt: "alttext", id: "invitation-add-btn", width: 28, height: 28, class: "mt-1" %>
           <% end %>

@@ -1,0 +1,41 @@
+(() => {
+  console.log(8128213)
+  const email = "<%= @email %>";
+  const emailInput = document.getElementById("invitation_email");
+  const resent = "<%= @resent %>";
+
+  if (resent === "true") {
+    const resentLink = document.querySelector(`.invitedWrapper a[data-email='${email}']`);
+    console.log(resentLink)
+    resentLink.innerText = "RESENT";
+    resentLink.disabled = true;
+    resentLink.classList.add("textGray");
+    resentLink.classList.remove("textBlue");
+  } else {
+
+    if (email === "" ) {
+      emailInput.style.border = "1px solid red";
+      return
+    } else {
+      emailInput.style.border = "none";
+    }
+
+    const form = document.querySelector(".simple_form.invitation");
+
+    const invitees = document.querySelectorAll(".invitedWrapper");
+    if (invitees.length > 4) {
+      invitees[0].remove();
+    }
+
+    const invitedHTML = (`<%= j render('custom_invitations/invited_list_item') %>`);
+
+
+    form.insertAdjacentHTML('beforebegin', invitedHTML)
+
+    form.reset();
+
+  }
+})();
+
+
+// TODO -> Create @errors and display then on an aelr
