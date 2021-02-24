@@ -41,7 +41,6 @@ class CustomInvitationsController < ApplicationController
     else
       flash[:alert] = "Please provide a CSV"
     end
-    binding.pry
     redirect_to new_invitation_path
   end
 end
