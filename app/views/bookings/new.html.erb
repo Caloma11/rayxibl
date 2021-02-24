@@ -21,7 +21,7 @@
 </section>
 
 
-<div class="flex justify-content-center p-3">
+<div id="new-booking" class="flex justify-content-center p-3">
   <div class="bookingCard">
     <%= simple_form_for [@profile, @booking] do |f| %>
       <%= f.input :title, label: "Project / Client", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
@@ -61,7 +61,7 @@
 
         <div class="dates-input-wrapper">
           <label for="dates" class="block textGray">Dates</label>
-          <input type="text" name="dates" class="mb-2 w-100 datepicker">
+          <input id="new-booking-dates" type="text" name="dates" class="mb-2 w-100 datepicker">
         </div>
 
         <div>
@@ -78,13 +78,12 @@
       <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true ]], input_html:{class: "mb-2"}, wrapper_html: { class: "flex flex-row-reverse justify-content-end my-2" }, include_hidden: false %>
 
       <!-- Price section -->
-      <div id="priceSection" class="flex justify-content-between items-center none">
-        <%= f.input :price, label: false, placeholder: "Ex: $250", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-2 flex-shrink-2" } %>
-        <%= f.input :price_type, label: false, label_html: { class: "block textGray" }, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-3" }  %>
+      <div id="priceSection" class="flex justify-content-between items-center none mb-2">
+        <%= f.input :price, label: false, placeholder: "Ex: $250", label_html: { class: "block textGray" }, input_html:{class: "w-100"}, wrapper_html: { class: "mr-2 flex-shrink-2" } %>
+        <%= f.input :price_type, label: false, label_html: { class: "block textGray" }, collection: Booking::PRICE_TYPES, input_html:{class: "w-100"}, wrapper_html: { class: "mr-3" }  %>
         <p class="textGray my-0" id="totalPrice"> Total: $1,000</p>
       </div>
       <%= f.input :attachments, label_html: { class: "choose-file textGray" }, as: :file, input_html: { multiple: true, class: "none" }, label: "#{image_tag("icons/paperclip", alt: "paperclip")} ADD ATTACHMENT".html_safe %>
-
 
       <%= f.button :button, class: "btn btn-primary w-100 my-3 send-request" do %>
         <%= image_tag("icons/paperplane", alt: "paperplane") %>
