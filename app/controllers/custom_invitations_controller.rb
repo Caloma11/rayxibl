@@ -30,7 +30,7 @@ class CustomInvitationsController < ApplicationController
   def ajax_create
     authorize :invite, policy_class: CustomInvitationPolicy
     @email = params[:invitation][:email]
-    return if params[:invitation][:email] == ""
+    return if @email == "" || !@email.match?(URI::MailTo::EMAIL_REGEXP)
     respond_to do |format|
       format.html
       format.js
