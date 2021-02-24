@@ -33,6 +33,7 @@ import { starRating } from "../components/starRating";
 import { initFirefoxFixer } from "../components/firefoxFixer";
 import { initNewMessageCable } from "../channels/new_message_channel";
 import { initDismissAlert } from "../components/dismissAlert";
+import { updateUser } from "../components/updateUser";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -63,7 +64,7 @@ document.addEventListener("turbolinks:load", () => {
 	editBookingFlatpickr();
 	conversationFilter();
 	initNewManagerPreviews();
-  initDismissAlert();
+	initDismissAlert();
 	if (/profiles\/\d+\/edit/.test(window.location.href)) {
 		toBindMoreTogglerMultiple();
 	} else {
@@ -73,12 +74,12 @@ document.addEventListener("turbolinks:load", () => {
 	initModal();
 	freelancerJobCardLink();
 	error();
-  initFirefoxFixer();
+	initFirefoxFixer();
 	initNewMessageCable();
 	registerError();
+	updateUser();
 	window.starRating = starRating;
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
 	window.toBindMoreTogglerMultiple = toBindMoreTogglerMultiple;
 });
-
