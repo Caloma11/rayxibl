@@ -11,6 +11,10 @@ class ApplicationController < ActionController::Base
   include Pundit
   include NavbarLinks
 
+  def get_rates
+    @rates ||= ExchangeRate.new(current_user).call
+  end
+
   def user_not_authorized
     flash[:alert] = "You are not authorized to perform this action."
     path_to_redirect = user_signed_in? ? dashboard_path : root_path
