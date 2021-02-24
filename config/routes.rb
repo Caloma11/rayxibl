@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "/mail", to: "pages#mail", as: :mail
   get "/edit_password", to: "users#edit_password", as: :edit_password
   patch "/update_password", to: "users#update_password", as: :update_password
+  patch "/users/update", to: "users#update", as: :user_update
   delete "/users/destroy", to: "users#destroy", as: :user_delete
   get "/settings", to: "pages#settings", as: :settings
 
