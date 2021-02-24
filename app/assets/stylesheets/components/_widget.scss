@@ -1,21 +1,29 @@
 .booking-widget {
-	border: 6px;
-	border-top: 12px solid;
+	@extend .mb-3;
 
-	&.accepted {
-		border-color: $flat-green-3;
-	}
+	border-radius: 12px;
 
-	&.pending {
-		border-color: $flat-yellow-3;
-	}
+	.title {
+		@extend .p-3, .mb-3;
 
-	&.rejected {
-		border-color: $flat-red-4;
+		border-top-left-radius: 12px;
+		border-top-right-radius: 12px;
+
+		&.accepted {
+			background-color: $flat-green-3;
+		}
+
+		&.pending {
+			background-color: $flat-yellow-3;
+		}
+
+		&.rejected {
+			background-color: $flat-red-4;
+		}
 	}
 
 	.box {
-		@extend .rounded, .p-2, .items-center, .mb-3;
+		@extend .rounded, .items-center, .mb-3;
 
 		border: 1px solid #dfe5ee;
 		display: grid;
@@ -26,5 +34,25 @@
 		@extend .rounded;
 
 		border: 1px solid $flat-gray-3;
+	}
+
+	.actions {
+		@extend .mt-3;
+
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		grid-gap: 16px;
+
+		.action {
+			@extend .btn, .textWhite;
+
+			&.reject {
+				@extend .gradient-red;
+			}
+
+			&.accept {
+				@extend .gradient-green;
+			}
+		}
 	}
 }
