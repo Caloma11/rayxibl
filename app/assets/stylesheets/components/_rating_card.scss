@@ -1,0 +1,12 @@
+.rating-card {
+	@extend .flex, .justify-content-between, .items-start, .mb-3;
+
+	.star {
+		width: 18px;
+		height: 18px;
+
+		&:not(:last-child) {
+			@extend .mr-1;
+		}
+	}
+}

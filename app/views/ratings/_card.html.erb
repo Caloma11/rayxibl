@@ -1,0 +1,17 @@
+<div class="rating-card">
+  <div class="flex">
+    <%= image_tag manager_avatar(rating.manager), alt: "manager avatar", class: "mr-3 avatar avatar-square small" %>
+    <div>
+      <h3 class="m-0"><%= rating.manager.user.display_name %></h3>
+      <p class="m-0"><%= rating.manager.job_title %>, <%= rating.manager.company.name %></p>
+    </div>
+  </div>
+  <div class="flex">
+    <% rating.profile.average_rating.to_i.times do %>
+      <%= image_tag "icons/colored-rating.svg", alt: "rating", class: "star" %>
+    <% end %>
+    <% (5 - rating.profile.average_rating.to_i).times do %>
+      <%= image_tag "icons/rating.svg", alt: "rating", class: "star" %>
+    <% end %>
+  </div>
+</div>
