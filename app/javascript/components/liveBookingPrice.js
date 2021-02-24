@@ -10,7 +10,7 @@ export const liveBookingPrice = () => {
 	const durationNode = container.querySelector("#booking_duration");
 	const startTimeNode = container.querySelector("#booking_start_time");
 	const endTimeNode = container.querySelector("#booking_end_time");
-	const datesNode = container.querySelector("#new-booking-dates");
+	const datesNode = container.querySelector("#new-booking-datepickr");
 	const billableNode = container.querySelector("#booking_billable_true");
 	const priceNode = container.querySelector("#booking_price");
 	const priceTypeNode = container.querySelector("#booking_price_type");
