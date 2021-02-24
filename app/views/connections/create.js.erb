@@ -1,0 +1,13 @@
+(() => {
+  // Change add button to book button
+  const addButton = document.querySelector(".connect-<%= @profile.id %>")
+  addButton.href = "<%= new_profile_booking_path(@profile) %> ";
+  addButton.innerHTML = `
+    <a class="action" href="/profiles/<%= @profile.id %>/bookings/new">
+      <img alt="calendar" class="icon" src="<%= image_path 'icons/calendar.svg' %>">
+    </a>
+  `;
+  addButton.dataset["method"] = "get";
+  addButton.dataset["remote"] = false;
+  addButton.rel = "";
+})()
