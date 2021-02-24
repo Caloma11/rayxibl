@@ -34,8 +34,9 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 		const { data } = await axios.post("/api/v1/bookings", formData);
 		if ("errors" in data) {
 			setErrors(data.errors);
+		} else {
+			window.location = "/schedule";
 		}
-		// window.location = "/schedule";
 	};
 
 	// useEffect(() => {
