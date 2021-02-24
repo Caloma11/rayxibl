@@ -16,6 +16,8 @@ Rails.application.routes.draw do
   patch "/bookings/:id/update_status", to: "bookings#accept_or_reject", as: :booking_update_status
 
   get "/mail", to: "pages#mail", as: :mail
+  delete "/users/destroy", to: "users#destroy", as: :user_delete
+  get "/settings", to: "pages#settings", as: :settings
 
   resources :jobs, only: %i[index show new create edit update] do
     resources :job_applications, only: %i[create]
