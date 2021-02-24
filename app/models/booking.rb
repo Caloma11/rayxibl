@@ -4,7 +4,7 @@ class Booking < ApplicationRecord
 
   belongs_to :manager
   belongs_to :profile
-  has_one :message
+  has_one :message, dependent: :destroy
   has_many_attached :attachments
 
   validates :title, :description, :start_date, :end_date, presence: true
@@ -53,6 +53,8 @@ class Booking < ApplicationRecord
   private
 
   def create_widget
+    return if message
+
     convo = Conversation.first_or_create(company: manager.company, profile: profile)
 
     convo.messages.create!(booking: self, user: manager.user)

@@ -1,6 +1,6 @@
 class Company < ApplicationRecord
   has_one_attached :logo
-  has_many :managers
+  has_many :managers, dependent: :destroy
   has_many :jobs, through: :managers
   has_many :notes, through: :managers
   has_many :connections
