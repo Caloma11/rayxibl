@@ -1,7 +1,7 @@
 <div class="profile-card">
   <div class="top">
     <% if add_to_network %>
-      <%= link_to profile_connections_path(profile), method: :post, class: "action", remote: true do %>
+      <%= link_to profile_connections_path(profile), method: :post, class: "action connect-#{profile.id}", remote: true do %>
         <%= image_tag "icons/person-add.svg", alt: "connection add", class: "icon" %>
       <% end %>
     <% else %>

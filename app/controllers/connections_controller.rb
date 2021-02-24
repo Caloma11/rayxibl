@@ -10,7 +10,9 @@ class ConnectionsController < ApplicationController
       last_url = Rails.application.routes.recognize_path(request.referrer)
       flash[:notice] = "You have added #{@profile.user.display_name} to your network!"
       if last_url[:action] == "index" && last_url[:controller] == "profiles"
-        redirect_to profiles_path
+        respond_to do |format|
+          format.js
+        end
       elsif last_url[:action] == "show" && last_url[:controller] == "conversations"
         @conversation = Conversation.find_by(manager: current_user.manager, profile: @profile)
         redirect_to conversation_path(@conversation, anchor: "message-#{@conversation.messages.last.id}")

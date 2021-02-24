@@ -21,7 +21,7 @@ class ProfileFilter
 
       filter_via_button
     else
-      @profiles = profile.includes(:ratings, user: [:manager, avatar_attachment: :blob])
+      @profiles = profile.includes(:connections, :ratings, user: [:manager, avatar_attachment: :blob]).where(connections: { profile_id: nil })
     end
   end
 

@@ -73,7 +73,8 @@
 		border-top: 6px solid $flat-green-3;
 	}
 
-	&.rejected {
+	&.rejected,
+	&.canceled {
 		border-top: 6px solid $flat-red-3;
 	}
 

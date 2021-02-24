@@ -80,7 +80,7 @@ class BookingsController < ApplicationController
 
   def cancel
     authorize @booking
-    if @booking.rejected!
+    if @booking.canceled!
       flash[:notice] = "Booking with #{@booking.profile.display_name} has been cancelled."
       redirect_to bookings_path
     end
