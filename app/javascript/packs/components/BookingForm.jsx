@@ -34,46 +34,49 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 		const { data } = await axios.post("/api/v1/bookings", formData);
 		if ("errors" in data) {
 			setErrors(data.errors);
+		} else {
+			window.location = "/schedule";
 		}
-		// window.location = "/schedule";
 	};
 
-	// useEffect(() => {
-	// 	let allFilled = startDate && endDate;
-	// 	if (specificHour) {
-	// 		allFilled = allFilled && startTime && endTime;
-	// 	} else {
-	// 		allFilled = allFilled && duration;
-	// 	}
+	useEffect(() => {
+		let allFilled = startDate && endDate;
+		if (specificHour) {
+			allFilled = allFilled && startTime && endTime;
+		} else {
+			allFilled = allFilled && duration;
+		}
 
-	// 	if (billable) {
-	// 		allFilled = allFilled && price && priceType;
-	// 	}
+		if (billable) {
+			allFilled = allFilled && price && priceType;
+		}
 
-	// 	if (!!allFilled) {
-	// 		const calculatedTotalPrice = generateTotalPrice({
-	// 			startDate,
-	// 			endDate,
-	// 			startTime,
-	// 			endTime,
-	// 			price: parseInt(price, 10),
-	// 			priceType: parseInt(priceType, 10),
-	// 			duration: parseInt(duration, 10),
-	// 			billable
-	// 		});
+		if (!!allFilled) {
+			const calculatedTotalPrice = generateTotalPrice({
+				startDate,
+				endDate,
+				startTime,
+				endTime,
+				price: parseInt(price, 10),
+				priceType: parseInt(priceType, 10),
+				duration: parseInt(duration, 10),
+				billable
+			});
 
-	// 		console.log({ calculatedTotalPrice });
-	// 	}
-	// }, [
-	// 	startDate,
-	// 	endDate,
-	// 	startTime,
-	// 	endTime,
-	// 	price,
-	// 	priceType,
-	// 	duration,
-	// 	billable
-	// ]);
+			if (calculatedTotalPrice) {
+				setTotalPrice(calculatedTotalPrice);
+			}
+		}
+	}, [
+		startDate,
+		endDate,
+		startTime,
+		endTime,
+		price,
+		priceType,
+		duration,
+		billable
+	]);
 
 	return (
 		<div id="booking-form-container">

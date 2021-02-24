@@ -1,7 +1,8 @@
 class CustomInvitationsController < ApplicationController
-  skip_before_action :authenticate_user!
-  skip_after_action :verify_authorized
+  skip_before_action :authenticate_user!, only: [:create]
+  skip_after_action :verify_authorized, only: [:create]
 
+  # Homepage create
   def create
     if User.find_by(email: params[:resource][:email])
       flash[:alert] = "Email is already in use."
@@ -19,6 +20,10 @@ class CustomInvitationsController < ApplicationController
       flash[:alert] = "Email is not valid"
       redirect_to root_path
     end
+  end
+
+  def new
+    authorize :invite, policy_class: CustomInvitationPolicy
   end
 end
 

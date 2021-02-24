@@ -41,6 +41,7 @@ export const BookingFormPricing = ({
 							onChange={e => setPrice(e.target.value)}
 							placeholder="250"
 							className={`mr-3 ${"price" in errors ? "error" : ""}`}
+							style={{ width: 120 }}
 						/>
 						<select
 							id="booking_price_type"
@@ -55,9 +56,7 @@ export const BookingFormPricing = ({
 								</option>
 							))}
 						</select>
-						{totalPrice && (
-							<span className="total-price">Total: ${totalPrice}</span>
-						)}
+						<span className="total-price">Total: ${totalPrice || 0}</span>
 					</div>
 				</div>
 			)}

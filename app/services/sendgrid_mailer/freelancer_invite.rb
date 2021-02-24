@@ -20,7 +20,7 @@ module SendgridMailer
       data = {
         full_name: sender.display_name,
         company_name: sender.company.name,
-        url: ROUTES.accept_user_invitation_url({ **routes_host, invitation_token: user.raw_invitation_token })
+        url: ROUTES.accept_user_invitation_url({ **routes_host, invitation_token: user.raw_invitation_token || user.invitation_token})
       }
       personalization.add_dynamic_template_data(data)
       mail.add_personalization(personalization)

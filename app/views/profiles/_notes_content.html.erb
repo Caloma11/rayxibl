@@ -1,41 +1,49 @@
-<h3 class=""><small class="textGray">ONLY VISIBLE TO YOUR TEAM</small></h3>
-
-<%= link_to "ADD A NOTE", "#note_content", class: "btn btn-note py-3"  %>
-
 <div class="notesContainer mt-3">
-  <% if current_user.manager? %>
-    <% @notes.each do |note| %>
-      <div class="flex p-3">
-        <% if note.manager.user.avatar.attached? %>
-          <%= image_tag note.manager.user.avatar, alt: "alttext", class: "profileAvatar rounded-circle", height: 32, width: 32  %>
-        <% else %>
-            <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 32, width: 32 %>
-        <% end %>
-        <div class="noteCardBody ml-2">
-          <p class="ml-3 mt-0 mb-2"><strong><%= note.manager.user.display_name %></strong></p>
-          <p class="mt-0 ml-3 textGray"><%= note.content %></p>
+  <% if user_signed_in? && current_user.manager? %>
+    <div class="bg-blueish-gray px-3">
+      <h3 class=""><small class="textGray">ONLY VISIBLE TO YOUR TEAM</small></h3>
+      <%= link_to "ADD A NOTE", "#note_content", class: "btn btn-note py-3"  %>
+
+      <% @notes.each do |note| %>
+        <div class="flex p-3">
+          <% if note.manager.user.avatar.attached? %>
+            <%= image_tag note.manager.user.avatar, alt: "alttext", class: "profileAvatar rounded-circle", height: 32, width: 32  %>
+          <% else %>
+              <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-circle", height: 32, width: 32 %>
+          <% end %>
+          <div class="noteCardBody ml-2">
+            <p class="ml-3 mt-0 mb-2"><strong><%= note.manager.user.display_name %></strong></p>
+            <p class="mt-0 ml-3 textGray"><%= note.content %></p>
+          </div>
         </div>
-      </div>
-    <% end %>
-
-    <!-- Note form ( might change )-->
-    <div id="writeYourNote" class="p-3">
-      <%= simple_form_for [@profile, Note.new], remote: true, class: "w-100" do |f| %>
-        <%= f.input :content, as: :text, label: false, input_html: { class: "w-100"} %>
-        <%= f.submit :Submit, class: "border-gray mt-2" %>
       <% end %>
+
+      <!-- Note form ( might change )-->
+      <div id="writeYourNote" class="p-3">
+        <%= simple_form_for [@profile, Note.new], remote: true, class: "w-100" do |f| %>
+          <%= f.input :content, as: :text, label: false, input_html: { class: "w-100"} %>
+          <%= f.submit :Submit, class: "border-gray mt-2" %>
+        <% end %>
+      </div>
     </div>
-
   <% end %>
-</div>
 
-<div class="form-wrapper">
-  <p class="text-center uppercase mt-0 mb-3 textBetween">Star ratings are visible on Gauthiers profile</p>
-  <div id="rating-form-container">
-    <% if @my_rating %>
-      <%= render partial: "ratings/update_form", locals: { rating: @my_rating } %>
-    <% else %>
-      <%= render partial: "ratings/create_form", locals: { profile: @profile } %>
+  <div class="my-3 px-3">
+    <% @ratings.each do |rating| %>
+      <%= render partial: "ratings/card", locals: { rating: rating } %>
     <% end %>
   </div>
 </div>
+
+<% if user_signed_in? && current_user.manager? %>
+  <div class="form-wrapper px-3">
+    <p class="text-center uppercase mt-0 mb-3 textBetween">Star ratings are visible on Gauthiers profile</p>
+    <div id="rating-form-container">
+      <% if @my_rating %>
+        <%= render partial: "ratings/update_form", locals: { rating: @my_rating } %>
+      <% else %>
+        <%= render partial: "ratings/create_form", locals: { profile: @profile } %>
+      <% end %>
+    </div>
+  </div>
+<% end %>

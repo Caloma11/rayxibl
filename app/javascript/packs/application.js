@@ -34,6 +34,7 @@ import { initFirefoxFixer } from "../components/firefoxFixer";
 import { initNewMessageCable } from "../channels/new_message_channel";
 import { initDismissAlert } from "../components/dismissAlert";
 import { updateUser } from "../components/updateUser";
+import { liveBookingPrice } from "../components/liveBookingPrice";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -65,6 +66,7 @@ document.addEventListener("turbolinks:load", () => {
 	conversationFilter();
 	initNewManagerPreviews();
 	initDismissAlert();
+	liveBookingPrice();
 	if (/profiles\/\d+\/edit/.test(window.location.href)) {
 		toBindMoreTogglerMultiple();
 	} else {

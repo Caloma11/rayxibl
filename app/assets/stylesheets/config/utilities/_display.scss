@@ -31,7 +31,7 @@
 }
 
 .none {
-  display: none !important;
+	display: none !important;
 }
 
 .self-centered {
@@ -52,6 +52,10 @@
 
 .items-center {
 	align-items: center;
+}
+
+.items-baseline {
+  align-items: baseline;
 }
 
 .items-end {
@@ -128,10 +132,6 @@
 
 .rounded-square {
 	@extend .rounded;
-	border-bottom-left-radius: 100%16px;
-	border-bottom-right-radius: 100%16px;
-	border-top-left-radius: 100%16px;
-	border-top-right-radius: 100%16px;
 }
 
 .rounded-pill {

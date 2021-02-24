@@ -23,6 +23,15 @@ export const BookingFormDates = ({
 		}
 	}, []);
 
+	useEffect(() => {
+		if (specificHour) {
+			setDuration(0);
+		} else {
+			setStartTime("");
+			setEndTime("");
+		}
+	}, [specificHour]);
+
 	return (
 		<>
 			<div className="duration-toggler">

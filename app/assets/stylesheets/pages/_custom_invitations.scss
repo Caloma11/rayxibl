@@ -1,0 +1,77 @@
+.invitationsWrapper {
+  height: 100vh;
+  max-height: 100%;
+  position: relative;
+
+  @extend .flex, .justify-content-center, .items-center;
+
+  .invitations-overlay {
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: (linear-gradient(rgba(20, 15, 38, 0.5), rgba(20, 15, 38, 0.5)), url(asset_path('overlay-freelancers.png')));
+    position: absolute;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(20, 15, 38, 0.5);
+    filter: blur(12px);
+  }
+
+  .fakeModal {
+    @extend .px-4, .flex, .flex-column, .items-center, .justify-content-around;
+    width: 95%;
+    min-height: 50%;
+    background-color: white;
+    z-index: 5;
+    border-radius: 16px;
+    position: relative;
+
+    button {
+      outline: none;
+    }
+
+    input {
+      @extend .mt-2;
+      height: 48px;
+      box-sizing: border-box;
+    }
+
+    #invitation-add-btn {
+      position: absolute;
+      right: 4px;
+      top: 16px;
+    }
+
+    .fakeModalInner {
+      height: 80%;
+      form, input, .input {
+        width: 100%;
+      }
+      p.invite-multiple {
+        margin-top: -12px;
+      }
+    }
+
+    .close-fake-modal {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+    }
+
+    .or-separator {
+      @extend .mt-3;
+      p {
+        @extend .mx-3, .textSm;
+      }
+      .line {
+        height: 1px;
+        width: 64px;
+        background-color: $gray;
+      }
+    }
+
+  }
+}
+

@@ -62,6 +62,7 @@ Rails.application.routes.draw do
   end
 
   post "custom_invitations", to: "custom_invitations#create", as: :home_invitation
+  get "invite", to: "custom_invitations#new", as: :new_invitation
 
   post "download_attachment/:id", to: "profile_attachments#download", as: :download_attachment
   post "booking_download_attachment/:id", to: "booking_attachments#download", as: :booking_download_attachment
