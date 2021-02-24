@@ -1,9 +1,16 @@
 import flatpickr from "flatpickr";
 
+const handleChange = (dates, { start, end }) => {
+	if (start && end) {
+		start.value = new Date(Date.parse(dates[0])).toDateString();
+		end.value = new Date(Date.parse(dates[1])).toDateString();
+	}
+};
+
 export const jobFlatpickr = () => {
 	const startTimeInput = document.getElementById("job_start_time");
 	const endTimeInput = document.getElementById("job_end_time");
-	const dateInput = document.querySelector(".datepicker");
+	const dateInput = document.getElementById("job-datepicker");
 	const startDateInput = document.getElementById("job_start_date");
 	const endDateInput = document.getElementById("job_end_date");
 	const expirationDateInput = document.getElementById("job_expiration_date");
@@ -33,8 +40,10 @@ export const jobFlatpickr = () => {
 				rangeSeparator: "  -  "
 			},
 			onChange: dates => {
-				startDateInput.value = new Date(Date.parse(dates[0])).toDateString();
-				endDateInput.value = new Date(Date.parse(dates[1])).toDateString();
+				handleChange(dates, {
+					start: startDateInput,
+					end: endDateInput
+				});
 			}
 		});
 	}

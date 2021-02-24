@@ -74,7 +74,7 @@
         <div class="flex items-end justify-content-between">
           <div class="dates-input-wrapper">
             <label for="dates" class="block textGray">Dates</label>
-            <input type="text" name="dates" class="mb-2 w-100 datepicker">
+            <input id="edit-booking-datepicker" type="text" name="dates" class="mb-2 w-100 datepicker">
 
             <%= f.input :start_date, as: :hidden,
                         wrapper_html: { class: "flex flex-column mb-3 mr-3 none" } %>

@@ -24,6 +24,10 @@
 					border-top: 1px solid #f4f6f9;
 				}
 
+				#job_weekends {
+					@extend .big;
+				}
+
 				button[type="submit"] {
 					@extend .w-100;
 

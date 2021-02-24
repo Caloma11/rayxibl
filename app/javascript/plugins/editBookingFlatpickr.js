@@ -10,7 +10,7 @@ const handleChange = (dates, { start, end }) => {
 export const editBookingFlatpickr = () => {
 	const startTimeInput = document.getElementById("booking_start_time");
 	const endTimeInput = document.getElementById("booking_end_time");
-	const dateInput = document.querySelector(".datepicker");
+	const dateInput = document.getElementById("edit-booking-datepicker");
 	const bookingStartDateInput = document.getElementById("booking_start_date");
 	const bookingEndDateInput = document.getElementById("booking_end_date");
 	const timepickerOptions = {
@@ -35,7 +35,7 @@ export const editBookingFlatpickr = () => {
 			dateFormat: "d-m-Y",
 			altFormat: "d M",
 			altInput: true,
-      minDate: new Date,
+			minDate: new Date(),
 			locale: {
 				rangeSeparator: "  -  "
 			},

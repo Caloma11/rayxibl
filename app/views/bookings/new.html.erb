@@ -61,11 +61,11 @@
 
         <div class="dates-input-wrapper">
           <label for="dates" class="block textGray">Dates</label>
-          <input type="text" name="dates" class="mb-2 w-100 datepicker">
+          <input id="new-booking-datepickr" type="text" name="dates" class="mb-2 w-100 datepicker">
         </div>
 
         <div>
-          <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" }, label_html: { class: "block textGray nowrap flex items-center" }, wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
+          <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2 big" }, label_html: { class: "block textGray nowrap flex items-center" }, wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
         </div>
       </div>
 
