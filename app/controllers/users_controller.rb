@@ -22,9 +22,24 @@ class UsersController < ApplicationController
     end
   end
 
+  def update
+    authorize current_user
+    if current_user.update(edit_params)
+      flash[:notice] = "Preferred currency successfully updated."
+      respond_to do |format|
+        format.html { redirect_to settings_path }
+        format.js
+      end
+    end
+  end
+
   private
 
   def edit_password_params
     params.require(:user).permit(:password)
+  end
+
+  def edit_params
+    params.require(:user).permit(:preferred_currency)
   end
 end
