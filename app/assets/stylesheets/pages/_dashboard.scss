@@ -36,11 +36,9 @@
 			background-color: $blueish-gray;
 
 			.card {
-				@extend .rounded-circle,
-					.p-2,
-					.flex,
-					.justify-content-center,
-					.items-center;
+				@extend .rounded-circle, .flex, .justify-content-center, .items-center;
+
+				padding: calc(#{$spacing-2} + #{$base-spacing});
 
 				&.accepted {
 					background: $flat-green-3;
@@ -56,8 +54,8 @@
 				}
 
 				img {
-					height: 24px;
-					width: 24px;
+					height: 16px;
+					width: 16px;
 				}
 			}
 		}
