@@ -107,9 +107,10 @@ $day-header-height: 60px;
 						.items-center,
 						.justify-content-center,
 						.px-1,
-						.text-center;
+						.text-center,
+						.border-box;
 
-					width: 100px;
+					width: 90px;
 
 					&.today {
 						@extend .justify-content-start;
