@@ -82,9 +82,6 @@
       <p class="textLightBlack mb-0">Location</p>
       <p class="textBlue mb-0 mt-1"><%= booking.profile.location %></p>
     </div>
-    <% if policy(booking).cancel? %>
-      <%= link_to "Cancel", "#", class: "btn btn-float red text-center" %>
-    <% end %>
 
     <% if policy(booking).accept_or_reject? %>
       <div class="actions">
