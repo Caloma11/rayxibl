@@ -2,7 +2,11 @@
   <div class="flex justify-content-between items-center title <%= booking.status %>">
     <h3 class="m-0"><%= booking.title %></h3>
     <div class="flex items-center">
-      <%= image_tag avatar_url(booking.profile), alt: "profile avatar", class: "avatar avatar-circle small" %>
+      <% if current_user.manager? %>
+        <%= image_tag avatar_url(booking.profile), alt: "profile avatar", class: "avatar avatar-circle small" %>
+      <% else %>
+        <%= image_tag manager_avatar(booking.manager), alt: "manager avatar", class: "avatar avatar-circle small" %>
+      <% end %>
       <div class="relative">
         <div class="none actions-container">
           <div class="actions flex flex-column job-show">
