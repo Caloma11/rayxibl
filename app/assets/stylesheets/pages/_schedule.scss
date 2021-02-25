@@ -200,7 +200,7 @@ $day-header-height: 60px;
 					height: $day-height;
 
 					&.today {
-						background: #fafbff;
+						background: rgba(207, 239, 249, 0.2);
 					}
 
 					&.blueBorder {
