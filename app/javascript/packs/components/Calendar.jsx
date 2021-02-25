@@ -317,6 +317,7 @@ const Calendar = () => {
 									data={data}
 									setShowForm={setShowForm}
 									setFormDetails={setFormDetails}
+									first={i === 0}
 								/>
 							);
 						})

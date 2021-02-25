@@ -7,7 +7,8 @@ export const CalendarDays = ({
 	numberOfWeeks,
 	data,
 	setShowForm,
-	setFormDetails
+	setFormDetails,
+	first = false
 }) => {
 	const handleDayClick = ({ week, day }) => {
 		const date = data[week][day];
@@ -17,7 +18,7 @@ export const CalendarDays = ({
 	};
 
 	return (
-		<div className="daysCollection">
+		<div className={`daysCollection ${first ? "first-row" : ""}`}>
 			{numberOfWeeks.map((week, j) => {
 				return week.map((_, k) => {
 					try {
