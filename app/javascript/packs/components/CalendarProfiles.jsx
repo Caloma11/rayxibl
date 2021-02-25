@@ -1,11 +1,15 @@
 import React from "react";
 
-const CalendarProfile = ({ avatar, displayName, profession }) => {
+const CalendarProfile = ({ avatar, displayName, profession, id }) => {
 	const professionTruncated =
 		profession.length > 12 ? `${profession.substr(0, 10)}...` : profession;
 
+	const navigate = () => {
+		window.location = `/profiles/${id}`;
+	};
+
 	return (
-		<div className="week profile">
+		<div className="week profile" onClick={navigate}>
 			<img
 				className="avatar avatar-square"
 				src={avatar}
