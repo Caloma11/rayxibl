@@ -13,6 +13,10 @@
 	}
 
 	.switch {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		justify-content: center;
+
 		a.btn {
 			line-height: 22px;
 			padding: 8px 24px;
