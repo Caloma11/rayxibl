@@ -38,7 +38,7 @@ class CustomInvitationsController < ApplicationController
           emails_array << row.select { |col_value| col_value && col_value.match?(URI::MailTo::EMAIL_REGEXP) }
         end
         emails_array.flatten!
-        emails_array.each { |email| InviteUserJob.perform_later(email, current_user) }
+        emails_array.each { |email| InviteFreelancerJob.perform_later(email, current_user) }
         flash[:notice] = "Invitations succesfully sent"
       end
     else

@@ -27,5 +27,6 @@ class PagesController < ApplicationController
   end
 
   def settings
+    @emails = current_user&.invitations&.pluck(:email) || []
   end
 end
