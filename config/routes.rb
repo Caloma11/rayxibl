@@ -23,6 +23,7 @@ Rails.application.routes.draw do
   get "/settings", to: "pages#settings", as: :settings
 
   resources :jobs, only: %i[index show new create edit update] do
+    patch "/archive", to: "jobs#archive"
     resources :job_applications, only: %i[create]
   end
 
