@@ -31,14 +31,14 @@ class CustomInvitationsController < ApplicationController
   def csv_create
     authorize :invite, policy_class: CustomInvitationPolicy
     @file = params[:bulk_invitation][:csv_file]
-    if @file.content_type == "text/csv"
+    if @file.content_type.match?(/csv|comma|separated/)
       if File.exist?(@file.tempfile)
         emails_array  = []
         CSV.foreach(@file.tempfile) do |row|
           emails_array << row.select { |col_value| col_value && col_value.match?(URI::MailTo::EMAIL_REGEXP) }
         end
         emails_array.flatten!
-        emails_array.each { |e| p e }
+        emails_array.each { |email| InviteUserJob.perform_later(email, current_user) }
         flash[:notice] = "Invitations succesfully sent"
       end
     else

@@ -11,6 +11,7 @@ module SendgridMailer
       attach_personalization!
       sg = SendGrid::API.new(api_key: @api_key)
       resp = sg.client.mail._("send").post(request_body: mail.to_json)
+      p resp
     end
 
     private
