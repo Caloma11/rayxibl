@@ -18,7 +18,7 @@
         </div>
       </div>
       <%= link_to bookings_path(status: 1) do %>
-        <%= image_tag "icons/right-arrow.svg", alt: "accepted bookings" %>
+        <%= image_tag "icons/dashboard-chevron-right.svg", alt: "accepted bookings", width: 12, height: 12 %>
       <% end %>
     </div>
 
@@ -33,7 +33,7 @@
         </div>
       </div>
       <%= link_to bookings_path(status: 0) do %>
-        <%= image_tag "icons/right-arrow.svg", alt: "pending bookings" %>
+        <%= image_tag "icons/dashboard-chevron-right.svg", alt: "pending bookings", width: 12, height: 12 %>
       <% end %>
     </div>
 
@@ -48,7 +48,7 @@
         </div>
       </div>
       <%= link_to bookings_path(status: 3) do %>
-        <%= image_tag "icons/right-arrow.svg", alt: "canceled bookings" %>
+        <%= image_tag "icons/dashboard-chevron-right.svg", alt: "canceled bookings", width: 12, height: 12 %>
       <% end %>
     </div>
 
