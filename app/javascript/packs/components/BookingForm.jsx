@@ -137,13 +137,14 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 				<div className="px-3">
 					<button
 						type="submit"
-						className="btn btn-primary w-100 flex items-center"
+						className="btn btn-primary w-100 flex items-center justify-content-center"
 					>
 						<img
 							src={paperPlaneSvg}
 							alt="send request"
 							width={24}
 							height={24}
+							className="mr-2"
 						/>{" "}
 						Send request
 					</button>
