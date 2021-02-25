@@ -117,7 +117,7 @@ $day-header-height: 60px;
 						height: 60px;
 
 						span {
-							@extend .textMd, .mt-0;
+							@extend .textSm, .mt-0;
 
 							color: $blue-2;
 						}
