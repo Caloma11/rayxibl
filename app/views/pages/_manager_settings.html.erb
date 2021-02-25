@@ -1,0 +1,14 @@
+<div id="content" class="flex justify-content-center items-center flex-column h-100">
+  <%= simple_form_for current_user, url: user_update_path, remote: true, html: { id: "edit_user", class: "border-box px-3 w-100" } do |f| %>
+    <%= f.input :preferred_currency, required: false,
+                label: "Default currency",
+                label_html: { class: "uppercase mb-1 textLightBlack textBetween" },
+                collection: Users::Constants::CURRENCIES,
+                wrapper_html: { class: "flex flex-column mb-3" } %>
+  <% end %>
+
+  <h1 class="textBlue">Email us at <%= mail_to "info@flxibl.io", "info@flxibl.io", class: "textBlue" %></h1>
+  <%= image_tag "message-bubble.svg", alt: "bubbles" %>
+  <%= link_to "Update your password", edit_password_path, class: "textBlue uppercase mb-3" %>
+  <%= link_to "Delete your account", user_delete_path, method: :delete, class: "textPink uppercase", data: { confirm: "Are you sure you want to delete your account?" } %>
+</div>

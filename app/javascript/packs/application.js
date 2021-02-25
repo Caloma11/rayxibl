@@ -33,6 +33,7 @@ import { starRating } from "../components/starRating";
 import { initFirefoxFixer } from "../components/firefoxFixer";
 import { initNewMessageCable } from "../channels/new_message_channel";
 import { initDismissAlert } from "../components/dismissAlert";
+import { updateUser } from "../components/updateUser";
 import { liveBookingPrice } from "../components/liveBookingPrice";
 
 require("@rails/ujs").start();
@@ -78,6 +79,7 @@ document.addEventListener("turbolinks:load", () => {
 	initFirefoxFixer();
 	initNewMessageCable();
 	registerError();
+	updateUser();
 	window.starRating = starRating;
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
