@@ -23,6 +23,8 @@ module ApplicationHelper
       return "£"
     when "EUR"
       return "€"
+    when "AED"
+      return "Dhs"
     else
       return "$"
     end
