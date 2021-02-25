@@ -7,10 +7,12 @@ class BookingsController < ApplicationController
       @bookings = policy_scope(current_user.manager.bookings)
                     .includes(profile: [user: { avatar_attachment: :blob }])
                     .today_and_after
+                    .active
     else
       @bookings = policy_scope(current_user.profile.bookings)
                     .includes(:manager, :profile)
                     .today_and_after
+                    .active
     end
 
     if params[:status]
@@ -23,6 +25,7 @@ class BookingsController < ApplicationController
     end
 
     @bookings = @bookings.group_by { |booking| booking.start_date.beginning_of_week }.sort_by { |day| day }.to_h
+    @archived_bookings = current_user.manager.bookings.where(status: [2, 3])
 
     respond_to do |format|
       format.html
