@@ -1,6 +1,6 @@
 #dashboardPage {
 	.head {
-		@extend .pt-4;
+		padding-top: calc(#{$spacing-4} + #{$spacing-2});
 
 		h1 {
 			@extend .uppercase;
