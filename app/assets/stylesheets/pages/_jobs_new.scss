@@ -44,4 +44,10 @@
 			}
 		}
 	}
+
+	@media only screen and (max-width: 360px) {
+		.dates-input-wrapper {
+			width: 145px;
+		}
+	}
 }

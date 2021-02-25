@@ -1,0 +1,10 @@
+<div id="settings-page">
+  <div class="flex justify-content-between items-center px-3">
+    <%= link_to dashboard_path do %>
+      <%= image_tag "icons/cross.svg", alt: "back button", width: 16, height: 16 %>
+    <% end %>
+    <h3 class="uppercase semi-bold">Settings</h3>
+    <button class="noSelect" style="width: 16px; height: 16px;">&nbsp;</button>
+  </div>
+  <%= render partial: "pages/#{current_user.role}_settings" %>
+</div>

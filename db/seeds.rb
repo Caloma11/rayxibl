@@ -220,12 +220,6 @@ Message.create!(
   conversation: convo,
   content: "I agree, bacon is nice!"
 )
-puts ">> Creating an embed message"
-Message.create!(
-  booking: booking,
-  user: user_manager,
-  conversation: convo
-)
 puts "[END] - Creating messages"
 
 puts "[END] - Seeding done"

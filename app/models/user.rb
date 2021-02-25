@@ -16,6 +16,8 @@ class User < ApplicationRecord
 
   enum role: ROLES
 
+  before_destroy :cleanup
+
   validates :preferred_currency, presence: true, inclusion: { in: CURRENCIES }
 
   def display_name
@@ -33,6 +35,28 @@ class User < ApplicationRecord
       Conversation.find_by(manager: manager, profile: other.profile)
     else
       Conversation.find_by(manager: other.manager, profile: profile)
+    end
+  end
+
+  def cleanup
+    if freelancer?
+      profile&.ratings&.destroy_all
+      profile&.job_applications&.destroy_all
+      profile&.notes&.destroy_all
+      Message.where(user: self)&.destroy_all
+      profile&.bookings&.destroy_all
+      profile&.conversations&.destroy_all
+      profile&.connections&.destroy_all
+      profile&.destroy
+    elsif manager?
+      # Safe navigation for seed cleanup purposes
+      manager&.jobs&.destroy_all
+      manager&.company&.connections&.destroy_all
+      manager&.bookings&.destroy_all
+      manager&.conversations&.destroy_all
+      manager&.notes&.destroy_all
+      manager&.ratings&.destroy_all
+      manager&.company&.destroy
     end
   end
 end

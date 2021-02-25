@@ -1,4 +1,6 @@
 class ConversationsController < ApplicationController
+  before_action :get_rates, only: %i[show]
+
   def index
     skip_policy_scope
     if current_user.manager?

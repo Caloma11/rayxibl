@@ -14,4 +14,17 @@ module ApplicationHelper
     !(params[:action] == "new" || params[:action] == "edit") &&
     !(current_page?("/"))
   end
+
+  def currency_mapper(currency)
+    case currency
+    when "USD"
+      return "$"
+    when "GBP"
+      return "£"
+    when "EUR"
+      return "€"
+    else
+      return "$"
+    end
+  end
 end

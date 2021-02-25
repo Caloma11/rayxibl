@@ -73,6 +73,18 @@ class JobsController < ApplicationController
     end
   end
 
+  def archive
+    @job = Job.find(params[:job_id])
+    authorize @job
+    if @job.archived!
+      flash[:notice] = "Job successfully archived."
+      redirect_to job_path(@job)
+    else
+      flash[:alert] = "Something went wrong. Please try again!"
+      render "jobs/show"
+    end
+  end
+
   private
 
   def job_params
