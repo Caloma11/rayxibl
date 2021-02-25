@@ -288,7 +288,7 @@ const Calendar = () => {
 			{showForm && formDetails && Object.keys(formDetails).length > 0 && (
 				<BookingForm formDetails={formDetails} setShowForm={setShowForm} />
 			)}
-			<div className="flex justify-content-between items-center relative">
+			<div className="flex justify-content-between items-center relative mt-4">
 				<div style={{ width: 70, height: 70 }}></div>
 				<CalendarMonthSelection
 					month={month}
