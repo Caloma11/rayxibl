@@ -19,10 +19,6 @@
 
 	#manager,
 	#freelancer {
-		p.subtitle {
-			font-size: 14px;
-		}
-
 		.bookings-count {
 			@extend .flex, .items-center, .justify-content-center, .my-3;
 

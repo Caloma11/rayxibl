@@ -4,8 +4,8 @@
   <% end %>
 
   <div class="shadow-alt rounded p-3 mb-3">
-    <h3 class="mt-0 mb-1">Bookings</h3>
-    <p class="subtitle m-0"><%= pluralize @booked_profiles.count, "booking" %> across <%= pluralize @booked_profiles.distinct.count("profiles.id"), "freelancer" %></p>
+    <h3 class="mt-0 mb-1 textMd">Bookings</h3>
+    <p class="subtitle m-0 textSm"><%= pluralize @booked_profiles.count, "booking" %> across <%= pluralize @booked_profiles.distinct.count("profiles.id"), "freelancer" %></p>
 
     <div class="card-container flex items-center justify-content-between">
       <div class="flex items-center">
