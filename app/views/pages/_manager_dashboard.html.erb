@@ -3,7 +3,7 @@
     You have <%= pluralize @today_booked_profiles.count, "freelancer" %> booked today
   <% end %>
 
-  <div class="shadow-alt rounded p-3 mb-3">
+  <div class="shadow-alt rounded p-3 mb-4">
     <h3 class="mt-0 mb-1 textMd">Bookings</h3>
     <p class="subtitle m-0 textSm"><%= pluralize @booked_profiles.count, "booking" %> across <%= pluralize @booked_profiles.distinct.count("profiles.id"), "freelancer" %></p>
 
@@ -52,10 +52,10 @@
       <% end %>
     </div>
 
-    <%= link_to "View all (#{@bookings.count})", bookings_path, class: "btn btn-primary text-center mx-2" %>
+    <%= link_to "View all (#{@bookings.count})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
   </div>
 
-  <div class="shadow-alt rounded p-3">
+  <div class="shadow-alt rounded p-3 mb-4">
     <h3 class="mt-0 mb-1">Job posts</h3>
     <p class="subtitle"><%= pluralize current_user.manager.job_applications.count, "applicant" %> for <%= pluralize current_user.manager.jobs.count, "job post" %></p>
 
@@ -75,6 +75,6 @@
       <% end %>
     <% end %>
 
-    <%= link_to "View all (#{@jobs.count})", jobs_path(manager_id: current_user.manager.id), class: "btn btn-primary text-center" %>
+    <%= link_to "View all (#{@jobs.count})", jobs_path(manager_id: current_user.manager.id), class: "btn btn-primary text-center mb-2" %>
   </div>
 </div>
