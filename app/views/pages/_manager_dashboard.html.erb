@@ -1,7 +1,6 @@
 <div id="manager">
   <%= link_to profiles_path(ids: @today_booked_profiles.pluck(:id)), class: "bookings-count" do %>
     You have <%= pluralize @today_booked_profiles.count, "freelancer" %> booked today
-    <%= image_tag "icons/right-arrow-blue.svg", alt: "profiles", class: "vertical-align-middle", width: 16, height: 16 %>
   <% end %>
 
   <div class="shadow-alt rounded p-3 mb-3">
