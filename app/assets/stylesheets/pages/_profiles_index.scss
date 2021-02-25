@@ -1,6 +1,8 @@
 .profiles-index {
+	@extend .pt-4;
+
 	.head {
-		@extend .flex, .justify-content-between, .px-3, .mt-3;
+		@extend .flex, .justify-content-between, .px-3;
 
 		button {
 			img {
@@ -26,50 +28,50 @@
 
 	.cards {
 		@extend .px-3;
-    min-height: 100vh;
+		min-height: 100vh;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 	}
 
-  .profiles-overlay {
-    width: 100%;
-    height: 80vh;
-    background-image: asset_url('overlay-freelancers');
-    background-position: center;
-    background-size: cover;
-    background-repeat: no-repeat;
-    grid-column-start: 1;
-    grid-column-end: 3;
-    p.main-text {
-      @extend .textBlue, .textLg, .text-center, .bold;
-      &.add-free {
-        margin-bottom: 40%;
-      }
-    }
-  }
+	.profiles-overlay {
+		width: 100%;
+		height: 80vh;
+		background-image: asset_url("overlay-freelancers");
+		background-position: center;
+		background-size: cover;
+		background-repeat: no-repeat;
+		grid-column-start: 1;
+		grid-column-end: 3;
+		p.main-text {
+			@extend .textBlue, .textLg, .text-center, .bold;
+			&.add-free {
+				margin-bottom: 40%;
+			}
+		}
+	}
 
-  .manager-actions-wrapper {
-    position: fixed;
-    bottom: 352px;
-    right: 24px;
-  }
+	.manager-actions-wrapper {
+		position: fixed;
+		bottom: 352px;
+		right: 24px;
+	}
 
-  #manager-actions-button {
-    position: fixed;
-    bottom: 88px;
-    right: 24px;
-    background-color: $blue-2;
-    padding: 16px;
-    z-index: 3;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-  }
+	#manager-actions-button {
+		position: fixed;
+		bottom: 88px;
+		right: 24px;
+		background-color: $blue-2;
+		padding: 16px;
+		z-index: 3;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 50%;
+	}
 
-  .add-free {
-    position: sticky;
-    bottom: 80px;
-    right: 24px;
-  }
+	.add-free {
+		position: sticky;
+		bottom: 80px;
+		right: 24px;
+	}
 }
