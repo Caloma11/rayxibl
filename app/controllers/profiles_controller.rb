@@ -12,7 +12,6 @@ class ProfilesController < ApplicationController
       profile = policy_scope(Profile)
     end
 
-
     unless params[:ob].present? && params[:ob] == "t"
       @profiles = ProfileFilter.new(profile, params, current_user).call
       @jobs = current_user.manager.jobs
