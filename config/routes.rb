@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get "/mail", to: "pages#mail", as: :mail
 
   resources :jobs, only: %i[index show new create edit update] do
+    patch "/archive", to: "jobs#archive"
     resources :job_applications, only: %i[create]
   end
 
