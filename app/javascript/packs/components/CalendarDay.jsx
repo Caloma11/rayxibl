@@ -109,7 +109,7 @@ export const CalendarDay = ({
 					<div
 						key={i}
 						className={eventClassName}
-						style={{ height: 40 }}
+						style={{ height: 44 }}
 						onClick={e => handleEventClick(e, booking.id)}
 					>
 						{a[0] && (

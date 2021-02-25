@@ -240,7 +240,7 @@ $day-header-height: 60px;
 							overflow-x: overlay;
 
 							.title {
-								@extend .textSm;
+								@extend .textSm, .my-1;
 
 								color: $dark-gray;
 								font-weight: 600;
