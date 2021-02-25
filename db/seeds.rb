@@ -34,6 +34,9 @@ user_manager = User.create!(
   role: 0
 )
 user_manager.confirm
+manager_avatar = URI.open("https://cdn.lynda.com/courses/696328-637491205596562954_270x480_thumb.jpg")
+user_manager.avatar.attach(io: manager_avatar, filename: "manager.jpg", content_type: "image/jpg")
+
 user_lancer = User.create!(
   email: "freelancer@test.com",
   password: "123123",
@@ -42,6 +45,9 @@ user_lancer = User.create!(
   role: 1
 )
 user_lancer.confirm
+lancer_avatar = URI.open("https://www.hrmanagementapp.com/wp-content/uploads/2019/06/freelancer-2.jpg")
+user_lancer.avatar.attach(io: lancer_avatar, filename: "lancer.jpg", content_type: "image/jpg")
+
 dummy_freelancers = []
 dummy_managers = []
 puts ">> Creating 10 dummy managers"
