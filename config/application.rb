@@ -36,6 +36,9 @@ module Flxibl
     config.generators.skip_routes = true
     config.generators.helper = false
 
+    # Use sidekiq as queue adapter
+    config.active_job.queue_adapter = :sidekiq
+
     # Unobstrusive JS with turbolinks remote forms
     config.action_view.embed_authenticity_token_in_remote_forms = true
 

@@ -7,7 +7,7 @@ class CustomInvitationPolicy < ApplicationPolicy
     new?
   end
 
-  def resend?
+  def csv_create?
     new?
   end
 end
