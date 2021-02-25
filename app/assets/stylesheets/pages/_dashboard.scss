@@ -31,8 +31,9 @@
 		}
 
 		.card-container {
-			@extend .py-2, .px-3, .rounded, .my-3;
+			@extend .px-3, .rounded, .my-3;
 
+			padding: calc(#{$spacing-2} + #{$base-spacing}) $spacing-3;
 			background-color: $blueish-gray;
 
 			.card {
