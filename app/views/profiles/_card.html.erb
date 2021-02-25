@@ -23,10 +23,10 @@
   </div>
   <div class="bottom flex-grow-1 flex flex-column justify-content-between">
     <div class="bottom-top flex-grow-1">
-      <%= link_to profile_path(profile), class: "h-100" do %>
-        <div class="text-group flex flex-column justify-content-between h-100">
-          <h3 class="name"><%= profile.user.display_name %></h3>
-          <h5 class="profession"><%= profile.profession %></h5>
+      <%= link_to profile_path(profile) do %>
+        <div class="text-group flex flex-column">
+          <h3 class="name"><%= profile.user.display_name.length > 16 ? profile.user.shortened_display_name : profile.user.display_name %></h3>
+          <h5 class="profession"><%= profile.profession.length > 17 ? "#{profile.profession[0..14]}..." : profile.profession %></h5>
           <p class="location"><%= profile.location %></p>
         </div>
       <% end %>
