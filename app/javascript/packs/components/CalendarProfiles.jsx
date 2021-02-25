@@ -1,6 +1,9 @@
 import React from "react";
 
 const CalendarProfile = ({ avatar, displayName, profession }) => {
+	const professionTruncated =
+		profession.length > 12 ? `${profession.substr(0, 10)}...` : profession;
+
 	return (
 		<div className="week profile">
 			<img
@@ -8,8 +11,8 @@ const CalendarProfile = ({ avatar, displayName, profession }) => {
 				src={avatar}
 				alt={`${displayName}'s avatar`}
 			/>
-			<p>{displayName}</p>
-			<span>{profession}</span>
+			<p className="profile-name">{displayName}</p>
+			<span className="profile-profession">{professionTruncated}</span>
 		</div>
 	);
 };

@@ -125,19 +125,23 @@ $day-header-height: 60px;
 					}
 
 					img {
+						@extend .mb-1;
+
 						width: 52px;
 						height: 52px;
 					}
 
-					p {
-						font-size: 14px;
+					p.profile-name {
+						@extend .semi-bold, .textSm;
+
 						color: #3f434a;
 					}
 
-					span {
-						@extend .text-center, .mt-1, .textSm;
+					span.profile-profession {
+						@extend .text-center, .uppercase;
 
 						color: #828282;
+						font-size: 10px;
 					}
 				}
 
