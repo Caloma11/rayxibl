@@ -3,7 +3,7 @@
   const switches = document.querySelectorAll(".switch a");
   const filterContent = document.getElementById("filter-content");
 
-  bookingCards.innerHTML = "<%= j render partial: "bookings/booking_cards", locals: { booking_group: @bookings, archived_bookings: @archived_bookings } %>";
+  bookingCards.innerHTML = "<%= j render partial: "bookings/booking_cards", locals: { booking_group: @bookings, archived_bookings: current_user.manager? ? @archived_bookings : [] } %>";
 
   switches.forEach(switchLink => {
     if (switchLink.classList.contains("btn-transparent") && switchLink.dataset.status == "<%= params[:status] %>") {

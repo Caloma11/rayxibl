@@ -25,7 +25,9 @@ class BookingsController < ApplicationController
     end
 
     @bookings = @bookings.group_by { |booking| booking.start_date.beginning_of_week }.sort_by { |day| day }.to_h
-    @archived_bookings = current_user.manager.bookings.where(status: [2, 3])
+    if current_user.manager?
+      @archived_bookings = current_user.manager.bookings.where(status: [2, 3])
+    end
 
     respond_to do |format|
       format.html
