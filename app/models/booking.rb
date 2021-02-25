@@ -28,6 +28,10 @@ class Booking < ApplicationRecord
     end
   end
 
+  def converted_total_price(rate)
+    (rate * total_price).to_i
+  end
+
   def number_of_days
     (end_date - start_date).to_i / 86400
   end

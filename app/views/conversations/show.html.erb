@@ -27,7 +27,7 @@
   <section class="flex-grow-1" id="messages" data-current-user-id="<%= current_user.id %>" data-conversation-id="<%= @conversation.id %>">
     <% @conversation.messages.each do |message| %>
       <% if message.booking %>
-        <%= render partial: "bookings/widget", locals: { booking: message.booking, conversation: @conversation } %>
+        <%= render partial: "bookings/widget", locals: { booking: message.booking, conversation: @conversation, rate: @rates } %>
       <% else %>
         <%= render partial: "messages/message", locals: { message: message, user_is_author: message.user == current_user } %>
       <% end %>
