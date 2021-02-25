@@ -4,7 +4,7 @@ const CalendarProfile = ({ avatar, displayName, profession }) => {
 	return (
 		<div className="week profile">
 			<img
-				className="avatar avatar-circle"
+				className="avatar avatar-square"
 				src={avatar}
 				alt={`${displayName}'s avatar`}
 			/>
