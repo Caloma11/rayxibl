@@ -21,7 +21,7 @@ export const CalendarFilter = ({ bookings, setProfiles }) => {
 		<div id="calendar-filter">
 			<div className="flex justify-content-end m-3">
 				<button onClick={() => setShow(prev => !prev)}>
-					<img src={filterSvg} alt="filter" width={24} height={24} />
+					<img src={filterSvg} alt="filter" width={16} height={16} />
 				</button>
 			</div>
 
