@@ -48,6 +48,10 @@
 				max-width: 240px;
 			}
 
+			.right {
+				justify-content: flex-end;
+			}
+
 			.time {
 				@extend .semi-bold, .items-self-end;
 
