@@ -1,5 +1,5 @@
 $day-width: 80px;
-$day-height: 180px;
+$day-height: 120px;
 $day-header-height: 60px;
 $day-border: 1px solid #e8e9eb;
 
@@ -108,9 +108,10 @@ $day-border: 1px solid #e8e9eb;
 						.items-center,
 						.justify-content-center,
 						.px-1,
-						.text-center;
+						.text-center,
+						.border-box;
 
-					width: 100px;
+					width: 90px;
 
 					&.today {
 						@extend .justify-content-start;
@@ -118,26 +119,30 @@ $day-border: 1px solid #e8e9eb;
 						height: 60px;
 
 						span {
-							@extend .textMd, .mt-0;
+							@extend .textSm, .mt-0;
 
 							color: $blue-2;
 						}
 					}
 
 					img {
-						width: 48px;
-						height: 48px;
+						@extend .mb-1;
+
+						width: 52px;
+						height: 52px;
 					}
 
-					p {
-						font-size: 14px;
+					p.profile-name {
+						@extend .semi-bold, .textSm;
+
 						color: #3f434a;
 					}
 
-					span {
-						@extend .text-center, .mt-1, .textSm;
+					span.profile-profession {
+						@extend .text-center, .uppercase;
 
 						color: #828282;
+						font-size: 10px;
 					}
 				}
 
@@ -154,14 +159,13 @@ $day-border: 1px solid #e8e9eb;
 				height: $day-header-height;
 
 				.dayHeader {
-					@extend .flex, .flex-column, .items-center;
+					@extend .flex, .flex-column, .items-center, .border-box;
 
 					width: $day-width;
 					border: 1px solid transparent;
 
 					span {
-						@extend .textSm;
-
+						font-size: 10px;
 						color: #8a9099;
 						font-weight: 500;
 
@@ -199,6 +203,8 @@ $day-border: 1px solid #e8e9eb;
 				}
 
 				.day {
+					@extend .border-box;
+
 					// Everyone gets a bottom & right border
 					border-bottom: $day-border;
 					border-right: $day-border;
@@ -211,7 +217,7 @@ $day-border: 1px solid #e8e9eb;
 					}
 
 					&.today {
-						background: #fafbff;
+						background: rgba(207, 239, 249, 0.2);
 					}
 
 					&.blueBorder {
@@ -223,6 +229,7 @@ $day-border: 1px solid #e8e9eb;
 
 						background: $flat-orange-5;
 						border-top: 8px solid $flat-orange-3;
+						margin-right: -2px;
 
 						.event-details {
 							background: $flat-orange-5;
@@ -251,7 +258,7 @@ $day-border: 1px solid #e8e9eb;
 							overflow-x: overlay;
 
 							.title {
-								@extend .textSm;
+								@extend .textSm, .my-1;
 
 								color: $dark-gray;
 								font-weight: 600;
@@ -260,6 +267,7 @@ $day-border: 1px solid #e8e9eb;
 							.time {
 								font-size: 10px;
 								font-weight: 500;
+								color: rgba(108, 123, 138, 1);
 							}
 						}
 					}

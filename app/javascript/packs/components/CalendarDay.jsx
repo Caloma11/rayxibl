@@ -4,7 +4,7 @@ import { truncate } from "../../utils/truncate";
 
 const START_EVENT_CLASS_NAMES = "rounded-top-left rounded-bottom-left pl-1";
 const EVENT_CLASS_NAMES = "event";
-const END_EVENT_CLASS_NAMES = "rounded-top-right rounded-bottom-right";
+const END_EVENT_CLASS_NAMES = "rounded-top-right rounded-bottom-right mr-0";
 
 const determineColor = status => {
 	if (status === "rejected") {
@@ -66,6 +66,9 @@ export const CalendarDay = ({
 			{eventDateBooleans.map((a, i) => {
 				if (!a.some(ele => ele)) return null;
 				{
+					/*  */
+				}
+				{
 					/* Every individual booking */
 				}
 				const booking = bookings[i];
@@ -109,13 +112,13 @@ export const CalendarDay = ({
 					<div
 						key={i}
 						className={eventClassName}
-						style={{ height: 40 }}
+						style={{ height: 44 }}
 						onClick={e => handleEventClick(e, booking.id)}
 					>
 						{a[0] && (
 							<div
 								className="event-details"
-								style={{ width: DAY_WIDTH * eventDuration - 4, height: 36 }}
+								style={{ width: DAY_WIDTH * eventDuration - 4, height: 40 }}
 							>
 								<p className="title">
 									{truncate(booking.title, { scale: eventDuration })}
