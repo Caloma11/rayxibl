@@ -21,6 +21,7 @@ class Message < ApplicationRecord
         .where(
           "conversations.manager_id = :manager_id OR conversations.profile_id = :profile_id", data
         )
+        .unread
         .count
     end
   end
