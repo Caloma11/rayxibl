@@ -13,7 +13,7 @@
           <% if other_person.freelancer? %>
             <p class="detail noMargin textLightBlack semi-bold"><%= other_person.profile.profession %>, <%= other_person.profile.location %></p>
           <% end %>
-          <p class="noMargin textLightBlack"><%= conversation.last_message&.content %></p>
+          <p class="noMargin textLightBlack text-content"><%= truncate_snippet(conversation.last_message&.content) %></p>
         </div>
       </div>
 

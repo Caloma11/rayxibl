@@ -37,6 +37,12 @@
 				@extend .textBetween;
 			}
 
+			.text-content {
+				@extend .textBetween, .mt-1;
+
+				max-width: 240px;
+			}
+
 			.time {
 				@extend .semi-bold;
 
