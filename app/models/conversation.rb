@@ -6,7 +6,7 @@ class Conversation < ApplicationRecord
   validates :manager, uniqueness: { scope: :profile }
 
   scope :by_latest_message, -> {
-    joins("FULL JOIN messages m ON m.conversation_id = conversations.id")
+    joins(:messages)
     .includes([profile: { user: :avatar_attachment }])
     .order("conversations.updated_at DESC")
     .distinct
