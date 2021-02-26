@@ -7,11 +7,15 @@ class PagesController < ApplicationController
 
   def dashboard
     if current_user.manager?
-      @network = current_user.manager.network
-      @booked_profiles = current_user.manager.booked_profiles
+      @manager = current_user.manager
+      @network = @manager.network
+      @booked_profiles = @manager.booked_profiles
       @today_booked_profiles = @booked_profiles.has_bookings_today
-      @bookings = current_user.manager.bookings
-      @jobs = current_user.manager.company.jobs.includes(:company, :manager).limit(3)
+      @bookings = @manager.bookings
+      @company = @manager.company
+      @jobs = @company.jobs.includes(:manager).limit(3)
+      @bookings_count = @bookings.count
+      @jobs_count = @jobs.count
     else
       @clients = current_user.profile.managers
       @bookings = current_user.profile.bookings
