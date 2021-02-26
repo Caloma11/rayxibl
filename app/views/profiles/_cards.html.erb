@@ -15,8 +15,9 @@
     <%= render partial: "profiles/card", locals: { profile: profile, conversation: conversation, add_to_network: !connection.present? } %>
   <% end %>
 <% end %>
-<% unless params[:ob].present? && params[:ob] == "t" %>
-  <div class="add-more flex flex-column items-center justify-content-center">
+<%# TODO: Uhh, re-check the last condition here later %>
+<% unless params[:ob].present? && params[:ob] == "t" && profiles.size >= 2 %>
+  <div class="add-more flex flex-column items-center justify-content-start">
     <p class="text-center textBlue bold textLg">Find more freelancers by posting a job</p>
     <%= image_tag "icons/phone-hand.svg", alt: "phone-hand", width: 312, height: 312 %>
   </div>
