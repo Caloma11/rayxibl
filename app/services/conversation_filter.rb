@@ -15,6 +15,11 @@ class ConversationFilter
     end
 
     if params[:name] != ""
+      if current_user.manager?
+        @conversations = @conversations.joins(profile: :user)
+      else
+        @conversations = @conversations.joins(manager: :user)
+      end
       @conversations = @conversations.where("users.first_name ILIKE :name OR users.last_name ILIKE :name", name: "%#{params[:name]}%")
     end
 

@@ -17,41 +17,74 @@
 
 	#conversations {
 		.convo-snippet {
-      .convo-avatar {
-        width: 40px;
-        height: 40px;
-        background-size: cover;
-        background-position: center;
-        box-shadow: 0px 3px 6px -2px rgba(50, 51, 9, .1);
-      }
+			@extend .mb-3, .block, .px-3;
+
+			border-bottom: 2px solid $blueish-gray;
+
+			.convo-snippet-content-wrapper {
+				display: grid;
+				grid-template-columns: 0.8fr 0.2fr;
+			}
+
+			.convo-avatar {
+				width: 40px;
+				height: 40px;
+				background-size: cover;
+				background-position: center;
+				box-shadow: 0px 3px 6px -2px rgba(50, 51, 9, 0.1);
+			}
+
+			h5 {
+				@extend .textMd;
+			}
+
+			.detail {
+				@extend .textBetween;
+			}
+
+			.text-content {
+				@extend .textBetween, .mt-1;
+
+				max-width: 240px;
+			}
+
+			.right {
+				justify-content: flex-end;
+			}
+
 			.time {
-				@extend .semi-bold;
+				@extend .semi-bold, .items-self-end;
 
 				font-size: 12px;
 			}
 		}
 	}
 	.head {
-		@extend .flex, .justify-content-between, .items-center, .px-3, .mt-3;
+		@extend .flex, .justify-content-between, .items-center, .px-3, .pt-4;
 
 		button {
 			img {
-				width: 24px;
-				height: 24px;
+				width: 16px;
+				height: 16px;
 			}
 		}
 	}
 
 	.switch {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		justify-content: center;
+
 		a.btn {
 			line-height: 22px;
 			padding: 8px 24px;
 
 			img {
-				@extend .mr-1;
+				@extend .mr-2;
+
 				object-fit: contain;
-				height: 18px;
-				width: 18px;
+				height: 16px;
+				width: 16px;
 			}
 		}
 	}

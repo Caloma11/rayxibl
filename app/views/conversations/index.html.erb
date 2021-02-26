@@ -1,9 +1,7 @@
 <div class="convo-index">
   <section class="head">
-    <%= link_to :back do %>
-      <%= image_tag "icons/left-arrow.svg", alt: "back link", height: 24, width: 24, class: "mr-2" %>
-    <% end %>
-    <p>INBOX</p>
+    <div style="width: 28px;"></div>
+    <p class="semi-bold textBetween">INBOX (<%= @unread_messages_count %>)</p>
     <button id="filter-trigger" type="button"><%= image_tag "icons/filter.svg", alt: "filter" %></button>
 
     <div id="filter-content" class="none">
@@ -11,7 +9,7 @@
     </div>
   </section>
 
-  <section class="switch flex justify-content-between p-3 my-3" style="background-color: #F9FBFE;">
+  <section class="switch flex justify-content-between px-3 py-2 my-3" style="background-color: #F9FBFE;">
     <%= link_to conversations_path(network: true), class: "flex items-center btn #{params[:network] ? 'btn-white' : 'btn-transparent'}" do %>
       <%= image_tag "icons/person-check", alt: "in network" %> My network
     <% end %>
@@ -20,7 +18,7 @@
     <% end %>
   </section>
 
-  <section id="conversations" class="mx-3">
+  <section id="conversations">
     <%= render partial: "conversations/snippets", locals: { conversations: @conversations } %>
   </section>
 </div>

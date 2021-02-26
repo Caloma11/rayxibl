@@ -29,6 +29,8 @@ class ConversationsController < ApplicationController
       @conversations = ConversationFilter.new(@conversations, profile_params, current_user).call
     end
 
+    @unread_messages_count = @conversations&.map { |convo| convo.messages.unread.count }&.sum
+
     respond_to do |format|
       format.html
       format.js
