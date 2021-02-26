@@ -55,7 +55,7 @@
 }
 
 .items-baseline {
-  align-items: baseline;
+	align-items: baseline;
 }
 
 .items-end {
@@ -200,4 +200,8 @@ fieldset {
 	border: none;
 	margin: 0;
 	padding: 0;
+}
+
+.height-unset {
+	height: unset !important;
 }
