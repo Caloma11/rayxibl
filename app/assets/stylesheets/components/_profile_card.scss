@@ -1,4 +1,6 @@
 .profile-card {
+	@extend .px-3;
+
 	border-bottom: 1px solid #f4f6f9;
 	padding: 16px;
 	display: flex;
