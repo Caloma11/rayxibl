@@ -11,7 +11,8 @@ class PagesController < ApplicationController
       @booked_profiles = current_user.manager.booked_profiles
       @today_booked_profiles = @booked_profiles.has_bookings_today
       @bookings = current_user.manager.bookings
-      @jobs = current_user.manager.company.jobs.includes(:company, :manager).limit(3)
+      @company = current_user.manager.company
+      @jobs = @company.jobs.includes(:manager).limit(3)
     else
       @clients = current_user.profile.managers
       @bookings = current_user.profile.bookings
