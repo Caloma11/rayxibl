@@ -1,8 +1,6 @@
 <div class="convo-index">
   <section class="head">
-    <%= link_to :back do %>
-      <%= image_tag "icons/left-arrow.svg", alt: "back link", height: 24, width: 24, class: "mr-2" %>
-    <% end %>
+    <div style="width: 28px;"></div>
     <p>INBOX (<%= @unread_messages_count %>)</p>
     <button id="filter-trigger" type="button"><%= image_tag "icons/filter.svg", alt: "filter" %></button>
 
