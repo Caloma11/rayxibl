@@ -1,9 +1,10 @@
 .action-button {
-	@extend .flex, .justify-content-end, .mr-3;
+	@extend .flex, .justify-content-end;
 
 	position: sticky;
 	bottom: 80px;
-	right: 24px;
+	right: 40px;
+	margin-right: calc(#{$base-spacing} + #{$spacing-4});
 }
 
 .action-button,
