@@ -6,7 +6,7 @@
   <% end %>
 
   <div class="shadow-alt rounded p-3 mb-4">
-    <% if @bookings.count.positive? %>
+    <% if @bookings_count.positive? %>
       <h3 class="mt-0 mb-1 textMd">Bookings</h3>
     <% else %>
       <h3 class="mt-0 mb-4 textMd textBlue">
@@ -17,7 +17,7 @@
       <p class="subtitle m-0 textSm"><%= pluralize @booked_profiles.count, "booking" %> across <%= pluralize @booked_profiles.distinct.count("profiles.id"), "freelancer" %></p>
     <% end %>
 
-    <% if @bookings.count.positive? %>
+    <% if @bookings_count.positive? %>
       <div class="card-container flex items-center justify-content-between">
         <div class="flex items-center">
           <div class="card accepted">
@@ -70,14 +70,14 @@
   </div>
 
   <div class="shadow-alt rounded p-3 mb-4">
-    <% if @jobs.count.positive? %>
+    <% if @jobs_count.positive? %>
       <h3 class="mt-0 mb-1 textMd">Job posts</h3>
     <% else %>
       <h3 class="mt-0 mb-4 textMd textBlue">Your current job posts will appear here</h3>
     <% end %>
 
-    <% if @jobs.count.positive? %>
-      <p class="subtitle m-0 textSm"><%= pluralize @company.job_applications.count, "applicant" %> for <%= pluralize @jobs.count, "job post" %></p>
+    <% if @jobs_count.positive? %>
+      <p class="subtitle m-0 textSm"><%= pluralize @company.job_applications.count, "applicant" %> for <%= pluralize @jobs_count, "job post" %></p>
     <% end %>
 
     <% @jobs.each do |job| %>
@@ -96,8 +96,8 @@
       <% end %>
     <% end %>
 
-    <% if @jobs.count.positive? %>
-      <%= link_to "View all (#{@jobs.count})", jobs_path(manager_id: current_user.manager.id), class: "btn btn-primary text-center mb-2" %>
+    <% if @jobs_count.positive? %>
+      <%= link_to "View all (#{@jobs_count})", jobs_path(manager_id: current_user.manager.id), class: "btn btn-primary text-center mb-2" %>
     <% else %>
       <%= link_to "Post a job", new_job_path, class: "btn btn-primary text-center mb-2" %>
     <% end %>
