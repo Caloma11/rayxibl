@@ -17,9 +17,19 @@
 
     <%= f.simple_fields_for :company_attributes do |cf|%>
       <div class="company-atttributes flex justify-content-between items-end">
-        <%= cf.input :name, label: "Company name", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "profession-edit px-3 overflow-hidden flex-grow-1 pb-3"}    %>
 
-        <%= cf.input :logo, as: :file, input_html: { class: 'none' }, label_html: { class: 'upload-photo flex flex-column justify-content-center items-center', id: "label-logo-placeholder"},label: "#{(image_tag 'icons/picture-placeholder', id: 'picture-placeholder-icon', width: 28, height: 28)}LOGO".html_safe, wrapper_html: { class: "px-3"} %>
+        <% unless current_user.invited_by&.manager&.company %>
+          <%= cf.input :name, label: "Company name", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "profession-edit px-3 overflow-hidden flex-grow-1 pb-3"}    %>
+
+          <%= cf.input :logo, as: :file, input_html: { class: 'none' }, label_html: { class: 'upload-photo flex flex-column justify-content-center items-center', id: "label-logo-placeholder"},label: "#{(image_tag 'icons/picture-placeholder', id: 'picture-placeholder-icon', width: 28, height: 28)}LOGO".html_safe, wrapper_html: { class: "px-3"} %>
+        <% else %>
+          <%= cf.input :name, label: "Company name", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", value: current_user.invited_by.company.name, disabled: true }, wrapper_html: { class: "profession-edit px-3 overflow-hidden flex-grow-1 pb-3"}    %>
+
+          <%= cf.input :logo, as: :file, input_html: { class: 'none' }, label_html: { class: 'upload-photo flex flex-column justify-content-center items-center', id: "label-logo-placeholder"},label: "#{(image_tag current_user.invited_by.company.logo.service_url, id: 'picture-placeholder-icon', width: 28, height: 28, class: "bg-none")}LOGO".html_safe, wrapper_html: { class: "px-3"}, disabled: true %>
+
+        <% end  %>
+
+
       </div>
 
     <% end %>

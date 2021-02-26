@@ -31,7 +31,7 @@ const ActionButton = () => {
 	return (
 		<div className={ob ? "relative flex" : "relative"}>
     {ob && (
-      <div className="flex items-center justify-content-center">
+      <div className="flex items-center justify-content-center" id="addfree">
       <p className="textBlue textLg bold">Add freelancers </p>
         <img
           className=""

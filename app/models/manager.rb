@@ -18,7 +18,7 @@ class Manager < ApplicationRecord
 
   scope :except_me, ->(my_id) { joins(:company).where.not(id: my_id) }
 
-  after_create :connect_with_inviter
+  before_validation :connect_with_inviter
 
   def notes_of(profile)
     return Note.none unless profile
@@ -28,8 +28,8 @@ class Manager < ApplicationRecord
   private
 
   def connect_with_inviter
-    return unless user.invited_by&.profile
-    Connection.create!(profile: user.invited_by.profile, company: company)
+    return unless user.invited_by&.manager && !user.profile && !company
+    self.company = user.invited_by&.manager.company
   end
 
 end

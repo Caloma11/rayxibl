@@ -26,7 +26,7 @@ class Users::InvitationsController < Devise::InvitationsController
   def create
     authorize :invite, policy_class: CustomInvitationPolicy
     @email = params[:user][:email]
-
+    @invitee = params[:invitee]
     # Resend logic
     if params[:r] == "t"
       @user = User.find_by(email: @email)
@@ -57,9 +57,9 @@ class Users::InvitationsController < Devise::InvitationsController
       self.resource = invite_resource do |u|
         u.email = @email
         u.role = "manager"
-        u.skip_invitation = true #if Rails.env.production?
+        u.skip_invitation = true if Rails.env.production?
       end
-      SendgridMailer::CompanyInvite.new(current_user, resource).call #if Rails.env.production?
+      SendgridMailer::CompanyInvite.new(current_user, resource).call if Rails.env.production?
     else
       self.resource = invite_resource
     end

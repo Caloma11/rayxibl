@@ -1,6 +1,6 @@
 <div class="invitedWrapper flex justify-content-between items-baseline w-100">
   <p class="textBetween textGray flex-grow-1 mb-1"><%= @email || email %></p>
   <!-- <p class="textSm textGray px-2 uppercase">invited</p> -->
-  <%= link_to "resend", user_invitation_path(r: "t", user: { email: @email || email }, inviter: "manager", invitee: "freelancer"), remote: true, class: "textSm textBlue pl-2 uppercase", method: :post, data: { email: @email || email } %>
+  <%= link_to "resend", user_invitation_path(r: "t", user: { email: @email || email }, inviter: "manager", invitee: @invitee || "freelancer"), remote: true, class: "textSm textBlue pl-2 uppercase", method: :post, data: { email: @email || email } %>
 </div>
 

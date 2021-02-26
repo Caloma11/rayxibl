@@ -1,0 +1,152 @@
+[1mdiff --git a/app/controllers/pages_controller.rb b/app/controllers/pages_controller.rb[m
+[1mindex 12e4788..2cb912f 100644[m
+[1m--- a/app/controllers/pages_controller.rb[m
+[1m+++ b/app/controllers/pages_controller.rb[m
+[36m@@ -27,6 +27,6 @@[m [mclass PagesController < ApplicationController[m
+   end[m
+ [m
+   def settings[m
+[31m-    @emails = current_user&.invitations&.pluck(:email) || [][m
+[32m+[m[32m    @emails = current_user&.invitations&.where('id NOT IN (SELECT DISTINCT(user_id) FROM profiles)').where('id NOT IN (SELECT DISTINCT(user_id) FROM managers)').pluck(:email) || [][m
+   end[m
+ end[m
+[1mdiff --git a/app/controllers/users/invitations_controller.rb b/app/controllers/users/invitations_controller.rb[m
+[1mindex f63745d..b9966f3 100644[m
+[1m--- a/app/controllers/users/invitations_controller.rb[m
+[1m+++ b/app/controllers/users/invitations_controller.rb[m
+[36m@@ -26,7 +26,7 @@[m [mclass Users::InvitationsController < Devise::InvitationsController[m
+   def create[m
+     authorize :invite, policy_class: CustomInvitationPolicy[m
+     @email = params[:user][:email][m
+[31m-[m
+[32m+[m[32m    @invitee = params[:invitee][m
+     # Resend logic[m
+     if params[:r] == "t"[m
+       @user = User.find_by(email: @email)[m
+[36m@@ -57,7 +57,7 @@[m [mclass Users::InvitationsController < Devise::InvitationsController[m
+       self.resource = invite_resource do |u|[m
+         u.email = @email[m
+         u.role = "manager"[m
+[31m-        u.skip_invitation = true #if Rails.env.production?[m
+[32m+[m[32m        u.skip_invitation = true if Rails.env.production?[m
+       end[m
+       SendgridMailer::CompanyInvite.new(current_user, resource).call #if Rails.env.production?[m
+     else[m
+[1mdiff --git a/app/javascript/packs/components/ActionButton.jsx b/app/javascript/packs/components/ActionButton.jsx[m
+[1mindex 958e1a9..866cb38 100644[m
+[1m--- a/app/javascript/packs/components/ActionButton.jsx[m
+[1m+++ b/app/javascript/packs/components/ActionButton.jsx[m
+[36m@@ -31,7 +31,7 @@[m [mconst ActionButton = () => {[m
+ 	return ([m
+ 		<div className={ob ? "relative flex" : "relative"}>[m
+     {ob && ([m
+[31m-      <div className="flex items-center justify-content-center">[m
+[32m+[m[32m      <div className="flex items-center justify-content-center" id="addfree">[m
+       <p className="textBlue textLg bold">Add freelancers </p>[m
+         <img[m
+           className=""[m
+[1mdiff --git a/app/models/manager.rb b/app/models/manager.rb[m
+[1mindex 0af6d8d..bae2314 100644[m
+[1m--- a/app/models/manager.rb[m
+[1m+++ b/app/models/manager.rb[m
+[36m@@ -18,7 +18,7 @@[m [mclass Manager < ApplicationRecord[m
+ [m
+   scope :except_me, ->(my_id) { joins(:company).where.not(id: my_id) }[m
+ [m
+[31m-  after_create :connect_with_inviter[m
+[32m+[m[32m  before_validation :connect_with_inviter[m
+ [m
+   def notes_of(profile)[m
+     return Note.none unless profile[m
+[36m@@ -28,8 +28,8 @@[m [mclass Manager < ApplicationRecord[m
+   private[m
+ [m
+   def connect_with_inviter[m
+[31m-    return unless user.invited_by&.profile[m
+[31m-    Connection.create!(profile: user.invited_by.profile, company: company)[m
+[32m+[m[32m    return unless user.invited_by&.manager && !user.profile && !company[m
+[32m+[m[32m    self.company = user.invited_by&.manager.company[m
+   end[m
+ [m
+ end[m
+[1mdiff --git a/app/services/sendgrid_mailer/company_invite.rb b/app/services/sendgrid_mailer/company_invite.rb[m
+[1mindex 0356a0c..2b5a7c6 100644[m
+[1m--- a/app/services/sendgrid_mailer/company_invite.rb[m
+[1m+++ b/app/services/sendgrid_mailer/company_invite.rb[m
+[36m@@ -12,6 +12,7 @@[m [mmodule SendgridMailer[m
+       attach_personalization![m
+       sg = SendGrid::API.new(api_key: @api_key)[m
+       resp = sg.client.mail._("send").post(request_body: mail.to_json)[m
+[32m+[m[32m      binding.pry[m
+     end[m
+ [m
+     private[m
+[1mdiff --git a/app/views/custom_invitations/_invited_list_item.html.erb b/app/views/custom_invitations/_invited_list_item.html.erb[m
+[1mindex 1b937d5..21e2d5a 100644[m
+[1m--- a/app/views/custom_invitations/_invited_list_item.html.erb[m
+[1m+++ b/app/views/custom_invitations/_invited_list_item.html.erb[m
+[36m@@ -1,6 +1,6 @@[m
+ <div class="invitedWrapper flex justify-content-between items-baseline w-100">[m
+   <p class="textBetween textGray flex-grow-1 mb-1"><%= @email || email %></p>[m
+   <!-- <p class="textSm textGray px-2 uppercase">invited</p> -->[m
+[31m-  <%= link_to "resend", user_invitation_path(r: "t", user: { email: @email || email }, inviter: "manager", invitee: "freelancer"), remote: true, class: "textSm textBlue pl-2 uppercase", method: :post, data: { email: @email || email } %>[m
+[32m+[m[32m  <%= link_to "resend", user_invitation_path(r: "t", user: { email: @email || email }, inviter: "manager", invitee: @invitee || "freelancer"), remote: true, class: "textSm textBlue pl-2 uppercase", method: :post, data: { email: @email || email } %>[m
+ </div>[m
+ [m
+[1mdiff --git a/app/views/managers/new.html.erb b/app/views/managers/new.html.erb[m
+[1mindex 45276dd..62e0f4b 100644[m
+[1m--- a/app/views/managers/new.html.erb[m
+[1m+++ b/app/views/managers/new.html.erb[m
+[36m@@ -17,9 +17,19 @@[m
+ [m
+     <%= f.simple_fields_for :company_attributes do |cf|%>[m
+       <div class="company-atttributes flex justify-content-between items-end">[m
+[31m-        <%= cf.input :name, label: "Company name", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "profession-edit px-3 overflow-hidden flex-grow-1 pb-3"}    %>[m
+ [m
+[31m-        <%= cf.input :logo, as: :file, input_html: { class: 'none' }, label_html: { class: 'upload-photo flex flex-column justify-content-center items-center', id: "label-logo-placeholder"},label: "#{(image_tag 'icons/picture-placeholder', id: 'picture-placeholder-icon', width: 28, height: 28)}LOGO".html_safe, wrapper_html: { class: "px-3"} %>[m
+[32m+[m[32m        <% unless current_user.invited_by&.manager&.company %>[m
+[32m+[m[32m          <%= cf.input :name, label: "Company name", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg" }, wrapper_html: { class: "profession-edit px-3 overflow-hidden flex-grow-1 pb-3"}    %>[m
+[32m+[m
+[32m+[m[32m          <%= cf.input :logo, as: :file, input_html: { class: 'none' }, label_html: { class: 'upload-photo flex flex-column justify-content-center items-center', id: "label-logo-placeholder"},label: "#{(image_tag 'icons/picture-placeholder', id: 'picture-placeholder-icon', width: 28, height: 28)}LOGO".html_safe, wrapper_html: { class: "px-3"} %>[m
+[32m+[m[32m        <% else %>[m
+[32m+[m[32m          <%= cf.input :name, label: "Company name", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 mt-2 border-box lg", value: current_user.invited_by.company.name, disabled: true }, wrapper_html: { class: "profession-edit px-3 overflow-hidden flex-grow-1 pb-3"}    %>[m
+[32m+[m
+[32m+[m[32m          <%= cf.input :logo, as: :file, input_html: { class: 'none' }, label_html: { class: 'upload-photo flex flex-column justify-content-center items-center', id: "label-logo-placeholder"},label: "#{(image_tag current_user.invited_by.company.logo.service_url, id: 'picture-placeholder-icon', width: 28, height: 28, class: "bg-none")}LOGO".html_safe, wrapper_html: { class: "px-3"}, disabled: true %>[m
+[32m+[m
+[32m+[m[32m        <% end  %>[m
+[32m+[m
+[32m+[m
+       </div>[m
+ [m
+     <% end %>[m
+[1mdiff --git a/app/views/profiles/index.js.erb b/app/views/profiles/index.js.erb[m
+[1mindex de0b940..2cf7fd4 100644[m
+[1m--- a/app/views/profiles/index.js.erb[m
+[1m+++ b/app/views/profiles/index.js.erb[m
+[36m@@ -2,9 +2,12 @@[m
+   const profileContainer = document.querySelector(".cards");[m
+   const [network, all] = document.querySelectorAll(".switch a");[m
+   const filterContent = document.getElementById("filter-content");[m
+[31m-[m
+[32m+[m[32m  const addFreelancers = document.getElementById("addfree")[m
+   profileContainer.innerHTML = "<%= j render partial: "profiles/cards", locals: { profiles: @profiles } %>";[m
+ [m
+[32m+[m
+[32m+[m[32m  addFreelancers?.remove();[m
+[32m+[m
+   if ("<%= params[:all] %>" === "true") {[m
+     all.classList.add("btn-white");[m
+     network.classList.remove("btn-white");[m
+[1mdiff --git a/app/views/users/invitations/create.js.erb b/app/views/users/invitations/create.js.erb[m
+[1mindex 159870c..356668c 100644[m
+[1m--- a/app/views/users/invitations/create.js.erb[m
+[1m+++ b/app/views/users/invitations/create.js.erb[m
+[36m@@ -13,7 +13,7 @@[m
+   } else {[m
+ [m
+     if (email === "" ) {[m
+[31m-      emailInput.style.border = "1px solid red";[m
+[32m+[m[32m      emailInput.style.border = "1px solid #ff464b";[m
+       return[m
+     } else {[m
+       emailInput.style.border = "none";[m
