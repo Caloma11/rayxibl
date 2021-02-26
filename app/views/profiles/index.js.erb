@@ -2,6 +2,7 @@
   const profileContainer = document.querySelector(".cards");
   const [network, all] = document.querySelectorAll(".switch a");
   const filterContent = document.getElementById("filter-content");
+  const trigger = document.getElementById("filter-trigger");
 
   profileContainer.innerHTML = "<%= j render partial: "profiles/cards", locals: { profiles: @profiles } %>";
 
@@ -17,5 +18,15 @@
 
   if (!filterContent.classList.contains("none")) {
     filterContent.classList.add("none");
+  }
+
+  if (trigger && <%= @filter_count %> > 0) {
+    const template = `
+      <span class="skill-pill blue m-0 filter-count">
+        <%= @filter_count.to_s.rjust(2, "0") %>
+      </span>
+    `;
+
+    trigger.insertAdjacentHTML("beforeend", template);
   }
 })();

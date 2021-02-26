@@ -15,6 +15,13 @@ class ProfilesController < ApplicationController
     unless params[:ob].present? && params[:ob] == "t"
       @profiles = ProfileFilter.new(profile, params, current_user).call
       @jobs = current_user.manager.jobs
+      @filter_count = params[:profile]&.permit!
+                                      &.to_h
+                                      &.filter { |k, _| k != "clear" }
+                                      &.filter { |k, v| v != "" }
+                                      &.filter { |k, v| v != [""] }
+                                      &.keys
+                                      &.count
     else
       @profiles = Profile.none
       @jobs = Job.none
