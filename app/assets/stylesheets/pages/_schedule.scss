@@ -159,7 +159,7 @@ $day-border: 1px solid #e8e9eb;
 				height: $day-header-height;
 
 				.dayHeader {
-					@extend .flex, .flex-column, .items-center;
+					@extend .flex, .flex-column, .items-center, .border-box;
 
 					width: $day-width;
 					border: 1px solid transparent;
@@ -203,6 +203,8 @@ $day-border: 1px solid #e8e9eb;
 				}
 
 				.day {
+					@extend .border-box;
+
 					// Everyone gets a bottom & right border
 					border-bottom: $day-border;
 					border-right: $day-border;
