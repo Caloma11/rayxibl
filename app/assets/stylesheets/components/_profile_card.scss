@@ -73,4 +73,14 @@
 			font-size: 12px;
 		}
 	}
+
+	.bottom-bottom {
+		.message {
+			font-size: 12px !important;
+
+			img {
+				@extend .mr-1;
+			}
+		}
+	}
 }

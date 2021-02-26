@@ -34,12 +34,12 @@
 
     <div class="bottom-bottom">
       <% if conversation %>
-        <%= link_to conversation_path(conversation), class: "btn btn-white mt-3" do %>
-          <%= image_tag "icons/message.svg", alt: "message" %> Message
+        <%= link_to conversation_path(conversation), class: "btn btn-white mt-3 message" do %>
+          <%= image_tag "icons/message.svg", alt: "message", class: "vertical-align-middle", width: 12, height: 12 %> Message
         <% end %>
       <% else %>
-        <%= link_to profile_conversations_path(profile, conversation: { profile_id: profile.id }), method: :post, class: "btn btn-white mt-3" do %>
-          <%= image_tag "icons/message.svg", alt: "message" %> Message
+        <%= link_to profile_conversations_path(profile, conversation: { profile_id: profile.id }), method: :post, class: "btn btn-white mt-3 message" do %>
+          <%= image_tag "icons/message.svg", alt: "message", class: "vertical-align-middle", width: 12, height: 12 %> Message
         <% end %>
       <% end %>
       <div class="flex items-center justify-content-center mt-3">
