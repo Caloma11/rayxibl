@@ -10,6 +10,18 @@
 				height: 16px;
 			}
 		}
+
+		#filter-trigger {
+			@extend .relative;
+
+			span.filter-count {
+				font-size: 10px;
+				position: absolute;
+				top: 0;
+				box-sizing: border-box;
+				right: -8px;
+			}
+		}
 	}
 
 	.switch {
