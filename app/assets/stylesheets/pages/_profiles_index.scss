@@ -13,6 +13,8 @@
 	}
 
 	.switch {
+		position: sticky;
+		top: 0;
 		display: grid;
 		grid-template-columns: 1fr 1fr;
 		justify-content: center;
