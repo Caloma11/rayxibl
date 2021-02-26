@@ -1,10 +1,17 @@
 .notification {
-	@extend .rounded, .p-1;
+	@extend .rounded-sm;
 
+	padding: calc(#{$base-spacing - 2px}) $base-spacing;
 	background: $blue-2;
 	color: white;
 	font-size: 12px;
 	position: absolute;
 	top: -6px;
 	right: -22px;
+
+	&.no-absolute {
+		position: unset;
+		top: unset;
+		right: unset;
+	}
 }

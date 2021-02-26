@@ -21,6 +21,11 @@
 
 			border-bottom: 2px solid $blueish-gray;
 
+			.convo-snippet-content-wrapper {
+				display: grid;
+				grid-template-columns: 0.8fr 0.2fr;
+			}
+
 			.convo-avatar {
 				width: 40px;
 				height: 40px;
@@ -44,7 +49,7 @@
 			}
 
 			.time {
-				@extend .semi-bold;
+				@extend .semi-bold, .items-self-end;
 
 				font-size: 12px;
 			}
