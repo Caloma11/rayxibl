@@ -21,15 +21,15 @@ export const CalendarMonthSelection = forwardRef(
 		return (
 			<div className="month-selection">
 				<div className="flex items-center" onClick={() => setShow(true)}>
-					<h3 className="uppercase m-0">
+					<h3 className="textMd uppercase m-0">
 						{month} {year}
 					</h3>
 					<img
 						className="ml-2 vertical-align-middle"
 						src={downChevron}
 						alt="chevron"
-						width={12}
-						height={12}
+						width={10}
+						height={10}
 					/>
 				</div>
 				{show && (

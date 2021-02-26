@@ -1,7 +1,8 @@
 .profile-card {
+	@extend .px-3;
+
 	border-bottom: 1px solid #f4f6f9;
 	padding: 16px;
-	height: 320px;
 	display: flex;
 	flex-direction: column;
 
@@ -9,7 +10,6 @@
 		@extend .rounded-square;
 
 		object-fit: contain;
-		box-shadow: 0px 3px 8px -1px rgba(50, 51, 9, 0.2);
 		background-position: center;
 		background-size: cover;
 	}
@@ -25,8 +25,8 @@
 			padding: 0;
 
 			.icon {
-				height: 24px;
-				width: 24px;
+				height: 18px;
+				width: 18px;
 			}
 		}
 	}
@@ -38,6 +38,7 @@
 			.name {
 				@extend .mt-2, .mb-3;
 
+				font-weight: 600;
 				font-size: 16px;
 			}
 
@@ -45,24 +46,43 @@
 				@extend .m-0;
 
 				font-size: 14px;
+				font-weight: normal;
 				text-transform: uppercase;
+				color: $flat-dark-4;
 			}
 
 			.location {
 				@extend .m-0;
 
 				font-size: 12px;
+				color: rgba(137, 137, 148, 1);
 			}
 		}
 
 		.star {
 			height: 16px;
 			width: 16px;
+
+			&:not(:last-child) {
+				@extend .mr-1;
+			}
 		}
 
 		.rating-size {
 			margin-left: 4px;
-			color: #6c7b8a;
+			color: $light-black;
+			font-weight: 500;
+			font-size: 12px;
+		}
+	}
+
+	.bottom-bottom {
+		.message {
+			font-size: 12px !important;
+
+			img {
+				@extend .mr-1;
+			}
 		}
 	}
 }

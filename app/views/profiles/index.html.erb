@@ -1,19 +1,17 @@
 <div class="profiles-index relative">
   <section class="head">
-    <button>
-      <%= image_tag "icons/search.svg", alt: "search" %>
-    </button>
-    <p>FREELANCERS</p>
+    <div style="width: 28px;"></div>
+    <p class="textBetween">FREELANCERS</p>
     <button id="filter-trigger">
       <%= image_tag "icons/filter.svg", alt: "filter" %>
     </button>
   </section>
 
   <section class="switch flex justify-content-between p-3 my-3" style="background-color: #F9FBFE;">
-    <%= link_to profiles_path, remote: true, class: "flex items-center btn #{params[:all] ? 'btn-transparent' : 'btn-white'}" do %>
+    <%= link_to profiles_path, remote: true, class: "flex items-center btn textBetween #{params[:all] ? 'btn-transparent' : 'btn-white'}" do %>
       <%= image_tag "icons/person-check.svg", alt: "in network", class: "vertical-align-middle" %> My network
     <% end %>
-    <%= link_to profiles_path(all: true), remote: true, class: "flex items-center btn #{params[:all] ? 'btn-white' : 'btn-transparent'}" do %>
+    <%= link_to profiles_path(all: true), remote: true, class: "flex items-center textBetween btn #{params[:all] ? 'btn-white' : 'btn-transparent'}" do %>
       <%= image_tag "icons/people-dark.svg", alt: "everyone", class: "vertical-align-middle" %> Everyone
     <% end %>
   </section>

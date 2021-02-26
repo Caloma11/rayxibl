@@ -24,14 +24,15 @@
 			&:nth-child(odd) {
 				border-right: 1px solid#f4f6f9;
 			}
-
-      }
 		}
 	}
-  .add-more {
-    img {
-      margin-top: -64px;
-    }
-    grid-column-start: 1;
-    grid-column-end: 3;
+}
+.add-more {
+	margin-top: calc(#{$spacing-3} + #{$spacing-5});
+
+	img {
+		margin-top: -64px;
+	}
+	grid-column-start: 1;
+	grid-column-end: 3;
 }
