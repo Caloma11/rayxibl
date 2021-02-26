@@ -43,15 +43,20 @@
 	}
 
 	.switch {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		justify-content: center;
+
 		a.btn {
 			line-height: 22px;
 			padding: 8px 24px;
 
 			img {
-				@extend .mr-1;
+				@extend .mr-2;
+
 				object-fit: contain;
-				height: 18px;
-				width: 18px;
+				height: 16px;
+				width: 16px;
 			}
 		}
 	}
