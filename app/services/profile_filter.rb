@@ -9,19 +9,19 @@ class ProfileFilter
   end
 
   def call
-    if params[:network]
-      @profiles = current_user.manager.network.includes(:ratings, user: [:manager, avatar_attachment: :blob])
+    if params[:all]
+      @profiles = profile.includes(:connections, :ratings, user: [:manager, avatar_attachment: :blob]).where(connections: { profile_id: nil })
     elsif params[:job_id]
       @profiles = profile
-                    .joins(job_applications: :job)
-                    .includes(:ratings, user: [:manager, avatar_attachment: :blob ])
-                    .where(job_applications: { job_id: params[:job_id] })
+      .joins(job_applications: :job)
+      .includes(:ratings, user: [:manager, avatar_attachment: :blob ])
+      .where(job_applications: { job_id: params[:job_id] })
     elsif profile_params
       @profiles = profile.includes(:ratings, user: [:manager, avatar_attachment: :blob])
 
       filter_via_button
     else
-      @profiles = profile.includes(:connections, :ratings, user: [:manager, avatar_attachment: :blob]).where(connections: { profile_id: nil })
+      @profiles = current_user.manager.network.includes(:ratings, user: [:manager, avatar_attachment: :blob])
     end
   end
 

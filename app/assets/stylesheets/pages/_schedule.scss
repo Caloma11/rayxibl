@@ -1,6 +1,7 @@
 $day-width: 80px;
 $day-height: 120px;
 $day-header-height: 60px;
+$day-border: 1px solid #e8e9eb;
 
 #calendar-page {
 	#calendar-filter {
@@ -194,10 +195,24 @@ $day-header-height: 60px;
 
 				height: $day-height;
 
+				// Top border on the first row
+				&.first-row {
+					.day {
+						border-top: $day-border;
+					}
+				}
+
 				.day {
-					border: 1px solid #e8e9eb;
+					// Everyone gets a bottom & right border
+					border-bottom: $day-border;
+					border-right: $day-border;
 					width: $day-width;
 					height: $day-height;
+
+					// First columns get a left border
+					&:first-child {
+						border-left: $day-border;
+					}
 
 					&.today {
 						background: rgba(207, 239, 249, 0.2);

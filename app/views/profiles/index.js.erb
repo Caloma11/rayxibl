@@ -1,18 +1,19 @@
 (() => {
   const profileContainer = document.querySelector(".cards");
-  const switches = document.querySelectorAll(".switch a");
+  const [network, all] = document.querySelectorAll(".switch a");
   const filterContent = document.getElementById("filter-content");
 
   profileContainer.innerHTML = "<%= j render partial: "profiles/cards", locals: { profiles: @profiles } %>";
-  switches.forEach((switchLink) => {
-    if (switchLink.classList.contains("btn-transparent")) {
-      switchLink.classList.add("btn-white");
-      switchLink.classList.remove("btn-transparent");
-    } else {
-      switchLink.classList.remove("btn-white");
-      switchLink.classList.add("btn-transparent");
-    }
-  })
+
+  if ("<%= params[:all] %>" === "true") {
+    all.classList.add("btn-white");
+    network.classList.remove("btn-white");
+    all.classList.remove("btn-transparent");
+  } else {
+    network.classList.add("btn-white");
+    all.classList.remove("btn-white");
+    network.classList.remove("btn-transparent");
+  }
 
   if (!filterContent.classList.contains("none")) {
     filterContent.classList.add("none");
