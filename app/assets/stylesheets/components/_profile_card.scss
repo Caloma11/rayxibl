@@ -61,11 +61,17 @@
 		.star {
 			height: 16px;
 			width: 16px;
+
+			&:not(:last-child) {
+				@extend .mr-1;
+			}
 		}
 
 		.rating-size {
 			margin-left: 4px;
-			color: #6c7b8a;
+			color: $light-black;
+			font-weight: 500;
+			font-size: 12px;
 		}
 	}
 }
