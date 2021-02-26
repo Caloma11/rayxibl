@@ -11,7 +11,7 @@
         <div class="ml-3">
           <h5 class="noMargin"><%= other_person.display_name %></h5>
           <% if other_person.freelancer? %>
-            <p class="noMargin textLightBlack semi-bold"><%= other_person.profile.profession %>, <%= other_person.profile.location %></p>
+            <p class="detail noMargin textLightBlack semi-bold"><%= other_person.profile.profession %>, <%= other_person.profile.location %></p>
           <% end %>
           <p class="noMargin textLightBlack"><%= conversation.last_message&.content %></p>
         </div>
