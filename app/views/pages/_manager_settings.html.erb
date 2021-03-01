@@ -7,6 +7,23 @@
                 wrapper_html: { class: "flex flex-column mb-3" } %>
   <% end %>
 
+
+  <%= simple_form_for :invitation, url: user_invitation_path(inviter: "manager", invitee: "manager"), method: :post, remote: true, html: {class: "w-100 px-3 border-box simple_form invitation"} do |f| %>
+        <div class="form-group relative">
+          <%= f.input :email, placeholder: "Email address..", label: "Manage users", input_html: { class: "relative w-100", name: "user[email]"  }, wrapper_html: { class: "w-100" }, label_html: { class: "uppercase mb-1 textLightBlack textBetween"}, required: false %>
+          <%= button_tag type: "submit" do %>
+            <%= image_tag "icons/person-add.svg", alt: "alttext", id: "invitation-add-btn", width: 28, height: 28, class: "mt-1" %>
+          <% end %>
+        </div>
+      <% end %>
+
+  <div id="sentEmails" class="w-100 border-box px-3">
+    <% @emails.each do |email| %>
+    <%= render 'custom_invitations/invited_list_item', email: email %>
+    <% end %>
+  </div>
+
+
   <h1 class="textBlue">Email us at <%= mail_to "info@flxibl.io", "info@flxibl.io", class: "textBlue" %></h1>
   <%= image_tag "message-bubble.svg", alt: "bubbles" %>
   <%= link_to "Update your password", edit_password_path, class: "textBlue uppercase mb-3" %>

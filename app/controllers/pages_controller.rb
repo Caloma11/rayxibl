@@ -31,5 +31,6 @@ class PagesController < ApplicationController
   end
 
   def settings
+    @emails = current_user&.invitations&.where('id NOT IN (SELECT DISTINCT(user_id) FROM profiles)').where('id NOT IN (SELECT DISTINCT(user_id) FROM managers)').pluck(:email) || []
   end
 end

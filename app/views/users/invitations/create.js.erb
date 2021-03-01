@@ -2,6 +2,7 @@
   const email = "<%= @email %>";
   const emailInput = document.getElementById("invitation_email");
   const resent = "<%= @resent %>";
+  const sentEmails = document.getElementById("sentEmails");
 
   if (resent === "true") {
     const resentLink = document.querySelector(`.invitedWrapper a[data-email='${email}']`);
@@ -12,7 +13,7 @@
   } else {
 
     if (email === "" ) {
-      emailInput.style.border = "1px solid red";
+      emailInput.style.border = "1px solid #ff464b";
       return
     } else {
       emailInput.style.border = "none";
@@ -27,8 +28,10 @@
 
     const invitedHTML = (`<%= j render('custom_invitations/invited_list_item') %>`);
 
+    const emailsContainer = sentEmails || form;
+    const position = sentEmails ? 'afterbegin' : 'beforebegin'
 
-    form.insertAdjacentHTML('beforebegin', invitedHTML)
+    emailsContainer.insertAdjacentHTML(position, invitedHTML)
 
     form.reset();
 

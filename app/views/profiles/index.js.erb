@@ -2,9 +2,13 @@
   const profileContainer = document.querySelector(".cards");
   const [network, all] = document.querySelectorAll(".switch a");
   const filterContent = document.getElementById("filter-content");
+  const addFreelancers = document.getElementById("addfree");
   const trigger = document.getElementById("filter-trigger");
 
-  profileContainer.innerHTML = "<%= j render partial: "profiles/cards", locals: { profiles: @profiles } %>";
+  profileContainer.innerHTML = "<%= j render partial: 'profiles/cards', locals: { profiles: @profiles } %>";
+
+
+  addFreelancers?.remove();
 
   if ("<%= params[:all] %>" === "true") {
     all.classList.add("btn-white");

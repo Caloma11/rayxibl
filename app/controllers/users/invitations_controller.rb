@@ -26,7 +26,7 @@ class Users::InvitationsController < Devise::InvitationsController
   def create
     authorize :invite, policy_class: CustomInvitationPolicy
     @email = params[:user][:email]
-
+    @invitee = params[:invitee]
     # Resend logic
     if params[:r] == "t"
       @user = User.find_by(email: @email)

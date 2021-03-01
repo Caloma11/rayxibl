@@ -1,4 +1,4 @@
-class InviteUserJob < ApplicationJob
+class InviteFreelancerJob < ApplicationJob
   queue_as :default
 
   def perform(email, inviter)
