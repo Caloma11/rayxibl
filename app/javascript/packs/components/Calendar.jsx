@@ -249,6 +249,19 @@ const Calendar = () => {
 		})();
 	}, []);
 
+	useEffect(() => {
+		setTimeout(() => {
+			const todayCell = document.querySelector(".day.today");
+
+			if (todayCell && calendarContainerRef) {
+				calendarContainerRef.current.scrollTo({
+					left: todayCell.offsetLeft - 92,
+					behavior: "smooth"
+				});
+			}
+		}, 300);
+	}, []);
+
 	useDidMountEffect(() => {
 		if (!forceTodayRef.current || moveMonthRef.current) {
 			addNewMonth(true);
