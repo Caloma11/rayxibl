@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import flatpickr from "flatpickr";
 import { BookingFormTimeList } from "./BookingFormTimeList";
 
 export const BookingFormDates = ({
@@ -17,9 +18,30 @@ export const BookingFormDates = ({
 	setEndDate,
 	errors
 }) => {
+	const datesRef = useRef(null);
+
 	useEffect(() => {
 		if (chosenDate) {
 			setStartDate(chosenDate);
+		}
+
+		if (datesRef.current) {
+			flatpickr(datesRef.current, {
+				disableMobile: true,
+				mode: "range",
+				dateFormat: "d-m-Y",
+				altFormat: "d M",
+				altInput: true,
+				locale: {
+					rangeSeparator: "  -  "
+				},
+				onChange: ([flatStartDate, flatEndDate]) => {
+					if (flatStartDate && flatEndDate) {
+						setStartDate(flatStartDate);
+						setEndDate(flatEndDate);
+					}
+				}
+			});
 		}
 	}, []);
 
@@ -92,26 +114,32 @@ export const BookingFormDates = ({
 				<BookingFormTimeList />
 			</div>
 			<div className="flex">
+				<input
+					id="booking_start_date"
+					name="booking[start_date]"
+					type="hidden"
+					value={startDate}
+					onChange={e => setStartDate(e.target.value)}
+					className={Object.keys(errors).includes("end_date") ? "error" : ""}
+				/>
+				<input
+					id="booking_end_date"
+					name="booking[end_date]"
+					type="hidden"
+					value={endDate}
+					onChange={e => setEndDate(e.target.value)}
+					className={Object.keys(errors).includes("end_date") ? "error" : ""}
+				/>
 				<div className="input-wrapper mr-3">
-					<label htmlFor="booking_start_date">Starting date</label>
+					<label htmlFor="new-booking-datepickr" className="block textGray">
+						Dates
+					</label>
 					<input
-						id="booking_start_date"
-						name="booking[start_date]"
-						type="date"
-						value={startDate}
-						onChange={e => setStartDate(e.target.value)}
-						className={Object.keys(errors).includes("end_date") ? "error" : ""}
-					/>
-				</div>
-				<div className="input-wrapper">
-					<label htmlFor="booking_end_date">Ending date</label>
-					<input
-						id="booking_end_date"
-						name="booking[end_date]"
-						type="date"
-						value={endDate}
-						onChange={e => setEndDate(e.target.value)}
-						className={Object.keys(errors).includes("end_date") ? "error" : ""}
+						id="new-booking-datepickr"
+						ref={datesRef}
+						type="text"
+						name="dates"
+						className="mb-2 w-100 datepicker"
 					/>
 				</div>
 			</div>
