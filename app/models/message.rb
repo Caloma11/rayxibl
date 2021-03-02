@@ -26,6 +26,16 @@ class Message < ApplicationRecord
     end
   end
 
+  def timestamp
+    if created_at.today?
+      created_at.strftime "%I:%M %p"
+    elsif (Date.today - created_at.to_date).to_i == 1
+      "Yesterday"
+    else
+      created_at.strftime "%d/%m/%Y"
+    end
+  end
+
   def notify_new_message(current_user)
     ActionCable.server.broadcast("user_#{current_user.id}_new_messages", count: self.class.unread_user_scoped_count(current_user))
   end
