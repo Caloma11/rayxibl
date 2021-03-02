@@ -164,10 +164,18 @@ $day-border: 1px solid #e8e9eb;
 					width: $day-width;
 					border: 1px solid transparent;
 
+					&.weekend {
+						color: #898994;
+
+						span {
+							opacity: 0.8;
+						}
+					}
+
 					span {
 						font-size: 10px;
-						color: #8a9099;
 						font-weight: 500;
+						color: inherit;
 
 						&.today {
 							color: $blue-2;
@@ -179,9 +187,9 @@ $day-border: 1px solid #e8e9eb;
 
 						width: 40px;
 						border-radius: $radius-md;
-						color: #4f4f4f;
 						font-weight: 600;
 						font-size: 18px;
+						color: inherit;
 
 						&.today {
 							color: $blue-2;
@@ -222,6 +230,16 @@ $day-border: 1px solid #e8e9eb;
 
 					&.blueBorder {
 						border: 1px solid transparent;
+					}
+
+					&.weekend {
+						&.dark-border-left {
+							border-left: 2px solid #dfe5ee;
+						}
+
+						&.dark-border-right {
+							border-right: 2px solid #dfe5ee;
+						}
 					}
 
 					.event {
