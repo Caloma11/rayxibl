@@ -2,6 +2,7 @@ import consumer from "./consumer";
 
 const initNewMessageCable = () => {
 	const inboxLink = document.getElementById("inbox-user");
+	const inboxTitle = document.getElementById("inbox-title");
 
 	if (inboxLink) {
 		const id = inboxLink.dataset.currentUserId;
@@ -17,6 +18,10 @@ const initNewMessageCable = () => {
               <span class="notification">${data.count}</span>
             </div>
           `;
+
+					if (inboxTitle) {
+						inboxTitle.innerText = `INBOX (${data.count})`;
+					}
 				}
 			}
 		);
