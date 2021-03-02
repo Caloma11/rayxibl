@@ -44,7 +44,7 @@
       <p class="textGray"><%= @profile.profession %>, <%= @profile.location %></p>
     </div>
     <div class="profileHeaderRight">
-      <div class="flex items-center justify-content-center mt-3">
+      <div class="flex items-center justify-content-end mt-3">
         <div class="stars">
           <%= render partial: "ratings/content", locals: { profile: @profile } %>
         </div>
@@ -55,7 +55,7 @@
   <!-- Buttons -->
 
   <!-- Add or Book button -->
-  <div class="profileButtons flex justify-content-around p-3 pt-0">
+  <div class="profileButtons flex justify-content-around px-3">
   <% if !user_signed_in? %>
     <%= link_to new_user_session_path, class: "action-link flex items-center w-100 btn btn-primary textWhite py-3" do %>
       LOGIN TO BOOK <%= @profile.user&.first_name&.upcase %>
@@ -97,9 +97,9 @@
 
   <!-- Skills -->
   <div class="container">
-    <div class="profileSection  p-3" id="skills">
-      <h3 class="small"><small class="textGray">KEY SKILLS</small></h3>
-      <div class="flex justify-content-around skill-pills">
+    <div class="profileSection p-3" id="skills">
+      <h3 class="small mb-2 mt-0"><small class="textGray">KEY SKILLS</small></h3>
+      <div class="flex justify-content-start skill-pills mb-2">
         <% @profile.skill_list.each do |skill| %>
           <span class="skill-pill"><%= skill %></span>
         <% end %>
