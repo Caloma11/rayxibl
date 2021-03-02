@@ -259,7 +259,7 @@ const Calendar = () => {
 					behavior: "smooth"
 				});
 			}
-		}, 300);
+		}, 500);
 	}, []);
 
 	useDidMountEffect(() => {

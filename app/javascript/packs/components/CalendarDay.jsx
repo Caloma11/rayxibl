@@ -5,6 +5,9 @@ import { truncate } from "../../utils/truncate";
 const START_EVENT_CLASS_NAMES = "rounded-top-left rounded-bottom-left pl-1";
 const EVENT_CLASS_NAMES = "event";
 const END_EVENT_CLASS_NAMES = "rounded-top-right rounded-bottom-right mr-0";
+const WEEKEND_CLASS_NAMES = "weekend";
+const SATURDAY_CLASS_NAMES = "dark-border-left";
+const SUNDAY_CLASS_NAMES = "dark-border-right";
 
 const determineColor = status => {
 	if (status === "rejected") {
@@ -37,6 +40,13 @@ export const CalendarDay = ({
 }) => {
 	// Checks if today, if so, use `"today"` as a class to color the background differently
 	const todayClassName = today ? "today" : "";
+	// Checks if date is weekend, for styling
+	const isWeekend = [0, 6].includes(dayOfWeek.day());
+	const weekend = isWeekend ? WEEKEND_CLASS_NAMES : "";
+	const isSaturday = dayOfWeek.day() === 6;
+	const isSunday = dayOfWeek.day() === 0;
+	const saturday = isSaturday ? SATURDAY_CLASS_NAMES : "";
+	const sunday = isSunday ? SUNDAY_CLASS_NAMES : "";
 	/*
     Used to render the events properly (particularly if it's multi-day)
     ORDER OF ARRAY:
@@ -60,7 +70,7 @@ export const CalendarDay = ({
 
 	return (
 		<div
-			className={`day ${todayClassName}`}
+			className={`day ${todayClassName} ${weekend} ${saturday} ${sunday}`}
 			onClick={() => handleDayClick({ week, day })}
 		>
 			{eventDateBooleans.map((a, i) => {
