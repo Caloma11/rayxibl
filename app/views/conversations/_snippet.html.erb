@@ -22,7 +22,7 @@
         <% if unread_count.positive? %>
           <span class="notification no-absolute mr-3"><%= unread_count %></span>
         <% end %>
-        <span class="time"><%= conversation.last_message&.created_at&.strftime("%I:%M %p") %></span>
+        <span class="time"><%= conversation.last_message&.timestamp %></span>
       </div>
     </div>
   </div>
