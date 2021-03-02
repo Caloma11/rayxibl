@@ -39,10 +39,13 @@
 	margin-top: -32px; // Removes white space left by relative position of the div above it
 
 	.btn-lg {
+		@extend .border-box;
+
 		flex-grow: 1;
 		border-radius: 8px;
 		text-align: center;
 		font-size: 12px;
+		height: 60px;
 	}
 
 	a {
@@ -60,10 +63,7 @@
 			color: inherit;
 		}
 
-		p {
-		}
 		letter-spacing: 2px;
-
 		display: flex;
 		align-items: center;
 		justify-content: center;
