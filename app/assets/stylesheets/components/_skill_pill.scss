@@ -1,6 +1,5 @@
 .skill-pills {
-	@extend .flex;
-	@extend .p-3;
+	@extend .flex, .mb-3;
 
 	flex-wrap: wrap;
 	font-size: 12px;
