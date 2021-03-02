@@ -78,6 +78,8 @@
 
 	.bottom-bottom {
 		.message {
+			padding-top: calc(#{$base-spacing} + #{$spacing-2});
+			padding-bottom: calc(#{$base-spacing} + #{$spacing-2});
 			font-size: 12px !important;
 
 			img {
