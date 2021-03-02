@@ -119,7 +119,7 @@ $day-border: 1px solid #e8e9eb;
 						height: 60px;
 
 						span {
-							@extend .textSm, .mt-0;
+							@extend .textBetween, .mt-0;
 
 							color: $blue-2;
 						}
