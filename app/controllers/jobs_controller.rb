@@ -27,6 +27,13 @@ class JobsController < ApplicationController
       @jobs = JobFilter.new(@jobs, params[:job], current_user).call
     end
 
+    @filter_count = params[:job]&.permit!
+                                &.to_h
+                                &.filter { |k, _| k != "clear" }
+                                &.filter { |k, v| v != "" }
+                                &.filter { |k, v| v != [""] }
+                                &.keys
+                                &.count
 
     respond_to do |format|
       format.html

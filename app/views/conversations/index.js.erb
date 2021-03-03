@@ -1,10 +1,21 @@
 (() => {
   const conversationsContainer = document.getElementById("conversations");
   const filterContent = document.getElementById("filter-content");
+  const trigger = document.getElementById("filter-trigger");
 
   conversationsContainer.innerHTML = "<%= j render partial: "conversations/snippets", locals: { conversations: @conversations } %>"
 
   if (!filterContent.classList.contains("none")) {
     filterContent.classList.add("none");
+  }
+
+  if (trigger && <%= @filter_count.is_a?(Integer) ? @filter_count : 0 %> > 0) {
+    const template = `
+      <span class="skill-pill blue m-0 filter-count">
+        <%= @filter_count.to_s.rjust(2, "0") %>
+      </span>
+    `;
+
+    trigger.insertAdjacentHTML("beforeend", template);
   }
 })()
