@@ -79,6 +79,10 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 		billable
 	]);
 
+	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	}, []);
+
 	return (
 		<div id="booking-form-container">
 			<BookingFormHeader setShowForm={setShowForm} profile={profile} />
