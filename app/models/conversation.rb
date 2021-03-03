@@ -12,6 +12,18 @@ class Conversation < ApplicationRecord
     .distinct
   }
 
+  scope :by_message_count, -> {
+    sort_by { |convo| 0 <=> convo.messages.count}
+  }
+
+
+  scope :by_latest_message_with_empty, -> {
+    joins("FULL JOIN messages m on m.conversation_id = conversations.id")
+    .includes([profile: { user: :avatar_attachment }])
+    .order("conversations.updated_at DESC")
+    .distinct
+  }
+
   def other_person(user)
     @other_person ||= user == manager.user ? profile.user : manager.user
   end
