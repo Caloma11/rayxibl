@@ -1,4 +1,4 @@
-<%= link_to conversation_path(conversation), class: "no-decoration textBlack convo-snippet" do %>
+<%= link_to conversation_path(conversation), class: "no-decoration textBlack convo-snippet", data: { conversation_id: conversation.id } do %>
   <div class="my-3">
     <div class="convo-snippet-content-wrapper">
       <div class="flex">
@@ -18,7 +18,7 @@
       </div>
 
       <% unread_count ||= conversation.messages.unread.count %>
-      <div class="flex flex-column justify-content-<%= unread_count.positive? ? "between" : "end" %> items-end">
+      <div class="flex flex-column justify-content-<%= unread_count.positive? ? "between" : "end" %> items-end right">
         <% if unread_count.positive? %>
           <span class="notification no-absolute mr-3"><%= unread_count %></span>
         <% end %>
