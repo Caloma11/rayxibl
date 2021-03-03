@@ -16,6 +16,8 @@ export const BookingFormDates = ({
 	setStartDate,
 	endDate,
 	setEndDate,
+	weekends,
+	setWeekends,
 	errors
 }) => {
 	const datesRef = useRef(null);
@@ -26,6 +28,10 @@ export const BookingFormDates = ({
 		}
 
 		if (datesRef.current) {
+			const [year, month, day] = chosenDate
+				.split("-")
+				.map(ele => parseInt(ele, 10));
+			const chosenDay = new Date(year, month - 1, day);
 			flatpickr(datesRef.current, {
 				disableMobile: true,
 				mode: "range",
@@ -35,6 +41,7 @@ export const BookingFormDates = ({
 				locale: {
 					rangeSeparator: "  -  "
 				},
+				defaultDate: [chosenDay, chosenDay],
 				onChange: ([flatStartDate, flatEndDate]) => {
 					if (flatStartDate && flatEndDate) {
 						setStartDate(flatStartDate);
@@ -113,7 +120,7 @@ export const BookingFormDates = ({
 				)}
 				<BookingFormTimeList />
 			</div>
-			<div className="flex">
+			<div className="flex mb-3 items-center">
 				<input
 					id="booking_start_date"
 					name="booking[start_date]"
@@ -130,7 +137,7 @@ export const BookingFormDates = ({
 					onChange={e => setEndDate(e.target.value)}
 					className={Object.keys(errors).includes("end_date") ? "error" : ""}
 				/>
-				<div className="input-wrapper mr-3">
+				<div className="input-wrapper" style={{ marginBottom: 0 }}>
 					<label htmlFor="new-booking-datepickr" className="block textGray">
 						Dates
 					</label>
@@ -139,8 +146,21 @@ export const BookingFormDates = ({
 						ref={datesRef}
 						type="text"
 						name="dates"
-						className="mb-2 w-100 datepicker"
+						className="mb-2 w-100 datepicker border-box"
 					/>
+				</div>
+				<div className="flex items-center mt-2 ml-3">
+					<input
+						name="booking[weekends]"
+						id="booking_weekends"
+						type="checkbox"
+						value={weekends}
+						className="mr-2 big"
+						onChange={() => setWeekends(prev => !prev)}
+					/>
+					<label htmlFor="booking_weekends" className="block textGray">
+						Incl. weekends
+					</label>
 				</div>
 			</div>
 		</>
