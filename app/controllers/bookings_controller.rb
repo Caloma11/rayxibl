@@ -29,6 +29,14 @@ class BookingsController < ApplicationController
       @archived_bookings = current_user.manager.bookings.where(status: [2, 3])
     end
 
+    @filter_count = params[:booking]&.permit!
+                                      &.to_h
+                                      &.filter { |k, _| k != "clear" }
+                                      &.filter { |k, v| v != "" }
+                                      &.filter { |k, v| v != [""] }
+                                      &.keys
+                                      &.count
+
     respond_to do |format|
       format.html
       format.js

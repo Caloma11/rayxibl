@@ -12,6 +12,19 @@
 		}
 	}
 
+	.head.top {
+		@extend .flex, .items-center, .justify-content-between, .px-3;
+
+		button#filter-trigger {
+			height: 46px;
+
+			img {
+				width: 16px;
+				height: 16px;
+			}
+		}
+	}
+
 	.switch {
 		a {
 			text-transform: none;

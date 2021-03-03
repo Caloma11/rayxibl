@@ -1,10 +1,10 @@
 <div class="bookings-index bg-blueish-gray">
-  <div class="bg-white pb-2">
-    <section class="px-3 pt-4 flex justify-content-between items-center">
+  <div class="bg-white pb-2 pt-4">
+    <section class="head top">
       <%= link_to dashboard_path do %>
         <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
       <% end %>
-      <p class="textDarkGray">Bookings</p>
+      <p class="textDarkGray uppercase">Bookings</p>
       <button id="filter-trigger" type="button">
         <%= image_tag "icons/filter.svg", alt: "filter", width: 16, height: 16 %>
       </button>

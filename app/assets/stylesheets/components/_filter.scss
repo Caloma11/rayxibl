@@ -1,3 +1,15 @@
+#filter-trigger {
+	@extend .relative;
+
+	span.filter-count {
+		font-size: 10px;
+		position: absolute;
+		top: 0;
+		box-sizing: border-box;
+		right: -8px;
+	}
+}
+
 #filter-content {
 	@extend .fixed, .h-100, .w-100, .mt-0, .pb-3, .mb-3;
 
