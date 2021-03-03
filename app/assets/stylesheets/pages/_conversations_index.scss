@@ -59,7 +59,9 @@
 	.head {
 		@extend .flex, .justify-content-between, .items-center, .px-3, .pt-4;
 
-		button {
+		button#filter-trigger {
+			height: 46px;
+
 			img {
 				width: 16px;
 				height: 16px;

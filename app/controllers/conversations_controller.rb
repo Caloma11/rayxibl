@@ -33,6 +33,14 @@ class ConversationsController < ApplicationController
 
     @conversations = @conversations.by_message_count
 
+    @filter_count = params[:profile]&.permit!
+                                      &.to_h
+                                      &.filter { |k, _| k != "clear" }
+                                      &.filter { |k, v| v != "" }
+                                      &.filter { |k, v| v != [""] }
+                                      &.keys
+                                      &.count
+
     respond_to do |format|
       format.html
       format.js
