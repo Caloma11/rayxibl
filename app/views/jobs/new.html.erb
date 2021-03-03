@@ -64,13 +64,13 @@
         <!-- Dates input -->
         <div class="flex items-end justify-content-between mt-3">
 
-          <div class="dates-input-wrapper">
+          <div class="dates-input-wrapper min-w-0 ">
             <label for="dates" class="block textLightBlack">Dates</label>
-            <input id="job-datepicker" type="text" name="dates" class="mb-2 w-100 datepicker">
+            <input id="job-datepicker" type="text" name="dates" class="mb-2 w-100 datepicker border-box">
           </div>
 
           <div>
-            <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" }, label_html: { class: "block textLightBlack nowrap flex items-center" }, wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
+            <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" }, label_html: { class: "block textLightBlack nowrap flex items-center" }, wrapper_html: { class: "flex flex-row-reverse items-center mb-2 min-w-0"} %>
           </div>
         </div>
 
@@ -83,16 +83,16 @@
         <div class="flex my-3">
           <%= f.input :rate, label: "Max budget", placeholder: "$250",
                       label_html: { class: "textLightBlack" },
-                      wrapper_html: { class: "flex flex-column mr-3" },
+                      wrapper_html: { class: "flex flex-column mr-3 min-w-0 " },
                       required: false %>
           <%= f.input :price_type, collection: Job.price_types.map { |ex| [ex[0].capitalize, ex[0]] },
                       label_html: { class: "textLightBlack" },
                       wrapper_html: { class: "flex flex-column w-100" } %>
         </div>
         <%= f.input :attachments, as: :file,
-                    input_html: { multiple: true },
+                    input_html: { multiple: true, class: "border-box w-100" },
                     label_html: { class: "textLightBlack" },
-                    wrapper_html: { class: "mb-3" } %>
+                    wrapper_html: { class: "mb-3 min-w-0 " } %>
       </div>
       <div class="separator">
         <div class="mx-3">
