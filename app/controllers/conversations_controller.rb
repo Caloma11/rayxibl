@@ -38,6 +38,7 @@ class ConversationsController < ApplicationController
   end
 
   def show
+    @last_url = Rails.application.routes.recognize_path(request.referer)
     @conversation = Conversation.includes(messages: [:user, { booking: [:attachments_attachments, :profile, :manager] }]).find(params[:id])
     if params[:booking_id]
       @booking = Booking.find(params[:booking_id])
