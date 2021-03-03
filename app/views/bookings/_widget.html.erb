@@ -64,7 +64,7 @@
     <div class="box">
       <div class="flex flex-column justify-content-center items-center mr-2">
         <p class="m-0 textSm textLightBlack uppercase">Total price</p>
-        <p class="m-0 textLg bold"><%= currency_mapper(current_user.preferred_currency) %> <%= booking.converted_total_price(@rates) %></p>
+        <p class="m-0 textLg bold"><%= currency_mapper(current_user.preferred_currency) %> <%= booking.converted_total_price(ExchangeRate.new(current_user).call) %></p>
       </div>
       <div class="flex flex-column justify-content-center items-center bg-blueish-gray rounded h-100">
         <p class="uppercase m-0 bold"><%= booking.price %> <%= booking.price_type %></p>

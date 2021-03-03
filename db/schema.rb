@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_24_101055) do
+ActiveRecord::Schema.define(version: 2021_03_03_082006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -48,7 +48,7 @@ ActiveRecord::Schema.define(version: 2021_02_24_101055) do
     t.datetime "end_date"
     t.boolean "billable"
     t.integer "price"
-    t.integer "total_price"
+    t.decimal "total_price"
     t.integer "price_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

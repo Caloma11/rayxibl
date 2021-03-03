@@ -1,10 +1,11 @@
-<div class="booking-edit">
+<div class="booking-edit <%= 'manager' if current_user.manager? %>">
   <section class="mx-3 mt-4 flex justify-content-between items-center">
     <%= link_to booking_path(@booking) do %>
       <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
     <% end %>
-    <p class="textDarkGray uppercase">Edit booking</p>
+
     <% if @booking.manager == current_user.manager %>
+    <p class="textDarkGray uppercase">Edit booking</p>
       <div class="relative">
         <div class="none actions-container">
           <div class="actions flex flex-column job-show">
@@ -50,7 +51,7 @@
                     wrapper_html: { class: "flex flex-column mb-3" },
                     input_html: { rows: 4 } %>
         <div class="flex justify-content-between items-end mb-3">
-          <div class="bookingSpecific flex flex-column">
+          <div class="bookingSpecific flex flex-column <%= 'none' if @booking&.duration %>">
             <label for="job_start_date">Hours per day</label>
             <div class="flex">
               <%= f.input :start_time, as: :time, html5: true,
@@ -62,19 +63,25 @@
                           wrapper_html: { class: "flex flex-column" } %>
             </div>
           </div>
-          <div class="bookingDuration none">
+          <div class="bookingDuration <%= 'none' unless @booking&.duration %>">
             <%= f.input :duration,
                         wrapper_html: { class: "flex flex-column" } %>
           </div>
           <div class="profileTabs flex-grow-1 textSm mr-0" id="tabs">
-            <%= link_to "Duration", "#", id: "duration", class: "tab", data: { turbolinks: false } %>
-            <%= link_to "Specific", "#", id: "specific", class: "tab active", data: { turbolinks: false } %>
+            <%= link_to "Duration", "#", id: "duration", class: "tab #{'active' if @booking&.duration}", data: { turbolinks: false } %>
+            <%= link_to "Specific", "#", id: "specific", class: "tab #{'active' unless @booking&.duration}", data: { turbolinks: false } %>
           </div>
         </div>
         <div class="flex items-end justify-content-between">
           <div class="dates-input-wrapper">
             <label for="dates" class="block textGray">Dates</label>
-            <input id="edit-booking-datepicker" type="text" name="dates" class="mb-2 w-100 datepicker">
+
+            <% if current_user.freelancer? %>
+            <input id="" value='<%= "#{@booking&.start_date&.strftime("%b %d")} - #{@booking&.end_date&.strftime("%b %d")}" %>' type="text" name="dates" class="mb-2 w-100">
+            <% else %>
+              <input id="edit-booking-datepicker" value='<%= "#{@booking&.start_date&.strftime("%b %d")} - #{@booking&.end_date&.strftime("%b %d")}" %>' type="text" name="dates" class="mb-2 w-100 datepicker">
+
+            <% end %>
 
             <%= f.input :start_date, as: :hidden,
                         wrapper_html: { class: "flex flex-column mb-3 mr-3 none" } %>
@@ -86,17 +93,19 @@
             <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" }, label_html: { class: "block textGray nowrap flex items-center" }, wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
           </div>
         </div>
-        <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true]], input_html:{ class: "mb-2", checked: false }, wrapper_html: { class: "flex flex-row-reverse justify-content-end my-2" }, include_hidden: false %>
-        <div id="priceSection" class="flex justify-content-between items-center none">
+        <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true]], input_html:{ class: "mb-2" }, wrapper_html: { class: "flex flex-row-reverse justify-content-end my-2" }, include_hidden: false %>
+        <div id="priceSection" class="flex justify-content-between items-center flex-wrap">
           <%= f.input :price, label: false, placeholder: "Ex: $250", label_html: { class: "block textGray" }, input_html: { class: "mb-2" }, wrapper_html: { class: "mr-2 flex-shrink-2" } %>
           <%= f.input :price_type, label: false, label_html: { class: "block textGray" }, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-3" }  %>
-          <p class="textGray my-0" id="totalPrice"> Total: $1,000</p>
+          <p class="textGray my-0" id="totalPrice" data-preferred-currency="<%= currency_mapper(current_user.preferred_currency) %>" > Total: <%= currency_mapper(current_user.preferred_currency) %> <%= @booking.converted_total_price(ExchangeRate.new(current_user).call) %> </p>
         </div>
         <%= f.input :attachments, label_html: { class: "choose-file textGray" }, as: :file, input_html: { multiple: true, class: "none" }, label: "#{image_tag("icons/paperclip", alt: "paperclip")} ADD ATTACHMENT".html_safe %>
       </div>
       <div class="separator"></div>
-      <div class="mx-3">
+      <div class="mx-3  pb-4">
+        <% if current_user.manager? %>
         <button class="btn btn-primary w-100 py-3" type="submit"><%= image_tag "icons/paperplane.svg", alt: "update", width: 24, height: 24, class: "vertical-align-middle" %> Update request</button>
+        <% end %>
       </div>
     <% end %>
     <% if current_user.freelancer? %>
