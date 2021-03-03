@@ -235,6 +235,8 @@ $day-border: 1px solid #e8e9eb;
 					}
 
 					&.weekend {
+						background: rgba(235, 240, 247, 0.2);
+
 						&.dark-border-left {
 							border-left: 2px solid #dfe5ee;
 						}
