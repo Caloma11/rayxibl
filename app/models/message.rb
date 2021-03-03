@@ -37,7 +37,12 @@ class Message < ApplicationRecord
   end
 
   def notify_new_message(current_user)
-    ActionCable.server.broadcast("user_#{current_user.id}_new_messages", count: self.class.unread_user_scoped_count(current_user))
+    body = {
+      new_text_content: content,
+      count: self.class.unread_user_scoped_count(current_user),
+      conversation_id: conversation.id
+    }
+    ActionCable.server.broadcast("user_#{current_user.id}_new_messages", body)
   end
 
   private

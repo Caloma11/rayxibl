@@ -1,7 +1,7 @@
 <div class="convo-index">
   <section class="head">
     <div style="width: 28px;"></div>
-    <p class="semi-bold textBetween">INBOX (<%= @unread_messages_count %>)</p>
+    <p class="semi-bold textBetween" id="inbox-title">INBOX (<%= @unread_messages_count %>)</p>
     <button id="filter-trigger" type="button"><%= image_tag "icons/filter.svg", alt: "filter" %></button>
 
     <div id="filter-content" class="none">
