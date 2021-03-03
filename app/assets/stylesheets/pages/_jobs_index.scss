@@ -1,4 +1,8 @@
 .jobs-index {
+	#filter-trigger {
+		height: 46px;
+	}
+
 	#filter-content {
 		.head {
 			@extend .flex, .justify-content-between, .px-3, .mt-3;
