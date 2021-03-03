@@ -13,6 +13,7 @@ select {
 	border-radius: $radius-md;
 	padding: 8px;
 	color: #121217;
+  box-sizing: border-box;
 
 	&:focus {
 		outline: $blue auto 1px;
