@@ -33,7 +33,7 @@ class ManagersController < ApplicationController
       current_user.update(user_params[:user_attributes]) if user_params.present?
       @manager.company.update(company_params[:company_attributes]) if company_params.present?
       flash[:notice] = "Manager profile succesfully updated."
-      redirect_to edit_manager_path(@manager)
+      redirect_to dashboard_path
     else
       render 'edit'
     end

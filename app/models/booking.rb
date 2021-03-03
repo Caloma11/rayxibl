@@ -30,6 +30,7 @@ class Booking < ApplicationRecord
   end
 
   def converted_total_price(rate)
+    return unless rate && total_price
     (rate * total_price).to_i
   end
 
