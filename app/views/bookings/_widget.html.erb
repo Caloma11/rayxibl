@@ -8,7 +8,7 @@
         <%= image_tag manager_avatar(booking.manager), alt: "manager avatar", class: "avatar avatar-circle small" %>
       <% end %>
       <div class="relative">
-        <div class="none actions-container">
+        <div class="none actions-container" data-id="<%= booking.id %>">
           <div class="actions flex flex-column job-show">
             <% if policy(booking).edit? %>
               <%= link_to edit_booking_path(booking), class: "action-link" do %>
@@ -35,7 +35,7 @@
           </div>
         </div>
 
-        <button type="button" class="trigger"><%= image_tag "icons/more.svg", alt: "menu", width: 16, height: 16 %></button>
+        <button type="button" class="trigger" data-id="<%= booking.id %>"><%= image_tag "icons/more.svg", alt: "menu", width: 16, height: 16 %></button>
       </div>
     </div>
   </div>
