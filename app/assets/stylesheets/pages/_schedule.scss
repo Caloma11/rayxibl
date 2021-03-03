@@ -49,7 +49,7 @@ $day-border: 1px solid #e8e9eb;
 
 				position: absolute;
 				bottom: -100px;
-				left: 50px;
+				left: calc((100vw - 320px) / 2);
 				z-index: 1;
 				background: white;
 			}
