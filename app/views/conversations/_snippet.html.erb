@@ -18,11 +18,13 @@
       </div>
 
       <% unread_count ||= conversation.messages.unread.count %>
-      <div class="flex flex-column justify-content-between items-end right <%= unread_count.positive? ? "bottom" : "" %>">
+      <div class="flex flex-column justify-content-<%= unread_count.positive? ? "between" : "end" %> items-end">
         <% if unread_count.positive? %>
           <span class="notification no-absolute mr-3"><%= unread_count %></span>
         <% end %>
-        <span class="time"><%= conversation.last_message&.timestamp %></span>
+        <% unless conversation.last_message.booking %>
+          <span class="time"><%= conversation.last_message&.timestamp %></span>
+        <% end %>
       </div>
     </div>
   </div>
