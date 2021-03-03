@@ -8,7 +8,7 @@ class ConversationsController < ApplicationController
       @jobs = current_user.manager.jobs
 
       if params[:network]
-        @conversations = @conversations.where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message
+        @conversations = @conversations.where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message_with_empty
       else
         @conversations = @conversations.by_latest_message
       end
@@ -17,7 +17,7 @@ class ConversationsController < ApplicationController
       @jobs = current_user.profile.jobs
 
       if params[:network]
-        @conversations = @conversations.where(manager_id: current_user.profile.managers.pluck(:id)).by_latest_message
+        @conversations = @conversations.where(manager_id: current_user.profile.managers.pluck(:id)).by_latest_message_with_empty
       else
         @conversations = @conversations.by_latest_message
       end
@@ -30,6 +30,8 @@ class ConversationsController < ApplicationController
     end
 
     @unread_messages_count = @conversations&.map { |convo| convo.messages.unread.count }&.sum
+
+    @conversations = @conversations.by_message_count
 
     respond_to do |format|
       format.html

@@ -22,7 +22,7 @@
         <% if unread_count.positive? %>
           <span class="notification no-absolute mr-3"><%= unread_count %></span>
         <% end %>
-        <% unless conversation.last_message.booking %>
+        <% if conversation&.last_message %>
           <span class="time"><%= conversation.last_message&.timestamp %></span>
         <% end %>
       </div>
