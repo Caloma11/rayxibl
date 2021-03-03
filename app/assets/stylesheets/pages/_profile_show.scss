@@ -17,7 +17,8 @@
 	@extend .flex;
 	@extend .justify-content-between;
 	@extend .items-center;
-	@extend .p-3;
+	@extend .px-3, .pt-3;
+
 	position: relative;
 	width: 100%;
 	background-color: white;
@@ -33,10 +34,21 @@
 		margin-left: 4px;
 		color: #6c7b8a;
 	}
+
+	.profileHeaderRight {
+		.stars {
+			.star {
+				width: 18px;
+				height: 18px;
+			}
+		}
+	}
 }
 
 .profileButtons {
 	margin-top: -32px; // Removes white space left by relative position of the div above it
+	padding-top: 0 !important;
+	padding-bottom: 0 !important;
 
 	.btn-lg {
 		@extend .border-box;

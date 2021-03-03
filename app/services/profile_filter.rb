@@ -20,6 +20,9 @@ class ProfileFilter
       @profiles = profile.includes(:ratings, user: [:manager, avatar_attachment: :blob])
 
       filter_via_button
+    elsif params[:ids]
+      ids = params[:ids].map(&:to_i)
+      @profiles = profile.where(id: ids)
     else
       @profiles = current_user.manager.network.includes(:ratings, user: [:manager, avatar_attachment: :blob])
     end

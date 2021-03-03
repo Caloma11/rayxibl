@@ -22,6 +22,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 	const [totalPrice, setTotalPrice] = useState(null);
 	const [attachments, setAttachments] = useState([]);
 	const [errors, setErrors] = useState({});
+	const [weekends, setWeekends] = useState(false);
 	const formRef = useRef(null);
 
 	const { profile, date } = formDetails;
@@ -78,6 +79,10 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 		billable
 	]);
 
+	useEffect(() => {
+		window.scrollTo({ top: 0, behavior: "smooth" });
+	}, []);
+
 	return (
 		<div id="booking-form-container">
 			<BookingFormHeader setShowForm={setShowForm} profile={profile} />
@@ -120,6 +125,8 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 						endDate={endDate}
 						setEndDate={setEndDate}
 						errors={errors}
+						weekends={weekends}
+						setWeekends={setWeekends}
 					/>
 					<BookingFormPricing
 						billable={billable}

@@ -1,4 +1,5 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
+import flatpickr from "flatpickr";
 import { BookingFormTimeList } from "./BookingFormTimeList";
 
 export const BookingFormDates = ({
@@ -15,11 +16,39 @@ export const BookingFormDates = ({
 	setStartDate,
 	endDate,
 	setEndDate,
+	weekends,
+	setWeekends,
 	errors
 }) => {
+	const datesRef = useRef(null);
+
 	useEffect(() => {
 		if (chosenDate) {
 			setStartDate(chosenDate);
+		}
+
+		if (datesRef.current) {
+			const [year, month, day] = chosenDate
+				.split("-")
+				.map(ele => parseInt(ele, 10));
+			const chosenDay = new Date(year, month - 1, day);
+			flatpickr(datesRef.current, {
+				disableMobile: true,
+				mode: "range",
+				dateFormat: "d-m-Y",
+				altFormat: "d M",
+				altInput: true,
+				locale: {
+					rangeSeparator: "  -  "
+				},
+				defaultDate: [chosenDay, chosenDay],
+				onChange: ([flatStartDate, flatEndDate]) => {
+					if (flatStartDate && flatEndDate) {
+						setStartDate(flatStartDate);
+						setEndDate(flatEndDate);
+					}
+				}
+			});
 		}
 	}, []);
 
@@ -91,28 +120,47 @@ export const BookingFormDates = ({
 				)}
 				<BookingFormTimeList />
 			</div>
-			<div className="flex">
-				<div className="input-wrapper mr-3">
-					<label htmlFor="booking_start_date">Starting date</label>
+			<div className="flex mb-3 items-center">
+				<input
+					id="booking_start_date"
+					name="booking[start_date]"
+					type="hidden"
+					value={startDate}
+					onChange={e => setStartDate(e.target.value)}
+					className={Object.keys(errors).includes("end_date") ? "error" : ""}
+				/>
+				<input
+					id="booking_end_date"
+					name="booking[end_date]"
+					type="hidden"
+					value={endDate}
+					onChange={e => setEndDate(e.target.value)}
+					className={Object.keys(errors).includes("end_date") ? "error" : ""}
+				/>
+				<div className="input-wrapper" style={{ marginBottom: 0 }}>
+					<label htmlFor="new-booking-datepickr" className="block textGray">
+						Dates
+					</label>
 					<input
-						id="booking_start_date"
-						name="booking[start_date]"
-						type="date"
-						value={startDate}
-						onChange={e => setStartDate(e.target.value)}
-						className={Object.keys(errors).includes("end_date") ? "error" : ""}
+						id="new-booking-datepickr"
+						ref={datesRef}
+						type="text"
+						name="dates"
+						className="mb-2 w-100 datepicker border-box"
 					/>
 				</div>
-				<div className="input-wrapper">
-					<label htmlFor="booking_end_date">Ending date</label>
+				<div className="flex items-center mt-2 ml-3">
 					<input
-						id="booking_end_date"
-						name="booking[end_date]"
-						type="date"
-						value={endDate}
-						onChange={e => setEndDate(e.target.value)}
-						className={Object.keys(errors).includes("end_date") ? "error" : ""}
+						name="booking[weekends]"
+						id="booking_weekends"
+						type="checkbox"
+						value={weekends}
+						className="mr-2 big"
+						onChange={() => setWeekends(prev => !prev)}
 					/>
+					<label htmlFor="booking_weekends" className="block textGray">
+						Incl. weekends
+					</label>
 				</div>
 			</div>
 		</>

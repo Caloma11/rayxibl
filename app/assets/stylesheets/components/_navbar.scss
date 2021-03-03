@@ -12,6 +12,8 @@ nav.navbar {
 	padding-right: 40px;
 
 	a.nav-link {
+		@extend .relative;
+
 		img.nav-icon {
 			height: 20px;
 			width: 20px;

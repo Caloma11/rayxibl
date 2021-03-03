@@ -1,7 +1,7 @@
 <div class="job-show">
   <div class="mx-3 pt-3 mt-3 flex justify-content-between items-start">
     <div class="flex items-start w-100">
-      <%= link_to :back do %>
+      <%= link_to jobs_path do %>
         <%= image_tag "icons/left-arrow.svg", alt: "back link", width: 24, height: 24, class: "mr-2 textSm" %>
       <% end %>
       <div class="flex items-start ml-3 flex-grow-1">
@@ -113,7 +113,7 @@
     </p>
     <div class="skills mt-4">
       <p class="subtitle mb-0">Key Skills</p>
-      <div class="skill-pills px-0">
+      <div class="skill-pills mb-3 px-0">
         <% @job.skill_list.each do |skill| %>
           <div class="skill-pill"><%= skill %></div>
         <% end %>

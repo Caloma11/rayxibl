@@ -28,6 +28,8 @@
 	}
 }
 .add-more {
+	@extend .mr-3;
+
 	margin-top: calc(#{$spacing-3} + #{$spacing-5});
 
 	img {

@@ -14,6 +14,10 @@ input[type="submit"] {
 		border-radius: $radius-md;
 		color: $dark-gray;
 		padding: 8px 16px;
+
+    &:active {
+      box-shadow:3px 6px 8px rgba(50, 51, 94, .5);
+    }
 	}
 
 	&.btn-centered {

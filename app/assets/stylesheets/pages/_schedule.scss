@@ -117,6 +117,7 @@ $day-border: 1px solid #e8e9eb;
 						@extend .justify-content-start;
 
 						height: 60px;
+						background-color: white;
 
 						span {
 							@extend .textBetween, .mt-0;
@@ -166,6 +167,7 @@ $day-border: 1px solid #e8e9eb;
 
 					&.weekend {
 						color: #898994;
+						z-index: -1;
 
 						span {
 							opacity: 0.8;

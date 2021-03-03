@@ -10,6 +10,8 @@
 	right: -22px;
 
 	&.no-absolute {
+		@extend .mb-2;
+
 		position: unset;
 		top: unset;
 		right: unset;
