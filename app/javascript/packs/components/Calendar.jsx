@@ -319,7 +319,12 @@ const Calendar = () => {
 			>
 				<CalendarProfiles profiles={profiles} moveToToday={moveToToday} />
 				<div className="allDays">
-					<CalendarDayHeaders data={data} weekOffset={weekOffset} />
+					<CalendarDayHeaders
+						data={data}
+						weekOffset={weekOffset}
+						setMonth={setMonth}
+						ref={{ moveMonthRef, forceTodayRef }}
+					/>
 					{profiles.length > 0 ? (
 						profiles.map((profile, i) => {
 							return (
