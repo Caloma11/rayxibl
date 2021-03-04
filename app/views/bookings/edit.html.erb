@@ -68,8 +68,8 @@
                         wrapper_html: { class: "flex flex-column" } %>
           </div>
           <div class="profileTabs flex-grow-1 textSm mr-0" id="tabs">
-            <%= link_to "Duration", "#", id: "duration", class: "tab #{'active' if @booking&.duration}", data: { turbolinks: false } %>
-            <%= link_to "Specific", "#", id: "specific", class: "tab #{'active' unless @booking&.duration}", data: { turbolinks: false } %>
+            <%= link_to "Duration", "#", id: ("duration" if current_user.manager?), class: "tab #{'active' if @booking&.duration}", data: { turbolinks: false } %>
+            <%= link_to "Specific", "#", id: ("specific" if current_user.manager?), class: "tab #{'active' unless @booking&.duration}", data: { turbolinks: false } %>
           </div>
         </div>
         <div class="flex items-end justify-content-between">
@@ -99,7 +99,10 @@
           <%= f.input :price_type, label: false, label_html: { class: "block textGray" }, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-3" }  %>
           <p class="textGray my-0" id="totalPrice" data-preferred-currency="<%= currency_mapper(current_user.preferred_currency) %>" > Total: <%= currency_mapper(current_user.preferred_currency) %> <%= @booking.converted_total_price(ExchangeRate.new(current_user).call) %> </p>
         </div>
-        <%= f.input :attachments, label_html: { class: "choose-file textGray" }, as: :file, input_html: { multiple: true, class: "none" }, label: "#{image_tag("icons/paperclip", alt: "paperclip")} ADD ATTACHMENT".html_safe %>
+        <% if current_user.manager? %>
+
+          <%= f.input :attachments, label_html: { class: "choose-file textGray" }, as: :file, input_html: { multiple: true, class: "none" }, label: "#{image_tag("icons/paperclip", alt: "paperclip")} ADD ATTACHMENT".html_safe %>
+        <% end %>
       </div>
       <div class="separator"></div>
       <div class="mx-3  pb-4">
