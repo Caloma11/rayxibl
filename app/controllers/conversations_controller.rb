@@ -48,14 +48,34 @@ class ConversationsController < ApplicationController
   end
 
   def show
-    @conversation = Conversation.includes(messages: [:user, { booking: [:attachments_attachments, :profile, :manager] }]).find(params[:id])
+    @conversation = Conversation.find(params[:id])
+    authorize @conversation
+    @other_person = @conversation.other_person(current_user)
+
+    timestamp = params.try(:[], :conversation).try(:[], :timestamp)
+    @messages = @conversation.messages.includes(:user, { booking: [:attachments_attachments, :profile, :manager] }).order(created_at: :DESC)
+
+    if timestamp
+      @messages = @messages.where("created_at < ?", timestamp.to_date).limit(10)
+    else
+      @messages = @messages.limit(10)
+    end
+
+    unless timestamp
+      @conversation.messages.where.not(user: current_user).unread.update_all(read: true)
+    end
+
+    @messages = @messages.reverse
+    @message = Message.new
+
     if params[:booking_id]
       @booking = Booking.find(params[:booking_id])
     end
-    authorize @conversation
-    @other_person = @conversation.other_person(current_user)
-    @conversation.messages.where.not(user: current_user).unread.update_all(read: true)
-    @message = Message.new
+
+    respond_to do |format|
+      format.html
+      format.js
+    end
   end
 
   def create
