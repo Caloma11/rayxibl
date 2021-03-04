@@ -1,26 +1,32 @@
 {
-  "name": "flxibl",
-  "private": true,
-  "dependencies": {
-    "@babel/preset-react": "^7.12.10",
-    "@rails/actioncable": "^6.0.0",
-    "@rails/activestorage": "^6.0.0",
-    "@rails/ujs": "^6.0.0",
-    "@rails/webpacker": "4.3.0",
-    "axios": "^0.21.1",
-    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
-    "flatpickr": "^4.6.9",
-    "moment": "^2.29.1",
-    "moment-range": "^4.0.2",
-    "prop-types": "^15.7.2",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-share": "^4.3.1",
-    "tom-select": "^1.1.1",
-    "turbolinks": "^5.2.0"
-  },
-  "version": "0.1.0",
-  "devDependencies": {
-    "webpack-dev-server": "^3.11.2"
-  }
+	"name": "flxibl",
+	"private": true,
+	"dependencies": {
+		"@babel/preset-react": "^7.12.10",
+		"@rails/actioncable": "^6.0.0",
+		"@rails/activestorage": "^6.0.0",
+		"@rails/ujs": "^6.0.0",
+		"@rails/webpacker": "4.3.0",
+		"axios": "^0.21.1",
+		"babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+		"flatpickr": "^4.6.9",
+		"moment": "^2.29.1",
+		"moment-range": "^4.0.2",
+		"prop-types": "^15.7.2",
+		"react": "^17.0.1",
+		"react-dom": "^17.0.1",
+		"react-share": "^4.3.1",
+		"tom-select": "^1.1.1",
+		"turbolinks": "^5.2.0"
+	},
+	"version": "0.1.0",
+	"devDependencies": {
+		"webpack-bundle-analyzer": "^4.4.0",
+		"webpack-dev-server": "^3.11.2"
+	},
+	"scripts": {
+		"webpack:profile": "webpack --config config/webpack/production.js --profile --json > stats.json",
+		"webpack:open": "webpack-bundle-analyzer stats.json",
+		"webpack:analyze": "yarn run webpack:profile && yarn run webpack:open"
+	}
 }
