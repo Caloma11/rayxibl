@@ -1,0 +1,15 @@
+(() => {
+  const messagesContainer = document.getElementById("messages");
+
+  if (messagesContainer) {
+    const timestampNode = document.getElementById("conversation_timestamp");
+    const template = "<%= j render partial: "messages/messages", locals: { conversation: @conversation, rate: @rate, messages: @messages } %>";
+
+    const firstMessage = messagesContainer.querySelector(".message-container")
+    const firstMessagePos = firstMessage.offsetTop;
+    timestampNode.value = "<%= @messages.first.created_at %>";
+
+    messagesContainer.insertAdjacentHTML("afterbegin", template);
+    window.scrollTo({ top: firstMessage.offsetTop - firstMessagePos })
+  };
+})();
