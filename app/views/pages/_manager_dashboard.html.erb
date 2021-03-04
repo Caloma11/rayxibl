@@ -1,7 +1,7 @@
 <div id="manager">
-  <% if @today_booked_profiles.count.positive? %>
+  <% if @today_booked_profiles.size.positive? %>
     <%= link_to profiles_path(ids: @today_booked_profiles.pluck(:id)), class: "bookings-count" do %>
-      You have <%= pluralize @today_booked_profiles.count, "freelancer" %> booked today
+      You have <%= pluralize @today_booked_profiles.size, "freelancer" %> booked today
     <% end %>
   <% end %>
 
@@ -9,12 +9,12 @@
     <% if @bookings_count.positive? %>
       <h3 class="mt-0 mb-1 textMd">Bookings</h3>
     <% else %>
-      <h3 class="mt-0 mb-4 textMd textBlue">
+      <h3 class="mt-0 mb-4 textMd">
         Your current bookings will appear here
       </h3>
     <% end %>
-    <% if @booked_profiles.count.positive? %>
-      <p class="subtitle m-0 textSm"><%= pluralize @booked_profiles.count, "booking" %> across <%= pluralize @booked_profiles.distinct.count("profiles.id"), "freelancer" %></p>
+    <% if @today_booked_profiles.size.positive? %>
+      <p class="subtitle m-0 textSm"><%= pluralize @today_booked_profiles.size, "booking" %> across <%= pluralize @today_booked_profiles.distinct.count("profiles.id"), "freelancer" %></p>
     <% end %>
 
     <% if @bookings_count.positive? %>
@@ -25,7 +25,7 @@
           </div>
           <div class="ml-2">
             <h4 class="m-0 textBetween">Accepted</h4>
-            <p class="textSm m-0"><%= pluralize @bookings.accepted.count, "booking" %></p>
+            <p class="textSm m-0"><%= pluralize @bookings.accepted.size, "booking" %></p>
           </div>
         </div>
         <%= link_to bookings_path(status: 1) do %>
@@ -40,7 +40,7 @@
           </div>
           <div class="ml-2">
             <h4 class="m-0 textBetween">Pending</h4>
-            <p class="textSm m-0"><%= pluralize @bookings.pending.count, "booking" %></p>
+            <p class="textSm m-0"><%= pluralize @bookings.pending.size, "booking" %></p>
           </div>
         </div>
         <%= link_to bookings_path(status: 0) do %>
@@ -55,7 +55,7 @@
           </div>
           <div class="ml-2">
             <h4 class="m-0 textBetween">Cancelled / Declined</h4>
-            <p class="textSm m-0"><%= pluralize @bookings.rejected.count, "booking" %></p>
+            <p class="textSm m-0"><%= pluralize @bookings.rejected.size, "booking" %></p>
           </div>
         </div>
         <%= link_to bookings_path(status: 3) do %>
@@ -63,7 +63,7 @@
         <% end %>
       </div>
 
-      <%= link_to "View all (#{@bookings.count})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
+      <%= link_to "View all (#{@bookings.size})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
     <% else %>
       <%= link_to "Make a booking", "#", class: "btn btn-primary text-center mb-2" %>
     <% end %>
@@ -73,11 +73,11 @@
     <% if @jobs_count.positive? %>
       <h3 class="mt-0 mb-1 textMd">Job posts</h3>
     <% else %>
-      <h3 class="mt-0 mb-4 textMd textBlue">Your current job posts will appear here</h3>
+      <h3 class="mt-0 mb-4 textMd">Your current job posts will appear here</h3>
     <% end %>
 
     <% if @jobs_count.positive? %>
-      <p class="subtitle m-0 textSm"><%= pluralize @company.job_applications.count, "applicant" %> for <%= pluralize @jobs_count, "job post" %></p>
+      <p class="subtitle m-0 textSm"><%= pluralize @company.job_applications.size, "applicant" %> for <%= pluralize @jobs_count, "job post" %></p>
     <% end %>
 
     <% @jobs.each do |job| %>
@@ -90,7 +90,7 @@
           <% end %>
           <div class="ml-2">
             <h4 class="m-0"><%= job.profession %></h4>
-            <p class="subtitle m-0"><%= pluralize(job.job_applications.count, "applicant") %></p>
+            <p class="subtitle m-0"><%= pluralize(job.job_applications.size, "applicant") %></p>
           </div>
         </div>
       <% end %>

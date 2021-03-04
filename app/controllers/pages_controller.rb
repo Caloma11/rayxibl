@@ -9,8 +9,7 @@ class PagesController < ApplicationController
     if current_user.manager?
       @manager = current_user.manager
       @network = @manager.network
-      @booked_profiles = @manager.booked_profiles
-      @today_booked_profiles = @booked_profiles.has_bookings_today
+      @today_booked_profiles = @manager.booked_profiles.has_bookings_today
       @bookings = @manager.bookings.today_and_after
       @company = @manager.company
       @jobs = @company.jobs.includes(:manager).limit(3).active
