@@ -17,7 +17,7 @@
         </div>
       </div>
 
-      <% unread_count ||= conversation.messages.unread.count %>
+      <% unread_count ||= conversation.messages.unread_user_scoped_count(current_user) %>
       <div class="flex flex-column justify-content-<%= unread_count.positive? ? "between" : "end" %> items-end right">
         <% if unread_count.positive? %>
           <span class="notification no-absolute mr-3"><%= unread_count %></span>
