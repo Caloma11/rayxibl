@@ -2,10 +2,19 @@ class JobsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
 
   def index
-    if current_user.manager?
-      @jobs = policy_scope(Job).includes(manager: { user: { avatar_attachment: :blob } }).active
+
+
+    if params[:applied] == "true"
+      skip_policy_scope
+      @jobs = Job.joins(:job_applications).where("job_applications.profile_id = :id", id: current_user.profile.id)
     else
-      @jobs = policy_scope(Job).includes(:manager).active
+      @jobs = policy_scope(Job)
+    end
+
+    if current_user.manager?
+      @jobs = @jobs.includes(manager: { user: { avatar_attachment: :blob } }).active
+    else
+      @jobs = @jobs.includes(:manager).active
     end
 
 
@@ -19,9 +28,6 @@ class JobsController < ApplicationController
       @jobs = @jobs.archived
     end
 
-    if params[:applied] == "true"
-      @jobs = @jobs.joins(:job_applications).where("job_applications.profile_id = :id", id: current_user.profile.id)
-    end
 
     if params[:job]
       @jobs = JobFilter.new(@jobs, params[:job], current_user).call

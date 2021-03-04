@@ -24,6 +24,15 @@
 			&:nth-child(odd) {
 				border-right: 1px solid#f4f6f9;
 			}
+
+      .actions {
+        width: 120px;
+      }
+
+      .action-link {
+        @extend .textSm;
+      }
+
 		}
 	}
 }

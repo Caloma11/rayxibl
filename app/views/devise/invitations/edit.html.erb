@@ -9,12 +9,14 @@
 
     <div class="flex justify-content-center">
       <div class="field mr-3">
-        <%= f.radio_button :role, "manager", required: true, disabled: true %>
+        <%= f.radio_button :role, "manager", required: true, disabled: (resource.manager? || resource.freelancer?)
+         %>
         <%= f.label :role, "I'm A Manager" %>
       </div>
 
       <div class="field">
-        <%= f.radio_button :role, "freelancer", required: true, disabled: true %>
+        <%= f.radio_button :role, "freelancer", required: true, disabled: (resource.manager? || resource.freelancer?)
+         %>
         <%= f.label :role, "I'm A Freelancer" %>
       </div>
     </div>
