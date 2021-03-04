@@ -1,3 +1,10 @@
-const { environment } = require('@rails/webpacker')
+const { environment } = require("@rails/webpacker");
 
-module.exports = environment
+const webpack = require("webpack");
+
+environment.plugins.prepend(
+	"MomentIgnoreLocales",
+	new webpack.IgnorePlugin(/^\.\/locale$/, /moment$/)
+);
+
+module.exports = environment;
