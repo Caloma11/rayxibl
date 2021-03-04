@@ -61,12 +61,11 @@ class ConversationsController < ApplicationController
       @messages = @messages.limit(10)
     end
 
-    @messages = @messages.reverse
-
     unless timestamp
       @conversation.messages.where.not(user: current_user).unread.update_all(read: true)
     end
 
+    @messages = @messages.reverse
     @message = Message.new
 
     if params[:booking_id]
