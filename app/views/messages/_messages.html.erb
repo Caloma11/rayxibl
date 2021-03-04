@@ -1,3 +1,5 @@
+<p class="text-center my-3 none" id="fetching-indicator">Fetching messages</p>
+
 <% messages.each do |message| %>
   <% if message.booking %>
     <%= render partial: "bookings/widget", locals: { booking: message.booking, conversation: conversation, rate: rate } %>
