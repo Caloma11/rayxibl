@@ -11,7 +11,7 @@ class PagesController < ApplicationController
       @network = @manager.network
       @booked_profiles = @manager.booked_profiles
       @today_booked_profiles = @booked_profiles.has_bookings_today
-      @bookings = @manager.bookings
+      @bookings = @manager.bookings.today_and_after
       @company = @manager.company
       @jobs = @company.jobs.includes(:manager).limit(3)
       @bookings_count = @bookings.count
