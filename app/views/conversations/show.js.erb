@@ -3,13 +3,16 @@
 
   if (messagesContainer) {
     const timestampNode = document.getElementById("conversation_timestamp");
+    const fetchingIndicator = document.getElementById("fetching-indicator");
     const template = "<%= j render partial: "messages/messages", locals: { conversation: @conversation, rate: @rate, messages: @messages } %>";
 
     const firstMessage = messagesContainer.querySelector(".message-container")
     const firstMessagePos = firstMessage.offsetTop;
-    timestampNode.value = "<%= @messages.first.created_at %>";
+    timestampNode.value = "<%= @messages.first&.created_at %>";
 
     messagesContainer.insertAdjacentHTML("afterbegin", template);
+    fetchingIndicator.classList.add("none");
+    <%# Ref: https://stackoverflow.com/questions/9834143/jquery-keep-window-from-changing-scroll-position-while-prepending-items-to-a-l/9834241#9834241 %>
     window.scrollTo({ top: firstMessage.offsetTop - firstMessagePos })
   };
 })();
