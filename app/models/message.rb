@@ -10,22 +10,14 @@ class Message < ApplicationRecord
 
   scope :unread, -> { where(read: false) }
 
-  class << self
-    def unread_user_scoped_count(current_user)
-      data = {
-        manager_id: current_user.manager&.id,
-        profile_id: current_user.profile&.id
-      }
-
+  scope :unread_user_scoped_count, -> (current_user) {
       joins(:conversation)
         .where(
-          "conversations.manager_id = :manager_id OR conversations.profile_id = :profile_id", data
-        )
+          "conversations.manager_id = :manager_id OR conversations.profile_id = :profile_id", profile_id: current_user&.profile&.id, manager_id: current_user&.manager&.id
+        ).where("messages.user_id != ?", current_user.id)
         .unread
         .count
-    end
-  end
-
+  }
   def timestamp
     if created_at.today?
       created_at.strftime "%I:%M %p"
