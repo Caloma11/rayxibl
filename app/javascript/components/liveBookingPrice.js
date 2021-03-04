@@ -83,7 +83,9 @@ export const liveBookingPrice = () => {
 				billable: billableNode.value === "true"
 			};
 			const calculatedTotalPrice = generateTotalPrice(options);
-			totalPriceNode.innerHTML = `Total: ${preferredCurrency} ${calculatedTotalPrice}`;
+      if (calculatedTotalPrice !== undefined && !isNaN(calculatedTotalPrice)) {
+			  totalPriceNode.innerHTML = `Total: ${preferredCurrency} ${calculatedTotalPrice}`;
+      }
 		}
 	};
 
