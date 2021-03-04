@@ -24,14 +24,12 @@
     </section>
   </div>
 
+  <%= simple_form_for :conversation, method: :GET, url: conversation_path(@conversation), remote: true, html: { id: "fetch-more-messages", class: "none" } do |f| %>
+    <%= f.input :timestamp, input_html: { value: @messages.first.created_at }, label: false, wrapper: false %>
+  <% end %>
+
   <section class="flex-grow-1" id="messages" data-current-user-id="<%= current_user.id %>" data-conversation-id="<%= @conversation.id %>">
-    <% @conversation.messages.includes(:user).order(:created_at).each do |message| %>
-      <% if message.booking %>
-        <%= render partial: "bookings/widget", locals: { booking: message.booking, conversation: @conversation, rate: @rates } %>
-      <% else %>
-        <%= render partial: "messages/message", locals: { message: message, user_is_author: message.user == current_user } %>
-      <% end %>
-    <% end %>
+    <%= render partial: "messages/messages", locals: { conversation: @conversation, rate: @rate, messages: @messages } %>
   </section>
 
   <div class="message-form flex items-end">
