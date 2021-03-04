@@ -3,20 +3,21 @@ import { PRICE_TYPES } from "../utils/constants";
 import { generateTotalPrice } from "../utils/generateTotalPrice";
 
 export const liveBookingPrice = () => {
-	const container = document.getElementById("new-booking");
+	const container = document.getElementById("new-booking") || document.querySelector(".booking-edit.manager");
 
 	if (!container) return;
 
 	const durationNode = container.querySelector("#booking_duration");
 	const startTimeNode = container.querySelector("#booking_start_time");
 	const endTimeNode = container.querySelector("#booking_end_time");
-	const datesNode = container.querySelector("#new-booking-datepickr");
+	const datesNode = container.querySelector("#new-booking-datepickr") || container.querySelector("#edit-booking-datepicker");
 	const billableNode = container.querySelector("#booking_billable_true");
 	const priceNode = container.querySelector("#booking_price");
 	const priceTypeNode = container.querySelector("#booking_price_type");
 	const totalPriceNode = container.querySelector("#totalPrice");
+  const preferredCurrency = totalPriceNode.dataset.preferredCurrency;
 	const timeTogglers = container.querySelectorAll(".profileTabs a");
-	let specificHour;
+	let specificHour = true;
 	const nodes = [
 		durationNode,
 		startTimeNode,
@@ -45,6 +46,7 @@ export const liveBookingPrice = () => {
 		const momentStart = moment(startDate, "DD-MM-YYYY");
 		const momentEnd = moment(endDate, "DD-MM-YYYY");
 
+
 		if (specificHour) {
 			allFilled = allFilled && startTimeNode.value && endTimeNode.value;
 		} else {
@@ -52,8 +54,19 @@ export const liveBookingPrice = () => {
 		}
 
 		if (billableNode.value === "true") {
+    let allFilled = datesNode.value !== "";
+    const [startDate, endDate] = datesNode.value.split("  -  ");
+    const momentStart = moment(startDate, "DD-MM-YYYY");
+    const momentEnd = moment(endDate, "DD-MM-YYYY");
+
+
+    if (specificHour) {
+      allFilled = allFilled && startTimeNode.value && endTimeNode.value;
+    } else {
+      allFilled = allFilled && durationNode.value;
+    }
 			allFilled = allFilled && priceNode.value && priceTypeNode.value;
-		}
+    }
 
 		if (!!allFilled) {
 			const chosenPriceType = PRICE_TYPES.find(
@@ -70,8 +83,7 @@ export const liveBookingPrice = () => {
 				billable: billableNode.value === "true"
 			};
 			const calculatedTotalPrice = generateTotalPrice(options);
-
-			totalPriceNode.innerHTML = `Total: $${calculatedTotalPrice}`;
+			totalPriceNode.innerHTML = `Total: ${preferredCurrency} ${calculatedTotalPrice}`;
 		}
 	};
 
@@ -82,11 +94,15 @@ export const liveBookingPrice = () => {
 		node.removeEventListener("change", changeCallback);
 	};
 
-	billableNode.addEventListener("change", e => {
-		if (e.target.value === "true") {
-			nodes.forEach(attachChangeListener);
-		} else {
-			nodes.forEach(removeEventListener);
-		}
-	});
+  if (billableNode.value === "true") {
+    nodes.forEach(attachChangeListener);
+  } else {
+    billableNode.addEventListener("change", e => {
+      if (e.target.value === "true") {
+        nodes.forEach(attachChangeListener);
+      } else {
+        nodes.forEach(removeEventListener);
+      }
+    });
+  }
 };

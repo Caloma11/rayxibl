@@ -9,6 +9,9 @@ class Booking < ApplicationRecord
 
   validates :title, :description, :start_date, :end_date, presence: true
   validates :price, :price_type, presence: true, if: -> { self.billable }
+  validates :price, numericality: { only_integer: true, greater_than: 0 }
+
+  validate :end_time_after_start_time
 
   enum price_type: PRICE_TYPES
   enum status: STATUSES
@@ -16,8 +19,10 @@ class Booking < ApplicationRecord
   scope :today_and_after, -> { where("start_date >= ?", Date.today) }
   scope :active, -> { where(status: [0, 1]) }
 
-  before_create :determine_total_price
+  before_save :determine_total_price
   after_create :create_widget
+
+  before_update :ensure_unique_duration
 
   %w[start end].each do |identifier|
     define_method :"parsed_#{identifier}_date" do
@@ -57,6 +62,23 @@ class Booking < ApplicationRecord
   end
 
   private
+
+  def ensure_unique_duration
+    if will_save_change_to_duration?
+      self.start_time = nil
+      self.end_time = nil
+    elsif will_save_change_to_start_time? || will_save_change_to_end_time?
+      self.duration = nil
+    end
+  end
+
+  def end_time_after_start_time
+    return unless start_time && end_time
+    if start_time > end_time
+      errors.add(:start_time, 'Must be after end time')
+      errors.add(:end_time, 'Must be before start time')
+    end
+  end
 
   def create_widget
     return if message

@@ -28,6 +28,10 @@
 	&.flex-column-reverse {
 		flex-direction: column-reverse;
 	}
+
+  &.flex-wrap {
+    flex-wrap: wrap;
+  }
 }
 
 .none {
