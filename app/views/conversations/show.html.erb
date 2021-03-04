@@ -25,7 +25,7 @@
   </div>
 
   <%= simple_form_for :conversation, method: :GET, url: conversation_path(@conversation), remote: true, html: { id: "fetch-more-messages", class: "none" } do |f| %>
-    <%= f.input :timestamp, input_html: { value: @messages.first.created_at }, label: false, wrapper: false %>
+    <%= f.input :timestamp, input_html: { value: @messages&.first&.created_at }, label: false, wrapper: false %>
   <% end %>
 
   <section class="flex-grow-1" id="messages" data-current-user-id="<%= current_user.id %>" data-conversation-id="<%= @conversation.id %>">
