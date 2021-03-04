@@ -289,7 +289,7 @@ const Calendar = () => {
 		return (
 			<section
 				id="calendar"
-				className="flex justify-content-center items-center"
+				className="flex justify-content-center items-center pt-5"
 			>
 				<h1>Loading...</h1>
 			</section>
