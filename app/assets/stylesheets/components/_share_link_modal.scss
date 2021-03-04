@@ -1,106 +1,106 @@
 .linkModalBg {
-  position: fixed;
-  width: 100%;
-  height: 100vh;
-  background: rgba(47, 47, 62, .8);
-  top: 0;
-  left: 0;
-  z-index: 3;
-  display: flex;
-  justify-content: center;
-  .linkModal {
-    position: fixed;
-    color: white;
-    border: none;
-    width: 90%;
-    background: $light-gray;
-    border-radius: 8px;
-    z-index: 9999999;
-    top: 20%;
-    margin: 0 auto;
-    // left: 5%;
-    .shareLinks {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      padding: 64px 32px;
-      // @include for-phone-only {
-      //   padding: 45px 0px;
-      // }
-      position: relative;
-      align-items: center;
-      button {
-        border-radius: 40px;
-        margin: 10px 0;
-        border: 1px solid $gray !important;
-        width: 90% !important;
-        background-color: transparent !important;
-        padding: 10px !important;
-        color: inherit !important;
-        cursor: pointer !important;
-        display: flex !important;
-        align-items: center !important;
-        justify-content: center !important;
-        font-family: "Nunito Sans", sans-serif;
-        font-size: 16px;
-        // @include for-phone-only {
-        //   padding: 8px;
-        //   img {
-        //     width: 20px !important;
-        //     margin-top: 0px !important;
-        //     object-fit: scale-down;
-        //   }
-        // }
-        img,
-        svg {
-          margin-right: 12px;
-        }
-      }
-    }
-    .closeIcon {
-      margin-top: 0px !important;
-      position: absolute !important;
-      cursor: pointer !important;
-      top: 0px !important;
-      right: 10px !important;
-      width: 20px !important;
-      padding: 16px 8px;
-      margin-bottom: 32px;
-      object-fit: scale-down;
-    }
-  }
-  &.influencers {
-    .linkModal {
-      border: none;
-    }
-    .shareLinks {
-      button {
-        border: 1px solid red !important;
-      }
-    }
-  }
+	position: fixed;
+	width: 100%;
+	height: 100vh;
+	background: rgba(47, 47, 62, 0.8);
+	top: 0;
+	left: 0;
+	z-index: 3;
+	display: flex;
+	justify-content: center;
+	.linkModal {
+		position: fixed;
+		color: white;
+		border: none;
+		width: 90%;
+		background: $light-gray;
+		border-radius: 8px;
+		z-index: 9999999;
+		top: 20%;
+		margin: 0 auto;
+		// left: 5%;
+		.shareLinks {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			padding: 64px 32px;
+			// @include for-phone-only {
+			//   padding: 45px 0px;
+			// }
+			position: relative;
+			align-items: center;
+			button {
+				border-radius: 40px;
+				margin: 10px 0;
+				border: 1px solid $gray !important;
+				width: 90% !important;
+				background-color: transparent !important;
+				padding: 10px !important;
+				color: inherit !important;
+				cursor: pointer !important;
+				display: flex !important;
+				align-items: center !important;
+				justify-content: center !important;
+				font-family: "Montserrat", sans-serif;
+				font-size: 16px;
+				// @include for-phone-only {
+				//   padding: 8px;
+				//   img {
+				//     width: 20px !important;
+				//     margin-top: 0px !important;
+				//     object-fit: scale-down;
+				//   }
+				// }
+				img,
+				svg {
+					margin-right: 12px;
+				}
+			}
+		}
+		.closeIcon {
+			margin-top: 0px !important;
+			position: absolute !important;
+			cursor: pointer !important;
+			top: 0px !important;
+			right: 10px !important;
+			width: 20px !important;
+			padding: 16px 8px;
+			margin-bottom: 32px;
+			object-fit: scale-down;
+		}
+	}
+	&.influencers {
+		.linkModal {
+			border: none;
+		}
+		.shareLinks {
+			button {
+				border: 1px solid red !important;
+			}
+		}
+	}
 }
 
 .copyLink {
-  font-family: "Helvetica Now light";
+	font-family: "Helvetica Now light";
 
-  .clipboardIcon {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-top: 4px;
+	.clipboardIcon {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		padding-top: 4px;
 
-    svg,
-    img {
-      margin-right: 0 !important;
-    }
-  }
+		svg,
+		img {
+			margin-right: 0 !important;
+		}
+	}
 }
 
 @media (min-width: 800px) {
-  .linkModalBg {
-    .linkModal {
-      width: 60%;
-    }
-  }
+	.linkModalBg {
+		.linkModal {
+			width: 60%;
+		}
+	}
 }
