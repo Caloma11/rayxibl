@@ -6,15 +6,17 @@ import leftArrow from "../images/left-arrow.svg";
 import rightArrow from "../images/right-arrow.svg";
 
 export const CalendarMonthSelection = forwardRef(
-	({ month, setMonth, year, setYear }, ref) => {
+	({ month, setMonth, year, setYear }, refs) => {
 		const [show, setShow] = useState(false);
+		const { moveMonthRef, jumpRef } = refs;
 
 		const handleYearChange = count => {
-			ref.current = true;
+			moveMonthRef.current = true;
 			setYear(prev => prev + count);
 		};
 		const handleMonthChange = mo => {
-			ref.current = true;
+			moveMonthRef.current = true;
+			jumpRef.current = true;
 			setMonth(mo);
 		};
 
