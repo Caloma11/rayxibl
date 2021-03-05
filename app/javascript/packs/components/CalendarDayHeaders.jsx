@@ -10,17 +10,26 @@ const INTERSECTION_OPTIONS = {
 
 const CalendarDayHeader = forwardRef(
 	({ day, today, weekend, setMonth }, refs) => {
+		const monthOfDay = day.format("MMMM");
+		const yearOfDay = day.format("YYYY");
 		const dayNumber = parseInt(day.format("D"), 10);
 		const firstDayOfMonthRef = useRef(null);
 		const observerRef = useRef(
 			new IntersectionObserver(([entry]) => {
 				if (entry.isIntersecting) {
 					const month = day.format("MMMM");
-					const { moveMonthRef, forceTodayRef, monthScrollChangeRef } = refs;
-					monthScrollChangeRef.current = true;
-					moveMonthRef.current = false;
-					forceTodayRef.current = true;
-					setMonth(month);
+					const {
+						moveMonthRef,
+						forceTodayRef,
+						monthScrollChangeRef,
+						jumpRef
+					} = refs;
+					if (!jumpRef.current) {
+						setMonth(month);
+						monthScrollChangeRef.current = true;
+						moveMonthRef.current = false;
+						forceTodayRef.current = true;
+					}
 				}
 			}, INTERSECTION_OPTIONS)
 		);
@@ -38,6 +47,8 @@ const CalendarDayHeader = forwardRef(
 		return (
 			<div
 				className={`dayHeader day ${weekend}`}
+				data-month={monthOfDay}
+				data-year={yearOfDay}
 				ref={dayNumber === 1 ? firstDayOfMonthRef : null}
 			>
 				<span className={`uppercase ${today}`}>{day.format("ddd")}</span>

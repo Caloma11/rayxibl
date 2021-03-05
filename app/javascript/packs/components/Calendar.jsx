@@ -40,6 +40,7 @@ const Calendar = () => {
 	const forceTodayRef = useRef(false);
 	const moveMonthRef = useRef(false);
 	const monthScrollChangeRef = useRef(false);
+	const jumpRef = useRef(false);
 
 	const generateJumpData = chosenMonth => {
 		const final = [];
@@ -266,6 +267,14 @@ const Calendar = () => {
 	useDidMountEffect(() => {
 		if (!forceTodayRef.current || moveMonthRef.current) {
 			addNewMonth(true);
+			setTimeout(() => {
+				const chosenMonth = document.querySelector(`[data-month="${month}"]`);
+				if (chosenMonth) {
+					calendarContainerRef.current.scrollTo({
+						left: chosenMonth.offsetLeft - 92
+					});
+				}
+			}, 1000);
 		}
 
 		moveMonthRef.current = false;
@@ -314,7 +323,7 @@ const Calendar = () => {
 					setMonth={setMonth}
 					year={year}
 					setYear={setYear}
-					ref={moveMonthRef}
+					ref={{ moveMonthRef, jumpRef }}
 				/>
 				<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
 			</div>
@@ -329,7 +338,7 @@ const Calendar = () => {
 						data={data}
 						weekOffset={weekOffset}
 						setMonth={setMonth}
-						ref={{ moveMonthRef, forceTodayRef, monthScrollChangeRef }}
+						ref={{ moveMonthRef, forceTodayRef, monthScrollChangeRef, jumpRef }}
 					/>
 					{profiles.length > 0 ? (
 						profiles.map((profile, i) => {
