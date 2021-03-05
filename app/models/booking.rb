@@ -55,9 +55,19 @@ class Booking < ApplicationRecord
 
   def short_date_time
     if duration
-      "#{duration} hours"
+      "#{duration} hours / day"
     else
       "#{parsed_start_time} - #{parsed_end_time}"
+    end
+  end
+
+  def pricing_text
+    if [0, "per hour"].include? price_type
+      "#{price * 8} per day"
+    elsif [1, "per day"].include? price_type
+      "#{price} per day"
+    elsif [2, "fixed price"].include? price_type
+      price
     end
   end
 
