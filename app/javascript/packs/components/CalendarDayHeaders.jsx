@@ -16,7 +16,8 @@ const CalendarDayHeader = forwardRef(
 			new IntersectionObserver(([entry]) => {
 				if (entry.isIntersecting) {
 					const month = day.format("MMMM");
-					const { moveMonthRef, forceTodayRef } = refs;
+					const { moveMonthRef, forceTodayRef, monthScrollChangeRef } = refs;
+					monthScrollChangeRef.current = true;
 					moveMonthRef.current = false;
 					forceTodayRef.current = true;
 					setMonth(month);

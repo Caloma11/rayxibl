@@ -39,6 +39,7 @@ const Calendar = () => {
 	const calendarContainerRef = useRef(null);
 	const forceTodayRef = useRef(false);
 	const moveMonthRef = useRef(false);
+	const monthScrollChangeRef = useRef(false);
 
 	const generateJumpData = chosenMonth => {
 		const final = [];
@@ -273,8 +274,12 @@ const Calendar = () => {
 	useDidMountEffect(() => {
 		const dates = data.flat().map(date => date.format("YYYY-MM-DD"));
 		const today = moment().format("YYYY-MM-DD");
+		const condition =
+			dates.includes(today) &&
+			forceTodayRef.current &&
+			!monthScrollChangeRef.current;
 
-		if (dates.includes(today) && forceTodayRef.current) {
+		if (condition) {
 			const todayCell = document.querySelector(".day.today");
 			calendarContainerRef.current.scrollTo({
 				left: todayCell.offsetLeft - 108,
@@ -283,6 +288,7 @@ const Calendar = () => {
 		}
 
 		forceTodayRef.current = false;
+		monthScrollChangeRef.current = false;
 	}, [data]);
 
 	if (loading) {
@@ -323,7 +329,7 @@ const Calendar = () => {
 						data={data}
 						weekOffset={weekOffset}
 						setMonth={setMonth}
-						ref={{ moveMonthRef, forceTodayRef }}
+						ref={{ moveMonthRef, forceTodayRef, monthScrollChangeRef }}
 					/>
 					{profiles.length > 0 ? (
 						profiles.map((profile, i) => {
