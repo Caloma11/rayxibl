@@ -55,19 +55,21 @@
           <p class="m-0 textLg bold"><%= booking.end_date.strftime("%d") %></p>
         </div>
       </div>
-      <div class="flex flex-column justify-content-center items-center bg-blueish-gray rounded h-100">
+      <div class="flex flex-column justify-content-center items-start pl-4 bg-blueish-gray rounded h-100">
         <p class="uppercase m-0 bold"><%= booking.number_of_days %> days</p>
-        <p class="m-0"><%= booking.short_date_time %></p>
+        <p class="m-0 textSm textLightBlack uppercase"><%= booking.short_date_time %></p>
       </div>
     </div>
 
     <div class="box">
+      <% currency ||= currency_mapper(current_user.preferred_currency) %>
       <div class="flex flex-column justify-content-center items-center mr-2">
         <p class="m-0 textSm textLightBlack uppercase">Total price</p>
-        <p class="m-0 textLg bold"><%= currency_mapper(current_user.preferred_currency) %> <%= booking.converted_total_price(ExchangeRate.new(current_user).call) %></p>
+        <p class="m-0 textLg bold"><%= currency %> <%= booking.converted_total_price(ExchangeRate.new(current_user).call) %></p>
       </div>
-      <div class="flex flex-column justify-content-center items-center bg-blueish-gray rounded h-100">
-        <p class="uppercase m-0 bold"><%= booking.price %> <%= booking.price_type %></p>
+      <div class="flex flex-column justify-content-center items-start pl-4 bg-blueish-gray rounded h-100">
+        <p class="uppercase m-0 bold"><%= currency %><%= booking.pricing_text %></p>
+        <p class="m-0 textSm textLightBlack uppercase"><%= currency %><%= booking.price %> per day</p>
       </div>
     </div>
 
