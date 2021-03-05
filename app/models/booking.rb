@@ -83,7 +83,9 @@ class Booking < ApplicationRecord
   def create_widget
     return if message
 
-    convo = Conversation.first_or_create(company: manager.company, profile: profile)
+    convo = Conversation.find_or_initialize_by(manager: manager, profile: profile)
+
+    convo.save! unless convo.persisted?
 
     convo.messages.create!(booking: self, user: manager.user)
   end

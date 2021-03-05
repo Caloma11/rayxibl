@@ -28,7 +28,7 @@
     <%= f.input :timestamp, input_html: { value: @messages&.first&.created_at }, label: false, wrapper: false %>
   <% end %>
 
-  <section class="flex-grow-1" id="messages" data-current-user-id="<%= current_user.id %>" data-conversation-id="<%= @conversation.id %>">
+  <section class="flex-grow-1 pt-4" id="messages" data-current-user-id="<%= current_user.id %>" data-conversation-id="<%= @conversation.id %>">
     <%= render partial: "messages/messages", locals: { conversation: @conversation, rate: @rate, messages: @messages } %>
   </section>
 

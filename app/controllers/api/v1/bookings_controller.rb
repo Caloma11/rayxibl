@@ -5,6 +5,8 @@ class Api::V1::BookingsController < Api::V1::BaseController
     @booking.price_type = price_type if price_type != -1
     @booking.manager = current_user.manager
 
+    binding.pry
+
     authorize @booking
 
     if @booking.save
