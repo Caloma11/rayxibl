@@ -39,7 +39,6 @@ export const BookingFormPricing = ({
 							type="number"
 							value={price}
 							onChange={e => setPrice(e.target.value)}
-							placeholder="250"
 							className={`mr-3 ${"price" in errors ? "error" : ""}`}
 							style={{ width: 120 }}
 						/>
