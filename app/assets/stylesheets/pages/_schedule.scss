@@ -234,6 +234,10 @@ $day-border: 1px solid #e8e9eb;
 						border: 1px solid transparent;
 					}
 
+					&.no-border-right {
+						border-right: none;
+					}
+
 					&.weekend {
 						background: rgba(235, 240, 247, 0.2);
 

@@ -6,6 +6,7 @@ const START_EVENT_CLASS_NAMES = "rounded-top-left rounded-bottom-left pl-1";
 const EVENT_CLASS_NAMES = "event";
 const END_EVENT_CLASS_NAMES = "rounded-top-right rounded-bottom-right mr-0";
 const WEEKEND_CLASS_NAMES = "weekend";
+const FRIDAY_CLASS_NAMES = "no-border-right";
 const SATURDAY_CLASS_NAMES = "dark-border-left";
 const SUNDAY_CLASS_NAMES = "dark-border-right";
 
@@ -43,8 +44,10 @@ export const CalendarDay = ({
 	// Checks if date is weekend, for styling
 	const isWeekend = [0, 6].includes(dayOfWeek.day());
 	const weekend = isWeekend ? WEEKEND_CLASS_NAMES : "";
+	const isFriday = dayOfWeek.day() === 5;
 	const isSaturday = dayOfWeek.day() === 6;
 	const isSunday = dayOfWeek.day() === 0;
+	const friday = isFriday ? FRIDAY_CLASS_NAMES : "";
 	const saturday = isSaturday ? SATURDAY_CLASS_NAMES : "";
 	const sunday = isSunday ? SUNDAY_CLASS_NAMES : "";
 	/*
@@ -70,7 +73,7 @@ export const CalendarDay = ({
 
 	return (
 		<div
-			className={`day ${todayClassName} ${weekend} ${saturday} ${sunday}`}
+			className={`day ${todayClassName} ${weekend} ${friday} ${saturday} ${sunday}`}
 			onClick={() => handleDayClick({ week, day })}
 		>
 			{eventDateBooleans.map((a, i) => {
