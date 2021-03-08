@@ -86,6 +86,8 @@ class BookingsController < ApplicationController
     if @booking.update(status: params[:booking][:status].to_i)
       last_url = Rails.application.routes.recognize_path(request.referrer)
       redirect_to last_url
+      flash[:notice] = @booking.accepted? ? "Booking request accepted." : "Booking request rejected."
+
     else
       render "conversations/show"
     end
