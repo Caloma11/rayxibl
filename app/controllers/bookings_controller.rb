@@ -2,6 +2,11 @@ class BookingsController < ApplicationController
   before_action :set_profile, only: :new
   before_action :set_booking, only: [:show, :edit, :update, :cancel, :accept_or_reject]
 
+
+
+  skip_before_action :authenticate_user!, only: [:redirect, :callback, :new_calendar_event]
+  skip_after_action :verify_authorized, only: [:redirect, :callback, :new_calendar_event]
+
   def index
     if current_user.manager?
       @bookings = policy_scope(current_user.manager.bookings)
@@ -99,7 +104,49 @@ class BookingsController < ApplicationController
     end
   end
 
+  # Add to booking to google calendar
+
+  def redirect
+    client = Signet::OAuth2::Client.new(client_options)
+
+    client.additional_parameters = { id: 9}
+    # client.redirect_uri = "#{client.redirect_uri}?booking_id=#{params[:id]}"
+    redirect_to(client.authorization_uri.to_s, id: params[:id])
+  end
+
+  def callback
+    binding.pry
+    client = Signet::OAuth2::Client.new(client_options)
+    client.code = params[:code]
+
+    response = client.fetch_access_token!
+
+    session[:authorization] = response
+
+    client.update!(session[:authorization])
+
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+
+    today = Date.today
+
+    event = Google::Apis::CalendarV3::Event.new({
+      start: Google::Apis::CalendarV3::EventDateTime.new(date: today),
+      end: Google::Apis::CalendarV3::EventDateTime.new(date: today + 1),
+      summary: 'Tomar no cu'
+    })
+
+    service.insert_event('primary', event)
+
+    flash[:notice] = "Event succesfully added"
+
+    redirect_to root_path
+  end
+
+
   private
+
+
 
   def set_booking
     @booking = Booking.includes(attachments_attachments: :blob).find(params[:id])
@@ -128,6 +175,57 @@ class BookingsController < ApplicationController
    end
    sanitized_params
   end
+
+
+  def client_options
+    {
+      client_id: Rails.application.credentials.google_calendar[:client_id],
+      client_secret: Rails.application.credentials.google_calendar[:client_secret],
+      authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
+      token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+      scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
+      redirect_uri: callback_url,
+      access_token: params[:code],
+      booking_id: params[:id]
+    }
+  end
+
+  # def calendar_add
+  #   client = Google::Apis::CalendarV3::CalendarService.new
+  #   client_id = Rails.application.credentials.google_calendar[:client_id]
+  #   authorizer = Google::Auth::UserAuthorizer.new client_id,  Google::Apis::CalendarV3::AUTH_CALENDAR_READONLY, token_store
+
+
+
+  #   # return unless (current_user.present? && current_user.access_token.present? && current_user.refresh_token.present?)
+  #     secrets = Google::APIClient::ClientSecrets.new({
+  #       "web" => {
+  #         # "access_token" => current_user.access_token,
+  #         # "refresh_token" => current_user.refresh_token,
+  #         "client_id" => ENV["GOOGLE_API_KEY"],
+  #         "client_secret" => ENV["GOOGLE_API_SECRET"]
+  #       }
+  #     })
+
+  #     begin
+  #       client.authorization = secrets.to_authorization
+  #       client.authorization.grant_type = "refresh_token"
+
+  #       if !current_user.present?
+  #         client.authorization.refresh!
+  #         current_user.update_attributes(
+  #           access_token: client.authorization.access_token,
+  #           refresh_token: client.authorization.refresh_token,
+  #           expires_at: client.authorization.expires_at.to_i
+  #         )
+  #       end
+  #     rescue => e
+  #       flash[:error] = 'Your token has been expired. Please login again with google.'
+  #       redirect_to :back
+  #     end
+  #     client.insert_event('primary', event)
+  # end
+
 end
 
 

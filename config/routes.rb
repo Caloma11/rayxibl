@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => "/cable"
 
-  devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations', invitations: 'users/invitations' }
+  devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations', invitations: 'users/invitations', omniauth_callbacks: "callbacks" }
 
   get "/dashboard", to: "pages#dashboard"
 
@@ -83,4 +83,8 @@ Rails.application.routes.draw do
   authenticate :user, ->(user) { user.admin? } do
     mount Sidekiq::Web => '/sidekiq'
   end
+
+  get '/bookings/:id/redirect', to: 'bookings#redirect', as: 'booking_redirect'
+  get '/users/google_oauth2/callback', to: 'bookings#callback', as: 'callback'
+  get '/new_calendar_event', to: "bookings#new_calendar_event", as: 'new_calendar_event'
 end
