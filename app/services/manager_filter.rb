@@ -20,6 +20,12 @@ class ManagerFilter
       @managers = @managers.where("job_title ILIKE :title", title: "%#{params[:job_title]}%")
     end
 
+    if params[:company_name]
+      @managers = @managers
+                    .joins(:company)
+                    .where("companies.name ILIKE :name", name: "%#{params[:company_name]}%")
+    end
+
     @managers
   end
 end

@@ -4,8 +4,8 @@
 
 		button {
 			img {
-				width: 24px;
-				height: 24px;
+				width: 16px;
+				height: 16px;
 			}
 		}
 	}
@@ -25,19 +25,18 @@
 				border-right: 1px solid#f4f6f9;
 			}
 
-      .actions {
-        width: 120px;
-      }
+			.actions {
+				width: 120px;
+			}
 
-      .action-link {
-        @extend .textSm;
-      }
-
+			.action-link {
+				@extend .textSm;
+			}
 		}
 	}
 }
 .add-more {
-	@extend .mr-3;
+	@extend .mx-3;
 
 	margin-top: calc(#{$spacing-3} + #{$spacing-5});
 

@@ -13,12 +13,12 @@
           <% end %>
         </div>
       </div>
-      <button data-id="<%= manager.id %>" class="trigger"><%= image_tag "icons/more.svg", alt: "sub-menu", width: 24, height: 24 %></button>
+      <button data-id="<%= manager.id %>" class="trigger"><%= image_tag "icons/more.svg", alt: "sub-menu", width: 18, height: 18 %></button>
     </div>
   </div>
   <div class="text-center">
     <h3 class="mt-0 mb-3 textMd"><%= manager.user.display_name %></h3>
-    <p class="bold uppercase textLightBlack my-0"><%= manager.job_title %></p>
+    <p class="semi-bold uppercase textLightBlack my-0"><%= manager.job_title %></p>
     <p class="textSm textLightBlack my-0"><%= manager.company.name %></p>
   </div>
   <% convo ||= current_user.conversation_with(manager.user) %>
