@@ -86,5 +86,4 @@ Rails.application.routes.draw do
 
   get '/bookings/:id/redirect', to: 'bookings#redirect', as: 'booking_redirect'
   get '/users/google_oauth2/callback', to: 'bookings#callback', as: 'callback'
-  get '/new_calendar_event', to: "bookings#new_calendar_event", as: 'new_calendar_event'
 end

@@ -2,11 +2,6 @@ class BookingsController < ApplicationController
   before_action :set_profile, only: :new
   before_action :set_booking, only: [:show, :edit, :update, :cancel, :accept_or_reject]
 
-
-
-  skip_before_action :authenticate_user!, only: [:redirect, :callback, :new_calendar_event]
-  skip_after_action :verify_authorized, only: [:redirect, :callback, :new_calendar_event]
-
   def index
     if current_user.manager?
       @bookings = policy_scope(current_user.manager.bookings)
