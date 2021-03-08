@@ -102,11 +102,14 @@ class BookingsController < ApplicationController
   # Add booking to google calendar
 
   def redirect
+    authorize Booking.find(params[:id])
     client = Signet::OAuth2::Client.new(client_options)
     redirect_to("#{client.authorization_uri.to_s}&state=#{params[:id]}")
   end
 
   def callback
+    booking = Booking.find(params[:state])
+    authorize booking
     client = Signet::OAuth2::Client.new(client_options)
     client.code = params[:code]
     response = client.fetch_access_token!
@@ -118,7 +121,6 @@ class BookingsController < ApplicationController
     service = Google::Apis::CalendarV3::CalendarService.new
     service.authorization = client
 
-    booking = Booking.find(params[:state])
 
     event = Google::Apis::CalendarV3::Event.new({
       start: Google::Apis::CalendarV3::EventDateTime.new(date: Date.parse(booking.start_date.to_s)),
