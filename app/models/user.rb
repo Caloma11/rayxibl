@@ -6,7 +6,7 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :invitable, :database_authenticatable,
-         :recoverable, :rememberable, :validatable, :confirmable
+         :recoverable, :rememberable, :validatable, :confirmable, :omniauthable
 
   has_one_attached :avatar
   # Manager side
@@ -65,4 +65,5 @@ class User < ApplicationRecord
       manager&.company&.destroy
     end
   end
+
 end

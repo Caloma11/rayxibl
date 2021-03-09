@@ -17,7 +17,8 @@ gem 'webpacker', '~> 4.0'
 gem 'turbolinks', '~> 5'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.7'
-gem 'devise'
+gem "devise", git: "https://github.com/heartcombo/devise"
+
 gem 'devise_invitable'
 gem 'pundit'
 gem 'simple_form'
@@ -25,15 +26,14 @@ gem 'aws-sdk-s3'
 gem 'sendgrid-ruby'
 gem "serviceworker-rails"
 gem "rest-client"
-
 # Use Redis adapter to run Action Cable in production
 gem 'redis', '~> 4.0'
 gem 'sidekiq'
 gem 'sidekiq-failures', '~> 1.0'
-
+gem 'omniauth-google-oauth2'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem 'google-api-client', require: 'google/apis/calendar_v3'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
