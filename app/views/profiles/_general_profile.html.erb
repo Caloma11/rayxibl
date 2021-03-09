@@ -109,11 +109,11 @@
     <!-- Tabs -->
 
     <div class="profileTabs" id="tabs">
-      <%= link_to "About", profile_path(@profile, tab: 'about', anchor: 'skills'), id: "about-tab", class: "tab #{'active' if params[:tab] == 'about' || !params[:tab] }", remote: true %>
-      <%= link_to "Links", profile_path(@profile, tab: 'links', anchor: 'skills'), id: "link-tab", class: "tab #{'active' if params[:tab] == 'links' }", remote: true %>
+      <%= link_to "About", profile_path(@profile, tab: 'about', anchor: 'skills'), id: "about-tab", class: "tab textBetween semi-bold #{'active' if params[:tab] == 'about' || !params[:tab] }", remote: true %>
+      <%= link_to "Links", profile_path(@profile, tab: 'links', anchor: 'skills'), id: "link-tab", class: "tab textBetween semi-bold #{'active' if params[:tab] == 'links' }", remote: true %>
       <% third_tab = "Ratings" %>
       <% third_tab = "Reviews" if user_signed_in? && current_user.manager? %>
-      <%= link_to "#{third_tab} (#{@ratings&.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), id: "note-tab", class: "tab #{'active' if params[:tab] == 'notes' }", remote: true %>
+      <%= link_to "#{third_tab} (#{@ratings&.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), id: "note-tab", class: "tab textBetween semi-bold #{'active' if params[:tab] == 'notes' }", remote: true %>
     </div>
 
     <div id="tab-content">
