@@ -7,19 +7,19 @@ class ConversationsController < ApplicationController
       @conversations = current_user.manager.conversations.joins(:profile).includes(profile: [user: { avatar_attachment: :blob }])
       @jobs = current_user.manager.jobs
 
-      if params[:network]
-        @conversations = @conversations.where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message_with_empty
-      else
+      if params[:all]
         @conversations = @conversations.by_latest_message
+      else
+        @conversations = @conversations.where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message_with_empty
       end
     else
       @conversations = current_user.profile.conversations.includes(profile: [user: { avatar_attachment: :blob }])
       @jobs = current_user.profile.jobs
 
-      if params[:network]
-        @conversations = @conversations.where(manager_id: current_user.profile.managers.pluck(:id)).by_latest_message_with_empty
-      else
+      if params[:all]
         @conversations = @conversations.by_latest_message
+      else
+        @conversations = @conversations.where(manager_id: current_user.profile.managers.pluck(:id)).by_latest_message_with_empty
       end
     end
 
