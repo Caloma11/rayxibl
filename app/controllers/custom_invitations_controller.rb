@@ -1,7 +1,7 @@
 require 'csv'
 class CustomInvitationsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:create]
-  skip_after_action :verify_authorized, only: [:create]
+  # skip_after_action :verify_authorized, only: [:create]
 
 
   # Homepage create
