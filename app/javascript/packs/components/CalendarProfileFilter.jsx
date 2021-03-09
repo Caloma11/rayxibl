@@ -43,7 +43,12 @@ const CalendarAdvancedFilter = ({ states, expertise }) => {
 	);
 };
 
-export const CalendarProfileFilter = ({ bookings, handleSubmit }) => {
+export const CalendarProfileFilter = ({
+	bookings,
+	handleSubmit,
+	setFilterCount,
+	setShow
+}) => {
 	const [name, setName] = useState("");
 	const [profession, setProfession] = useState("");
 	const [skills, setSkills] = useState("");
@@ -59,6 +64,10 @@ export const CalendarProfileFilter = ({ bookings, handleSubmit }) => {
 		setSkills("");
 		setLocation("");
 		setExpertise("");
+		setStatus("");
+		setBookingIds([]);
+		setFilterCount(0);
+		setShow(false);
 	};
 
 	const toggleAdvancedFilter = () => {
@@ -72,6 +81,18 @@ export const CalendarProfileFilter = ({ bookings, handleSubmit }) => {
 			profile: { name, profession, skills, location, expertise },
 			booking: { status, id: bookingIds }
 		};
+
+		let localFilterCount = 0;
+
+		if (name !== "") localFilterCount += 1;
+		if (profession !== "") localFilterCount += 1;
+		if (skills !== "") localFilterCount += 1;
+		if (location !== "") localFilterCount += 1;
+		if (expertise !== "") localFilterCount += 1;
+		if (status !== "") localFilterCount += 1;
+		if (bookingIds.length > 0) localFilterCount += 1;
+
+		setFilterCount(localFilterCount);
 		handleSubmit(params);
 	};
 
