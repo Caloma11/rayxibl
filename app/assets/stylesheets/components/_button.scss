@@ -15,9 +15,9 @@ input[type="submit"] {
 		color: $dark-gray;
 		padding: 8px 16px;
 
-    &:active {
-      box-shadow:3px 6px 8px rgba(50, 51, 94, .5);
-    }
+		&:active {
+			box-shadow: 3px 6px 8px rgba(50, 51, 94, 0.5);
+		}
 	}
 
 	&.btn-centered {
@@ -75,7 +75,8 @@ input[type="submit"] {
 	}
 
 	&.btn-note {
-		@extend .text-center, .border-gray;
+		@extend .text-center, .border-gray, .normal-weight, .textBetween;
+
 		color: $gray !important;
 	}
 
