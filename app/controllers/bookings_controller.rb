@@ -101,6 +101,44 @@ class BookingsController < ApplicationController
     end
   end
 
+  # Add booking to google calendar
+
+  def redirect
+    authorize Booking.find(params[:id])
+    client = Signet::OAuth2::Client.new(client_options)
+    redirect_to("#{client.authorization_uri.to_s}&state=#{params[:id]}")
+  end
+
+  def callback
+    booking = Booking.find(params[:state])
+    authorize booking
+    client = Signet::OAuth2::Client.new(client_options)
+    client.code = params[:code]
+    response = client.fetch_access_token!
+
+    session[:authorization] = response
+
+    client.update!(session[:authorization])
+
+    service = Google::Apis::CalendarV3::CalendarService.new
+    service.authorization = client
+
+
+    event = Google::Apis::CalendarV3::Event.new({
+      start: Google::Apis::CalendarV3::EventDateTime.new(date: Date.parse(booking.start_date.to_s)),
+      end: Google::Apis::CalendarV3::EventDateTime.new(date: Date.parse(booking.end_date.to_s)),
+      summary: booking.title,
+      description: booking.description + "\n - booked by #{booking.manager.user.display_name}. \n For more information visit https://www.flxibl.io/bookings/#{booking.id}"
+    })
+
+    service.insert_event('primary', event)
+
+    flash[:notice] = "Event succesfully added"
+
+    redirect_to root_path
+  end
+
+
   private
 
   def set_booking
@@ -130,6 +168,20 @@ class BookingsController < ApplicationController
    end
    sanitized_params
   end
+
+
+  def client_options
+    {
+      client_id: Rails.application.credentials.google_calendar[:client_id],
+      client_secret: Rails.application.credentials.google_calendar[:client_secret],
+      authorization_uri: 'https://accounts.google.com/o/oauth2/auth',
+      token_credential_uri: 'https://accounts.google.com/o/oauth2/token',
+      scope: Google::Apis::CalendarV3::AUTH_CALENDAR,
+      redirect_uri: callback_url,
+      access_token: params[:code]
+    }
+  end
+
 end
 
 

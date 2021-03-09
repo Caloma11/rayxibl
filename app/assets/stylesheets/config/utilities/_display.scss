@@ -217,3 +217,9 @@ fieldset {
 .min-w-0 {
   min-width: 0;
 }
+
+.focus-outline-none {
+  &:focus {
+    outline: none;
+  }
+}

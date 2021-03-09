@@ -23,7 +23,7 @@
   </div>
   <% convo ||= current_user.conversation_with(manager.user) %>
   <% if convo %>
-    <%= link_to conversation_path(convo), class: "btn btn-white textSm text-center mt-3" do %>
+    <%= link_to conversation_path(convo, anchor: "message-#{convo.messages.last&.id}"), class: "btn btn-white textSm text-center mt-3" do %>
       <%= image_tag "icons/message.svg", alt: "message", width: 16, height: 16, class: "vertical-align-middle" %> Message
     <% end %>
   <% end %>

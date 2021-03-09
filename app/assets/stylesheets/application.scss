@@ -62,3 +62,9 @@ span {
   color: $blue;
   opacity: .6;
 }
+
+@supports (padding-top: constant(safe-area-inset-top))  {
+    body {
+        padding-top: (env(safe-area-inset-top), 0);
+    }
+}

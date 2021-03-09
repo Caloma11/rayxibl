@@ -34,7 +34,7 @@
 
     <div class="bottom-bottom">
       <% if conversation %>
-        <%= link_to conversation_path(conversation), class: "btn btn-white mt-3 mx-3 message" do %>
+        <%= link_to conversation_path(conversation, anchor: "message-#{conversation.messages.last&.id}"), class: "btn btn-white mt-3 mx-3 message" do %>
           <%= image_tag "icons/message.svg", alt: "message", class: "vertical-align-middle", width: 12, height: 12 %> Message
         <% end %>
       <% else %>

@@ -1,4 +1,4 @@
-<div class="booking-widget rounded shadow">
+<div class="booking-widget rounded shadow" id="message-<%= message.id %>">
   <div class="flex justify-content-between items-center title <%= booking.status %>">
     <h3 class="m-0"><%= booking.title %></h3>
     <div class="flex items-center">
@@ -106,6 +106,13 @@
       </div>
     <% end %>
   </div>
+  <% if booking.accepted? && current_user.freelancer? %>
+    <%= link_to booking_redirect_path(booking), class: "btn btn-primary m-3 " do %>
+      <%= image_tag "icons/schedule-white", alt: "calendar", height: 24, width: 24, class: "pr-3" %>
+      Add to calendar
+    <% end %>
+  <% end %>
+
   <% if policy(booking).cancel? %>
     <%= link_to "Cancel", booking_cancel_path(booking), method: :patch, class: "btn btn-float red text-center" %>
   <% end %>

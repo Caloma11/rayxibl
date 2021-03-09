@@ -29,6 +29,14 @@ class BookingPolicy < ApplicationPolicy
     still_pending? && is_freelancer?
   end
 
+  def callback?
+    user && is_freelancer?
+  end
+
+  def redirect?
+    callback?
+  end
+
   private
 
   def is_booker?
