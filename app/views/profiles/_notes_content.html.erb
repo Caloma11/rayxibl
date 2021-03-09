@@ -1,7 +1,7 @@
 <div class="notesContainer mt-3">
   <% if user_signed_in? && current_user.manager? %>
     <div class="bg-blueish-gray px-3 pt-1">
-      <h3 class="textGray textBetween semi-bold">ONLY VISIBLE TO YOUR TEAM</h3>
+      <h3 class="textLightBlack textBetween semi-bold">ONLY VISIBLE TO YOUR TEAM</h3>
       <%= link_to "Write a Review", "#note_content", class: "btn btn-note py-3"  %>
 
       <% @notes.each do |note| %>
@@ -14,7 +14,7 @@
             <% end %>
             <div class="noteCardBody ml-2">
               <p class="mt-0 mb-2"><strong><%= note.manager.user.display_name %></strong></p>
-              <p class="my-0 textGray"><%= note.content %></p>
+              <p class="my-0 textLightBlack"><%= note.content %></p>
             </div>
           </div>
           <span class="textSm textLightBlack semi-bold items-self-end"><%= note.created_at.strftime("%^b %-d") %></span>
@@ -40,7 +40,7 @@
 
 <% if user_signed_in? && current_user.manager? %>
   <div class="form-wrapper px-3 pb-3">
-    <p class="text-center uppercase mt-0 mb-3 textBetween">Star ratings are visible on Gauthiers profile</p>
+    <p class="text-center uppercase mt-0 mb-3 textBetween textLightBlack semi-bold">Star ratings are visible on Gauthiers profile</p>
     <div id="rating-form-container">
       <% if @my_rating %>
         <%= render partial: "ratings/update_form", locals: { rating: @my_rating } %>
