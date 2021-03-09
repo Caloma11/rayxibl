@@ -12,7 +12,8 @@ class ApplicationController < ActionController::Base
   include NavbarLinks
 
   def get_rates
-    @rates ||= ExchangeRate.new(current_user).call
+    # @rates ||= ExchangeRate.new(current_user).call
+    0
   end
 
   def user_not_authorized
