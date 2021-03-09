@@ -80,7 +80,7 @@
       <!-- Message Button -->
       <% conversation ||= current_user.conversation_with(@profile.user) %>
       <% if conversation %>
-        <%= link_to conversation_path(conversation), class: "btn-lg px-0 btn-white" do %>
+        <%= link_to conversation_path(conversation, anchor: "message-#{conversation.messages.last&.id}"), class: "btn-lg px-0 btn-white" do %>
           <%= image_tag "icons/message.svg", alt: "message" %> MESSAGE
         <% end %>
       <% else %>
