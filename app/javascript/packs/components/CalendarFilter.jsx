@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { CalendarProfileFilter } from "./CalendarProfileFilter";
 import filterSvg from "../images/filter.svg";
@@ -6,6 +6,7 @@ import crossDarkSvg from "../images/cross-dark.svg";
 
 export const CalendarFilter = ({ bookings, setProfiles }) => {
 	const [show, setShow] = useState(false);
+	const [filterCount, setFilterCount] = useState(0);
 
 	const handleProfileSubmit = async params => {
 		try {
@@ -20,8 +21,13 @@ export const CalendarFilter = ({ bookings, setProfiles }) => {
 	return (
 		<div id="calendar-filter">
 			<div className="flex justify-content-end m-3">
-				<button onClick={() => setShow(prev => !prev)}>
+				<button id="filter-trigger" onClick={() => setShow(prev => !prev)}>
 					<img src={filterSvg} alt="filter" width={16} height={16} />
+					{filterCount > 0 && (
+						<span className="skill-pill blue m-0 filter-count">
+							{filterCount}
+						</span>
+					)}
 				</button>
 			</div>
 
@@ -38,6 +44,8 @@ export const CalendarFilter = ({ bookings, setProfiles }) => {
 					</section>
 					<section className="content">
 						<CalendarProfileFilter
+							setFilterCount={setFilterCount}
+							setShow={setShow}
 							bookings={bookings}
 							handleSubmit={handleProfileSubmit}
 						/>

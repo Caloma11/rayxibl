@@ -5,6 +5,15 @@ $day-border: 1px solid #e8e9eb;
 
 #calendar-page {
 	#calendar-filter {
+		button#filter-trigger {
+			height: 46px;
+
+			img {
+				width: 16px;
+				height: 16px;
+			}
+		}
+
 		.filter-overlay {
 			@extend .bg-white;
 
