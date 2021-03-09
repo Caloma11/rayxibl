@@ -30,7 +30,11 @@ module Bookings
         # TODO: May need to be changed
         self.total_price = dur * price
       end
-      self.total_price = self.total_price / ExchangeRate.new(self.manager.user).call
+
+      rate = ExchangeRate.new(self.manager.user).call
+      if rate != 0
+        self.total_price = self.total_price / rate
+      end
     end
   end
 end
