@@ -38,12 +38,14 @@ const initNewMessageCable = () => {
 						const notification = conversationContainer.querySelector(
 							".notification"
 						);
+						const timestamp = conversationContainer.querySelector(".time");
 
+						timestamp.innerText = data.timestamp;
 						textContent.innerText = data.new_text_content;
 						rightSide.classList.remove("justify-content-end");
 						rightSide.classList.add("justify-content-between");
+
 						if (notification) {
-							console.log(notification);
 							notification.innerText = data.count;
 						} else {
 							rightSide.insertAdjacentHTML("afterbegin", template);
