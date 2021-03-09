@@ -18,6 +18,7 @@ export const CalendarMonthSelection = forwardRef(
 			moveMonthRef.current = true;
 			jumpRef.current = true;
 			setMonth(mo);
+			setShow(false);
 		};
 
 		return (
