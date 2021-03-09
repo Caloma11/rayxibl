@@ -1,6 +1,6 @@
 <div class="booking-edit <%= 'manager' if current_user.manager? %>">
   <section class="mx-3 mt-4 flex justify-content-between items-center">
-    <%= link_to booking_path(@booking) do %>
+    <%= link_to bookings_path do %>
       <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
     <% end %>
 
