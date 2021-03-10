@@ -103,68 +103,71 @@ export const BookingFormDates = ({
 
 	return (
 		<>
-			<div className="duration-toggler">
-				<button
-					type="button"
-					className={`btn ${specificHour ? "" : "btn-white"}`}
-					onClick={() => setSpecificHour(false)}
-				>
-					Duration
-				</button>
-				<button
-					type="button"
-					className={`btn ${specificHour ? "btn-white" : ""}`}
-					onClick={() => setSpecificHour(true)}
-				>
-					Specific
-				</button>
-			</div>
-			<div className="flex">
-				{specificHour ? (
-					<>
-						<div className="input-wrapper mr-3" ref={timeWrapperRef}>
-							<label className="block textGray nowrap" htmlFor="booking_time">
-								Hours per day
-							</label>
+			<div className="flex flex-row-reverse justify-content-between items-end">
+				<div className="duration-toggler">
+					<button
+						type="button"
+						className={`btn ${specificHour ? "" : "btn-white"}`}
+						onClick={() => setSpecificHour(false)}
+					>
+						Duration
+					</button>
+					<button
+						type="button"
+						className={`btn ${specificHour ? "btn-white" : ""}`}
+						onClick={() => setSpecificHour(true)}
+					>
+						Specific
+					</button>
+				</div>
+				<div className="flex">
+					{specificHour ? (
+						<>
+							<div className="input-wrapper mb-0 mr-3" ref={timeWrapperRef}>
+								<label className="block textGray nowrap" htmlFor="booking_time">
+									Hours per day
+								</label>
+								<input
+									id="booking_time"
+									className="w-100"
+									ref={timeRef}
+									onClick={handleTimeClick}
+									defaultValue={time}
+								/>
+								<input
+									id="booking_start_time"
+									name="booking[start_time]"
+									type="time"
+									value={startTime}
+									onChange={e => setStartTime(e.target.value)}
+									ref={startTimeRef}
+									className="none"
+								/>
+							</div>
 							<input
-								id="booking_time"
-								ref={timeRef}
-								onClick={handleTimeClick}
-								defaultValue={time}
-							/>
-							<input
-								id="booking_start_time"
-								name="booking[start_time]"
+								id="booking_end_time"
+								name="booking[end_time]"
 								type="time"
-								value={startTime}
-								onChange={e => setStartTime(e.target.value)}
-								ref={startTimeRef}
+								value={endTime}
+								onChange={e => setEndTime(e.target.value)}
+								ref={endTimeRef}
 								className="none"
 							/>
+						</>
+					) : (
+						<div className="input-wrapper mb-0 mr-3">
+							<label htmlFor="booking_duration">Hours per day</label>
+							<input
+								id="booking_duration"
+								name="booking[duration]"
+								type="number"
+								value={duration}
+								onChange={e => setDuration(e.target.value)}
+								className="w-100"
+							/>
 						</div>
-						<input
-							id="booking_end_time"
-							name="booking[end_time]"
-							type="time"
-							value={endTime}
-							onChange={e => setEndTime(e.target.value)}
-							ref={endTimeRef}
-							className="none"
-						/>
-					</>
-				) : (
-					<div className="input-wrapper">
-						<label htmlFor="booking_duration">Duration (in hours)</label>
-						<input
-							id="booking_duration"
-							name="booking[duration]"
-							type="number"
-							value={duration}
-							onChange={e => setDuration(e.target.value)}
-							list="booking-form-duration-list"
-						/>
-					</div>
-				)}
+					)}
+				</div>
 			</div>
 			<div className="flex mb-3 items-center">
 				<input
