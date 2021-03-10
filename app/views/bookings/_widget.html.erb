@@ -29,7 +29,7 @@
                 </button>
               <% end %>
             <% end %>
-            <%= link_to conversation_path(booking_id: booking.id), class: "action-link" do %>
+            <%= link_to "#", class: "action-link widget-message", data: { message: prefilled_message(booking)} do %>
               <%= image_tag "icons/message-white.svg", alt: "message", class: "vertical-align-middle pl-1 mr-2" %> Message
             <% end %>
           </div>
