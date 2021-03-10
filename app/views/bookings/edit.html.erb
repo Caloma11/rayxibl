@@ -52,19 +52,24 @@
                     input_html: { rows: 4 } %>
         <div class="flex justify-content-between items-end mb-3">
           <div class="bookingSpecific flex flex-column <%= 'none' if @booking&.duration %>">
-            <label for="job_start_date">Hours per day</label>
-            <div class="flex">
-              <%= f.input :start_time, as: :time, html5: true,
-                          label: false,
-                          wrapper_html: { class: "flex flex-column" } %>
-              <span class="self-centered mx-2"> - </span>
-              <%= f.input :end_time, as: :time, html5: true,
-                          label: false,
-                          wrapper_html: { class: "flex flex-column" } %>
+            <label class="block textGray nowrap">Hours per day</label>
+            <input id="booking_time" value="<%= @booking.parsed_short_time %>" />
+            <div class="inputs flex items-center relative">
+              <%= f.input :start_time, label: false,
+                          label_html: { class: "block textGray nowrap" },
+                          input_html: { class: "mb-2 w-100 start-timepicker" },
+                          wrapper_html: { class: "none" },
+                          as: :string %>
+              <%= f.input :end_time, label: false,
+                          input_html: { class: "mb-2 w-100 end-timepicker" },
+                          wrapper_html: { class: "none" },
+                          as: :string %>
             </div>
           </div>
           <div class="bookingDuration <%= 'none' unless @booking&.duration %>">
             <%= f.input :duration,
+                        label_html: { class: "block textGray nowrap" },
+                        input_html: { class: "mb-2 w-100" },
                         wrapper_html: { class: "flex flex-column" } %>
           </div>
           <div class="profileTabs flex-grow-1 textSm mr-0" id="tabs">

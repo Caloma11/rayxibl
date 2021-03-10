@@ -9,26 +9,52 @@ const handleChange = (dates, { start, end }) => {
 
 export const editBookingFlatpickr = () => {
 	const bookingEditWrapper = document.querySelector(".booking-edit");
-	const startTimeInput = document.getElementById("booking_start_time");
-	const endTimeInput = document.getElementById("booking_end_time");
 	const dateInput = document.getElementById("edit-booking-datepicker");
 	const bookingStartDateInput = document.getElementById("booking_start_date");
 	const bookingEndDateInput = document.getElementById("booking_end_date");
-	const timepickerOptions = {
-		disableMobile: true,
-		noCalendar: true,
-		enableTime: true,
-		time_24hr: true
-	};
+	const bookingTime = document.getElementById("booking_time");
+	const timeWrapper = document.querySelector(".bookingSpecific");
 
 	if (bookingEditWrapper) {
-		if (startTimeInput) {
-			flatpickr(startTimeInput, timepickerOptions);
-		}
+		const timepickerOptions = {
+			disableMobile: true,
+			noCalendar: true,
+			enableTime: true,
+			time_24hr: true,
+			positionElement: timeWrapper
+		};
+		let value = "";
 
-		if (endTimeInput) {
-			flatpickr(endTimeInput, timepickerOptions);
-		}
+		const endTimeFlat = flatpickr(".end-timepicker", {
+			...timepickerOptions,
+			onClose: (_, time) => {
+				value += ` - ${time}`;
+				bookingTime.value = value;
+			}
+		});
+
+		const startTimeFlat = flatpickr(".start-timepicker", {
+			...timepickerOptions,
+			onClose: () => endTimeFlat.open(),
+			onChange: (_, time) => {
+				value = time;
+			}
+		});
+
+		console.log({ startTimeFlat, endTimeFlat });
+
+		bookingTime.addEventListener("click", e => {
+			e.preventDefault();
+			if (!startTimeFlat.isOpen && !endTimeFlat.isOpen) {
+				startTimeFlat.open();
+			} else if (startTimeFlat.isOpen) {
+				startTimeFlat.close();
+				endTimeFlat.open();
+			} else {
+				endTimeFlat.close();
+				startTimeFlat.open();
+			}
+		});
 
 		if (dateInput) {
 			flatpickr(dateInput, {
