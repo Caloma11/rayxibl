@@ -1,7 +1,11 @@
 .invitationsWrapper {
   height: 100vh;
   max-height: 100%;
-  position: relative;
+  position: fixed;
+  top: 0;
+  // right: 0;
+  // max-width: 700px;
+  z-index: 9;
 
   @extend .flex, .justify-content-center, .items-center;
 
@@ -9,14 +13,14 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: (linear-gradient(rgba(20, 15, 38, 0.5), rgba(20, 15, 38, 0.5)), url(asset_path('overlay-freelancers.png')));
+    background-image: (linear-gradient(rgba(20, 15, 38, 0.5), rgba(20, 15, 38, 0.3)));
     position: absolute;
     top: 0;
     right: 0;
     height: 100%;
     width: 100%;
-    background-color: rgba(20, 15, 38, 0.5);
-    filter: blur(12px);
+    background-color: rgba(20, 15, 38, .2);
+    backdrop-filter: blur(8px);
   }
 
   .fakeModal {
@@ -36,6 +40,7 @@
       @extend .mt-2;
       height: 48px;
       box-sizing: border-box;
+      padding-right: 32px;
     }
 
     #invitation-add-btn {
@@ -75,3 +80,11 @@
   }
 }
 
+
+
+@media (min-width: 600px) {
+  .invitationsWrapper {
+    width: 600px;
+    z-index: 0;
+  }
+}

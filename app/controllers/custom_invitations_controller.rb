@@ -24,10 +24,6 @@ class CustomInvitationsController < ApplicationController
     end
   end
 
-  def new
-    authorize :invite, policy_class: CustomInvitationPolicy
-  end
-
   def csv_create
     authorize :invite, policy_class: CustomInvitationPolicy
     @file = params[:bulk_invitation][:csv_file]
@@ -44,7 +40,7 @@ class CustomInvitationsController < ApplicationController
     else
       flash[:alert] = "Please provide a CSV"
     end
-    redirect_to new_invitation_path
+    redirect_to profiles_path
   end
 end
 
