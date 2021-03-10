@@ -9,7 +9,7 @@
     <% if @bookings_count.positive? %>
       <h3 class="mt-0 mb-1 textMd">Bookings</h3>
     <% else %>
-      <h3 class="mt-0 mb-4 textMd">
+    <h3 class="mt-0 mb-4 textMd textBlue">
         Your current bookings will appear here
       </h3>
     <% end %>
@@ -65,7 +65,12 @@
 
       <%= link_to "View all (#{@bookings.size})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
     <% else %>
-      <%= link_to "Make a booking", new_profile_booking_path(current_user.manager.network.first, select: true), class: "btn btn-primary text-center mb-2" %>
+      <% if current_user.manager.network.empty? %>
+        <%= link_to "Connect with freelancers", profiles_path(all: true), class: "btn btn-primary text-center mb-2" %>
+      <% else %>
+        <%= link_to "Make a booking", new_profile_booking_path("no_profile", select: true), class: "btn btn-primary text-center mb-2" %>
+
+      <% end %>
     <% end %>
   </div>
 
@@ -73,7 +78,7 @@
     <% if @jobs_count.positive? %>
       <h3 class="mt-0 mb-1 textMd">Job posts</h3>
     <% else %>
-      <h3 class="mt-0 mb-4 textMd">Your current job posts will appear here</h3>
+      <h3 class="mt-0 mb-4 textMd textBlue">Your current job posts will appear here</h3>
     <% end %>
 
     <% if @jobs_count.positive? %>
