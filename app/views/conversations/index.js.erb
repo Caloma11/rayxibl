@@ -2,11 +2,22 @@
   const conversationsContainer = document.getElementById("conversations");
   const filterContent = document.getElementById("filter-content");
   const trigger = document.getElementById("filter-trigger");
+  const [network, all] = document.querySelectorAll(".switch a");
 
   conversationsContainer.innerHTML = "<%= j render partial: "conversations/snippets", locals: { conversations: @conversations } %>"
 
   if (!filterContent.classList.contains("none")) {
     filterContent.classList.add("none");
+  }
+
+  if ("<%= params[:all] %>" === "true") {
+    all.classList.add("btn-white");
+    network.classList.remove("btn-white");
+    all.classList.remove("btn-transparent");
+  } else {
+    network.classList.add("btn-white");
+    all.classList.remove("btn-white");
+    network.classList.remove("btn-transparent");
   }
 
   if (trigger && <%= @filter_count.is_a?(Integer) ? @filter_count : 0 %> > 0) {
