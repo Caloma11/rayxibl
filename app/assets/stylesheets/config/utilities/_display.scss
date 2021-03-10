@@ -3,7 +3,7 @@
 }
 
 .block {
-	display: block;
+	display: block !important;
 }
 
 .inline-flex {
@@ -29,9 +29,9 @@
 		flex-direction: column-reverse;
 	}
 
-  &.flex-wrap {
-    flex-wrap: wrap;
-  }
+	&.flex-wrap {
+		flex-wrap: wrap;
+	}
 }
 
 .none {
@@ -215,11 +215,11 @@ fieldset {
 }
 
 .min-w-0 {
-  min-width: 0;
+	min-width: 0;
 }
 
 .focus-outline-none {
-  &:focus {
-    outline: none;
-  }
+	&:focus {
+		outline: none;
+	}
 }

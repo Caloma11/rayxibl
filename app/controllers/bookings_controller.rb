@@ -105,7 +105,7 @@ class BookingsController < ApplicationController
   def cancel
     authorize @booking
     if @booking.canceled!
-      flash[:notice] = "Booking with #{@booking.profile.display_name} has been cancelled."
+      flash[:alert] = "Booking with #{@booking.profile.display_name} has been cancelled."
       redirect_to bookings_path
     end
   end
@@ -170,6 +170,7 @@ class BookingsController < ApplicationController
                                      :price_type,
                                      :weekends,
                                      :profile_id,
+                                     :billable,
                                      attachments: [],
                                      billable: []
                                     )

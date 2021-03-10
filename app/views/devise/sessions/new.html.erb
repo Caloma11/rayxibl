@@ -15,14 +15,14 @@
         <%= f.email_field :email, autofocus: true,
                           autocomplete: "email",
                           class: "w-100 bg-white py-3 textMd",
-                          placeholder: "alan@gmail.com" %>
+                          placeholder: "Email" %>
       </div>
 
       <div class="flex mb-3">
         <%= f.password_field :password,
                               autocomplete: "new-password",
                               class: "bg-white w-100 py-3 textMd",
-                              placeholder: "********" %>
+                              placeholder: "Password" %>
       </div>
 
       <% if devise_mapping.rememberable? %>

@@ -9,9 +9,19 @@
       <div class="relative">
         <div class="none actions-container">
           <div class="actions flex flex-column job-show">
+            <% convo ||= Conversation.find_by(manager: @booking.manager, profile: @booking.profile) %>
+            <% if convo %>
+              <%= link_to conversation_path(convo, booking_id: @booking.id, anchor: "message-#{convo.messages.last&.id}"), class: "action-link" do %>
+                <%= image_tag "icons/message-white.svg", alt: "message icon", width: 16, height: 16, class: "vertical-align-middle mr-2 pl-1" %> Message
+              <% end %>
+            <% else %>
+              <%= link_to profile_conversations_path(conversation: { profile_id: booking.profile.id }, profile_id: booking.profile.id), method: :post, class: "action-link" do %>
+                <%= image_tag "icons/message-white.svg", alt: "message icon", width: 16, height: 16, class: "vertical-align-middle mr-2 pl-1" %> Message
+              <% end %>
+            <% end %>
             <% if policy(@booking).cancel? %>
               <%= button_to booking_cancel_path(@booking), method: :patch, class: "action-link", data: { confirm: "Are you sure you want to cancel the booking?" } do %>
-                Cancel
+                <%= image_tag "icons/x-square.svg", alt: "Cancel", width: 20, height: 20, class: "vertical-align-middle mr-2" %> Cancel
               <% end %>
             <% end %>
           </div>
@@ -77,7 +87,7 @@
             <%= link_to "Specific", "#", id: ("specific" if current_user.manager?), class: "tab #{'active' unless @booking&.duration}", data: { turbolinks: false } %>
           </div>
         </div>
-        <div class="flex items-end justify-content-between">
+        <div class="flex items-end justify-content-between dates-selector">
           <div class="dates-input-wrapper">
             <label for="dates" class="block textGray">Dates</label>
 
@@ -94,11 +104,13 @@
                         wrapper_html: { class: "flex flex-column mb-3 none" } %>
           </div>
 
-          <div>
-            <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" }, label_html: { class: "block textGray nowrap flex items-center" }, wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
+          <div class="weekends-contain">
+            <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "booking[weekends]", active: @booking.weekends, id: "booking_weekends" } %>
           </div>
         </div>
-        <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true]], input_html:{ class: "mb-2" }, wrapper_html: { class: "flex flex-row-reverse justify-content-end my-2" }, include_hidden: false %>
+        <div class="flex mb-3">
+          <%= render partial: "shared/checkbox", locals: { label: "Billable", name: "booking[billable]", active: @booking.billable, id: "booking_billable_true" } %>
+        </div>
         <div id="priceSection" class="flex justify-content-between items-center flex-wrap">
           <%= f.input :price, label: false, placeholder: "Ex: $250", label_html: { class: "block textGray" }, input_html: { class: "mb-2" }, wrapper_html: { class: "mr-2 flex-shrink-2" } %>
           <%= f.input :price_type, label: false, label_html: { class: "block textGray" }, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-3" }  %>

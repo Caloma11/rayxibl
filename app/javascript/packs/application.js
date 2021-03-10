@@ -39,6 +39,7 @@ import { initUploadCSV } from "../components/uploadCSV";
 import { initFormsOverlay } from "../components/formsOverlay";
 import { fetchMoreMessages } from "../components/fetchMoreMessages";
 import { invitationModal } from "../components/invitationPage";
+import { initPrefill } from "../components/widgetMessage";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -88,6 +89,7 @@ document.addEventListener("turbolinks:load", () => {
 	initFormsOverlay();
 	fetchMoreMessages();
 	invitationModal();
+  initPrefill();
 	window.starRating = starRating;
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
