@@ -170,6 +170,7 @@ class BookingsController < ApplicationController
                                      :price_type,
                                      :weekends,
                                      :profile_id,
+                                     :billable,
                                      attachments: [],
                                      billable: []
                                     )

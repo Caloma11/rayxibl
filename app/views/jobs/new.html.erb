@@ -69,15 +69,15 @@
         </div>
 
         <!-- Dates input -->
-        <div class="flex items-end justify-content-between mt-3">
+        <div class="flex items-center justify-content-between mt-3">
 
-          <div class="dates-input-wrapper min-w-0 ">
+          <div class="dates-input-wrapper min-w-0">
             <label for="dates" class="block textLightBlack">Dates</label>
-            <input id="job-datepicker" type="text" name="dates" class="mb-2 w-100 datepicker border-box">
+            <input id="job-datepicker" type="text" name="dates" class="w-100 datepicker border-box">
           </div>
 
-          <div>
-            <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" }, label_html: { class: "block textLightBlack nowrap flex items-center" }, wrapper_html: { class: "flex flex-row-reverse items-center mb-2 min-w-0"} %>
+          <div class="weekends-contain">
+            <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "job[weekends]", active: false } %>
           </div>
         </div>
 
