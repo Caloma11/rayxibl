@@ -22,6 +22,13 @@ const ActionButton = () => {
 		setOpen(prevState => !prevState);
 	};
 
+  const triggerModal = (e) => {
+    e.preventDefault();
+    const modal = document.querySelector(".invitationsWrapper");
+    modal.classList.remove("none");
+    setOpen(false);
+  }
+
 	useEffect(() => {
 		checkParams();
 	}, []);
@@ -44,7 +51,7 @@ const ActionButton = () => {
 				<div className="actions flex flex-column">
 					<a
 						className="action-link flex items-center justify-content-between"
-						href="/invite"
+						href="#" onClick={triggerModal}
 					>
 						<img className="" src={mail} alt="mail" width={28} height={28} />
 						Email invite
