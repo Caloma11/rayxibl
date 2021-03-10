@@ -73,11 +73,27 @@ class BookingsController < ApplicationController
 
   def show
     authorize @booking
+
+    recognized = Rails.application.routes.recognize_path(request.referrer)
+    @last_url = if recognized[:controller] == "bookings" && recognized[:action] == "index"
+      bookings_path
+    else
+      schedule_path
+    end
+
     render 'edit'
   end
 
   def edit
     authorize @booking
+
+    recognized = Rails.application.routes.recognize_path(request.referrer)
+
+    @last_url = if recognized[:controller] == "bookings" && recognized[:action] == "index"
+      bookings_path
+    else
+      schedule_path
+    end
   end
 
   def update
