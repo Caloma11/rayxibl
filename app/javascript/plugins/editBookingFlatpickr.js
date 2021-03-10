@@ -41,8 +41,6 @@ export const editBookingFlatpickr = () => {
 			}
 		});
 
-		console.log({ startTimeFlat, endTimeFlat });
-
 		bookingTime.addEventListener("click", e => {
 			e.preventDefault();
 			if (!startTimeFlat.isOpen && !endTimeFlat.isOpen) {
