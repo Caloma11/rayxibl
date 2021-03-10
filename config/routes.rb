@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   patch "/bookings/:id/update_status", to: "bookings#accept_or_reject", as: :booking_update_status
 
   get "/mail", to: "pages#mail", as: :mail
+  get "/policy", to: "pages#policy", as: :policy
   get "/edit_password", to: "users#edit_password", as: :edit_password
   patch "/update_password", to: "users#update_password", as: :update_password
   patch "/users/update", to: "users#update", as: :user_update
