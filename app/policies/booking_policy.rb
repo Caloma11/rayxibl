@@ -9,6 +9,14 @@ class BookingPolicy < ApplicationPolicy
     record.manager == user.manager || record.profile == user.profile
   end
 
+  def new?
+    if record.profile.persisted?
+      user.manager? && user.find_connection(record.profile.user)
+    else
+      user.manager? && record
+    end
+  end
+
   def create?
     user.manager? && user.find_connection(record.profile.user)
   end
