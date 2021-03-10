@@ -14,6 +14,9 @@ export const jobFlatpickr = () => {
 	const expirationDateInput = document.getElementById("job_expiration_date");
 	const jobTime = document.getElementById("job_time");
 	const timeWrapper = document.querySelector(".bookingSpecific");
+	const jobPageWrapper = document.querySelector(".jobs-new");
+
+	if (!jobPageWrapper) return;
 
 	const timepickerOptions = {
 		disableMobile: true,
