@@ -65,7 +65,7 @@
 
       <%= link_to "View all (#{@bookings.size})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
     <% else %>
-      <%= link_to "Make a booking", "#", class: "btn btn-primary text-center mb-2" %>
+      <%= link_to "Make a booking", new_profile_booking_path(current_user.manager.network.first, select: true), class: "btn btn-primary text-center mb-2" %>
     <% end %>
   </div>
 

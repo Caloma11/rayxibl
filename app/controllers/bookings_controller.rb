@@ -44,20 +44,29 @@ class BookingsController < ApplicationController
   end
 
   def new
+    @select = params[:select] == "true"
     @booking = Booking.new
     @booking.profile = @profile
+    @network = current_user.manager.network
     authorize @booking
   end
 
   def create
     @booking = Booking.new(booking_params)
     @booking.manager = current_user.manager
-    @profile = Profile.find(params[:profile_id])
-    @booking.profile = @profile
+    @select = params[:select] == "true"
+    # If has Query params[:select], Manager will choose from Dropdown list of Freelancers
+    if @select
+      @profile = Profile.find(booking_params[:profile_id])
+    else
+      @profile = Profile.find(params[:profile_id])
+      @booking.profile = @profile
+    end
     authorize @booking
     if @booking.save
       redirect_to bookings_path
     else
+      @network = current_user.manager.network
       render 'new'
     end
   end
@@ -160,6 +169,7 @@ class BookingsController < ApplicationController
                                      :price,
                                      :price_type,
                                      :weekends,
+                                     :profile_id,
                                      attachments: [],
                                      billable: []
                                     )
