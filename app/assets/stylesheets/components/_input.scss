@@ -20,6 +20,10 @@ select {
 	box-sizing: border-box;
 	height: 40px;
 
+	&[type="radio"] {
+		height: unset;
+	}
+
 	&:focus {
 		outline: $blue auto 1px;
 		background: white;
