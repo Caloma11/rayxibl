@@ -89,11 +89,13 @@ class BookingsController < ApplicationController
 
     recognized = Rails.application.routes.recognize_path(request.referrer)
 
-    @last_url = if recognized[:controller] == "bookings" && recognized[:action] == "index"
-      bookings_path
-    else
-      schedule_path
-    end
+    @last_url = if current_user.freelancer?
+                  dashboard_path
+                elsif recognized[:controller] == "bookings" && recognized[:action] == "index"
+                  bookings_path
+                else
+                  schedule_path
+                end
   end
 
   def update
