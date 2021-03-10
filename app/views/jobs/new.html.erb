@@ -1,8 +1,9 @@
 <div class="jobs-new">
   <section class="mx-3 flex justify-content-between items-center">
-    <%= link_to jobs_path do %>
+    <%= link_to @last_url do %>
       <%= image_tag "icons/cross.svg", alt: "exit", class: "icon" %>
     <% end %>
+
     <h1>NEW JOB POST</h1>
     <%= image_tag "icons/more.svg", alt: "more", class: "icon more opaque noSelect" %>
   </section>
@@ -77,7 +78,7 @@
           </div>
 
           <div class="weekends-contain">
-            <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "job[weekends]", active: false } %>
+            <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "job[weekends]", active: false, id: "job_weekends" } %>
           </div>
         </div>
 

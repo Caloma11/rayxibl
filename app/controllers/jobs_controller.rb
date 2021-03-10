@@ -54,6 +54,14 @@ class JobsController < ApplicationController
 
   def new
     @job = Job.new
+    recognized = Rails.application.routes.recognize_path(request.referrer)
+
+    @last_url = if recognized[:controller] == "pages"
+                  dashboard_path
+                elsif recognized[:controller] == "profiles"
+                  profiles_path
+                end
+
     authorize @job
   end
 
