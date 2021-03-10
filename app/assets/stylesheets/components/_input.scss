@@ -1,3 +1,7 @@
+label {
+	@extend .mb-1;
+}
+
 input,
 textarea,
 select {
@@ -13,7 +17,8 @@ select {
 	border-radius: $radius-md;
 	padding: 8px;
 	color: #121217;
-  box-sizing: border-box;
+	box-sizing: border-box;
+	height: 40px;
 
 	&:focus {
 		outline: $blue auto 1px;

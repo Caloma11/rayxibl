@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import flatpickr from "flatpickr";
-import { BookingFormTimeList } from "./BookingFormTimeList";
 
 export const BookingFormDates = ({
 	chosenDate,
@@ -20,7 +19,19 @@ export const BookingFormDates = ({
 	setWeekends,
 	errors
 }) => {
+	const [time, setTime] = useState("");
 	const datesRef = useRef(null);
+	const startTimeRef = useRef(null);
+	const endTimeRef = useRef(null);
+	const timeRef = useRef(null);
+	const timeWrapperRef = useRef(null);
+	const startTimeFlat = useRef(null);
+	const endTimeFlat = useRef(null);
+
+	const handleTimeClick = e => {
+		e.preventDefault();
+		startTimeFlat.current.open();
+	};
 
 	useEffect(() => {
 		if (chosenDate) {
@@ -50,6 +61,35 @@ export const BookingFormDates = ({
 				}
 			});
 		}
+
+		const timepickerOptions = {
+			disableMobile: true,
+			noCalendar: true,
+			enableTime: true,
+			time_24hr: true,
+			positionElement: timeWrapperRef.current
+		};
+
+		if (endTimeRef.current) {
+			endTimeFlat.current = flatpickr(endTimeRef.current, {
+				...timepickerOptions,
+				onClose: (_, time) => {
+					setTime(prev => `${prev} - ${time}`);
+					setEndTime(time);
+				}
+			});
+		}
+
+		if (startTimeRef.current) {
+			startTimeFlat.current = flatpickr(startTimeRef.current, {
+				...timepickerOptions,
+				onClose: () => endTimeFlat.current.open(),
+				onChange: (_, newTime) => {
+					setTime(newTime);
+					setStartTime(newTime);
+				}
+			});
+		}
 	}, []);
 
 	useEffect(() => {
@@ -63,62 +103,71 @@ export const BookingFormDates = ({
 
 	return (
 		<>
-			<div className="duration-toggler">
-				<button
-					type="button"
-					className={`btn ${specificHour ? "" : "btn-white"}`}
-					onClick={() => setSpecificHour(false)}
-				>
-					Duration
-				</button>
-				<button
-					type="button"
-					className={`btn ${specificHour ? "btn-white" : ""}`}
-					onClick={() => setSpecificHour(true)}
-				>
-					Specific
-				</button>
-			</div>
-			<div className="flex">
-				{specificHour ? (
-					<>
-						<div className="input-wrapper mr-3">
-							<label htmlFor="booking_start_time">Starting time</label>
-							<input
-								id="booking_start_time"
-								name="booking[start_time]"
-								type="time"
-								value={startTime}
-								onChange={e => setStartTime(e.target.value)}
-								list="booking-form-time-list"
-							/>
-						</div>
-						<div className="input-wrapper mr-3">
-							<label htmlFor="booking_end_time">Ending time</label>
+			<div className="flex flex-row-reverse justify-content-between items-end">
+				<div className="duration-toggler">
+					<button
+						type="button"
+						className={`btn ${specificHour ? "" : "btn-white"}`}
+						onClick={() => setSpecificHour(false)}
+					>
+						Duration
+					</button>
+					<button
+						type="button"
+						className={`btn ${specificHour ? "btn-white" : ""}`}
+						onClick={() => setSpecificHour(true)}
+					>
+						Specific
+					</button>
+				</div>
+				<div className="flex">
+					{specificHour ? (
+						<>
+							<div className="input-wrapper mb-0 mr-3" ref={timeWrapperRef}>
+								<label className="block textGray nowrap" htmlFor="booking_time">
+									Hours per day
+								</label>
+								<input
+									id="booking_time"
+									className="w-100"
+									ref={timeRef}
+									onClick={handleTimeClick}
+									defaultValue={time}
+								/>
+								<input
+									id="booking_start_time"
+									name="booking[start_time]"
+									type="time"
+									value={startTime}
+									onChange={e => setStartTime(e.target.value)}
+									ref={startTimeRef}
+									className="none"
+								/>
+							</div>
 							<input
 								id="booking_end_time"
 								name="booking[end_time]"
 								type="time"
 								value={endTime}
 								onChange={e => setEndTime(e.target.value)}
-								list="booking-form-time-list"
+								ref={endTimeRef}
+								className="none"
+							/>
+						</>
+					) : (
+						<div className="input-wrapper mb-0 mr-3">
+							<label htmlFor="booking_duration">Hours per day</label>
+							<input
+								id="booking_duration"
+								name="booking[duration]"
+								type="number"
+								value={duration}
+								onChange={e => setDuration(e.target.value)}
+								className="w-100"
 							/>
 						</div>
-					</>
-				) : (
-					<div className="input-wrapper">
-						<label htmlFor="booking_duration">Duration (in hours)</label>
-						<input
-							id="booking_duration"
-							name="booking[duration]"
-							type="number"
-							value={duration}
-							onChange={e => setDuration(e.target.value)}
-							list="booking-form-duration-list"
-						/>
-					</div>
-				)}
-				<BookingFormTimeList />
+					)}
+				</div>
 			</div>
 			<div className="flex mb-3 items-center">
 				<input
