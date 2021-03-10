@@ -48,6 +48,14 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     @booking.profile = @profile
     @network = current_user.manager.network
+    recognized = Rails.application.routes.recognize_path(request.referrer)
+    @last_url = if recognized[:controller] == "profiles" && recognized[:action] == "show"
+                  profile_path(@profile)
+                elsif recognized[:controller] == "pages" || !@profile.persisted?
+                  dashboard_path
+                elsif recognized[:controller] == "profiles" && recognized[:action] == "index"
+                  profiles_path
+                end
     authorize @booking
   end
 
@@ -73,11 +81,27 @@ class BookingsController < ApplicationController
 
   def show
     authorize @booking
+
+    recognized = Rails.application.routes.recognize_path(request.referrer)
+    @last_url = if recognized[:controller] == "bookings" && recognized[:action] == "index"
+      bookings_path
+    else
+      schedule_path
+    end
+
     render 'edit'
   end
 
   def edit
     authorize @booking
+
+    recognized = Rails.application.routes.recognize_path(request.referrer)
+
+    @last_url = if recognized[:controller] == "bookings" && recognized[:action] == "index"
+                  bookings_path
+                else
+                  schedule_path
+                end
   end
 
   def update

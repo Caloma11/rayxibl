@@ -1,6 +1,6 @@
 <div id="bookings-new">
   <section class="mx-3 mt-4 flex justify-content-between items-center">
-    <%= link_to(@profile.persisted? ? profile_path(@profile) : dashboard_path) do %>
+    <%= link_to(@last_url) do %>
       <%= image_tag "icons/cross.svg", alt: "exit", class: "icon", height: 16, width: 16 %>
     <% end %>
     <p class="textDarkGray">NEW BOOKING</p>
