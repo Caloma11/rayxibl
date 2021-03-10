@@ -34,7 +34,7 @@
 
   <div class="message-form flex items-end">
     <%= simple_form_for [@conversation, @message], remote: true, html: {class: "flex-grow-1"} do |f| %>
-      <%= f.input :content, as: :string, label: false, placeholder: "Type a message...", input_html: { class: "rounded-pill focus-outline-none ", autocomplete: "off" } %>
+      <%= f.input :content, as: :string, label: false, placeholder: "Type a message...", input_html: { class: "rounded-pill focus-outline-none ", autocomplete: "off", value: (@booking ? prefilled_message(@booking) : nil) } %>
     <% end %>
     <% if current_user.manager? %>
       <% unless current_user.find_connection(@conversation.profile.user) %>

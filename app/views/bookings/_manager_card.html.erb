@@ -23,7 +23,7 @@
             <% end %>
             <% convo ||= Conversation.find_by(manager: booking.manager, profile: booking.profile) %>
             <% if convo %>
-              <%= link_to conversation_path(convo, anchor: "message-#{convo.messages.last&.id}"), class: "action-link" do %>
+              <%= link_to conversation_path(convo, anchor: "message-#{convo.messages.last&.id}", booking_id: booking.id), class: " action-link" do %>
                 <%= image_tag "icons/message-white.svg", alt: "message icon", width: 16, height: 16, class: "vertical-align-middle mr-2 pl-1" %> Message
               <% end %>
             <% else %>
