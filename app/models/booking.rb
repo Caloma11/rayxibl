@@ -72,7 +72,7 @@ class Booking < ApplicationRecord
   end
 
   def parsed_short_time
-    "#{start_time.strftime("%H:%M")} - #{end_time.strftime("%H:%M")}"
+    "#{start_time&.strftime("%H:%M")} - #{end_time&.strftime("%H:%M")}"
   end
 
   private

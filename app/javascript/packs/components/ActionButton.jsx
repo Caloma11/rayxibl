@@ -58,7 +58,7 @@ const ActionButton = () => {
 					</a>
 					<a
 						className="action-link flex items-center justify-content-between"
-						href="/profiles"
+						href="/profiles?all=true"
 					>
 						<img
 							className=""
