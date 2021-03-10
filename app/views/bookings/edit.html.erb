@@ -94,8 +94,8 @@
                         wrapper_html: { class: "flex flex-column mb-3 none" } %>
           </div>
 
-          <div>
-            <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" }, label_html: { class: "block textGray nowrap flex items-center" }, wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
+          <div class="weekends-contain">
+            <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "booking[weekends]", active: @booking.weekends } %>
           </div>
         </div>
         <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true]], input_html:{ class: "mb-2" }, wrapper_html: { class: "flex flex-row-reverse justify-content-end my-2" }, include_hidden: false %>
