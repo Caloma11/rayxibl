@@ -1,0 +1,55 @@
+.checkbox-container {
+	@extend .noSelect,
+		.block,
+		.textLightBlack,
+		.textBetween,
+		.flex,
+		.flex-row-reverse,
+		.items-center;
+
+	position: relative;
+	cursor: pointer;
+
+	input[type="checkbox"] {
+		position: absolute;
+		opacity: 0;
+		cursor: pointer;
+		height: 0;
+		width: 0;
+
+		&:checked {
+			& ~ .checkmark {
+				svg {
+					@extend .block;
+				}
+			}
+		}
+	}
+
+	.checkmark {
+		@extend .rounded,
+			.flex,
+			.justify-content-center,
+			.items-center,
+			.mr-2,
+			.border-box;
+
+		height: 25px;
+		width: 25px;
+		border: 2px solid $flat-gray-3;
+
+		svg {
+			@extend .none;
+		}
+	}
+
+	&:hover {
+		input[type="checkbox"] {
+			&:checked {
+				& ~ .checkmark {
+					background-color: $blue-2;
+				}
+			}
+		}
+	}
+}
