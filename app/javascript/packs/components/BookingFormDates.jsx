@@ -1,6 +1,5 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import flatpickr from "flatpickr";
-import { BookingFormTimeList } from "./BookingFormTimeList";
 
 export const BookingFormDates = ({
 	chosenDate,
@@ -20,7 +19,19 @@ export const BookingFormDates = ({
 	setWeekends,
 	errors
 }) => {
+	const [time, setTime] = useState("");
 	const datesRef = useRef(null);
+	const startTimeRef = useRef(null);
+	const endTimeRef = useRef(null);
+	const timeRef = useRef(null);
+	const timeWrapperRef = useRef(null);
+	const startTimeFlat = useRef(null);
+	const endTimeFlat = useRef(null);
+
+	const handleTimeClick = e => {
+		e.preventDefault();
+		startTimeFlat.current.open();
+	};
 
 	useEffect(() => {
 		if (chosenDate) {
@@ -47,6 +58,35 @@ export const BookingFormDates = ({
 						setStartDate(flatStartDate);
 						setEndDate(flatEndDate);
 					}
+				}
+			});
+		}
+
+		const timepickerOptions = {
+			disableMobile: true,
+			noCalendar: true,
+			enableTime: true,
+			time_24hr: true,
+			positionElement: timeWrapperRef.current
+		};
+
+		if (endTimeRef.current) {
+			endTimeFlat.current = flatpickr(endTimeRef.current, {
+				...timepickerOptions,
+				onClose: (_, time) => {
+					setTime(prev => `${prev} - ${time}`);
+					setEndTime(time);
+				}
+			});
+		}
+
+		if (startTimeRef.current) {
+			startTimeFlat.current = flatpickr(startTimeRef.current, {
+				...timepickerOptions,
+				onClose: () => endTimeFlat.current.open(),
+				onChange: (_, newTime) => {
+					setTime(newTime);
+					setStartTime(newTime);
 				}
 			});
 		}
@@ -82,28 +122,35 @@ export const BookingFormDates = ({
 			<div className="flex">
 				{specificHour ? (
 					<>
-						<div className="input-wrapper mr-3">
-							<label htmlFor="booking_start_time">Starting time</label>
+						<div className="input-wrapper mr-3" ref={timeWrapperRef}>
+							<label className="block textGray nowrap" htmlFor="booking_time">
+								Hours per day
+							</label>
+							<input
+								id="booking_time"
+								ref={timeRef}
+								onClick={handleTimeClick}
+								defaultValue={time}
+							/>
 							<input
 								id="booking_start_time"
 								name="booking[start_time]"
 								type="time"
 								value={startTime}
 								onChange={e => setStartTime(e.target.value)}
-								list="booking-form-time-list"
+								ref={startTimeRef}
+								className="none"
 							/>
 						</div>
-						<div className="input-wrapper mr-3">
-							<label htmlFor="booking_end_time">Ending time</label>
-							<input
-								id="booking_end_time"
-								name="booking[end_time]"
-								type="time"
-								value={endTime}
-								onChange={e => setEndTime(e.target.value)}
-								list="booking-form-time-list"
-							/>
-						</div>
+						<input
+							id="booking_end_time"
+							name="booking[end_time]"
+							type="time"
+							value={endTime}
+							onChange={e => setEndTime(e.target.value)}
+							ref={endTimeRef}
+							className="none"
+						/>
 					</>
 				) : (
 					<div className="input-wrapper">
@@ -118,7 +165,6 @@ export const BookingFormDates = ({
 						/>
 					</div>
 				)}
-				<BookingFormTimeList />
 			</div>
 			<div className="flex mb-3 items-center">
 				<input
