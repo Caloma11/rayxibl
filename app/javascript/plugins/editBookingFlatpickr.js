@@ -8,6 +8,7 @@ const handleChange = (dates, { start, end }) => {
 };
 
 export const editBookingFlatpickr = () => {
+	const bookingEditWrapper = document.querySelector(".booking-edit");
 	const startTimeInput = document.getElementById("booking_start_time");
 	const endTimeInput = document.getElementById("booking_end_time");
 	const dateInput = document.getElementById("edit-booking-datepicker");
@@ -20,31 +21,33 @@ export const editBookingFlatpickr = () => {
 		time_24hr: true
 	};
 
-	if (startTimeInput) {
-		flatpickr(startTimeInput, timepickerOptions);
-	}
+	if (bookingEditWrapper) {
+		if (startTimeInput) {
+			flatpickr(startTimeInput, timepickerOptions);
+		}
 
-	if (endTimeInput) {
-		flatpickr(endTimeInput, timepickerOptions);
-	}
+		if (endTimeInput) {
+			flatpickr(endTimeInput, timepickerOptions);
+		}
 
-	if (dateInput) {
-		flatpickr(dateInput, {
-			disableMobile: true,
-			mode: "range",
-			dateFormat: "d-m-Y",
-			altFormat: "d M",
-			altInput: true,
-			minDate: new Date(),
-			locale: {
-				rangeSeparator: "  -  "
-			},
-			onChange: dates => {
-				handleChange(dates, {
-					start: bookingStartDateInput,
-					end: bookingEndDateInput
-				});
-			}
-		});
+		if (dateInput) {
+			flatpickr(dateInput, {
+				disableMobile: true,
+				mode: "range",
+				dateFormat: "d-m-Y",
+				altFormat: "d M",
+				altInput: true,
+				minDate: new Date(),
+				locale: {
+					rangeSeparator: "  -  "
+				},
+				onChange: dates => {
+					handleChange(dates, {
+						start: bookingStartDateInput,
+						end: bookingEndDateInput
+					});
+				}
+			});
+		}
 	}
 };
