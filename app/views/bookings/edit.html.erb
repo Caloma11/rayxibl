@@ -95,10 +95,12 @@
           </div>
 
           <div class="weekends-contain">
-            <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "booking[weekends]", active: @booking.weekends } %>
+            <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "booking[weekends]", active: @booking.weekends, id: "booking_weekends" } %>
           </div>
         </div>
-        <%= f.input :billable, label_html: { class: "block textGray" }, as: :check_boxes, collection: [["", true]], input_html:{ class: "mb-2" }, wrapper_html: { class: "flex flex-row-reverse justify-content-end my-2" }, include_hidden: false %>
+        <div class="flex">
+          <%= render partial: "shared/checkbox", locals: { label: "Billable", name: "booking[billable]", active: @booking.billable, id: "booking_billable_true" } %>
+        </div>
         <div id="priceSection" class="flex justify-content-between items-center flex-wrap">
           <%= f.input :price, label: false, placeholder: "Ex: $250", label_html: { class: "block textGray" }, input_html: { class: "mb-2" }, wrapper_html: { class: "mr-2 flex-shrink-2" } %>
           <%= f.input :price_type, label: false, label_html: { class: "block textGray" }, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-3" }  %>
