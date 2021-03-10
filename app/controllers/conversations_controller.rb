@@ -8,7 +8,7 @@ class ConversationsController < ApplicationController
       @jobs = current_user.manager.jobs
 
       if params[:all]
-        @conversations = @conversations.by_latest_message
+        @conversations = @conversations.joins(profile: :connections).group('conversations.id').having('count(*) = 1').by_latest_message
       else
         @conversations = @conversations.where(profile_id: current_user.manager.network.pluck(:id)).by_latest_message_with_empty
       end

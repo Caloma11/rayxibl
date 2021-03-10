@@ -57,9 +57,9 @@ class BookingsController < ApplicationController
     @select = params[:select] == "true"
     # If has Query params[:select], Manager will choose from Dropdown list of Freelancers
     if @select
-      @profile = Profile.find(booking_params[:profile_id])
+      @profile = Profile.new
     else
-      @profile = Profile.find(params[:profile_id])
+      set_profile
       @booking.profile = @profile
     end
     authorize @booking
@@ -155,7 +155,7 @@ class BookingsController < ApplicationController
   end
 
   def set_profile
-    @profile = Profile.find(params[:profile_id])
+    @profile = Profile.find_by_id(params[:profile_id]) || Profile.new
   end
 
   def booking_params

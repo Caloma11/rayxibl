@@ -1,6 +1,6 @@
 
 <section class="mx-3 mt-4 flex justify-content-between items-center">
-  <%= link_to profile_path(@profile) do %>
+  <%= link_to(@profile.persisted? ? profile_path(@profile) : dashboard_path) do %>
     <%= image_tag "icons/cross.svg", alt: "exit", class: "icon", height: 16, width: 16 %>
   <% end %>
   <p class="textDarkGray">NEW BOOKING</p>
@@ -24,7 +24,7 @@
 
 <div id="new-booking" class="flex justify-content-center p-3">
   <div class="bookingCard">
-    <% url = @select ? profile_bookings_path(current_user.manager.network.first, select: true) : profile_bookings_path(@profile) %>
+    <% url = @select ? profile_bookings_path("no_profile", select: true) : profile_bookings_path(@profile) %>
     <%= simple_form_for [Profile.new, @booking], url: url do |f| %>
       <% if @select %>
         <%= f.input :profile_id, collection: @network.map { |profile| [profile.user.display_name, profile.id] },
