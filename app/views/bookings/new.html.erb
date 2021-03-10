@@ -7,23 +7,31 @@
   <%= image_tag "icons/more.svg", alt: "more", class: "icon more opaque", height: 24, width: 24 %>
 </section>
 
-<section class="flex p-3">
-  <% if @profile.user.avatar.attached? %>
-    <div class="profileAvatar rounded-square" style="background-image: url(<%= @profile.user.avatar.service_url %>)">
+<% unless @select %>
+  <section class="flex items-center p-3">
+    <% if @profile.user.avatar.attached? %>
+      <div class="profileAvatar rounded-square" style="background-image: url(<%= @profile.user.avatar.service_url %>)">
+      </div>
+    <% else %>
+      <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-square", height: 80, width: 80 %>
+    <% end %>
+    <div>
+      <p class="my-0 mx-3"><strong><%= @profile.user.display_name %></strong></p>
+      <p class="textGray my-0 mx-3"><%= @profile.profession %>, <%= @profile.location %></p>
     </div>
-  <% else %>
-    <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-square", height: 80, width: 80 %>
-  <% end %>
-  <div>
-    <p class="mb-0 mx-3"><strong><%= @profile.user.display_name %></strong></p>
-    <p class="textGray my-0 mx-3"><%= @profile.profession %>, <%= @profile.location %></p>
-  </div>
-</section>
-
+  </section>
+<% end %>
 
 <div id="new-booking" class="flex justify-content-center p-3">
   <div class="bookingCard">
-    <%= simple_form_for [@profile, @booking] do |f| %>
+    <% url = @select ? profile_bookings_path(current_user.manager.network.first, select: true) : profile_bookings_path(@profile) %>
+    <%= simple_form_for [Profile.new, @booking], url: url do |f| %>
+      <% if @select %>
+        <%= f.input :profile_id, collection: @network.map { |profile| [profile.user.display_name, profile.id] },
+                    label: "Freelancer",
+                    label_html: { class: "block textGray" },
+                    input_html: { class: "mb-2 w-100" } %>
+        <% end %>
       <%= f.input :title, label: "Project / Client", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
       <%= f.input :description, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
 
