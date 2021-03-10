@@ -29,11 +29,10 @@
                           placeholder: "alan@gmail.com",
                           input_html: { value: resource.email }, disabled: true %>
       </div>
-
       <div class="flex mb-3">
         <%= f.password_field :password,
                              autocomplete: "new-password",
-                             class: "bg-white w-100 py-3 textMd",
+                             class: "bg-white w-100 py-3 textMd #{resource.errors.messages[:password].length.positive? ? "error" : ""}",
                              placeholder: "********" %>
       </div>
 
