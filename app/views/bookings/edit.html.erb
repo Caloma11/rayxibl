@@ -98,7 +98,7 @@
             <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "booking[weekends]", active: @booking.weekends, id: "booking_weekends" } %>
           </div>
         </div>
-        <div class="flex">
+        <div class="flex mb-3">
           <%= render partial: "shared/checkbox", locals: { label: "Billable", name: "booking[billable]", active: @booking.billable, id: "booking_billable_true" } %>
         </div>
         <div id="priceSection" class="flex justify-content-between items-center flex-wrap">
