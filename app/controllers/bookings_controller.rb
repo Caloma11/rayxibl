@@ -82,7 +82,6 @@ class BookingsController < ApplicationController
 
   def update
     authorize @booking
-    binding.pry
     if @booking.update(booking_params)
       redirect_to booking_path(@booking)
     else
@@ -171,6 +170,7 @@ class BookingsController < ApplicationController
                                      :price_type,
                                      :weekends,
                                      :profile_id,
+                                     :billable,
                                      attachments: [],
                                      billable: []
                                     )

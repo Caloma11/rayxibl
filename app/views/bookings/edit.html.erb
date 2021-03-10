@@ -77,7 +77,7 @@
             <%= link_to "Specific", "#", id: ("specific" if current_user.manager?), class: "tab #{'active' unless @booking&.duration}", data: { turbolinks: false } %>
           </div>
         </div>
-        <div class="flex items-end justify-content-between">
+        <div class="flex items-end justify-content-between dates-selector">
           <div class="dates-input-wrapper">
             <label for="dates" class="block textGray">Dates</label>
 
