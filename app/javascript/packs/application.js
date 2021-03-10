@@ -38,6 +38,7 @@ import { liveBookingPrice } from "../components/liveBookingPrice";
 import { initUploadCSV } from "../components/uploadCSV";
 import { initFormsOverlay } from "../components/formsOverlay";
 import { fetchMoreMessages } from "../components/fetchMoreMessages";
+import { invitationModal } from "../components/invitationPage";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -86,6 +87,7 @@ document.addEventListener("turbolinks:load", () => {
 	updateUser();
 	initFormsOverlay();
 	fetchMoreMessages();
+	invitationModal();
 	window.starRating = starRating;
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
