@@ -1,6 +1,7 @@
 nav.navbar {
 	@extend .pb-3, .pt-2;
 
+	z-index: 2;
 	flex-shrink: 0; // For sticky footer behavior
 	position: sticky;
 	bottom: 0;
