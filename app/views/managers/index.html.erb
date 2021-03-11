@@ -4,7 +4,7 @@
       <%= image_tag "icons/search.svg", alt: "search", class: "opaque" %>
     </button>
     <div class="flex flex-column items-center justify-content-center">
-      <p class="m-0">CLIENTS (<%= @managers.length %>)</p>
+      <p id="manager-title" class="m-0">CLIENTS (<%= @managers.length %>)</p>
       <span class="textSm textLightBlack">Managers who have added you</span>
     </div>
     <button id="filter-trigger">

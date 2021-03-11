@@ -1,9 +1,11 @@
 (() => {
   const managerCards = document.getElementById("manager-cards");
   const filterContent = document.getElementById("filter-content");
+  const title = document.getElementById("manager-title");
 
   managerCards.innerHTML = "<%= j render partial: "managers/cards", locals: { managers: @managers } %>";
   if (!filterContent.classList.contains("none")) {
     filterContent.classList.add("none");
+    title.innerText = "CLIENTS (<%= @managers.length %>)";
   }
 })();
