@@ -25,16 +25,19 @@
                   wrapper_html: { class: "flex flex-column mb-3" },
                   required: false %>
       <div class="flex justify-content-between items-end mb-3">
-        <div class="bookingSpecific flex flex-column">
-          <label for="job_start_date">Hours per day</label>
-          <div class="flex">
-            <%= f.input :start_time, as: :time, html5: true,
-                        label: false,
-                        wrapper_html: { class: "flex flex-column" } %>
-            <span class="self-centered mx-2"> - </span>
-            <%= f.input :end_time, as: :time, html5: true,
-                        label: false,
-                        wrapper_html: { class: "flex flex-column" } %>
+        <div class="bookingSpecific">
+          <label class="block textGray nowrap">Hours per day</label>
+          <input id="job_time" autocomplete="off" />
+          <div class="inputs flex items-center relative">
+            <%= f.input :start_time, label: false,
+                        label_html: { class: "block textGray nowrap" },
+                        input_html: { class: "mb-2 w-100 start-timepicker" },
+                        wrapper_html: { class: "none" },
+                        as: :string %>
+            <%= f.input :end_time, label: false,
+                        input_html: { class: "mb-2 w-100 end-timepicker" },
+                        wrapper_html: { class: "none" },
+                        as: :string %>
           </div>
         </div>
         <div class="bookingDuration none">
@@ -50,7 +53,7 @@
       <div class="flex items-end justify-content-between">
         <div class="dates-input-wrapper">
           <label for="dates" class="block textGray">Dates</label>
-          <input type="text" name="dates" class="mb-2 w-100 datepicker">
+          <input id="job-datepicker" type="text" name="dates" class="mb-2 w-100 datepicker">
         </div>
         <%= f.input :start_date, as: :hidden,
                     wrapper_html: { class: "flex flex-column mb-3 mr-3 none" } %>
