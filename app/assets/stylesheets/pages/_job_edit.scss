@@ -2,16 +2,18 @@
 	#job_start_time,
 	#job_end_time {
 		width: 80px;
-		height: 24px;
 	}
 
 	#job_duration {
 		width: 200px;
-		height: 24px;
 	}
 
 	.bookingDuration {
 		width: 214px;
+	}
+
+	.weekends-contain {
+		margin-top: calc(#{$spacing-2} + #{$spacing-3});
 	}
 
 	#tabs {
