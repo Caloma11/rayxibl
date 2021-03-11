@@ -351,6 +351,7 @@ const Calendar = () => {
 									setShowForm={setShowForm}
 									setFormDetails={setFormDetails}
 									first={i === 0}
+									ref={calendarContainerRef}
 								/>
 							);
 						})

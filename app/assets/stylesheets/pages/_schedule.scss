@@ -103,6 +103,7 @@ $day-border: 1px solid #e8e9eb;
 			.profiles {
 				@extend .sticky;
 
+				z-index: 2;
 				left: 0;
 				background: white;
 			}
@@ -260,14 +261,17 @@ $day-border: 1px solid #e8e9eb;
 					}
 
 					.event {
-						@extend .mb-2;
+						@extend .mb-2, .relative;
 
 						background: $flat-orange-5;
 						border-top: 8px solid $flat-orange-3;
 						margin-right: -2px;
 
 						.event-details {
+							@extend .absolute;
+
 							background: $flat-orange-5;
+							z-index: 1;
 						}
 
 						&.red {
