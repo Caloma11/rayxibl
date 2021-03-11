@@ -1,12 +1,17 @@
 .items.ts-input {
+	@extend .py-0, .px-2, .flex, .items-center;
+
 	background: $blueish-gray !important;
 	border: 0;
 	box-shadow: unset;
+	height: 40px !important;
 
 	.item {
-		@extend .shadow;
+		@extend .shadow, .py-1;
 
 		border-radius: 4px;
+		padding-left: calc(#{$base-spacing} + 2px);
+		padding-right: calc(#{$base-spacing} + 2px);
 		background: white !important;
 	}
 }
