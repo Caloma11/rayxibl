@@ -39,6 +39,8 @@ export const CalendarDay = forwardRef(
 		calendarContainerRef
 	) => {
 		const eventRef = useRef(null);
+		const maxPossibleLength = useRef(null);
+		const moreThanOneWeek = useRef(false);
 		const durationRef = useRef(1);
 		// Checks if today, if so, use `"today"` as a class to color the background differently
 		const todayClassName = today ? "today" : "";
@@ -84,11 +86,18 @@ export const CalendarDay = forwardRef(
 
 						if (details) {
 							details.style.left = `${90 - x + 8}px`;
-							details.style.width = `${currentWidth - (90 - x) - 8}px`;
+
+							if (moreThanOneWeek.current) {
+								details.style.width = `${
+									maxPossibleLength.current - (90 - x) - 8
+								}px`;
+							} else {
+								details.style.width = `${currentWidth - (90 - x) - 8}px`;
+							}
 						}
 					}
 
-					if (activeWidth <= 10) {
+					if (activeWidth <= 40) {
 						details.style.left = 0;
 					}
 				}
@@ -143,7 +152,17 @@ export const CalendarDay = forwardRef(
 					{
 						/* To avoid 0 day events (happens when `booking.end_date` === `booking.start_date`) */
 					}
-					if (eventDuration === 0) eventDuration = 1;
+					if (eventDuration === 0) {
+						eventDuration = 1;
+					}
+
+					maxPossibleLength.current = DAY_WIDTH * eventDuration - 4;
+
+					if (eventDuration > 6) {
+						moreThanOneWeek.current = true;
+						const numberOfDaysUntilSunday = 6 - day;
+						eventDuration = numberOfDaysUntilSunday;
+					}
 
 					durationRef.current = eventDuration;
 					const maxWidth = DAY_WIDTH * eventDuration - 4;
@@ -161,7 +180,6 @@ export const CalendarDay = forwardRef(
 									className="event-details"
 									style={{
 										width: maxWidth,
-										maxWidth,
 										height: 40
 									}}
 								>
