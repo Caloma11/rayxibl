@@ -1,3 +1,7 @@
+<% if @bookings == {} %>
+  <%= content_for :body_class, "no-scroll" %>
+<% end %>
+
 <div class="bookings-index bg-blueish-gray">
   <div class="bg-white pb-2 pt-4">
     <section class="head top">
@@ -30,7 +34,7 @@
     </section>
   </div>
 
-  <section class="mx-3 mt-3">
+  <section class="mx-3 mt-3" style="<%= "height: 100vh;" if @bookings == {} %>">
     <div class="flex flex-column" id="booking-cards">
       <%= render partial: "bookings/booking_cards", locals: { booking_group: @bookings, archived_bookings: @archived_bookings } %>
     </div>
