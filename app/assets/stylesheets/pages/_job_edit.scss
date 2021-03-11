@@ -12,6 +12,10 @@
 		width: 214px;
 	}
 
+	.weekends-contain {
+		margin-top: calc(#{$spacing-2} + #{$spacing-3});
+	}
+
 	#tabs {
 		@extend .rounded;
 

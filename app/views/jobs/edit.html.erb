@@ -50,7 +50,7 @@
           <%= link_to "Specific", "#", id: "specific", class: "tab active", data: { turbolinks: false } %>
         </div>
       </div>
-      <div class="flex items-end justify-content-between">
+      <div class="flex items-center justify-content-between mt-3">
         <div class="dates-input-wrapper">
           <label for="dates" class="block textGray">Dates</label>
           <input id="job-datepicker" type="text" name="dates" class="mb-2 w-100 datepicker">
@@ -60,19 +60,21 @@
         <%= f.input :end_date, as: :hidden,
                     wrapper_html: { class: "flex flex-column mb-3 none" } %>
 
-        <div>
-          <%= f.input :weekends, label: "Incl. weekends", input_html: { class: "mr-2" },
-                      label_html: { class: "block textGray nowrap flex items-center" },
-                      wrapper_html: { class: "flex flex-row-reverse items-center mb-2"} %>
+        <div class="weekends-contain">
+          <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "job[weekends]", active: false, id: "job_weekends" } %>
         </div>
       </div>
       <div class="flex">
         <%= f.input :rate, label: "Max budget", placeholder: "$250",
+                    label_html: { class: "block textGray nowrap" },
                     wrapper_html: { class: "flex flex-column mb-3 mr-3" },
                     required: false %>
-        <%= f.input :price_type, collection: Job.price_types.map { |ex| [ex[0].capitalize, ex[0]] }, wrapper_html: { class: "flex flex-column mb-3" } %>
+        <%= f.input :price_type, collection: Job.price_types.map { |ex| [ex[0].capitalize, ex[0]] },
+                    wrapper_html: { class: "flex flex-column mb-3" },
+                    label_html: { class: "block textGray nowrap" } %>
       </div>
-      <%= f.input :attachments, as: :file, input_html: { multiple: true } %>
+      <%= f.input :attachments, as: :file, input_html: { multiple: true },
+                  label_html: { class: "block textGray nowrap" } %>
       <%= f.submit "Update Job", class: "btn btn-primary w-100 my-3 py-2" %>
     <% end %>
   </section>
