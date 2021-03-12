@@ -4,9 +4,7 @@ export const archive = () => {
 	const content = document.getElementById("archived-bookings");
 
 	if (toggler && content) {
-		console.log("hmm");
-		toggler.addEventListener("click", e => {
-			console.log(e);
+		toggler.addEventListener("click", () => {
 			togglerImg.classList.toggle("open");
 			content.classList.toggle("open");
 		});

@@ -92,6 +92,7 @@ document.addEventListener("turbolinks:load", () => {
 	invitationModal();
 	initPrefill();
 	archive();
+	window.archive = archive;
 	window.starRating = starRating;
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;
