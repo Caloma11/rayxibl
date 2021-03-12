@@ -270,6 +270,7 @@ $day-border: 1px solid #e8e9eb;
 						.event-details {
 							@extend .absolute;
 
+							white-space: nowrap;
 							background: $flat-orange-5;
 							z-index: 1;
 						}
