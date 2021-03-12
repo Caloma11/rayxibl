@@ -41,18 +41,17 @@
           <div class="bookingHours w-100">
             <div class="bookingSpecific">
               <label class="block textGray nowrap">Hours per day</label>
-              <input id="booking_time" />
-              <div class="inputs flex items-center relative">
+              <div class="inputs flex items-center">
                 <%= f.input :start_time, label: false,
+                            as: :string,
                             label_html: { class: "block textGray nowrap" },
-                            input_html: { class: "mb-2 w-100 start-timepicker" },
-                            wrapper_html: { class: "none" },
-                            as: :string %>
+                            input_html: { class: "mb-2 w-100", list: "time-options", autocomplete: false } %>
+                <span class="self-centered mx-2"> - </span>
                 <%= f.input :end_time, label: false,
-                            input_html: { class: "mb-2 w-100 end-timepicker" },
-                            wrapper_html: { class: "none" },
-                            as: :string %>
+                            as: :string,
+                            input_html: { class: "mb-2 w-100", list: "time-options", autocomplete: false } %>
               </div>
+              <%= render partial: "shared/time_options" %>
             </div>
 
             <!-- Hidden duration -->

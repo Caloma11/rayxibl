@@ -27,18 +27,17 @@
       <div class="flex justify-content-between items-end mb-3">
         <div class="bookingSpecific">
           <label class="block textGray nowrap">Hours per day</label>
-          <input id="job_time" autocomplete="off" />
-          <div class="inputs flex items-center relative">
+          <div class="inputs flex items-center">
             <%= f.input :start_time, label: false,
+                        as: :string,
                         label_html: { class: "block textGray nowrap" },
-                        input_html: { class: "mb-2 w-100 start-timepicker" },
-                        wrapper_html: { class: "none" },
-                        as: :string %>
+                        input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @job.start_time.strftime("%H:%M") } %>
+            <span class="self-centered mx-2"> - </span>
             <%= f.input :end_time, label: false,
-                        input_html: { class: "mb-2 w-100 end-timepicker" },
-                        wrapper_html: { class: "none" },
-                        as: :string %>
+                        as: :string,
+                        input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @job.end_time.strftime("%H:%M") } %>
           </div>
+          <%= render partial: "shared/time_options" %>
         </div>
         <div class="bookingDuration none">
           <%= f.input :duration,

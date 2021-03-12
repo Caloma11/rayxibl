@@ -12,50 +12,10 @@ export const jobFlatpickr = () => {
 	const startDateInput = document.getElementById("job_start_date");
 	const endDateInput = document.getElementById("job_end_date");
 	const expirationDateInput = document.getElementById("job_expiration_date");
-	const jobTime = document.getElementById("job_time");
-	const timeWrapper = document.querySelector(".bookingSpecific");
 	const jobPageWrapper =
 		document.querySelector(".jobs-new") || document.querySelector(".job-edit");
 
 	if (!jobPageWrapper) return;
-
-	const timepickerOptions = {
-		disableMobile: true,
-		noCalendar: true,
-		enableTime: true,
-		time_24hr: true,
-		positionElement: timeWrapper
-	};
-	let value = "";
-
-	const endTimeFlat = flatpickr(".end-timepicker", {
-		...timepickerOptions,
-		onClose: (_, time) => {
-			value += ` - ${time}`;
-			jobTime.value = value;
-		}
-	});
-
-	const startTimeFlat = flatpickr(".start-timepicker", {
-		...timepickerOptions,
-		onClose: () => endTimeFlat.open(),
-		onChange: (_, time) => {
-			value = time;
-		}
-	});
-
-	jobTime.addEventListener("click", e => {
-		e.preventDefault();
-		if (!startTimeFlat.isOpen && !endTimeFlat.isOpen) {
-			startTimeFlat.open();
-		} else if (startTimeFlat.isOpen) {
-			startTimeFlat.close();
-			endTimeFlat.open();
-		} else {
-			endTimeFlat.close();
-			startTimeFlat.open();
-		}
-	});
 
 	if (dateInput) {
 		flatpickr(dateInput, {
