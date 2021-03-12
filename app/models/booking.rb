@@ -23,6 +23,7 @@ class Booking < ApplicationRecord
   after_create :create_widget
 
   before_update :ensure_unique_duration
+  before_update :archive!, if: -> { [3, "canceled"].include? status }
 
   %w[start end].each do |identifier|
     define_method :"parsed_#{identifier}_date" do
@@ -102,5 +103,9 @@ class Booking < ApplicationRecord
     convo.save! unless convo.persisted?
 
     convo.messages.create!(booking: self, user: manager.user)
+  end
+
+  def archive!
+    self.archived = true
   end
 end
