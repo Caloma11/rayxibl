@@ -51,11 +51,7 @@
                             as: :string,
                             input_html: { class: "mb-2 w-100", list: "time-options", autocomplete: false } %>
               </div>
-              <datalist id="time-options">
-                <% Booking::TIME_LIST.each do |tl| %>
-                  <option value="<%= tl %>"><%= tl %></option>
-                <% end %>
-              </datalist>
+              <%= render partial: "shared/time_options" %>
             </div>
 
             <!-- Hidden duration -->
