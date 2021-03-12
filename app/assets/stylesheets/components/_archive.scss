@@ -1,0 +1,23 @@
+// Ref: https://css-tricks.com/using-css-transitions-auto-dimensions/#technique-2-transform-scaley
+
+#archive-toggler {
+	img {
+		transition: transform 0.25s ease;
+
+		&.open {
+			transform: rotate(180deg);
+		}
+	}
+}
+
+#archived-bookings {
+	overflow: hidden;
+	transition: transform 0.25s ease-out;
+	height: auto;
+	transform: scaleY(0);
+	transform-origin: top;
+
+	&.open {
+		transform: scaleY(1);
+	}
+}

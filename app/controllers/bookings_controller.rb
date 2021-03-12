@@ -26,8 +26,14 @@ class BookingsController < ApplicationController
 
     @bookings = @bookings.group_by { |booking| booking.start_date.beginning_of_week }.sort_by { |day| day }.to_h
     if current_user.manager?
-      @archived_bookings = current_user.manager.bookings.where(status: [2, 3])
+      @archived_bookings = current_user.manager.bookings.archived
+
+      if params[:status]
+        status = params[:status] == "-1" ? (0..3).to_a : params[:status].to_i
+        @archived_bookings = @archived_bookings.where(status: status)
+      end
     end
+
 
     @filter_count = params[:booking]&.permit!
                                       &.to_h
