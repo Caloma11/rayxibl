@@ -10,7 +10,7 @@ class PagesController < ApplicationController
       @manager = current_user.manager
       @network = @manager.network
       @today_booked_profiles = @manager.booked_profiles.has_bookings_today
-      @bookings = @manager.bookings.today_and_after
+      @bookings = @manager.bookings.today_and_after.active
       @company = @manager.company
       @jobs = @company.jobs.includes(:manager).limit(3).active
       @bookings_count = @bookings.count
