@@ -210,6 +210,19 @@ const Calendar = () => {
 			setWeekOffset(prevState => prevState + 1);
 			setNumberOfWeeks(prevState => [[...Array(7).fill(0)], ...prevState]);
 			setData(prev => [...previousDays, ...prev]);
+			/***
+			 ** Explanation:
+			 ** 80 => Width per (.day) cell
+			 ** 7 => Number of days that gets loaded
+			 ** 80 * 7 = 560px ->
+			 ** - Each cell is 80px wide
+			 ** - 7 cells get generated everytime you go back in time
+			 ** - This prevents the content jump issue by scrolling back (instantly) to the position of the first (old*) cell
+			 ** - *old cell being the first (left-most) cell before the new cells get inserted
+			 ** ----------------------------------------
+			 ** Conclusion: Smoother experience for user
+			 ***/
+			calendarContainerRef.current.scrollTo({ left: 80 * 7 });
 		}
 	};
 
