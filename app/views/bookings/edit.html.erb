@@ -67,11 +67,11 @@
               <%= f.input :start_time, label: false,
                           as: :string,
                           label_html: { class: "block textGray nowrap" },
-                          input_html: { class: "mb-2 w-100", list: "time-options", autocomplete: false } %>
+                          input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @booking.start_time.strftime("%H:%M") } %>
               <span class="self-centered mx-2"> - </span>
               <%= f.input :end_time, label: false,
                           as: :string,
-                          input_html: { class: "mb-2 w-100", list: "time-options", autocomplete: false } %>
+                          input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @booking.end_time.strftime("%H:%M") } %>
             </div>
             <%= render partial: "shared/time_options" %>
           </div>
