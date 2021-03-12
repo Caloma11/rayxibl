@@ -6,8 +6,10 @@
   <% end %>
 <% end %>
 <% if current_user.manager? %>
-  <p class="uppercase mt-0 mb-3 text-center text-dark-5 alternate">Archive <%= image_tag "icons/up-chevron.svg", alt: "Up chevron", width: 12, height: 12, class: "vertical-align-middle" %></p>
-  <% archived_bookings.each do |booking| %>
-    <%= render partial: "bookings/manager_card", locals: { booking: booking, first: false, archived: true } %>
-  <% end %>
+  <p id="archive-toggler" class="uppercase mt-0 mb-3 text-center text-dark-5 alternate">Archive <%= image_tag "icons/up-chevron.svg", alt: "Up chevron", width: 12, height: 12, class: "vertical-align-middle" %></p>
+  <div id="archived-bookings">
+    <% archived_bookings.each do |booking| %>
+      <%= render partial: "bookings/manager_card", locals: { booking: booking, first: false, archived: true } %>
+    <% end %>
+  </div>
 <% end %>
