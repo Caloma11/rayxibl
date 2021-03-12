@@ -17,7 +17,8 @@ class Booking < ApplicationRecord
   enum status: STATUSES
 
   scope :today_and_after, -> { where("start_date >= ?", Date.today) }
-  scope :active, -> { where(status: [0, 1]) }
+  scope :archived, -> { where(archived: true) }
+  scope :active, -> { where(status: [0, 1, 2], archived: false) }
 
   before_save :determine_total_price
   after_create :create_widget
