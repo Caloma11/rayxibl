@@ -13,7 +13,7 @@ const SATURDAY_CLASS_NAMES = "dark-border-left";
 const SUNDAY_CLASS_NAMES = "dark-border-right";
 
 const determineColor = status => {
-	if (status === "rejected") {
+	if (["rejected", "canceled"].includes(status)) {
 		return "red";
 	} else if (status === "accepted") {
 		return "green";
