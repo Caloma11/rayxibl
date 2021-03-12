@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get "/mail", to: "pages#mail", as: :mail
   get "/policy", to: "pages#policy", as: :policy
+  get "/privacy", to: "pages#policy", as: :privacy
   get "/edit_password", to: "users#edit_password", as: :edit_password
   patch "/update_password", to: "users#update_password", as: :update_password
   patch "/users/update", to: "users#update", as: :user_update
