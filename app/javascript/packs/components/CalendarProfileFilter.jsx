@@ -68,6 +68,7 @@ export const CalendarProfileFilter = ({
 		setBookingIds([]);
 		setFilterCount(0);
 		setShow(false);
+		handleSubmit({});
 	};
 
 	const toggleAdvancedFilter = () => {
