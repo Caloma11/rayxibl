@@ -13,7 +13,7 @@
         Your current bookings will appear here
       </h3>
     <% end %>
-    <% if @today_booked_profiles.size.positive? %>
+    <% if @bookings.size.positive? %>
       <p class="subtitle m-0 textSm"><%= pluralize @today_booked_profiles.size, "booking" %> across <%= pluralize @today_booked_profiles.distinct.count("profiles.id"), "freelancer" %></p>
     <% end %>
 
