@@ -17,12 +17,14 @@ class Booking < ApplicationRecord
   enum status: STATUSES
 
   scope :today_and_after, -> { where("start_date >= ?", Date.today) }
-  scope :active, -> { where(status: [0, 1]) }
+  scope :archived, -> { where(archived: true) }
+  scope :active, -> { where(status: [0, 1, 2], archived: false) }
 
   before_save :determine_total_price
   after_create :create_widget
 
   before_update :ensure_unique_duration
+  before_update :archive!, if: -> { [3, "canceled"].include? status }
 
   %w[start end].each do |identifier|
     define_method :"parsed_#{identifier}_date" do
@@ -102,5 +104,9 @@ class Booking < ApplicationRecord
     convo.save! unless convo.persisted?
 
     convo.messages.create!(booking: self, user: manager.user)
+  end
+
+  def archive!
+    self.archived = true
   end
 end
