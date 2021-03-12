@@ -57,17 +57,13 @@
 	}
 
 	.duration-toggler {
-		@extend .inline-flex, .p-1, .rounded, .justify-content-end, .mb-3;
+		@extend .inline-flex, .p-1, .rounded, .justify-content-end, .ml-3;
 
 		background: $blueish-gray;
 
 		button {
 			text-transform: none;
 			color: #898994;
-
-			&:first-of-type {
-				@extend .mr-3;
-			}
 		}
 	}
 
