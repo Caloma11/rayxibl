@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => "/cable"
 
-  devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations', invitations: 'users/invitations', omniauth_callbacks: "callbacks" }
+  devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations', invitations: 'users/invitations', omniauth_callbacks: "callbacks", passwords: "passwords" }
 
   get "/dashboard", to: "pages#dashboard"
 
