@@ -15,7 +15,7 @@ class ConnectionsController < ApplicationController
         end
       elsif last_url[:action] == "show" && last_url[:controller] == "conversations"
         @conversation = Conversation.find_by(manager: current_user.manager, profile: @profile)
-        redirect_to conversation_path(@conversation, anchor: "message-#{@conversation.messages.last.id}")
+        redirect_to conversation_path(@conversation, anchor: "message-#{@conversation.messages&.last&.id}")
       else
         redirect_to profile_path(@profile)
       end
