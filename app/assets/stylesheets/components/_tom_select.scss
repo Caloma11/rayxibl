@@ -1,5 +1,5 @@
 .items.ts-input {
-	@extend .py-0, .px-2, .flex, .items-center;
+	@extend .py-0, .px-2, .flex, .items-center, .rounded;
 
 	background: $blueish-gray !important;
 	border: 0;
