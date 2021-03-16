@@ -22,7 +22,9 @@ export const CalendarBookingFilter = ({
 			bookingStatusNode.current &&
 			!bookingStatusNode.current.classList.contains("tomselected")
 		) {
-			new TomSelect(bookingStatusNode.current);
+			new TomSelect(bookingStatusNode.current, {
+				plugins: ["remove_button"]
+			});
 		}
 	}, [bookingStatusNode.current]);
 
