@@ -35,7 +35,7 @@ export const CalendarFilter = ({ bookings, setProfiles }) => {
 				<div className="filter-overlay">
 					<section className="px-3 flex justify-content-between items-center header">
 						<button className="p-0" onClick={() => setShow(false)}>
-							<img src={crossDarkSvg} alt="exit" />
+							<img src={crossDarkSvg} alt="exit" width={16} height={16} />
 						</button>
 						<p>FREELANCERS</p>
 						<button className={show ? "noSelect" : ""} style={{ width: 32 }}>
