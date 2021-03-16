@@ -1,4 +1,5 @@
 import flatpickr from "flatpickr";
+import moment from "moment";
 import React, { useEffect, useRef } from "react";
 import { BookingFormTimeList } from "./BookingFormTimeList";
 
@@ -44,8 +45,10 @@ export const BookingFormDates = ({
 				defaultDate: [chosenDay, chosenDay],
 				onChange: ([flatStartDate, flatEndDate]) => {
 					if (flatStartDate && flatEndDate) {
-						setStartDate(flatStartDate);
-						setEndDate(flatEndDate);
+						const startDate = moment(flatStartDate);
+						const endDate = moment(flatEndDate);
+						setStartDate(startDate.format("ddd MMM D YYYY"));
+						setEndDate(endDate.format("ddd MMM D YYYY"));
 					}
 				}
 			});
