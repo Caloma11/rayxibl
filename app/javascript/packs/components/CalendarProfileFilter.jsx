@@ -115,7 +115,7 @@ export const CalendarProfileFilter = ({
 					<button
 						id="show-advanced"
 						type="button"
-						className={`btn btn-float blue text-center textSm ${
+						className={`btn btn-float blue text-center textSm mb-3 ${
 							showAdvanced ? "active" : ""
 						}`}
 						onClick={toggleAdvancedFilter}
