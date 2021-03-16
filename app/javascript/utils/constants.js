@@ -39,7 +39,7 @@ export const EXPERTISES = [
 	"senior",
 	"pro"
 ];
-export const STATUSES = ["", "pending", "accepted", "rejected", "all"];
+export const STATUSES = ["pending", "accepted", "rejected", "all"];
 
 export const MONTHS = [
 	"January",
