@@ -57,7 +57,7 @@ export const CalendarBookingFilter = ({
 						</option>
 					))}
 				</select>
-				<div className="flex flex-column mb-3">
+				<div className="flex flex-column my-3">
 					<label htmlFor="booking_id" className="textLightBlack mb-1">
 						Project/Client
 					</label>
