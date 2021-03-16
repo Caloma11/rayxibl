@@ -66,7 +66,7 @@ export const BookingFormDates = ({
 			<label className="block textGray nowrap" htmlFor="booking_time">
 				Hours per day
 			</label>
-			<div className="flex justify-content-between items-end">
+			<div className="flex justify-content-center items-end">
 				<div className="flex">
 					{specificHour ? (
 						<div className="flex flex-column">

@@ -57,9 +57,15 @@
 	}
 
 	.duration-toggler {
-		@extend .inline-flex, .p-1, .rounded, .justify-content-end, .ml-3;
+		@extend .inline-flex,
+			.p-1,
+			.rounded,
+			.justify-content-end,
+			.ml-3,
+			.border-box;
 
 		background: $blueish-gray;
+		height: 40px;
 
 		button {
 			text-transform: none;
