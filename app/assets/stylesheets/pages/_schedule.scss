@@ -94,6 +94,10 @@ $day-border: 1px solid #e8e9eb;
 			#booking_end_time {
 				width: 80px;
 			}
+
+			.billable-wrapper {
+				@extend .mb-4;
+			}
 		}
 
 		.calendarContainer {
