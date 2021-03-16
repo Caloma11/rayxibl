@@ -66,7 +66,10 @@ export const BookingFormDates = ({
 
 	return (
 		<>
-			<label className="block textGray nowrap" htmlFor="booking_time">
+			<label
+				className="block textGray nowrap textBetween"
+				htmlFor="booking_time"
+			>
 				Hours per day
 			</label>
 			<div className="flex justify-content-center items-end">
@@ -139,7 +142,7 @@ export const BookingFormDates = ({
 					onChange={e => setEndDate(e.target.value)}
 					className={Object.keys(errors).includes("end_date") ? "error" : ""}
 				/>
-				<div className="input-wrapper" style={{ marginBottom: 0 }}>
+				<div className="input-wrapper mt-3" style={{ marginBottom: 0 }}>
 					<label htmlFor="new-booking-datepickr" className="block textGray">
 						Dates
 					</label>
