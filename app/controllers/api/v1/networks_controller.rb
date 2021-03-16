@@ -5,7 +5,7 @@ class Api::V1::NetworksController < ApplicationController
     filter_via_profile!
     filter_via_booking!
 
-    render json: @networks, each_serializer: ProfileSerializer
+    render json: @networks, manager_id: current_user.manager.id, each_serializer: ProfileSerializer
   end
 
   private
