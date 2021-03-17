@@ -12,6 +12,10 @@
 
 		width: calc(100vw - 20px);
 
+		textarea {
+			height: 80px;
+		}
+
 		div.job_application_cover_letter {
 			@extend .w-100;
 

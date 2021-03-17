@@ -26,6 +26,12 @@
     <div class="bookingCard">
       <% url = @select ? profile_bookings_path("no_profile", select: true) : profile_bookings_path(@profile) %>
       <%= simple_form_for [Profile.new, @booking], url: url do |f| %>
+        <% if params[:parent_id] %>
+          <input type="hidden" name="parent_id" value="<%= params[:parent_id] %>">
+        <% end %>
+        <% if @reassign %>
+          <input type="hidden" name="reassign" value=<%= @reassign %> id="reassign" />
+        <% end %>
         <% if @select %>
           <%= f.input :profile_id,
                       collection: @network.map { |profile| [profile.user.display_name, profile.id] },
