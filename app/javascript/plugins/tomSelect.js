@@ -1,7 +1,6 @@
 import TomSelect from "tom-select";
 
 const customizeTs = ts => {
-	// ts.control_input.style.width = "0px";
 	ts.on("item_add", () => {
 		if (ts.caretPos >= 3) {
 			ts.control.classList.add("flex", "flex-wrap", "big");
