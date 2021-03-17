@@ -39,7 +39,12 @@ export const EXPERTISES = [
 	"senior",
 	"pro"
 ];
-export const STATUSES = ["pending", "accepted", "rejected", "all"];
+export const STATUSES = [
+	{ text: "pending", value: 0 },
+	{ text: "accepted", value: 1 },
+	{ text: "rejected", value: 2 },
+	{ text: "all", value: 3 }
+];
 
 export const MONTHS = [
 	"January",

@@ -16,8 +16,8 @@ class Api::V1::NetworksController < ApplicationController
     booking_params = JSON.parse(params[:booking]).deep_symbolize_keys
 
     if booking_params
-      if booking_params[:status] != ""
-        status = booking_params[:status] == "3" ? [0, 1, 2] : booking_params[:status].to_i
+      if booking_params[:status] != []
+        status = booking_params[:status] == [3] ? [0, 1, 2] : booking_params[:status].map(&:to_i)
         @networks = @networks.joins(:bookings).where(bookings: { status: status })
       end
 

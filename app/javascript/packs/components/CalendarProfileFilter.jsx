@@ -56,7 +56,7 @@ export const CalendarProfileFilter = ({
 	const [skills, setSkills] = useState("");
 	const [location, setLocation] = useState("");
 	const [expertise, setExpertise] = useState("");
-	const [status, setStatus] = useState("");
+	const [status, setStatus] = useState([]);
 	const [bookingIds, setBookingIds] = useState([]);
 	const [showAdvanced, setShowAdvanced] = useState(false);
 
