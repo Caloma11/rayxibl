@@ -92,7 +92,7 @@ export const CalendarProfileFilter = ({
 		if (skills !== "") localFilterCount += 1;
 		if (location !== "") localFilterCount += 1;
 		if (expertise !== "") localFilterCount += 1;
-		if (status !== "") localFilterCount += 1;
+		if (status.length > 0) localFilterCount += 1;
 		if (bookingIds.length > 0) localFilterCount += 1;
 
 		setFilterCount(localFilterCount);
