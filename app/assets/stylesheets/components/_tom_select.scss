@@ -6,6 +6,10 @@
 	box-shadow: unset;
 	height: 40px !important;
 
+	&.big {
+		height: 80px !important;
+	}
+
 	.item {
 		@extend .shadow, .py-1;
 

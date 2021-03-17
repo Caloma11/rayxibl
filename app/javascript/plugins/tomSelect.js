@@ -15,7 +15,19 @@ export const initTomSelect = () => {
 	}
 
 	if (profileExpertise) {
-		new TomSelect(profileExpertise, config);
+		const ts = new TomSelect(profileExpertise, config);
+
+		ts.control_input.style.width = "0px";
+		ts.on("item_add", () => {
+			if (ts.caretPos >= 5) {
+				ts.control.classList.add("flex", "flex-wrap", "big");
+			}
+		});
+		ts.on("item_remove", () => {
+			if (ts.caretPos < 5) {
+				ts.control.classList.remove("flex", "flex-wrap", "big");
+			}
+		});
 	}
 
 	if (bookingSkills) {
@@ -23,7 +35,19 @@ export const initTomSelect = () => {
 	}
 
 	if (bookingExpertise) {
-		new TomSelect(bookingExpertise, config);
+		const ts = new TomSelect(bookingExpertise, config);
+
+		ts.control_input.style.width = "0px";
+		ts.on("item_add", () => {
+			if (ts.caretPos >= 5) {
+				ts.control.classList.add("flex", "flex-wrap", "big");
+			}
+		});
+		ts.on("item_remove", () => {
+			if (ts.caretPos < 5) {
+				ts.control.classList.remove("flex", "flex-wrap", "big");
+			}
+		});
 	}
 
 	if (jobExpertise) {
