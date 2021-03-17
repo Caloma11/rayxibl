@@ -1,4 +1,4 @@
-<div id="modal-content">
+<div class="flex px-3" id="modal-content">
   <div class="card-content">
     <%= image_tag "icons/alert.svg", alt: "message alert" %>
     <div class="text-center">
@@ -7,8 +7,9 @@
       <%= simple_form_for [@conversation, @message], html: { class: "flex flex-column items-center justify-content-center" } do |f| %>
         <%= f.input :content,
                     label: false,
+                    wrapper_html: { class: "w-100" },
                     input_html: {
-                      rows: 4,
+                      class: "w-100",
                       placeholder: "Hi Tillie, I’m having to cancel the booking “Ecommerce shoot on the 13 Nov - 20 Dec”"
                     } %>
 
