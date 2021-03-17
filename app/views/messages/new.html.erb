@@ -1,0 +1,24 @@
+<div id="modal-content">
+  <div class="card-content">
+    <%= image_tag "icons/alert.svg", alt: "message alert" %>
+    <div class="text-center">
+      <h1 class="textLg textDarkOne mt-0">Update <%= @parent_booking.profile.user.first_name %></h1>
+      <p class="textLightBlack">Let <%= @parent_booking.profile.user.first_name %> know why you’re cancelling their booking</p>
+      <%= simple_form_for [@conversation, @message], html: { class: "flex flex-column items-center justify-content-center" } do |f| %>
+        <%= f.input :content,
+                    label: false,
+                    input_html: {
+                      rows: 4,
+                      placeholder: "Hi Tillie, I’m having to cancel the booking “Ecommerce shoot on the 13 Nov - 20 Dec”"
+                    } %>
+
+        <button type="submit" class="uppercase btn btn-white w-100 mt-3">
+          <%= image_tag "icons/message.svg", alt: "Send application", class: "vertical-align-middle" %> Send
+        </button>
+      <% end %>
+      <div class="flex justify-content-center mt-3">
+        <button type="button" id="modal-exit" class="btn btn-float blue textMd">Skip</button>
+      </div>
+    </div>
+  </div>
+</div>
