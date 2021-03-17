@@ -5,10 +5,13 @@ import mail from "../images/mail-white";
 import search from "../images/search-white";
 import brief from "../images/brief-white";
 import rightArrowPurple from "../images/right-arrow-purple";
+import crossWhite from "../images/cross.svg";
+
 
 const ActionButton = () => {
 	const [open, setOpen] = useState(false);
 	const [ob, setOb] = useState(false);
+  const [clickedOnce, setClickedOnce] = useState(false);
 
 	const checkParams = () => {
 		const queryString = window.location.search;
@@ -19,6 +22,7 @@ const ActionButton = () => {
 	};
 
 	const handleClick = async () => {
+    setClickedOnce(true);
 		setOpen(prevState => !prevState);
 	};
 
@@ -35,7 +39,7 @@ const ActionButton = () => {
 
 	return (
 		<div className={ob ? "relative flex" : "relative"}>
-			{ob && (
+			{ob && !(clickedOnce) && (
 				<div className="flex items-center justify-content-center" id="addfree">
 					<p className="textBlue textLg bold">Add freelancers </p>
 					<img
@@ -50,18 +54,18 @@ const ActionButton = () => {
 			{open && (
 				<div className="actions flex flex-column">
 					<a
-						className="action-link flex items-center justify-content-between"
+						className="action-link flex items-center justify-content-start"
 						href="#" onClick={triggerModal}
 					>
-						<img className="" src={mail} alt="mail" width={28} height={28} />
+						<img className="mr-3" src={mail} alt="mail" width={24} height={24} />
 						Email invite
 					</a>
 					<a
-						className="action-link flex items-center justify-content-between"
+						className="action-link flex items-center justify-content-start"
 						href="/profiles?all=true"
 					>
 						<img
-							className=""
+							className="mr-3"
 							src={search}
 							alt="search"
 							width={24}
@@ -70,22 +74,22 @@ const ActionButton = () => {
 						Browse flxibl
 					</a>
 					<a
-						className="action-link flex items-center justify-content-between"
+						className="action-link flex items-center justify-content-start"
 						href="/jobs/new"
 					>
-						<img className="" src={brief} alt="brief" width={24} height={24} />
+						<img className="mr-3" src={brief} alt="brief" width={24} height={24} />
 						Post a job
 					</a>
 				</div>
 			)}
 
-			<button className="trigger" onClick={handleClick}>
+			<button className={open ? 'trigger bg-gray' : 'trigger'} onClick={handleClick}>
 				<img
 					className="toggler"
-					src={personAdd}
+					src={open ? crossWhite : personAdd}
 					alt="action button"
-					width={22}
-					height={22}
+					width={open ? 16 : 22}
+					height={open ? 16 : 22}
 				/>
 			</button>
 		</div>
