@@ -122,7 +122,6 @@ export const CalendarProfileFilter = ({
 			<h3 className="textLightBlack">Filter freelancers</h3>
 
 			<form onSubmit={localHandleSubmit}>
-				{/* <Input name="name" label="Name" value={name} setValue={setName} /> */}
 				<div className="flex flex-column mb-3">
 					<label htmlFor="profile_name" className="textLightBlack mb-1">
 						Name
