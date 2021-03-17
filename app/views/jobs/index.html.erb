@@ -13,7 +13,7 @@
     </div>
   </div>
 
-  <section class="switch flex bg-blueish-gray py-2 my-3 px-3">
+  <section class="switch flex bg-blueish-gray py-2 px-3 mx-3 mb-3 rounded">
     <% if current_user.manager? %>
       <% Job.statuses.keys.first(2).each do |k| %>
         <%= link_to k, jobs_path(status: Job.statuses[k]), remote: true,
@@ -29,7 +29,7 @@
     <% end %>
   </section>
 
-  <section class="jobs bg-blueish-gray px-3">
+  <section class="jobs bg-blueish-gray px-3 pt-3">
     <%= render partial: "jobs/job_cards", locals: { jobs: @jobs } %>
   </section>
 </div>

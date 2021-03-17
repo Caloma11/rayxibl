@@ -17,6 +17,12 @@
 	}
 
 	section.jobs {
+		/***
+    * ~150px => Height of top part
+    * ~50px => Height of navbar
+    ***/
+		height: calc(100vh - 150px - 50px);
+
 		.job-card {
 			.skill-pill {
 				margin: 0;

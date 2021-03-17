@@ -30,4 +30,8 @@
 			text-transform: none;
 		}
 	}
+
+	.bookings-section {
+		height: calc(100vh - 165px - 50px);
+	}
 }
