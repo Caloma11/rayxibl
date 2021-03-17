@@ -18,7 +18,7 @@
     <% end %>
 
     <% if @bookings_count.positive? %>
-      <div class="card-container flex items-center justify-content-between">
+      <%= link_to bookings_path(status: 1), class: "card-container flex items-center justify-content-between" do %>
         <div class="flex items-center">
           <div class="card accepted">
             <%= image_tag "icons/checkmark", alt: "active bookings" %>
@@ -28,12 +28,10 @@
             <p class="textSm m-0"><%= pluralize @bookings.accepted.size, "booking" %></p>
           </div>
         </div>
-        <%= link_to bookings_path(status: 1) do %>
-          <%= image_tag "icons/dashboard-chevron-right.svg", alt: "accepted bookings", width: 12, height: 12 %>
-        <% end %>
-      </div>
+        <%= image_tag "icons/dashboard-chevron-right.svg", alt: "accepted bookings", width: 12, height: 12 %>
+      <% end %>
 
-      <div class="card-container flex items-center justify-content-between">
+      <%= link_to bookings_path(status: 0), class: "card-container flex items-center justify-content-between" do %>
         <div class="flex items-center">
           <div class="card pending">
             <%= image_tag "icons/pending.svg", alt: "pending bookings" %>
@@ -43,12 +41,10 @@
             <p class="textSm m-0"><%= pluralize @bookings.pending.size, "booking" %></p>
           </div>
         </div>
-        <%= link_to bookings_path(status: 0) do %>
-          <%= image_tag "icons/dashboard-chevron-right.svg", alt: "pending bookings", width: 12, height: 12 %>
-        <% end %>
-      </div>
+        <%= image_tag "icons/dashboard-chevron-right.svg", alt: "pending bookings", width: 12, height: 12 %>
+      <% end %>
 
-      <div class="card-container flex items-center justify-content-between">
+      <%= link_to bookings_path(status: 3), class: "card-container flex items-center justify-content-between" do %>
         <div class="flex items-center">
           <div class="card rejected">
             <%= image_tag "icons/cross-white.svg", alt: "rejected bookings" %>
@@ -58,18 +54,15 @@
             <p class="textSm m-0"><%= pluralize @bookings.rejected.size, "booking" %></p>
           </div>
         </div>
-        <%= link_to bookings_path(status: 3) do %>
-          <%= image_tag "icons/dashboard-chevron-right.svg", alt: "canceled bookings", width: 12, height: 12 %>
-        <% end %>
-      </div>
+        <%= image_tag "icons/dashboard-chevron-right.svg", alt: "canceled bookings", width: 12, height: 12 %>
+      <% end %>
 
-      <%= link_to "View all (#{@bookings.size})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
+      <%= link_to "View all (#{@bookings_count})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
     <% else %>
       <% if current_user.manager.network.empty? %>
-        <%= link_to "Connect with freelancers", profiles_path(all: true), class: "btn btn-primary text-center mb-2" %>
+        <%= link_to "Add freelancers", profiles_path(all: true), class: "btn btn-primary text-center mx-2 mb-2" %>
       <% else %>
-        <%= link_to "Make a booking", new_profile_booking_path("no_profile", select: true), class: "btn btn-primary text-center mb-2" %>
-
+        <%= link_to "Make a booking", new_profile_booking_path("no_profile", select: true), class: "btn btn-primary text-center mx-2 mb-2" %>
       <% end %>
     <% end %>
   </div>
@@ -103,9 +96,9 @@
     <% end %>
 
     <% if @jobs_count.positive? %>
-      <%= link_to "View all (#{@jobs_count})", jobs_path(manager_id: current_user.manager.id), class: "btn btn-primary text-center mb-2" %>
+      <%= link_to "View all (#{@jobs_count})", jobs_path(manager_id: current_user.manager.id), class: "btn btn-primary text-center mx-2 mb-2" %>
     <% else %>
-      <%= link_to "Post a job", new_job_path, class: "btn btn-primary text-center mb-2" %>
+      <%= link_to "Post a job", new_job_path, class: "btn btn-primary text-center mx-2 mb-2" %>
     <% end %>
   </div>
 </div>
