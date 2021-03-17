@@ -23,7 +23,7 @@ $day-border: 1px solid #e8e9eb;
 		}
 
 		.filter-overlay {
-			@extend .bg-white;
+			@extend .bg-white, .scroll-y;
 
 			padding-top: calc(#{$spacing-3} + #{$spacing-4});
 			position: fixed;
