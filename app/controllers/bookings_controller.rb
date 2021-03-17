@@ -50,6 +50,7 @@ class BookingsController < ApplicationController
   end
 
   def new
+    @reassign = params[:reassign] == "true"
     @select = params[:select] == "true"
     if params[:parent_id]
       @parent_booking = Booking.find(params[:parent_id])
@@ -69,6 +70,7 @@ class BookingsController < ApplicationController
   end
 
   def create
+    @reassign = params[:reassign] == "true"
     @booking = Booking.new(booking_params)
     @booking.manager = current_user.manager
     @select = params[:select] == "true"
@@ -79,8 +81,15 @@ class BookingsController < ApplicationController
       set_profile
       @booking.profile = @profile
     end
+
     authorize @booking
+
     if @booking.save
+      if @reassign && params[:parent_id]
+        @parent_booking = Booking.find(params[:parent_id])
+        @parent_booking.canceled!
+      end
+
       redirect_to bookings_path
     else
       @network = current_user.manager.network
