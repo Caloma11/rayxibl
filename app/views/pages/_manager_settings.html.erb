@@ -2,7 +2,7 @@
   <%= simple_form_for current_user, url: user_update_path, remote: true, html: { id: "edit_user", class: "border-box px-3 w-100" } do |f| %>
     <%= f.input :preferred_currency, required: false,
                 label: "Default currency",
-                label_html: { class: "uppercase block textLightBlack textBetween mb-2" },
+                label_html: { class: "uppercase block textLightBlack textBetween mb-3" },
                 collection: Users::Constants::CURRENCIES,
                 wrapper_html: { class: "flex flex-column mb-3" } %>
   <% end %>
@@ -10,7 +10,7 @@
 
   <%= simple_form_for :invitation, url: user_invitation_path(inviter: "manager", invitee: "manager"), method: :post, remote: true, html: {class: "w-100 px-3 border-box simple_form invitation"} do |f| %>
     <div class="form-group relative">
-      <%= f.input :email, placeholder: "Email address..", label: "Manage users", input_html: { class: "relative w-100", name: "user[email]" }, wrapper_html: { class: "w-100" }, label_html: { class: "block uppercase mb-2 textLightBlack textBetween"}, required: false %>
+      <%= f.input :email, placeholder: "Email address..", label: "Manage users", input_html: { class: "relative w-100", name: "user[email]" }, wrapper_html: { class: "w-100" }, label_html: { class: "block uppercase mb-3 textLightBlack textBetween"}, required: false %>
       <%= button_tag type: "submit" do %>
         <%= image_tag "icons/person-add.svg", alt: "alttext", id: "invitation-add-btn", width: 20, height: 28, class: "mt-1 mr-2" %>
       <% end %>
