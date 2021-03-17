@@ -88,6 +88,12 @@ class BookingsController < ApplicationController
       if @reassign && params[:parent_id]
         @parent_booking = Booking.find(params[:parent_id])
         @parent_booking.canceled!
+        chosen_profile = @profile.persisted? ? @profile : @parent_booking.profile
+        @conversation = Conversation.find_or_initialize_by(manager: current_user.manager, profile: chosen_profile)
+        @conversation.save! unless @conversation.persisted?
+
+        redirect_to new_conversation_message_path(@conversation, parent_booking_id: @booking.id)
+        return
       end
 
       redirect_to bookings_path
