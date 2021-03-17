@@ -83,8 +83,10 @@
         <div class="flex items-center">
           <% if job.manager.user.avatar.attached? %>
             <%= image_tag job.manager.user.avatar.service_url, class: "avatar small avatar-circle", alt: "Manager's picture" %>
-          <% else %>
+          <% elsif job.company.logo.attached? %>
             <%= image_tag job.company.logo.service_url, class: "avatar small avatar-circle", alt: "Company's picture" %>
+          <% else %>
+            <%= image_tag "https://cdn.lynda.com/courses/696328-637491205596562954_270x480_thumb.jpg", class: "avatar small avatar-circle", alt: "Company's picture" %>
           <% end %>
           <div class="ml-2">
             <h4 class="m-0 textBetween"><%= job.profession %></h4>

@@ -8,6 +8,11 @@
 
 	&.big {
 		height: 80px !important;
+  }
+  
+	&.focus {
+		outline: $blue auto 1px;
+		background: white;
 	}
 
 	.item {

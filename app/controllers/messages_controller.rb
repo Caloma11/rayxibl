@@ -1,4 +1,10 @@
 class MessagesController < ApplicationController
+  def new
+    @conversation = Conversation.find(params[:conversation_id])
+    @message = Message.new
+    @parent_booking = Booking.includes(profile: :user).find(params[:parent_booking_id])
+  end
+
   def create
     @conversation = Conversation.find(params[:conversation_id])
     @message = Message.new(message_params)

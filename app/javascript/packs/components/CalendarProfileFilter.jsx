@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
+import TomSelect from "tom-select";
 import downChevronBlue from "../images/down-chevron-blue.svg";
 import upChevronGray from "../images/up-chevron-gray.svg";
 import { Input } from "./Input";
@@ -51,18 +52,20 @@ export const CalendarProfileFilter = ({
 	setFilterCount,
 	setShow
 }) => {
-	const [name, setName] = useState("");
-	const [profession, setProfession] = useState("");
+	const [name, setName] = useState([]);
+	const [profession, setProfession] = useState([]);
 	const [skills, setSkills] = useState("");
 	const [location, setLocation] = useState("");
 	const [expertise, setExpertise] = useState("");
 	const [status, setStatus] = useState([]);
 	const [bookingIds, setBookingIds] = useState([]);
 	const [showAdvanced, setShowAdvanced] = useState(false);
+	const nameRef = useRef(null);
+	const professionRef = useRef(null);
 
 	const clearFilter = () => {
-		setName("");
-		setProfession("");
+		setName([]);
+		setProfession([]);
 		setSkills("");
 		setLocation("");
 		setExpertise("");
@@ -87,8 +90,8 @@ export const CalendarProfileFilter = ({
 
 		let localFilterCount = 0;
 
-		if (name !== "") localFilterCount += 1;
-		if (profession !== "") localFilterCount += 1;
+		if (name.length > 0) localFilterCount += 1;
+		if (profession.length > 0) localFilterCount += 1;
 		if (skills !== "") localFilterCount += 1;
 		if (location !== "") localFilterCount += 1;
 		if (expertise !== "") localFilterCount += 1;
@@ -99,18 +102,63 @@ export const CalendarProfileFilter = ({
 		handleSubmit(params);
 	};
 
+	useEffect(() => {
+		if (nameRef.current) {
+			const nameTom = new TomSelect(nameRef.current, {
+				plugins: ["remove_button"],
+				createOnBlur: true,
+				create: true
+			});
+			nameTom.on("item_add", e =>
+				setName(prev => [...new Set([...prev, `%${e}%`])])
+			);
+			nameTom.on("item_remove", e =>
+				setName(prev => prev.filter(ele => ele !== `%${e}%`))
+			);
+		}
+
+		if (professionRef.current) {
+			const professionTom = new TomSelect(professionRef.current, {
+				plugins: ["remove_button"],
+				createOnBlur: true,
+				create: true
+			});
+			professionTom.on("item_add", e =>
+				setProfession(prev => [...new Set([...prev, `%${e}%`])])
+			);
+			professionTom.on("item_remove", e =>
+				setProfession(prev => prev.filter(ele => ele !== `%${e}%`))
+			);
+		}
+	}, []);
+
 	return (
 		<>
 			<h3 className="textLightBlack">Filter freelancers</h3>
 
-			<form onSubmit={localHandleSubmit}>
-				<Input name="name" label="Name" value={name} setValue={setName} />
-				<Input
-					name="profession"
-					label="Profession"
-					value={profession}
-					setValue={setProfession}
-				/>
+			<form className="mb-5" onSubmit={localHandleSubmit}>
+				<div className="flex flex-column mb-3">
+					<label htmlFor="profile_name" className="textLightBlack mb-1">
+						Name
+					</label>
+					<select
+						ref={nameRef}
+						name="profile[name]"
+						multiple
+						defaultValue={name}
+					></select>
+				</div>
+				<div className="flex flex-column mb-3">
+					<label htmlFor="profile_profession" className="textLightBlack mb-1">
+						Profession
+					</label>
+					<select
+						ref={professionRef}
+						name="profile[profession]"
+						multiple
+						defaultValue={profession}
+					></select>
+				</div>
 				<div className="flex justify-content-center">
 					<button
 						id="show-advanced"

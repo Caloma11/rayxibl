@@ -50,7 +50,11 @@ class BookingsController < ApplicationController
   end
 
   def new
+    @reassign = params[:reassign] == "true"
     @select = params[:select] == "true"
+    if params[:parent_id]
+      @parent_booking = Booking.find(params[:parent_id])
+    end
     @booking = Booking.new
     @booking.profile = @profile
     @network = current_user.manager.network
@@ -66,6 +70,7 @@ class BookingsController < ApplicationController
   end
 
   def create
+    @reassign = params[:reassign] == "true"
     @booking = Booking.new(booking_params)
     @booking.manager = current_user.manager
     @select = params[:select] == "true"
@@ -76,8 +81,22 @@ class BookingsController < ApplicationController
       set_profile
       @booking.profile = @profile
     end
+
     authorize @booking
+
     if @booking.save
+      if @reassign && params[:parent_id]
+        @parent_booking = Booking.find(params[:parent_id])
+        @parent_booking.canceled!
+
+        # This will find the Convo between Manager & original booking's Freelancer
+        @conversation = Conversation.find_by(manager: current_user.manager, profile: @parent_booking.profile)
+
+        # This path is specifically (and currently only) used for re-assigning bookings
+        redirect_to new_conversation_message_path(@conversation, parent_booking_id: @booking.id)
+        return
+      end
+
       redirect_to bookings_path
     else
       @network = current_user.manager.network
