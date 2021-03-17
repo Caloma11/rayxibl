@@ -17,7 +17,8 @@ class PagesController < ApplicationController
       @jobs_count = @jobs.count
     else
       @clients = current_user.profile.managers
-      @bookings = current_user.profile.bookings
+      @bookings = current_user.profile.bookings.today_and_after.active
+      @bookings_count = @bookings.count
     end
   end
 

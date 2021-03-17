@@ -57,7 +57,7 @@
         <%= image_tag "icons/dashboard-chevron-right.svg", alt: "canceled bookings", width: 12, height: 12 %>
       <% end %>
 
-      <%= link_to "View all (#{@bookings.size})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
+      <%= link_to "View all (#{@bookings_count})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
     <% else %>
       <% if current_user.manager.network.empty? %>
         <%= link_to "Add freelancers", profiles_path(all: true), class: "btn btn-primary text-center mx-2 mb-2" %>
