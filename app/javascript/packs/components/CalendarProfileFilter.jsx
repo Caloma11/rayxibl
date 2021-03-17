@@ -53,7 +53,7 @@ export const CalendarProfileFilter = ({
 	setShow
 }) => {
 	const [name, setName] = useState([]);
-	const [profession, setProfession] = useState("");
+	const [profession, setProfession] = useState([]);
 	const [skills, setSkills] = useState("");
 	const [location, setLocation] = useState("");
 	const [expertise, setExpertise] = useState("");
@@ -61,10 +61,11 @@ export const CalendarProfileFilter = ({
 	const [bookingIds, setBookingIds] = useState([]);
 	const [showAdvanced, setShowAdvanced] = useState(false);
 	const nameRef = useRef(null);
+	const professionRef = useRef(null);
 
 	const clearFilter = () => {
 		setName([]);
-		setProfession("");
+		setProfession([]);
 		setSkills("");
 		setLocation("");
 		setExpertise("");
@@ -89,8 +90,8 @@ export const CalendarProfileFilter = ({
 
 		let localFilterCount = 0;
 
-		if (name !== []) localFilterCount += 1;
-		if (profession !== "") localFilterCount += 1;
+		if (name.length > 0) localFilterCount += 1;
+		if (profession.length > 0) localFilterCount += 1;
 		if (skills !== "") localFilterCount += 1;
 		if (location !== "") localFilterCount += 1;
 		if (expertise !== "") localFilterCount += 1;
@@ -115,6 +116,20 @@ export const CalendarProfileFilter = ({
 				setName(prev => prev.filter(ele => ele !== `%${e}%`))
 			);
 		}
+
+		if (professionRef.current) {
+			const professionTom = new TomSelect(professionRef.current, {
+				plugins: ["remove_button"],
+				createOnBlur: true,
+				create: true
+			});
+			professionTom.on("item_add", e =>
+				setProfession(prev => [...new Set([...prev, `%${e}%`])])
+			);
+			professionTom.on("item_remove", e =>
+				setProfession(prev => prev.filter(ele => ele !== `%${e}%`))
+			);
+		}
 	}, []);
 
 	return (
@@ -126,14 +141,24 @@ export const CalendarProfileFilter = ({
 					<label htmlFor="profile_name" className="textLightBlack mb-1">
 						Name
 					</label>
-					<select ref={nameRef} multiple defaultValue={name}></select>
+					<select
+						ref={nameRef}
+						name="profile[name]"
+						multiple
+						defaultValue={name}
+					></select>
 				</div>
-				<Input
-					name="profession"
-					label="Profession"
-					value={profession}
-					setValue={setProfession}
-				/>
+				<div className="flex flex-column mb-3">
+					<label htmlFor="profile_profession" className="textLightBlack mb-1">
+						Profession
+					</label>
+					<select
+						ref={professionRef}
+						name="profile[profession]"
+						multiple
+						defaultValue={profession}
+					></select>
+				</div>
 				<div className="flex justify-content-center">
 					<button
 						id="show-advanced"

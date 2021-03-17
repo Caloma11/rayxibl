@@ -38,8 +38,8 @@ class Api::V1::NetworksController < ApplicationController
                              .where("users.first_name ILIKE ANY (array[:name]) OR users.first_name ILIKE ANY (array[:name])", name: profile_params[:name])
       end
 
-      if profile_params[:profession] != ""
-        @networks = @networks.where("profession ILIKE :profession", profession: "%#{profile_params[:profession]}%")
+      if profile_params[:profession] != []
+        @networks = @networks.where("profession ILIKE ANY (array[:profession])", profession: profile_params[:profession])
       end
 
       if profile_params[:skills] != ""
