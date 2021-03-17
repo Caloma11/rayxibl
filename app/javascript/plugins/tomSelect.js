@@ -1,7 +1,9 @@
 import TomSelect from "tom-select";
 
 export const initTomSelect = () => {
-	const config = {};
+	const config = {
+		plugins: ["remove_button"]
+	};
 	const profileSkills = document.getElementById("profile_skills");
 	const profileExpertise = document.getElementById("profile_expertise");
 	const bookingSkills = document.getElementById("booking_skills");
