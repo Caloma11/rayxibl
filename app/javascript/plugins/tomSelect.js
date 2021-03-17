@@ -1,5 +1,19 @@
 import TomSelect from "tom-select";
 
+const customizeTs = ts => {
+	ts.control_input.style.width = "0px";
+	ts.on("item_add", () => {
+		if (ts.caretPos >= 5) {
+			ts.control.classList.add("flex", "flex-wrap", "big");
+		}
+	});
+	ts.on("item_remove", () => {
+		if (ts.caretPos < 5) {
+			ts.control.classList.remove("flex", "flex-wrap", "big");
+		}
+	});
+};
+
 export const initTomSelect = () => {
 	const config = {
 		plugins: ["remove_button"]
@@ -16,18 +30,7 @@ export const initTomSelect = () => {
 
 	if (profileExpertise) {
 		const ts = new TomSelect(profileExpertise, config);
-
-		ts.control_input.style.width = "0px";
-		ts.on("item_add", () => {
-			if (ts.caretPos >= 5) {
-				ts.control.classList.add("flex", "flex-wrap", "big");
-			}
-		});
-		ts.on("item_remove", () => {
-			if (ts.caretPos < 5) {
-				ts.control.classList.remove("flex", "flex-wrap", "big");
-			}
-		});
+		customizeTs(ts);
 	}
 
 	if (bookingSkills) {
@@ -36,21 +39,11 @@ export const initTomSelect = () => {
 
 	if (bookingExpertise) {
 		const ts = new TomSelect(bookingExpertise, config);
-
-		ts.control_input.style.width = "0px";
-		ts.on("item_add", () => {
-			if (ts.caretPos >= 5) {
-				ts.control.classList.add("flex", "flex-wrap", "big");
-			}
-		});
-		ts.on("item_remove", () => {
-			if (ts.caretPos < 5) {
-				ts.control.classList.remove("flex", "flex-wrap", "big");
-			}
-		});
+		customizeTs(ts);
 	}
 
 	if (jobExpertise) {
-		new TomSelect(jobExpertise, config);
+		const ts = new TomSelect(jobExpertise, config);
+		customizeTs(ts);
 	}
 };
