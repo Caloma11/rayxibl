@@ -9,10 +9,11 @@
 .skill-pill {
 	@extend .mr-3, .mb-1, .rounded-md;
 
-	padding: $base-spacing calc(#{$base-spacing} + 2px);
+	padding: calc(#{$base-spacing - 2px}) $base-spacing;
 	box-shadow: 0px 6px 10px rgba(50, 51, 94, 0.15);
 	font-weight: 600;
 	white-space: nowrap;
+	font-size: 12px;
 
 	&.blue {
 		background: $blue-2;

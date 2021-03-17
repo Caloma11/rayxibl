@@ -10,7 +10,7 @@
         <% end %>
         <% unread_count ||= Message.unread_user_scoped_count(current_user) %>
         <% if link[:text] == "Inbox" && unread_count.positive? %>
-          <span class="notification"><%= unread_count %></span>
+          <span class="notification"><%= unread_count.to_s.rjust(2, "0") %></span>
         <% end %>
       <% end %>
     <% end %>
