@@ -1,5 +1,18 @@
 import TomSelect from "tom-select";
 
+const customizeTs = ts => {
+	ts.on("item_add", () => {
+		if (ts.caretPos >= 3) {
+			ts.control.classList.add("flex", "flex-wrap", "big");
+		}
+	});
+	ts.on("item_remove", () => {
+		if (ts.caretPos < 3) {
+			ts.control.classList.remove("flex", "flex-wrap", "big");
+		}
+	});
+};
+
 export const initTomSelect = () => {
 	const config = {
 		plugins: ["remove_button"]
@@ -15,7 +28,8 @@ export const initTomSelect = () => {
 	}
 
 	if (profileExpertise) {
-		new TomSelect(profileExpertise, config);
+		const ts = new TomSelect(profileExpertise, config);
+		customizeTs(ts);
 	}
 
 	if (bookingSkills) {
@@ -23,10 +37,12 @@ export const initTomSelect = () => {
 	}
 
 	if (bookingExpertise) {
-		new TomSelect(bookingExpertise, config);
+		const ts = new TomSelect(bookingExpertise, config);
+		customizeTs(ts);
 	}
 
 	if (jobExpertise) {
-		new TomSelect(jobExpertise, config);
+		const ts = new TomSelect(jobExpertise, config);
+		customizeTs(ts);
 	}
 };

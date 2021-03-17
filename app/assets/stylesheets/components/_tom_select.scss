@@ -6,6 +6,10 @@
 	box-shadow: unset;
 	height: 40px !important;
 
+	&.big {
+		height: 80px !important;
+  }
+  
 	&.focus {
 		outline: $blue auto 1px;
 		background: white;
