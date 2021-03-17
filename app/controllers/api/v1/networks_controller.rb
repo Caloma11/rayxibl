@@ -33,8 +33,9 @@ class Api::V1::NetworksController < ApplicationController
     profile_params = JSON.parse(params[:profile]).deep_symbolize_keys
 
     if profile_params
-      if profile_params[:name] != ""
-        @networks = @networks.joins(:user).where("users.first_name ILIKE :name OR users.last_name ILIKE :name", name: "%#{profile_params[:name]}%")
+      if profile_params[:name] != []
+        @networks = @networks.joins(:user)
+                             .where("users.first_name ILIKE ANY (array[:name]) OR users.first_name ILIKE ANY (array[:name])", name: profile_params[:name])
       end
 
       if profile_params[:profession] != ""
