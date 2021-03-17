@@ -13,7 +13,7 @@ export const BookingFormPricing = ({
 }) => {
 	return (
 		<>
-			<div className="flex">
+			<div className="flex billable-wrapper">
 				<label htmlFor="booking_billable" className="checkbox-container">
 					Billable
 					<input

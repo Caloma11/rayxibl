@@ -14,9 +14,18 @@ $day-border: 1px solid #e8e9eb;
 			}
 		}
 
+		#show-advanced {
+			transition: color 0.2s ease;
+
+			&.active {
+				color: rgba(20, 15, 38, 0.5) !important;
+			}
+		}
+
 		.filter-overlay {
 			@extend .bg-white;
 
+			padding-top: calc(#{$spacing-3} + #{$spacing-4});
 			position: fixed;
 			width: 100%;
 			height: 100vh;
@@ -93,6 +102,10 @@ $day-border: 1px solid #e8e9eb;
 			#booking_start_time,
 			#booking_end_time {
 				width: 80px;
+			}
+
+			.billable-wrapper {
+				@extend .mb-4;
 			}
 		}
 

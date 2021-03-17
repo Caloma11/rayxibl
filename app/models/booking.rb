@@ -9,7 +9,7 @@ class Booking < ApplicationRecord
 
   validates :title, :description, :start_date, :end_date, presence: true
   validates :price, :price_type, presence: true, if: -> { self.billable }
-  validates :price, numericality: { only_integer: true, greater_than: 0 }
+  validates :price, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
 
   validate :end_time_after_start_time
 

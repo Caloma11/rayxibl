@@ -7,10 +7,10 @@
 }
 
 .skill-pill {
-	@extend .mr-3, .p-1, .mb-1;
+	@extend .mr-3, .mb-1, .rounded-md;
 
+	padding: $base-spacing calc(#{$base-spacing} + 2px);
 	box-shadow: 0px 6px 10px rgba(50, 51, 94, 0.15);
-	border-radius: $radius-md;
 	font-weight: 600;
 	white-space: nowrap;
 

@@ -1,6 +1,7 @@
 import flatpickr from "flatpickr";
+import moment from "moment";
 import React, { useEffect, useRef } from "react";
-import { BookingFormTimeList } from "./BookingFormTimeList";
+import { TIME_LIST } from "../../utils/constants";
 
 export const BookingFormDates = ({
 	chosenDate,
@@ -44,8 +45,10 @@ export const BookingFormDates = ({
 				defaultDate: [chosenDay, chosenDay],
 				onChange: ([flatStartDate, flatEndDate]) => {
 					if (flatStartDate && flatEndDate) {
-						setStartDate(flatStartDate);
-						setEndDate(flatEndDate);
+						const startDate = moment(flatStartDate);
+						const endDate = moment(flatEndDate);
+						setStartDate(startDate.format("ddd MMM D YYYY"));
+						setEndDate(endDate.format("ddd MMM D YYYY"));
 					}
 				}
 			});
@@ -63,31 +66,42 @@ export const BookingFormDates = ({
 
 	return (
 		<>
-			<label className="block textGray nowrap" htmlFor="booking_time">
+			<label
+				className="block textGray nowrap textBetween"
+				htmlFor="booking_time"
+			>
 				Hours per day
 			</label>
-			<div className="flex justify-content-between items-end">
+			<div className="flex justify-content-center items-end">
 				<div className="flex">
 					{specificHour ? (
 						<div className="flex flex-column">
 							<div className="flex items-center">
-								<input
+								<select
 									id="booking_start_time"
 									name="booking[start_time]"
-									type="text"
 									value={startTime}
 									onChange={e => setStartTime(e.target.value)}
-									list="booking-form-time-list"
-								/>
+								>
+									{TIME_LIST.map((time, i) => (
+										<option value={time} key={i}>
+											{time}
+										</option>
+									))}
+								</select>
 								<span className="self-centered mx-2"> - </span>
-								<input
+								<select
 									id="booking_end_time"
 									name="booking[end_time]"
-									type="text"
 									value={endTime}
 									onChange={e => setEndTime(e.target.value)}
-									list="booking-form-time-list"
-								/>
+								>
+									{TIME_LIST.map((time, i) => (
+										<option value={time} key={i}>
+											{time}
+										</option>
+									))}
+								</select>
 							</div>
 						</div>
 					) : (
@@ -100,7 +114,6 @@ export const BookingFormDates = ({
 							className="w-100"
 						/>
 					)}
-					<BookingFormTimeList />
 				</div>
 				<div className="duration-toggler">
 					<button
@@ -136,7 +149,7 @@ export const BookingFormDates = ({
 					onChange={e => setEndDate(e.target.value)}
 					className={Object.keys(errors).includes("end_date") ? "error" : ""}
 				/>
-				<div className="input-wrapper" style={{ marginBottom: 0 }}>
+				<div className="input-wrapper mt-3" style={{ marginBottom: 0 }}>
 					<label htmlFor="new-booking-datepickr" className="block textGray">
 						Dates
 					</label>

@@ -25,7 +25,7 @@ export const CalendarFilter = ({ bookings, setProfiles }) => {
 					<img src={filterSvg} alt="filter" width={16} height={16} />
 					{filterCount > 0 && (
 						<span className="skill-pill blue m-0 filter-count">
-							{filterCount}
+							{filterCount <= 9 ? `0${filterCount}` : filterCount}
 						</span>
 					)}
 				</button>
@@ -35,7 +35,7 @@ export const CalendarFilter = ({ bookings, setProfiles }) => {
 				<div className="filter-overlay">
 					<section className="px-3 flex justify-content-between items-center header">
 						<button className="p-0" onClick={() => setShow(false)}>
-							<img src={crossDarkSvg} alt="exit" />
+							<img src={crossDarkSvg} alt="exit" width={16} height={16} />
 						</button>
 						<p>FREELANCERS</p>
 						<button className={show ? "noSelect" : ""} style={{ width: 32 }}>
