@@ -22,7 +22,17 @@ export const CalendarBookingFilter = ({
 			bookingStatusNode.current &&
 			!bookingStatusNode.current.classList.contains("tomselected")
 		) {
-			new TomSelect(bookingStatusNode.current);
+			const statusTom = new TomSelect(bookingStatusNode.current, {
+				plugins: ["remove_button"]
+			});
+
+			statusTom.on("item_add", e => {
+				setStatus(prevState => [...new Set([...prevState, parseInt(e, 10)])]);
+			});
+
+			statusTom.on("item_remove", e => {
+				setStatus(prevState => prevState.filter(ele => ele != parseInt(e, 10)));
+			});
 		}
 	}, [bookingStatusNode.current]);
 
@@ -44,20 +54,20 @@ export const CalendarBookingFilter = ({
 					Status
 				</label>
 				<select
+					multiple
 					ref={bookingStatusNode}
-					name="booking[status]"
+					name="booking[status][]"
 					id="booking_status"
-					value={status}
-					onChange={e => setStatus(e.target.value)}
+					defaultValue={status}
 				>
-					{STATUSES.map((status, i) => (
-						<option key={i} value={i - 1}>
-							{status[0]?.toUpperCase()}
-							{status.substr(1)}
+					{STATUSES.map(({ text, value }) => (
+						<option key={value} value={value}>
+							{text[0]?.toUpperCase()}
+							{text.substr(1)}
 						</option>
 					))}
 				</select>
-				<div className="flex flex-column mb-3">
+				<div className="flex flex-column my-3">
 					<label htmlFor="booking_id" className="textLightBlack mb-1">
 						Project/Client
 					</label>

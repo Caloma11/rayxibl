@@ -1,4 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
+import downChevronBlue from "../images/down-chevron-blue.svg";
+import upChevronGray from "../images/up-chevron-gray.svg";
 import { Input } from "./Input";
 import { CalendarBookingFilter } from "./CalendarBookingFilter";
 import { EXPERTISES } from "../../utils/constants";
@@ -54,7 +56,7 @@ export const CalendarProfileFilter = ({
 	const [skills, setSkills] = useState("");
 	const [location, setLocation] = useState("");
 	const [expertise, setExpertise] = useState("");
-	const [status, setStatus] = useState("");
+	const [status, setStatus] = useState([]);
 	const [bookingIds, setBookingIds] = useState([]);
 	const [showAdvanced, setShowAdvanced] = useState(false);
 
@@ -90,7 +92,7 @@ export const CalendarProfileFilter = ({
 		if (skills !== "") localFilterCount += 1;
 		if (location !== "") localFilterCount += 1;
 		if (expertise !== "") localFilterCount += 1;
-		if (status !== "") localFilterCount += 1;
+		if (status.length > 0) localFilterCount += 1;
 		if (bookingIds.length > 0) localFilterCount += 1;
 
 		setFilterCount(localFilterCount);
@@ -111,11 +113,21 @@ export const CalendarProfileFilter = ({
 				/>
 				<div className="flex justify-content-center">
 					<button
+						id="show-advanced"
 						type="button"
-						className="btn btn-float blue text-center"
+						className={`btn btn-float blue text-center textSm mb-3 ${
+							showAdvanced ? "active" : ""
+						}`}
 						onClick={toggleAdvancedFilter}
 					>
-						More
+						More{" "}
+						<img
+							src={showAdvanced ? upChevronGray : downChevronBlue}
+							alt="down chevron"
+							width={10}
+							height={10}
+							className="ml-1 vertical-align-middle"
+						/>
 					</button>
 				</div>
 				{showAdvanced && (

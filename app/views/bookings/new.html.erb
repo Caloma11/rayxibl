@@ -35,7 +35,7 @@
         <%= f.input :title, label: "Project / Client", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
         <%= f.input :description, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"} %>
 
-        <div class="flex justify-content-between items-center flex-shrink-2">
+        <div class="flex justify-content-between items-end flex-shrink-2">
 
           <!-- Start time and end time OR duration input -->
           <div class="bookingHours w-100">
@@ -45,18 +45,18 @@
                 <%= f.input :start_time, label: false,
                             as: :string,
                             label_html: { class: "block textGray nowrap" },
-                            input_html: { class: "mb-2 w-100", list: "time-options", autocomplete: false } %>
+                            input_html: { class: "w-100", list: "time-options", autocomplete: false } %>
                 <span class="self-centered mx-2"> - </span>
                 <%= f.input :end_time, label: false,
                             as: :string,
-                            input_html: { class: "mb-2 w-100", list: "time-options", autocomplete: false } %>
+                            input_html: { class: "w-100", list: "time-options", autocomplete: false } %>
               </div>
               <%= render partial: "shared/time_options" %>
             </div>
 
             <!-- Hidden duration -->
             <div class="bookingDuration none">
-              <%= f.input :duration, label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"}, label: "Hours per day" %>
+              <%= f.input :duration, label_html: { class: "block textGray" }, input_html: { class: "w-100" }, label: "Hours per day" %>
             </div>
           </div>
           <!-- End of left side -->

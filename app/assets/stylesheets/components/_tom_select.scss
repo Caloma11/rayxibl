@@ -1,5 +1,5 @@
 .items.ts-input {
-	@extend .py-0, .px-2, .flex, .items-center;
+	@extend .py-0, .px-2, .flex, .items-center, .rounded;
 
 	background: $blueish-gray !important;
 	border: 0;
@@ -13,5 +13,9 @@
 		padding-left: calc(#{$base-spacing} + 2px);
 		padding-right: calc(#{$base-spacing} + 2px);
 		background: white !important;
+
+		a.remove {
+			border-left: none;
+		}
 	}
 }

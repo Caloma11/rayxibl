@@ -5,6 +5,7 @@ export const PRICE_TYPES = [
 	{ text: "Fixed price", value: 2 }
 ];
 export const TIME_LIST = [
+	"",
 	"00:00",
 	"01:00",
 	"02:00",
@@ -39,7 +40,12 @@ export const EXPERTISES = [
 	"senior",
 	"pro"
 ];
-export const STATUSES = ["", "pending", "accepted", "rejected", "all"];
+export const STATUSES = [
+	{ text: "pending", value: 0 },
+	{ text: "accepted", value: 1 },
+	{ text: "rejected", value: 2 },
+	{ text: "all", value: 3 }
+];
 
 export const MONTHS = [
 	"January",
