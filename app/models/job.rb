@@ -17,7 +17,7 @@ class Job < ApplicationRecord
 
   validates :location, :profession, :expertise, :description, :rate, :expiration_date, :start_date, :end_date, presence: true
 
-  scope :active, -> { where("expiration_date > :today", today: Date.today) }
+  scope :active, -> { where("expiration_date >= :today", today: Date.today).live }
   scope :outside_connections, ->(profile) { where.not(manager_id: profile.managers.pluck(:id)) }
 
   def full_timestamp
