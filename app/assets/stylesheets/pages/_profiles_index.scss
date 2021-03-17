@@ -46,8 +46,11 @@
 		background-repeat: no-repeat;
 		grid-column-start: 1;
 		grid-column-end: 3;
+    img {
+      opacity: .8;
+    }
 		p.main-text {
-			@extend .textBlue, .textLg, .text-center, .bold;
+			@extend .textBlue, .textLg, .text-center, .bold, .pt-5, .mt-5;
 			&.add-free {
 				margin-bottom: 20%;
 			}
