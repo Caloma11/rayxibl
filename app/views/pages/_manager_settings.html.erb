@@ -24,8 +24,8 @@
   </div>
 
 
-  <h1 class="textBlue">Email us at <%= mail_to "info@flxibl.io", "info@flxibl.io", class: "textBlue" %></h1>
-  <%= image_tag "message-bubble.svg", alt: "bubbles" %>
+  <h2 class="textBlue">Email us at <%= mail_to "info@flxibl.io", "info@flxibl.io", class: "textBlue" %></h2>
+  <%= image_tag "message-bubble-blue.svg", alt: "bubbles", width: 300, height: 300, id: "bubble" %>
   <%= link_to "Update your password", edit_password_path, class: "textBlue uppercase mb-3" %>
   <%= link_to "Delete your account", user_delete_path, method: :delete, class: "textPink uppercase", data: { confirm: "Are you sure you want to delete your account?" } %>
 </div>
