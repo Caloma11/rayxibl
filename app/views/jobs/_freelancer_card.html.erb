@@ -13,8 +13,10 @@
     <div class="flex flex-column">
       <% if job.manager.company.logo.attached? %>
         <%= image_tag job.manager.company.logo.service_url, alt: "Company logo", class: "logo avatar avatar-square shadow" %>
-      <% else %>
+      <% elsif job.manager.user.avatar.attached? %>
         <%= image_tag job.manager.user.avatar.service_url, alt: "Company logo", class: "logo avatar avatar-square shadow" %>
+      <% else %>
+        <%= image_tag "https://cdn.lynda.com/courses/696328-637491205596562954_270x480_thumb.jpg", alt: "Company logo", class: "logo avatar avatar-square shadow" %>
       <% end %>
       <p class="text-center mt-2 semi-bold mb-0"><%= job.manager.company.name %></p>
       <% if current_user.profile.has_applied_for?(job) %>

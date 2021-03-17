@@ -17,7 +17,8 @@
 			background-color: $flat-yellow-3;
 		}
 
-		&.rejected {
+		&.rejected,
+		&.canceled {
 			background-color: $flat-red-4;
 		}
 	}

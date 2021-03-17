@@ -9,6 +9,12 @@
       <div class="relative">
         <div class="none actions-container">
           <div class="actions flex flex-column job-show">
+            <%= link_to new_profile_booking_path("no_profile", parent_id: @booking.id, select: true), class: "action-link" do %>
+              <%= image_tag "icons/copy.svg", alt: "copy icon", width: 22, height: 22, class: "vertical-align-middle" %> Duplicate
+            <% end %>
+            <%= link_to new_profile_booking_path("no_profile", parent_id: @booking.id, select: true, reassign: true), class: "action-link" do %>
+              <%= image_tag "icons/re-assign.svg", alt: "copy icon", width: 22, height: 22, class: "vertical-align-middle" %> Re-assign
+            <% end %>
             <% convo ||= Conversation.find_by(manager: @booking.manager, profile: @booking.profile) %>
             <% if convo %>
               <%= link_to conversation_path(convo, booking_id: @booking.id, anchor: "message-#{convo.messages.last&.id}"), class: "action-link" do %>
@@ -67,11 +73,11 @@
               <%= f.input :start_time, label: false,
                           as: :string,
                           label_html: { class: "block textGray nowrap" },
-                          input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @booking.start_time.strftime("%H:%M") } %>
+                          input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @booking.start_time&.strftime("%H:%M") } %>
               <span class="self-centered mx-2"> - </span>
               <%= f.input :end_time, label: false,
                           as: :string,
-                          input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @booking.end_time.strftime("%H:%M") } %>
+                          input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @booking.end_time&.strftime("%H:%M") } %>
             </div>
             <%= render partial: "shared/time_options" %>
           </div>

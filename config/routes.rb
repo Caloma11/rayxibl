@@ -54,7 +54,7 @@ Rails.application.routes.draw do
 
   resources :managers, except: %i[destroy]
   resources :conversations, only: %i[index show] do
-    resources :messages, only: %i[create]
+    resources :messages, only: %i[new create]
   end
 
   resources :job_applications, only: %i[] do
