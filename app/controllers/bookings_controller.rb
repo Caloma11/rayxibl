@@ -51,6 +51,9 @@ class BookingsController < ApplicationController
 
   def new
     @select = params[:select] == "true"
+    if params[:parent_id]
+      @parent_booking = Booking.find(params[:parent_id])
+    end
     @booking = Booking.new
     @booking.profile = @profile
     @network = current_user.manager.network
