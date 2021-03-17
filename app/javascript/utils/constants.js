@@ -5,6 +5,7 @@ export const PRICE_TYPES = [
 	{ text: "Fixed price", value: 2 }
 ];
 export const TIME_LIST = [
+	"",
 	"00:00",
 	"01:00",
 	"02:00",

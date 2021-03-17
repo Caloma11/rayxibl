@@ -1,7 +1,7 @@
 import flatpickr from "flatpickr";
 import moment from "moment";
 import React, { useEffect, useRef } from "react";
-import { BookingFormTimeList } from "./BookingFormTimeList";
+import { TIME_LIST } from "../../utils/constants";
 
 export const BookingFormDates = ({
 	chosenDate,
@@ -77,23 +77,31 @@ export const BookingFormDates = ({
 					{specificHour ? (
 						<div className="flex flex-column">
 							<div className="flex items-center">
-								<input
+								<select
 									id="booking_start_time"
 									name="booking[start_time]"
-									type="text"
 									value={startTime}
 									onChange={e => setStartTime(e.target.value)}
-									list="booking-form-time-list"
-								/>
+								>
+									{TIME_LIST.map((time, i) => (
+										<option value={time} key={i}>
+											{time}
+										</option>
+									))}
+								</select>
 								<span className="self-centered mx-2"> - </span>
-								<input
+								<select
 									id="booking_end_time"
 									name="booking[end_time]"
-									type="text"
 									value={endTime}
 									onChange={e => setEndTime(e.target.value)}
-									list="booking-form-time-list"
-								/>
+								>
+									{TIME_LIST.map((time, i) => (
+										<option value={time} key={i}>
+											{time}
+										</option>
+									))}
+								</select>
 							</div>
 						</div>
 					) : (
@@ -106,7 +114,6 @@ export const BookingFormDates = ({
 							className="w-100"
 						/>
 					)}
-					<BookingFormTimeList />
 				</div>
 				<div className="duration-toggler">
 					<button
