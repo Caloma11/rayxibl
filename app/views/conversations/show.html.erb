@@ -1,12 +1,12 @@
 <div class="convo-show h-100 flex flex-column">
   <div class="convo-header">
-    <section class="flex shadow pt-3 pb-2 px-3">
-      <%= link_to conversations_path, class: "flex items-center" do %>
-        <%= image_tag "icons/left-arrow.svg", alt: "back link", height: 24, width: 24, class: "mr-2" %>
+    <section class="flex pt-4 pb-3 px-3">
+      <%= link_to @back_path, class: "flex items-center" do %>
+        <%= image_tag "icons/left-arrow.svg", alt: "back link", height: 20, width: 20, class: "mr-2" %>
       <% end %>
       <div class="flex items-center flex-grow-1">
         <% if @other_person.avatar.present? %>
-          <div class="profile-card-avatar ml-3 rounded-square company-logo" style="background-image: url(<%= @other_person.avatar.service_url %>)">
+          <div class="profile-card-avatar ml-3 rounded-square company-logo mr-2" style="background-image: url(<%= @other_person.avatar.service_url %>)">
           </div>
         <% else %>
           <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "Avatar", width: 64, height: 64, class: "ml-3 rounded-square company-logo" %>
@@ -17,6 +17,8 @@
           <% if @other_person.freelancer? %>
             <p class="noMargin semi-bold textGray"><%= @other_person.profile.profession %></p>
             <span class="textMd textGray"><%= @other_person.profile.location %></span>
+          <% else %>
+            <p class="noMargin semi-bold textGray pt-2"><%= @other_person&.manager&.job_title %>, <%= @other_person&.manager&.company&.name %></p>
           <% end %>
         </div>
       </div>
@@ -33,8 +35,8 @@
   </section>
 
   <div class="message-form flex items-end">
-    <%= simple_form_for [@conversation, @message], remote: true, html: {class: "flex-grow-1"} do |f| %>
-      <%= f.input :content, as: :string, label: false, placeholder: "Type a message...", input_html: { class: "rounded-pill focus-outline-none ", autocomplete: "off", value: (@booking ? prefilled_message(@booking) : nil) } %>
+    <%= simple_form_for [@conversation, @message], remote: true, html: {class: "flex-grow-1 pr-0"} do |f| %>
+      <%= f.input :content, as: :string, label: false, placeholder: "Type a message...", input_html: { class: "rounded-pill focus-outline-none w-100", autocomplete: "off", value: (@booking ? prefilled_message(@booking) : nil) } %>
     <% end %>
     <% if current_user.manager? %>
       <% unless current_user.find_connection(@conversation.profile.user) %>
@@ -43,7 +45,7 @@
         <% end %>
       <% else %>
         <%= link_to new_profile_booking_path(@conversation.profile), class: "action" do %>
-          <%= image_tag "icons/calendar.svg", alt: "calendar", class: "p-1 mr-2 icon", width: 32, height: 32 %>
+          <%= image_tag "icons/calendar.svg", alt: "calendar", class: "p-1 mr-2 icon", width: 24, height: 24 %>
         <% end %>
       <% end %>
     <% end %>

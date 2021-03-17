@@ -55,6 +55,17 @@ class ConversationsController < ApplicationController
     timestamp = params.try(:[], :conversation).try(:[], :timestamp)
     @messages = @conversation.messages.includes(:user, { booking: [:attachments_attachments, :profile, :manager] }).order(created_at: :DESC)
 
+
+
+    @back_path = case params[:from]
+    when "profs_index" then profiles_path
+    when "prof_show" then profile_path(@conversation.profile)
+    when "convo_index" then conversations_path
+    else
+      dashboard_path
+    end
+
+
     if timestamp
       @messages = @messages.where("created_at < ?", timestamp.to_date).limit(10)
     else
