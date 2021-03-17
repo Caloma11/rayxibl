@@ -23,6 +23,11 @@
 		}
 	}
 
+  .booking-description {
+    max-width: 100%;
+    line-break: anywhere;
+  }
+
 	.box {
 		@extend .rounded, .items-center, .mb-3;
 
@@ -49,10 +54,12 @@
 
 			&.reject {
 				@extend .gradient-red;
+        height: 40px;
 			}
 
 			&.accept {
 				@extend .gradient-green;
+        height: 40px;
 			}
 		}
 	}

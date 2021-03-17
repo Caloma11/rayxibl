@@ -1,4 +1,4 @@
-<%= link_to conversation_path(conversation, anchor: "message-#{conversation.messages.last&.id}"), class: "no-decoration textBlack convo-snippet", data: { conversation_id: conversation.id } do %>
+<%= link_to conversation_path(conversation, anchor: "message-#{conversation.messages.last&.id}", from: "convo_index"), class: "no-decoration textBlack convo-snippet", data: { conversation_id: conversation.id } do %>
   <div class="my-3">
     <div class="convo-snippet-content-wrapper">
       <div class="flex">
