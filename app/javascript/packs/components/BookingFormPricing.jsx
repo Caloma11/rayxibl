@@ -49,12 +49,6 @@ export const BookingFormPricing = ({
 			</div>
 			{billable && (
 				<div className="input-wrapper">
-					<label
-						htmlFor="booking_price"
-						className="block mb-1 textLightBlack textBetween"
-					>
-						Price rate
-					</label>
 					<div className="flex items-center">
 						<input
 							id="booking_price"
@@ -70,7 +64,9 @@ export const BookingFormPricing = ({
 							name="booking[price_type]"
 							value={priceType}
 							onChange={e => setPriceType(e.target.value)}
-							className={`mr-3 ${"price_type" in errors ? "error" : ""}`}
+							className={`mr-3 ${
+								"price_type" in errors ? "error" : ""
+							} with-caret`}
 						>
 							{PRICE_TYPES.map(({ text, value }) => (
 								<option value={value} key={value}>
