@@ -64,9 +64,9 @@ span {
 }
 
 .fixed-bottom {
-	position: fixed;
+	position: sticky;
 	width: 100%;
-	bottom: 60px;
+	bottom: 0px;
 }
 
 @supports (padding-top: constant(safe-area-inset-top)) {
