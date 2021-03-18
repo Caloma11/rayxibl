@@ -7,7 +7,9 @@
         Your current bookings will appear here
       </h3>
     <% end %>
-    <p class="subtitle m-0 textSm"><%= pluralize @bookings.count, "booking" %> across <%= pluralize @bookings.distinct.count("manager_id"), "client" %></p>
+    <% if @bookings_count.positive? %>
+      <p class="subtitle m-0 textSm"><%= pluralize @bookings.count, "booking" %> across <%= pluralize @bookings.distinct.count("manager_id"), "client" %></p>
+    <% end %>
 
     <% if @bookings_count.positive? %>
       <%= link_to bookings_path(status: 1), class: "card-container flex items-center justify-content-between" do %>
@@ -48,8 +50,6 @@
         </div>
         <%= image_tag "icons/right-arrow.svg", alt: "canceled bookings", width: 12, height: 12 %>
       <% end %>
-    <% else %>
-      <p class="my-0">This is where your bookings will appear</p>
     <% end %>
 
     <%= link_to "View all (#{@bookings_count})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
