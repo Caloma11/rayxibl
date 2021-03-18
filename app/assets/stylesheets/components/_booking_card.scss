@@ -27,18 +27,19 @@
 	}
 
 	.choose-file {
-		border: 1px solid #d3d3d3;
+		border: 1px solid $flat-gray-3;
 		padding: 8px 24px;
 		cursor: pointer;
 		background: white;
 		border-radius: 8px;
-		display: flex;
+		display: flex !important;
 		justify-content: center;
 		align-items: center;
 		letter-spacing: 2px;
 		img {
-			height: 32px;
-			width: 32px;
+			@extend .mr-2;
+			height: 24px;
+			width: 24px;
 		}
 
 		@extend .mt-3;

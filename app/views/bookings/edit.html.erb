@@ -5,7 +5,7 @@
     <% end %>
 
     <% if @booking.manager == current_user.manager %>
-    <p class="textDarkGray uppercase">Edit booking</p>
+    <h3 class="semi-bold uppercase textBetween textDarkGray">Edit booking</h3>
       <div class="relative">
         <div class="none actions-container">
           <div class="actions flex flex-column job-show">
@@ -33,22 +33,24 @@
           </div>
         </div>
 
-        <button class="trigger">
-          <%= image_tag "icons/more.svg", class: "toggler", alt: "more", width: 24, height: 24 %>
+        <button class="trigger px-0">
+          <%= image_tag "icons/more.svg", class: "toggler", alt: "more", width: 16, height: 16 %>
         </button>
       </div>
     <% end %>
   </section>
   <section class="mt-3">
-    <div class="flex mx-3">
+    <div class="flex items-center mx-3">
       <% if @booking.profile.user.avatar.attached? %>
-        <%= image_tag @booking.profile.user.avatar.service_url, alt: "Avatar", width: 40, height: 40 %>
+        <%= image_tag @booking.profile.user.avatar.service_url, alt: "Avatar", class: "avatar avatar-square booking rounded" %>
       <% else %>
-        <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "Avatar", width: 40, height: 40 %>
+        <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "Avatar", class: "avatar avatar-square booking rounded" %>
       <% end %>
       <div class="ml-3">
-        <h5 class="noMargin"><%= @booking.profile.user.display_name %></h5>
-        <p class="noMargin textLightBlack semi-bold"><%= @booking.profile.profession %></p>
+        <p class="mt-0 mb-1 bold"><%= @booking.profile.user.display_name %></p>
+        <span class="textBetween textLightBlack">
+          <%= @booking.profile.profession %>, <%= @booking.profile.location %>
+        </span>
       </div>
     </div>
 
@@ -60,31 +62,33 @@
       <div class="mx-3">
         <%= f.input :title, required: false,
                     label: "Project/Client",
-                    label_html: { class: "mb-1 textLightBlack" },
+                    label_html: { class: "block mb-1 textLightBlack textBetween" },
                     wrapper_html: { class: "flex flex-column mb-3" } %>
         <%= f.input :description, required: false,
-                    label_html: { class: "mb-1 textLightBlack" },
+                    label_html: { class: "block mb-1 textLightBlack textBetween" },
                     wrapper_html: { class: "flex flex-column mb-3" },
-                    input_html: { rows: 4 } %>
+                    input_html: { class: "with-min-height" } %>
         <div class="flex justify-content-between items-end mb-3">
           <div class="bookingSpecific flex flex-column <%= 'none' if @booking&.duration %>">
-            <label class="block textGray nowrap">Hours per day</label>
-            <div class="inputs flex items-center">
+            <label class="block mb-1 textLightBlack textBetween">Hours per day</label>
+            <div class="inputs flex justify-content-between items-center" style="width: 200px;">
               <%= f.input :start_time, label: false,
-                          as: :string,
-                          label_html: { class: "block textGray nowrap" },
+                          collection: Booking::TIME_LIST,
+                          label_html: { class: "block mb-1 textLightBlack textBetween" },
                           input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @booking.start_time&.strftime("%H:%M") } %>
               <span class="self-centered mx-2"> - </span>
               <%= f.input :end_time, label: false,
-                          as: :string,
-                          input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @booking.end_time&.strftime("%H:%M") } %>
+                          collection: Booking::TIME_LIST,
+                          label_html: { class: "block mb-1 textLightBlack textBetween" },
+                          input_html: { class: "w-100", autocomplete: false, value: @booking.end_time&.strftime("%H:%M") } %>
             </div>
-            <%= render partial: "shared/time_options" %>
           </div>
           <div class="bookingDuration <%= 'none' unless @booking&.duration %>">
             <%= f.input :duration,
-                        label_html: { class: "block textGray nowrap" },
-                        input_html: { class: "mb-2 w-100" },
+                        collection: (1..8),
+                        label: "Hours per day",
+                        label_html: { class: "block mb-1 textLightBlack textBetween" },
+                        input_html: { class: "w-100" },
                         wrapper_html: { class: "flex flex-column" } %>
           </div>
           <div class="profileTabs flex-grow-1 textSm mr-0" id="tabs">
@@ -92,15 +96,14 @@
             <%= link_to "Specific", "#", id: ("specific" if current_user.manager?), class: "tab #{'active' unless @booking&.duration}", data: { turbolinks: false } %>
           </div>
         </div>
-        <div class="flex items-end justify-content-between dates-selector">
+
+        <label for="dates" class="block mb-1 textLightBlack textBetween">Dates</label>
+        <div class="flex items-center dates-selector mb-3">
           <div class="dates-input-wrapper">
-            <label for="dates" class="block textGray">Dates</label>
-
             <% if current_user.freelancer? %>
-            <input id="" value='<%= "#{@booking&.start_date&.strftime("%b %d")} - #{@booking&.end_date&.strftime("%b %d")}" %>' type="text" name="dates" class="mb-2 w-100">
+              <input id="" value='<%= "#{@booking&.start_date&.strftime("%b %d")} - #{@booking&.end_date&.strftime("%b %d")}" %>' type="text" name="dates" class="w-100">
             <% else %>
-              <input id="edit-booking-datepicker" value='<%= "#{@booking&.start_date&.strftime("%b %d")} - #{@booking&.end_date&.strftime("%b %d")}" %>' type="text" name="dates" class="mb-2 w-100 datepicker">
-
+              <input id="edit-booking-datepicker" value='<%= "#{@booking&.start_date&.strftime("%b %d")} - #{@booking&.end_date&.strftime("%b %d")}" %>' type="text" name="dates" class="w-100 datepicker">
             <% end %>
 
             <%= f.input :start_date, as: :hidden,
@@ -109,27 +112,44 @@
                         wrapper_html: { class: "flex flex-column mb-3 none" } %>
           </div>
 
-          <div class="weekends-contain">
+          <div class="weekends-contain ml-4">
             <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "booking[weekends]", active: @booking.weekends, id: "booking_weekends" } %>
           </div>
         </div>
-        <div class="flex mb-3">
+        <div class="flex mb-4">
           <%= render partial: "shared/checkbox", locals: { label: "Billable", name: "booking[billable]", active: @booking.billable, id: "booking_billable_true" } %>
         </div>
-        <div id="priceSection" class="flex justify-content-between items-center flex-wrap">
-          <%= f.input :price, label: false, placeholder: "Ex: $250", label_html: { class: "block textGray" }, input_html: { class: "mb-2" }, wrapper_html: { class: "mr-2 flex-shrink-2" } %>
-          <%= f.input :price_type, label: false, label_html: { class: "block textGray" }, collection: Booking::PRICE_TYPES, input_html:{class: "mb-2 w-100"}, wrapper_html: { class: "mr-3" }  %>
-          <p class="textGray my-0" id="totalPrice" data-preferred-currency="<%= currency_mapper(current_user.preferred_currency) %>" > Total: <%= currency_mapper(current_user.preferred_currency) %> <%= @booking.converted_total_price(ExchangeRate.new(current_user).call) %> </p>
+        <div id="priceSection" class="mb-3">
+          <div class="input-wrapper">
+            <div class="flex items-center">
+              <%= f.input :price,
+                          label: false,
+                          label_html: { class: "block mb-1 textLightBlack textBetween" },
+                          input_html: { class: "mr-3", style: "width: 120px;" },
+                          wrapper: false %>
+              <%= f.input :price_type,
+                          label: false,
+                          label_html: { class: "block mb-1 textLightBlack textBetween" },
+                          collection: Booking::PRICE_TYPES,
+                          input_html: { class: "mr-3" },
+                          wrapper: false %>
+              <span class="textLightBlack textBetween" id="totalPrice" data-preferred-currency="<%= currency_mapper(current_user.preferred_currency) %>" > Total: <%= currency_mapper(current_user.preferred_currency) %> <%= @booking.converted_total_price(ExchangeRate.new(current_user).call) %> </span>
+            </div>
+          </div>
         </div>
         <% if current_user.manager? %>
 
-          <%= f.input :attachments, label_html: { class: "choose-file textGray" }, as: :file, input_html: { multiple: true, class: "none" }, label: "#{image_tag("icons/paperclip", alt: "paperclip")} ADD ATTACHMENT".html_safe %>
+          <%= f.input :attachments,
+                      as: :file,
+                      input_html: { multiple: true, class: "none" },
+                      label: "#{image_tag("icons/paperclip", alt: "paperclip")} ADD ATTACHMENT".html_safe,
+                      label_html: { class: "choose-file block mb-1 textLightBlack textBetween" } %>
         <% end %>
       </div>
       <div class="separator"></div>
-      <div class="mx-3  pb-4">
+      <div class="mx-3 pb-4">
         <% if current_user.manager? %>
-        <button class="btn btn-primary w-100 py-3" type="submit"><%= image_tag "icons/paperplane.svg", alt: "update", width: 24, height: 24, class: "vertical-align-middle" %> Update request</button>
+          <button class="btn btn-primary w-100 py-3" type="submit"><%= image_tag "icons/paperplane.svg", alt: "update", width: 24, height: 24, class: "vertical-align-middle" %> Update request</button>
         <% end %>
       </div>
     <% end %>

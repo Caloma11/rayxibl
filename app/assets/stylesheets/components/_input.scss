@@ -2,6 +2,17 @@ label {
 	@extend .mb-1;
 }
 
+textarea {
+	&.with-min-height {
+		min-height: 120px;
+	}
+}
+
+select {
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
 input,
 textarea,
 select {
@@ -18,15 +29,18 @@ select {
 	padding: 8px;
 	color: #121217;
 	box-sizing: border-box;
-	height: 40px;
+	height: 48px;
 
 	&[type="radio"] {
 		height: unset;
 	}
 
 	&:focus {
-		outline: $blue auto 1px;
+		@extend .rounded;
+
+		outline: none;
 		background: white;
+		border: 1px solid $blue;
 	}
 
 	&.lg {
@@ -34,11 +48,14 @@ select {
 	}
 
 	&.error {
+		@extend .rounded;
+
+		outline: none;
 		border: 1px solid $flat-red-3;
 	}
 
 	@media only screen and (min-device-width: 375px) and (max-device-width: 812px) and (-webkit-min-device-pixel-ratio: 3) and (orientation: portrait) {
-		font-size: 16px;
+		font-size: 14px;
 	}
 }
 
