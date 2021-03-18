@@ -38,9 +38,10 @@ input[type="submit"] {
 
 		color: #fff;
 		background: $dark-blue-gradient;
-		font-weight: 500;
 		font-size: 14px !important;
-		height: 40px;
+		height: 48px;
+		font-weight: normal;
+		letter-spacing: 2px;
 	}
 
 	&.btn-secondary {
