@@ -8,10 +8,10 @@ export const BookingFormAttachments = ({ setAttachments }) => {
 	};
 
 	return (
-		<div className="input-wrapper booking-attachments">
+		<div className="input-wrapper booking-attachments mx-3">
 			<label
 				htmlFor="booking_attachments"
-				className="block mb-1 mt-0 textLightBlack textBetween choose-file uppercase text-center"
+				className="block my-0 textLightBlack textBetween choose-file uppercase text-center"
 			>
 				<img
 					src={paperclipSvg}
