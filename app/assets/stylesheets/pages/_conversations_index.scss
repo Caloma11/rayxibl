@@ -17,9 +17,7 @@
 
 	#conversations {
 		.convo-snippet {
-			@extend .mb-3, .block, .px-3;
-
-			border-bottom: 2px solid $blueish-gray;
+			@extend .mb-4, .block, .px-3;
 
 			.convo-snippet-content-wrapper {
 				display: grid;
