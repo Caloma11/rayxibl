@@ -2,6 +2,12 @@ label {
 	@extend .mb-1;
 }
 
+textarea {
+	&.with-min-height {
+		min-height: 120px;
+	}
+}
+
 input,
 textarea,
 select {
