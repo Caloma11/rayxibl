@@ -7,7 +7,7 @@ $spacing-5: calc(#{$base-spacing} * 16);
 
 // START: Margin top
 .mt-0 {
-	margin-top: $spacing-0;
+	margin-top: $spacing-0 !important;
 }
 
 .mt-1 {
@@ -33,7 +33,7 @@ $spacing-5: calc(#{$base-spacing} * 16);
 
 // START: Margin bottom
 .mb-0 {
-	margin-bottom: $spacing-0;
+	margin-bottom: $spacing-0 !important;
 }
 
 .mb-1 {
