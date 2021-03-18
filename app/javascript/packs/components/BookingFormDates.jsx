@@ -67,7 +67,7 @@ export const BookingFormDates = ({
 	return (
 		<>
 			<label
-				className="block textGray nowrap textBetween"
+				className="block mb-1 textLightBlack textBetween"
 				htmlFor="booking_time"
 			>
 				Hours per day
@@ -150,7 +150,10 @@ export const BookingFormDates = ({
 					className={Object.keys(errors).includes("end_date") ? "error" : ""}
 				/>
 				<div className="input-wrapper mt-3" style={{ marginBottom: 0 }}>
-					<label htmlFor="new-booking-datepickr" className="block textGray">
+					<label
+						htmlFor="new-booking-datepickr"
+						className="block mb-1 textLightBlack textBetween"
+					>
 						Dates
 					</label>
 					<input

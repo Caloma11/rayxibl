@@ -89,7 +89,12 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 			<form ref={formRef} className="bookingForm" onSubmit={handleSubmit}>
 				<div className="px-3">
 					<div className="input-wrapper">
-						<label htmlFor="booking_title">Project/Client</label>
+						<label
+							htmlFor="booking_title"
+							className="block mb-1 textLightBlack textBetween"
+						>
+							Project/Client
+						</label>
 						<input
 							id="booking_title"
 							name="booking[title]"
@@ -100,7 +105,12 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 						/>
 					</div>
 					<div className="input-wrapper">
-						<label htmlFor="booking_description">Description</label>
+						<label
+							htmlFor="booking_description"
+							className="block mb-1 textLightBlack textBetween"
+						>
+							Description
+						</label>
 						<textarea
 							id="booking_description"
 							name="booking[description]"

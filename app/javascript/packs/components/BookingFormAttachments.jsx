@@ -9,7 +9,12 @@ export const BookingFormAttachments = ({ setAttachments }) => {
 	return (
 		<>
 			<div className="input-wrapper">
-				<label htmlFor="booking_attachments">Attachments</label>
+				<label
+					htmlFor="booking_attachments"
+					className="block mb-1 textLightBlack textBetween"
+				>
+					Attachments
+				</label>
 				<input
 					id="booking_attachments"
 					name="booking[attachments][]"
