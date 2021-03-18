@@ -313,6 +313,15 @@ const Calendar = () => {
 		monthScrollChangeRef.current = false;
 	}, [data]);
 
+	useEffect(() => {
+		const nav = document.querySelector("nav.navbar");
+		if (showForm) {
+			nav.classList.add("none");
+		} else {
+			nav.classList.remove("none");
+		}
+	}, [showForm]);
+
 	if (loading) {
 		return (
 			<section
