@@ -18,7 +18,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 	const [endTime, setEndTime] = useState("");
 	const [billable, setBillable] = useState(false);
 	const [price, setPrice] = useState("");
-	const [priceType, setPriceType] = useState(-1);
+	const [priceType, setPriceType] = useState(1);
 	const [totalPrice, setTotalPrice] = useState(null);
 	const [attachments, setAttachments] = useState([]);
 	const [errors, setErrors] = useState({});
@@ -150,21 +150,23 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 					/>
 					<BookingFormAttachments setAttachments={setAttachments} />
 				</div>
-				<div className="separator"></div>
-				<div className="px-3">
-					<button
-						type="submit"
-						className="btn btn-primary w-100 flex items-center justify-content-center"
-					>
-						<img
-							src={paperPlaneSvg}
-							alt="send request"
-							width={24}
-							height={24}
-							className="mr-2"
-						/>{" "}
-						Send request
-					</button>
+				<div className="fixed-bottom">
+					<div className="separator"></div>
+					<div className="px-3 mx-3">
+						<button
+							type="submit"
+							className="btn btn-primary w-100 flex items-center justify-content-center"
+						>
+							<img
+								src={paperPlaneSvg}
+								alt="send request"
+								width={24}
+								height={24}
+								className="mr-2"
+							/>{" "}
+							Send request
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>
