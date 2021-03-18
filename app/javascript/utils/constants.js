@@ -1,5 +1,4 @@
 export const PRICE_TYPES = [
-	{ text: "", value: -1 },
 	{ text: "Per hour", value: 0 },
 	{ text: "Per day", value: 1 },
 	{ text: "Fixed price", value: 2 }
@@ -31,6 +30,7 @@ export const TIME_LIST = [
 	"22:00",
 	"23:00"
 ];
+export const DURATION_LIST = new Array(8).fill(1).map((ele, i) => ele + i);
 export const EXPERTISES = [
 	"",
 	"junior",
