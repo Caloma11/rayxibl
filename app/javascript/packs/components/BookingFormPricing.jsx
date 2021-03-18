@@ -54,6 +54,7 @@ export const BookingFormPricing = ({
 							id="booking_price"
 							name="booking[price]"
 							type="number"
+							placeholder="Rate"
 							value={price}
 							onChange={e => setPrice(e.target.value)}
 							className={`mr-3 ${"price" in errors ? "error" : ""}`}
