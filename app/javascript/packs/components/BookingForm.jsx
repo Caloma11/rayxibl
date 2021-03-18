@@ -18,7 +18,7 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 	const [endTime, setEndTime] = useState("");
 	const [billable, setBillable] = useState(false);
 	const [price, setPrice] = useState("");
-	const [priceType, setPriceType] = useState(-1);
+	const [priceType, setPriceType] = useState(1);
 	const [totalPrice, setTotalPrice] = useState(null);
 	const [attachments, setAttachments] = useState([]);
 	const [errors, setErrors] = useState({});
@@ -89,7 +89,12 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 			<form ref={formRef} className="bookingForm" onSubmit={handleSubmit}>
 				<div className="px-3">
 					<div className="input-wrapper">
-						<label htmlFor="booking_title">Project/Client</label>
+						<label
+							htmlFor="booking_title"
+							className="block mb-1 textLightBlack textBetween"
+						>
+							Project/Client
+						</label>
 						<input
 							id="booking_title"
 							name="booking[title]"
@@ -100,7 +105,12 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 						/>
 					</div>
 					<div className="input-wrapper">
-						<label htmlFor="booking_description">Description</label>
+						<label
+							htmlFor="booking_description"
+							className="block mb-1 textLightBlack textBetween"
+						>
+							Description
+						</label>
 						<textarea
 							id="booking_description"
 							name="booking[description]"
@@ -140,21 +150,23 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 					/>
 					<BookingFormAttachments setAttachments={setAttachments} />
 				</div>
-				<div className="separator"></div>
-				<div className="px-3">
-					<button
-						type="submit"
-						className="btn btn-primary w-100 flex items-center justify-content-center"
-					>
-						<img
-							src={paperPlaneSvg}
-							alt="send request"
-							width={24}
-							height={24}
-							className="mr-2"
-						/>{" "}
-						Send request
-					</button>
+				<div className="fixed-bottom">
+					<div className="separator"></div>
+					<div className="px-3 mx-3">
+						<button
+							type="submit"
+							className="btn btn-primary w-100 flex items-center justify-content-center"
+						>
+							<img
+								src={paperPlaneSvg}
+								alt="send request"
+								width={24}
+								height={24}
+								className="mr-2"
+							/>{" "}
+							Send request
+						</button>
+					</div>
 				</div>
 			</form>
 		</div>

@@ -4,7 +4,7 @@ import blackCrossSvg from "../images/black-cross.svg";
 export const BookingFormHeader = ({ setShowForm, profile }) => {
 	return (
 		<div className="booking-form-header">
-			<div className="flex justify-content-between">
+			<div className="flex justify-content-between mb-2">
 				<button type="button" onClick={() => setShowForm(false)}>
 					<img src={blackCrossSvg} alt="back" width={14} height={14} />
 				</button>
@@ -16,13 +16,13 @@ export const BookingFormHeader = ({ setShowForm, profile }) => {
 
 			<div className="flex items-center profile">
 				<img
-					className="avatar avatar-square medium"
+					className="avatar avatar-square booking rounded"
 					src={profile.avatar}
 					alt={`${profile.displayName}'s avatar`}
 				/>
 				<div className="ml-3">
-					<p className="mt-0 mb-1">{profile.displayName}</p>
-					<span className="textBetween">
+					<p className="my-0">{profile.displayName}</p>
+					<span className="textBetween semi-bold">
 						{profile.profession}, {profile.location}
 					</span>
 				</div>

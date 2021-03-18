@@ -18,11 +18,6 @@
 .bookingForm {
 	.input-wrapper {
 		@extend .flex, .flex-column, .mb-3;
-
-		label {
-			color: $light-black;
-			font-size: 14px;
-		}
 	}
 
 	.checkbox-wrapper {
@@ -65,11 +60,16 @@
 			.border-box;
 
 		background: $blueish-gray;
-		height: 40px;
+		height: 48px;
 
 		button {
+			font-weight: normal;
 			text-transform: none;
 			color: #898994;
+
+			&.btn-white {
+				color: $flat-dark-1 !important;
+			}
 		}
 	}
 
@@ -78,10 +78,37 @@
 		font-size: 14px;
 	}
 
+	.booking-attachments {
+		@extend .rounded;
+
+		border: 1px solid $flat-gray-3;
+
+		.choose-file {
+			@extend .border-box;
+
+			padding: 8px 24px;
+			cursor: pointer;
+			background: white;
+			border-radius: 8px;
+			display: flex !important;
+			justify-content: center;
+			align-items: center;
+			letter-spacing: 2px;
+			height: 48px;
+
+			img {
+				@extend .mr-2;
+
+				height: 24px;
+				width: 24px;
+			}
+		}
+	}
+
 	.separator {
 		@extend .my-3;
 
-		border-top: 2px solid $blueish-gray;
+		border-top: 1px solid $blueish-gray;
 	}
 
 	button[type="submit"] {

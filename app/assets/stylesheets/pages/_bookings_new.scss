@@ -15,4 +15,34 @@
 			margin-top: calc(#{$spacing-2} + #{$spacing-3});
 		}
 	}
+
+	.separator {
+		@extend .my-3;
+
+		border-bottom: 2px solid $blueish-gray;
+	}
+
+	.booking-attachments {
+		@extend .rounded;
+
+		border: 1px solid $flat-gray-3;
+
+		.choose-file {
+			padding: 8px 24px;
+			cursor: pointer;
+			background: white;
+			border-radius: 8px;
+			display: flex !important;
+			justify-content: center;
+			align-items: center;
+			letter-spacing: 2px;
+
+			img {
+				@extend .mr-2;
+
+				height: 24px;
+				width: 24px;
+			}
+		}
+	}
 }
