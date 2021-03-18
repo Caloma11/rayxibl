@@ -1,4 +1,5 @@
 import React from "react";
+import paperclipSvg from "../images/paperclip.svg";
 
 export const BookingFormAttachments = ({ setAttachments }) => {
 	const handleChange = e => {
@@ -7,22 +8,28 @@ export const BookingFormAttachments = ({ setAttachments }) => {
 	};
 
 	return (
-		<>
-			<div className="input-wrapper">
-				<label
-					htmlFor="booking_attachments"
-					className="block mb-1 textLightBlack textBetween"
-				>
-					Attachments
-				</label>
-				<input
-					id="booking_attachments"
-					name="booking[attachments][]"
-					type="file"
-					multiple
-					onChange={handleChange}
-				/>
-			</div>
-		</>
+		<div className="input-wrapper booking-attachments">
+			<label
+				htmlFor="booking_attachments"
+				className="block mb-1 mt-0 textLightBlack textBetween choose-file uppercase text-center"
+			>
+				<img
+					src={paperclipSvg}
+					alt="Add attachment icon"
+					width={32}
+					height={32}
+					className="vertical-align-middle"
+				/>{" "}
+				Add attachment
+			</label>
+			<input
+				id="booking_attachments"
+				name="booking[attachments][]"
+				className="none"
+				type="file"
+				multiple
+				onChange={handleChange}
+			/>
+		</div>
 	);
 };

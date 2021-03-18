@@ -72,7 +72,7 @@ export const BookingFormDates = ({
 			>
 				Hours per day
 			</label>
-			<div className="flex justify-content-center items-end">
+			<div className="flex justify-content-center items-end mb-3">
 				<div className="flex">
 					{specificHour ? (
 						<div className="flex flex-column">
@@ -132,6 +132,12 @@ export const BookingFormDates = ({
 					</button>
 				</div>
 			</div>
+			<label
+				htmlFor="new-booking-datepickr"
+				className="block mb-1 textLightBlack textBetween"
+			>
+				Dates
+			</label>
 			<div className="flex mb-3 items-center">
 				<input
 					id="booking_start_date"
@@ -149,51 +155,47 @@ export const BookingFormDates = ({
 					onChange={e => setEndDate(e.target.value)}
 					className={Object.keys(errors).includes("end_date") ? "error" : ""}
 				/>
-				<div className="input-wrapper mt-3" style={{ marginBottom: 0 }}>
-					<label
-						htmlFor="new-booking-datepickr"
-						className="block mb-1 textLightBlack textBetween"
-					>
-						Dates
-					</label>
-					<input
-						id="new-booking-datepickr"
-						ref={datesRef}
-						type="text"
-						name="dates"
-						className="mb-2 w-100 datepicker border-box"
-					/>
-				</div>
-				<div className="flex items-center mt-2 ml-3">
-					<label htmlFor="booking_weekends" className="checkbox-container">
-						Incl. weekends
+				<div className="flex items-center">
+					<div className="input-wrapper" style={{ marginBottom: 0 }}>
 						<input
-							type="checkbox"
-							name="booking[weekends]"
-							className="mr-2"
-							id="booking_weekends"
-							defaultValue={weekends}
+							id="new-booking-datepickr"
+							ref={datesRef}
+							type="text"
+							name="dates"
+							className="w-100 datepicker border-box"
 						/>
-						<span
-							className="checkmark"
-							onClick={() => setWeekends(prev => !prev)}
-						>
-							<svg
-								width="15"
-								height="11"
-								viewBox="0 0 15 11"
-								fill="none"
-								xmlns="http://www.w3.org/2000/svg"
+					</div>
+					<div className="flex items-center ml-3">
+						<label htmlFor="booking_weekends" className="checkbox-container">
+							Incl. weekends
+							<input
+								type="checkbox"
+								name="booking[weekends]"
+								className="mr-2"
+								id="booking_weekends"
+								defaultValue={weekends}
+							/>
+							<span
+								className="checkmark"
+								onClick={() => setWeekends(prev => !prev)}
 							>
-								<path
-									fillRule="evenodd"
-									clipRule="evenodd"
-									d="M11.7058 0.42315C12.3005 -0.153556 13.2502 -0.138946 13.8269 0.455782C14.4036 1.05051 14.389 2.00015 13.7942 2.57685L6.05985 10.0768C5.47802 10.641 4.55324 10.641 3.97141 10.0768L0.455783 6.66776C-0.138946 6.09105 -0.153556 5.14142 0.423151 4.54669C0.999857 3.95196 1.94949 3.93735 2.54422 4.51406L5.01563 6.91057L11.7058 0.42315Z"
-									fill="white"
-								/>
-							</svg>
-						</span>
-					</label>
+								<svg
+									width="15"
+									height="11"
+									viewBox="0 0 15 11"
+									fill="none"
+									xmlns="http://www.w3.org/2000/svg"
+								>
+									<path
+										fillRule="evenodd"
+										clipRule="evenodd"
+										d="M11.7058 0.42315C12.3005 -0.153556 13.2502 -0.138946 13.8269 0.455782C14.4036 1.05051 14.389 2.00015 13.7942 2.57685L6.05985 10.0768C5.47802 10.641 4.55324 10.641 3.97141 10.0768L0.455783 6.66776C-0.138946 6.09105 -0.153556 5.14142 0.423151 4.54669C0.999857 3.95196 1.94949 3.93735 2.54422 4.51406L5.01563 6.91057L11.7058 0.42315Z"
+										fill="white"
+									/>
+								</svg>
+							</span>
+						</label>
+					</div>
 				</div>
 			</div>
 		</>
