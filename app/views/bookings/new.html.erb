@@ -3,26 +3,27 @@
     <%= link_to(@last_url) do %>
       <%= image_tag "icons/cross.svg", alt: "exit", class: "icon", height: 16, width: 16 %>
     <% end %>
-    <p class="textDarkGray">NEW BOOKING</p>
+    <h3 class="semi-bold uppercase textBetween textDarkGray">New booking</h3>
     <%= image_tag "icons/more.svg", alt: "more", class: "icon more opaque", height: 24, width: 24 %>
   </section>
 
   <% unless @select %>
     <section class="flex items-center p-3">
       <% if @profile.user.avatar.attached? %>
-        <div class="profileAvatar rounded-square" style="background-image: url(<%= @profile.user.avatar.service_url %>)">
-        </div>
+        <%= image_tag @profile.user.avatar.service_url, alt: "Avatar", class: "avatar avatar-square booking rounded" %>
       <% else %>
-        <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "alttext", class: "profileAvatar rounded-square", height: 80, width: 80 %>
+        <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "Avatar", class: "avatar avatar-square booking rounded" %>
       <% end %>
-      <div>
-        <p class="my-0 mx-3"><strong><%= @profile.user.display_name %></strong></p>
-        <p class="textGray my-0 mx-3"><%= @profile.profession %>, <%= @profile.location %></p>
+      <div class="ml-3">
+        <p class="mt-0 mb-1 bold"><%= @profile.display_name %></p>
+        <span class="textBetween textLightBlack">
+          <%= @profile.profession %>, <%= @profile.location %>
+        </span>
       </div>
     </section>
   <% end %>
 
-  <div id="new-booking" class="flex justify-content-center p-3">
+  <div id="new-booking" class="flex justify-content-center px-3">
     <div class="bookingCard">
       <% url = @select ? profile_bookings_path("no_profile", select: true) : profile_bookings_path(@profile) %>
       <%= simple_form_for [Profile.new, @booking], url: url do |f| %>
@@ -36,17 +37,18 @@
           <%= f.input :profile_id,
                       collection: @network.map { |profile| [profile.user.display_name, profile.id] },
                       label: "Freelancer",
-                      label_html: { class: "block textGray" },
+                      label_html: { class: "block mb-1 textLightBlack textBetween" },
                       input_html: { class: "w-100" },
                       wrapper_html: { class: "mb-3" } %>
-          <% end %>
+        <% end %>
+
         <%= f.input :title,
                     label: "Project / Client",
-                    label_html: { class: "block textGray" },
+                    label_html: { class: "block mb-1 textLightBlack textBetween" },
                     input_html: { value: @parent_booking&.title, class: "w-100" },
                     wrapper_html: { class: "mb-3" } %>
         <%= f.input :description,
-                    label_html: { class: "block textGray" },
+                    label_html: { class: "block mb-1 textLightBlack textBetween" },
                     input_html: { value: @parent_booking&.description, class: "w-100" },
                     wrapper_html: { class: "mb-3" } %>
 
@@ -54,15 +56,15 @@
           <!-- Start time and end time OR duration input -->
           <div class="bookingHours w-100">
             <div class="bookingSpecific <%= 'none' if @parent_booking&.duration %>">
-              <label class="block textGray nowrap">Hours per day</label>
+              <label class="block mb-1 textLightBlack textBetween">Hours per day</label>
               <div class="inputs flex items-center">
                 <%= f.input :start_time,
                             label: false,
                             as: :string,
-                            label_html: { class: "block textGray nowrap" },
                             input_html: { value: @parent_booking&.start_time&.strftime("%H:%M"), class: "w-100", list: "time-options", autocomplete: false } %>
                 <span class="self-centered mx-2"> - </span>
-                <%= f.input :end_time, label: false,
+                <%= f.input :end_time,
+                            label: false,
                             as: :string,
                             input_html: { value: @parent_booking&.end_time&.strftime("%H:%M"), class: "w-100", list: "time-options", autocomplete: false } %>
               </div>
@@ -72,7 +74,8 @@
             <!-- Hidden duration -->
             <div class="bookingDuration <%= 'none' if !@parent_booking || @parent_booking&.start_time %>">
               <%= f.input :duration,
-                          label_html: { class: "block textGray" },
+                          collection: (1..8),
+                          label_html: { class: "block mb-1 textLightBlack textBetween" },
                           input_html: { value: @parent_booking&.duration, class: "w-100" },
                           label: "Hours per day" %>
             </div>
@@ -92,7 +95,7 @@
         <div class="flex items-center justify-content-between mb-3">
 
           <div class="dates-input-wrapper">
-            <label for="dates" class="block textGray">Dates</label>
+            <label for="dates" class="block mb-1 textLightBlack textBetween">Dates</label>
             <input id="new-booking-datepickr" type="text" name="dates" class="mb-2 w-100 datepicker">
           </div>
 
@@ -102,9 +105,16 @@
         </div>
 
         <!-- Hidden inputs for start and end dates -->
-        <%= f.input :start_date, label: "sd", label_html: { class: "block textGray" }, input_html:{class: "mb-2 w-100"}, as: :hidden %>
+        <%= f.input :start_date,
+                    label: "sd",
+                    label_html: { class: "block mb-1 textLightBlack textBetween" },
+                    input_html: { class: "mb-2 w-100" },
+                    as: :hidden %>
 
-        <%= f.input :end_date, label: "ed", input_html:{class: "mb-2 w-100"}, as: :hidden %>
+        <%= f.input :end_date,
+                    label: "ed",
+                    input_html: { class: "mb-2 w-100" },
+                    as: :hidden %>
 
         <!-- Billable input -->
         <div class="flex mb-4">
@@ -112,26 +122,36 @@
         </div>
 
         <!-- Price section -->
-        <div id="priceSection" class="flex justify-content-between items-center <%= 'none' unless @parent_booking&.billable %> mb-3">
-          <%= f.input :price,
-                      label: false,
-                      placeholder: "Ex: $250",
-                      label_html: { class: "block textGray" },
-                      input_html: { value: @parent_booking&.price, class: "w-100" },
-                      wrapper_html: { class: "mr-2 flex-shrink-2" } %>
-          <%= f.input :price_type,
-                      label: false,
-                      label_html: { class: "block textGray" },
-                      collection: Booking::PRICE_TYPES,
-                      input_html: { class: "w-100" },
-                      wrapper_html: { class: "mr-3" }  %>
-          <p class="textGray my-0" id="totalPrice" data-preferred-currency="<%= currency_mapper(current_user.preferred_currency) %>"> Total: <%= currency_mapper(current_user.preferred_currency) %> 1,000</p>
+        <div id="priceSection" class="mb-3 <%= 'none' unless @parent_booking&.billable %> mb-3">
+          <div class="input-wrapper">
+            <div class="flex items-center">
+              <%= f.input :price,
+                          label: false,
+                          placeholder: "Ex: $250",
+                          label_html: { class: "block mb-1 textLightBlack textBetween" },
+                          input_html: { value: @parent_booking&.price, class: "w-100" },
+                          wrapper_html: { class: "mr-2 flex-shrink-2" } %>
+              <%= f.input :price_type,
+                          label: false,
+                          label_html: { class: "block mb-1 textLightBlack textBetween" },
+                          collection: Booking::PRICE_TYPES,
+                          input_html: { class: "w-100" },
+                          wrapper_html: { class: "mr-3" }  %>
+              <span class="textLightBlack textBetween" id="totalPrice" data-preferred-currency="<%= currency_mapper(current_user.preferred_currency) %>" >
+                <!-- Total: <%#= currency_mapper(current_user.preferred_currency) %> <%#= @booking.converted_total_price(ExchangeRate.new(current_user).call) %> -->
+                <!-- TODO: Change this -->
+                Total: $1,000
+              </span>
+            </div>
+          </div>
         </div>
         <%= f.input :attachments,
-                    label_html: { class: "choose-file textGray" },
-                    as: :file,
-                    input_html: { multiple: true, class: "none" },
-                    label: "#{image_tag("icons/paperclip", alt: "paperclip")} ADD ATTACHMENT".html_safe %>
+                      as: :file,
+                      input_html: { multiple: true, class: "none" },
+                      label: "#{image_tag("icons/paperclip", alt: "paperclip", class: "vertical-align-middle")} ADD ATTACHMENT".html_safe,
+                      label_html: { class: "choose-file block mb-1 textLightBlack textBetween text-center" } %>
+
+        <div class="separator"></div>
 
         <%= f.button :button, class: "btn btn-primary w-100 my-3 send-request" do %>
           <%= image_tag("icons/paperplane", alt: "paperplane") %>
