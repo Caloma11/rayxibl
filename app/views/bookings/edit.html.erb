@@ -67,7 +67,7 @@
         <%= f.input :description, required: false,
                     label_html: { class: "block mb-1 textLightBlack textBetween" },
                     wrapper_html: { class: "flex flex-column mb-3" },
-                    input_html: { rows: 4 } %>
+                    input_html: { class: "with-min-height" } %>
         <div class="flex justify-content-between items-end mb-3">
           <div class="bookingSpecific flex flex-column <%= 'none' if @booking&.duration %>">
             <label class="block mb-1 textLightBlack textBetween">Hours per day</label>
