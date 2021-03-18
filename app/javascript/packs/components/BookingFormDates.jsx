@@ -1,7 +1,7 @@
 import flatpickr from "flatpickr";
 import moment from "moment";
 import React, { useEffect, useRef } from "react";
-import { TIME_LIST } from "../../utils/constants";
+import { TIME_LIST, DURATION_LIST } from "../../utils/constants";
 
 export const BookingFormDates = ({
 	chosenDate,
@@ -39,6 +39,7 @@ export const BookingFormDates = ({
 				dateFormat: "d-m-Y",
 				altFormat: "d M",
 				altInput: true,
+				altInputClass: "flatpickr-customize",
 				locale: {
 					rangeSeparator: "  -  "
 				},
@@ -73,7 +74,7 @@ export const BookingFormDates = ({
 				Hours per day
 			</label>
 			<div className="flex justify-content-center items-end mb-3">
-				<div className="flex">
+				<div className="flex w-100">
 					{specificHour ? (
 						<div className="flex flex-column">
 							<div className="flex items-center">
@@ -105,14 +106,20 @@ export const BookingFormDates = ({
 							</div>
 						</div>
 					) : (
-						<input
+						<select
 							id="booking_duration"
 							name="booking[duration]"
-							type="number"
+							className="w-100"
 							value={duration}
 							onChange={e => setDuration(e.target.value)}
-							className="w-100"
-						/>
+							style={{ width: 180 }}
+						>
+							{DURATION_LIST.map(ele => (
+								<option value={ele} key={ele}>
+									{ele}
+								</option>
+							))}
+						</select>
 					)}
 				</div>
 				<div className="duration-toggler">
@@ -162,7 +169,7 @@ export const BookingFormDates = ({
 							ref={datesRef}
 							type="text"
 							name="dates"
-							className="w-100 datepicker border-box"
+							className="datepicker border-box"
 						/>
 					</div>
 					<div className="flex items-center ml-3">
