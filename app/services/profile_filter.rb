@@ -39,10 +39,11 @@ class ProfileFilter
                     .where("users.first_name ILIKE :name OR users.last_name ILIKE :name", name: "%#{profile_params[:name]}%")
     end
 
-    if profile_params[:profession] != ""
+    if profile_params[:profession] != [""]
+      profession = profile_params[:profession].reject(&:blank?)
       @profiles = profile
                     .includes(:ratings, user: [:manager, avatar_attachment: :blob])
-                    .where("profession ILIKE :profession", profession: "%#{profile_params[:profession]}%")
+                    .where("profession ILIKE ANY (array[:profession])", profession: profession)
     end
 
     if profile_params[:skills] != [""] && profile_params[:skills] != ""

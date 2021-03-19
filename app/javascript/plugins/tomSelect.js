@@ -5,6 +5,8 @@ const customizeTs = ts => {
 		if (ts.caretPos >= 3) {
 			ts.control.classList.add("flex", "flex-wrap", "big");
 		}
+
+		ts.control_input.value = "";
 	});
 	ts.on("item_remove", () => {
 		if (ts.caretPos < 3) {
@@ -19,12 +21,19 @@ export const initTomSelect = () => {
 	};
 	const profileSkills = document.getElementById("profile_skills");
 	const profileExpertise = document.getElementById("profile_expertise");
+	const profileProfession = document.getElementById("profile_profession");
 	const bookingSkills = document.getElementById("booking_skills");
 	const bookingExpertise = document.getElementById("booking_expertise");
 	const jobExpertise = document.getElementById("job_expertise");
 
 	if (profileSkills) {
-		new TomSelect(profileSkills, config);
+		const ts = new TomSelect(profileSkills, config);
+		customizeTs(ts);
+	}
+
+	if (profileProfession) {
+		const ts = new TomSelect(profileProfession, config);
+		customizeTs(ts);
 	}
 
 	if (profileExpertise) {
