@@ -7,7 +7,6 @@ class ProfileFilter
     @current_user = current_user
     @profile_params = params[:profile] || session_filters&.deep_transform_keys(&:to_sym)
     @using_session = !params[:profile] && session_filters
-    # binding.pry
   end
 
   def call
@@ -46,7 +45,7 @@ class ProfileFilter
                     .where("profession ILIKE :profession", profession: "%#{profile_params[:profession]}%")
     end
 
-    if profile_params[:skills] != [""]
+    if profile_params[:skills] != [""] && profile_params[:skills] != ""
       skills = profile_params[:skills].reject(&:blank?)
       @profiles = profile
               .includes(:ratings, user: [:manager, avatar_attachment: :blob])
@@ -59,7 +58,7 @@ class ProfileFilter
                     .where("location ILIKE :location", location: "%#{profile_params[:location]}%")
     end
 
-    if profile_params[:expertise] != [""]
+    if profile_params[:expertise] != [""] && profile_params[:expertise] != ""
       expertises = profile_params[:expertise].reject(&:blank?)
       @profiles = profile
                     .includes(:ratings, user: [:manager, avatar_attachment: :blob])
@@ -82,4 +81,5 @@ class ProfileFilter
       @profiles = profile.joins(job_applications: :job).where(job_applications: { jobs: { id: job_ids } })
     end
   end
+
 end

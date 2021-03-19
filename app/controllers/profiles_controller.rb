@@ -13,17 +13,21 @@ class ProfilesController < ApplicationController
       profile = policy_scope(Profile)
     end
 
-    # binding.pry
-
     unless params[:ob].present? && params[:ob] == "t"
       @profiles = ProfileFilter.new(profile, params, current_user, session[:filter_params]).call
       @jobs = current_user.manager.jobs
+      @session_filter_params = session[:filter_params]
       filter_params = params[:profile]&.permit!&.to_h || session[:filter_params]
-      @filter_count = filter_params&.filter { |k, _| k != "clear" }&.filter { |k, v| v != "" }&.filter { |k, v| v != [""] }&.keys&.count
+      @filter_count = filter_params&.filter { |k, _| k != "clear" }
+                                   &.filter { |k, v| v != "" }
+                                   &.filter { |k, v| v != [""] }
+                                   &.keys&.count
+
     else
       @profiles = Profile.none
       @jobs = Job.none
     end
+
     respond_to do |format|
       format.html
       format.js
@@ -133,19 +137,17 @@ class ProfilesController < ApplicationController
   end
 
   def set_session_params
-    return unless params[:profile].present?
-    if  params[:profile].values.flatten.all?(&:empty?) || params[:profile][:clear]
+    if params[:profile].present?
+      session[:filter_params] = params[:profile]
+    end
+
+    if params[:profile] && (params[:profile].values.flatten.all?(&:empty?) || params[:profile][:clear])
       session[:filter_params] = nil
     end
 
-    # binding.pry
-
-    # binding.pry
-    # elsif params[:profile].present?
-    if  params[:profile].present?
-      session[:filter_params] = params[:profile]
+    if !request.xhr?
+      session[:filter_params] = nil
     end
-    # binding.pry
   end
 
 end
