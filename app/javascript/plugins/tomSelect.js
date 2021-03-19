@@ -5,6 +5,8 @@ const customizeTs = ts => {
 		if (ts.caretPos >= 3) {
 			ts.control.classList.add("flex", "flex-wrap", "big");
 		}
+
+		ts.control_input.value = "";
 	});
 	ts.on("item_remove", () => {
 		if (ts.caretPos < 3) {
@@ -24,7 +26,8 @@ export const initTomSelect = () => {
 	const jobExpertise = document.getElementById("job_expertise");
 
 	if (profileSkills) {
-		new TomSelect(profileSkills, config);
+		const ts = new TomSelect(profileSkills, config);
+		customizeTs(ts);
 	}
 
 	if (profileExpertise) {
