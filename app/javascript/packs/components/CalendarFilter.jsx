@@ -24,7 +24,7 @@ export const CalendarFilter = ({ bookings, setProfiles }) => {
 				<button id="filter-trigger" onClick={() => setShow(prev => !prev)}>
 					<img src={filterSvg} alt="filter" width={16} height={16} />
 					{filterCount > 0 && (
-						<span className="skill-pill blue m-0 filter-count">
+						<span className="skill-pill filter blue m-0 filter-count">
 							{filterCount <= 9 ? `0${filterCount}` : filterCount}
 						</span>
 					)}
