@@ -1,15 +1,17 @@
 class ProfileFilter
   attr_reader :params, :profile, :current_user, :profile_params
 
-  def initialize(profile, params, current_user)
+  def initialize(profile, params, current_user, session_filters)
     @profile = profile
     @params = params
     @current_user = current_user
-    @profile_params = params[:profile]
+    @profile_params = params[:profile] || session_filters&.deep_transform_keys(&:to_sym)
+    @using_session = !params[:profile] && session_filters
+    # binding.pry
   end
 
   def call
-    if params[:all]
+    if params[:all] && !@using_session
       @profiles = profile.joins("FULL JOIN connections on connections.profile_id = profiles.id").includes(:ratings, user: [:manager, avatar_attachment: :blob]).where.not(connections: { company_id: current_user.company.id }).or(profile.joins("FULL JOIN connections on connections.profile_id = profiles.id").includes(:ratings, user: [:manager, avatar_attachment: :blob]).where(connections: { id: nil })).distinct
     elsif params[:job_id]
       @profiles = profile

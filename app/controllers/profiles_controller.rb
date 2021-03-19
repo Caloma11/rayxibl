@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update]
+  before_action :set_session_params, only: :index
   skip_before_action :authenticate_user!, only: [:show]
 
   def index
@@ -12,21 +13,17 @@ class ProfilesController < ApplicationController
       profile = policy_scope(Profile)
     end
 
+    # binding.pry
+
     unless params[:ob].present? && params[:ob] == "t"
-      @profiles = ProfileFilter.new(profile, params, current_user).call
+      @profiles = ProfileFilter.new(profile, params, current_user, session[:filter_params]).call
       @jobs = current_user.manager.jobs
-      @filter_count = params[:profile]&.permit!
-                                      &.to_h
-                                      &.filter { |k, _| k != "clear" }
-                                      &.filter { |k, v| v != "" }
-                                      &.filter { |k, v| v != [""] }
-                                      &.keys
-                                      &.count
+      filter_params = params[:profile]&.permit!&.to_h || session[:filter_params]
+      @filter_count = filter_params&.filter { |k, _| k != "clear" }&.filter { |k, v| v != "" }&.filter { |k, v| v != [""] }&.keys&.count
     else
       @profiles = Profile.none
       @jobs = Job.none
     end
-
     respond_to do |format|
       format.html
       format.js
@@ -133,6 +130,22 @@ class ProfilesController < ApplicationController
 
   def user_params
     params.require(:profile).permit(profile_user: [:first_name, :last_name, :avatar])
+  end
+
+  def set_session_params
+    return unless params[:profile].present?
+    if  params[:profile].values.flatten.all?(&:empty?) || params[:profile][:clear]
+      session[:filter_params] = nil
+    end
+
+    # binding.pry
+
+    # binding.pry
+    # elsif params[:profile].present?
+    if  params[:profile].present?
+      session[:filter_params] = params[:profile]
+    end
+    # binding.pry
   end
 
 end
