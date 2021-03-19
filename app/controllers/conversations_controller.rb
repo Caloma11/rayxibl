@@ -29,7 +29,11 @@ class ConversationsController < ApplicationController
       @conversations = ConversationFilter.new(@conversations, profile_params, current_user).call
     end
 
-    @unread_messages_count = @conversations&.map { |convo| convo.messages.unread.count }&.sum
+    @unread_messages_count = @conversations
+                              .joins(:messages)
+                              .where(messages: { read: false })
+                              .where.not(messages: { user: current_user })
+                              .count
 
     @conversations = @conversations.by_message_count
 
