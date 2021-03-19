@@ -25,7 +25,6 @@
 
 	.content {
 		@extend .mt-3, .px-3;
-    overflow: scroll;
     height: 120vh;
     margin-bottom: 50px;
 		p.title {
@@ -52,6 +51,7 @@
     background-color: white;
     left: 0;
     border-top: 2px solid $blueish-gray;
+    // margin-bottom: 80vh;
 
   }
 
@@ -157,7 +157,7 @@
       .content {
         overflow: visible !important;
         margin-bottom: 64px;
-        height: 100vh;
+        height: 120vh;
       }
 
       .advanced-content {

@@ -17,12 +17,14 @@ export const filtering = () => {
 	if (filterButton && filterContent) {
 		filterButton.addEventListener("click", () => {
 			filterContent.classList.remove("none");
+      document.querySelector("body").classList.add("overflow-hidden");
 		});
 	}
 
 	if (filterExit) {
 		filterExit.addEventListener("click", () => {
 			filterContent.classList.add("none");
+      document.querySelector("body").classList.remove("overflow-hidden");
 		});
 	}
 };
