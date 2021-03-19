@@ -14,7 +14,7 @@
 	@extend .fixed, .h-100, .w-100, .mt-0, .pb-3, .mb-3;
 
 	overflow-y: scroll;
-	top: -16px;
+	top: 0;
 	left: 0;
 	background: white;
 	z-index: 1;
@@ -25,7 +25,8 @@
 
 	.content {
 		@extend .mt-3, .px-3;
-
+    height: 120vh;
+    margin-bottom: 50px;
 		p.title {
 			@extend .uppercase;
 
@@ -38,6 +39,21 @@
 			color: $light-black;
 		}
 	}
+
+  .submit-wrapper {
+    // position: fixed;
+    // bottom: 50px;
+    width: 100%;
+    max-width: 100%;
+    padding: 16px;
+    box-sizing: border-box;
+    z-index: 19;
+    background-color: white;
+    left: 0;
+    border-top: 2px solid $blueish-gray;
+    // margin-bottom: 80vh;
+
+  }
 
 	.job-simple-card {
 		@extend .rounded, .mb-3;
@@ -53,6 +69,8 @@
 	}
 
 	.advanced-content {
+    margin-bottom: 64px;
+
 		#job-application-trigger {
 			color: $blue-2;
 			transition: 0.25s ease;
@@ -128,3 +146,26 @@
 		}
 	}
 }
+
+
+  @media (min-width: 600px) {
+    #filter-content {
+      width: 600px !important;
+      left: calc(50% - 300px);
+      overflow-y: none;
+
+      .content {
+        overflow: visible !important;
+        margin-bottom: 64px;
+        height: 120vh;
+      }
+
+      .advanced-content {
+        margin-bottom: 32px;
+      }
+    }
+
+    .submit-wrapper {
+      position: inherit !important  ;
+    }
+  }

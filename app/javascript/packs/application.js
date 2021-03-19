@@ -42,6 +42,7 @@ import { invitationModal } from "../components/invitationPage";
 import { initPrefill } from "../components/widgetMessage";
 import { archive } from "../components/archive";
 import { initContinueReading } from "../components/continueReading";
+import { initSkillPillShow } from "../components/skillPillShow";
 // import { initSendMessage } from "../components/sendMessage";
 
 require("@rails/ujs").start();
@@ -96,6 +97,7 @@ document.addEventListener("turbolinks:load", () => {
 	archive();
   initContinueReading();
   // initSendMessage();
+  initSkillPillShow();
 
   window.initContinueReading = initContinueReading;
 	window.archive = archive;

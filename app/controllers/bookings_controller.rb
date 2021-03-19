@@ -65,6 +65,10 @@ class BookingsController < ApplicationController
                   dashboard_path
                 elsif recognized[:controller] == "profiles" && recognized[:action] == "index"
                   profiles_path
+                elsif current_user.manager?
+                  schedule_path
+                else
+                  dashboard_path
                 end
     authorize @booking
   end

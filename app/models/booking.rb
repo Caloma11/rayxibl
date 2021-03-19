@@ -64,6 +64,7 @@ class Booking < ApplicationRecord
   end
 
   def pricing_text
+    return "-" unless price
     if [0, "per hour"].include? price_type
       "#{price * 8} per day"
     elsif [1, "per day"].include? price_type
