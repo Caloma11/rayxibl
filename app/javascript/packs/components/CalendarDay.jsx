@@ -43,6 +43,7 @@ export const CalendarDay = forwardRef(
 		const moreThanOneWeek = useRef(false);
 		const durationRef = useRef(1);
 		const bookingEndDateRef = useRef(null);
+		const dayRef = useRef(null);
 		// Checks if today, if so, use `"today"` as a class to color the background differently
 		const todayClassName = today ? "today" : "";
 		// Checks if date is weekend, for styling
@@ -80,7 +81,10 @@ export const CalendarDay = forwardRef(
 				if (eventRef.current) {
 					const { x } = eventRef.current.getBoundingClientRect();
 					const details = eventRef.current.querySelector(".event-details");
-					const activeWidth = parseInt(details.style.width.match(/\d+/)[0], 10);
+					const renderedWidth = details.style.width.match(/\d+/);
+					const activeWidth = renderedWidth
+						? parseInt(renderedWidth[0], 10)
+						: 0;
 
 					if (x <= 90) {
 						const currentWidth = DAY_WIDTH * durationRef.current - 4;
@@ -122,11 +126,35 @@ export const CalendarDay = forwardRef(
 			});
 		}, []);
 
+		useEffect(() => {
+			if (dayRef.current) {
+				const eventsWithinADay = dayRef.current.querySelectorAll(".event");
+				if (eventsWithinADay.length > 1) {
+					const [first, second] = eventsWithinADay;
+					dayRef.current.insertBefore(second, first);
+				}
+
+				const previousDayCell = dayRef.current.previousElementSibling;
+				if (previousDayCell) {
+					const previousDayEventCount = previousDayCell.querySelectorAll(
+						".event"
+					).length;
+					if (previousDayEventCount > 1 && eventsWithinADay.length === 1) {
+						dayRef.current.insertAdjacentHTML(
+							"afterbegin",
+							`<div class="event empty" style="height: 52px; width: 82px"></div>`
+						);
+					}
+				}
+			}
+		}, []);
+
 		return (
 			<div
 				className={`day ${todayClassName} ${weekend} ${friday} ${saturday} ${sunday}`}
 				onClick={() => handleDayClick({ week, day })}
 				data-formatted-day={dayOfWeek.format("DD-MM-YYYY")}
+				ref={dayRef}
 			>
 				{eventDateBooleans.map((a, i) => {
 					if (!a.some(ele => ele)) return null;

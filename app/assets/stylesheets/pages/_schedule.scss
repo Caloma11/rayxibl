@@ -298,6 +298,13 @@ $day-border: 1px solid #e8e9eb;
 							}
 						}
 
+						&.empty {
+							@extend .mb-0;
+
+							visibility: hidden;
+							user-select: none;
+						}
+
 						&.red {
 							background: $flat-red-5;
 							border-top-color: $flat-red-3;
