@@ -21,12 +21,18 @@ export const initTomSelect = () => {
 	};
 	const profileSkills = document.getElementById("profile_skills");
 	const profileExpertise = document.getElementById("profile_expertise");
+	const profileProfession = document.getElementById("profile_profession");
 	const bookingSkills = document.getElementById("booking_skills");
 	const bookingExpertise = document.getElementById("booking_expertise");
 	const jobExpertise = document.getElementById("job_expertise");
 
 	if (profileSkills) {
 		const ts = new TomSelect(profileSkills, config);
+		customizeTs(ts);
+	}
+
+	if (profileProfession) {
+		const ts = new TomSelect(profileProfession, config);
 		customizeTs(ts);
 	}
 
