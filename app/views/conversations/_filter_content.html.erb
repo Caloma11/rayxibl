@@ -12,7 +12,9 @@
       <%= f.input :name, required: false,
                   wrapper_html: { class: "flex flex-column mb-3" } %>
       <%= f.input :profession, required: false,
-                  wrapper_html: { class: "flex flex-column mb-3" } %>
+                  wrapper_html: { class: "flex flex-column mb-3" },
+                  collection: Profile.pluck(:profession).map(&:capitalize).uniq.sort,
+                  input_html: { multiple: true } %>
       <%= f.input :skills, required: false,
                   wrapper_html: { class: "flex flex-column mb-3" },
                   input_html: { multiple: true },

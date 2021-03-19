@@ -40,10 +40,10 @@ class ProfileFilter
     end
 
     if profile_params[:profession] != [""]
-      skills = profile_params[:profession].reject(&:blank?)
+      profession = profile_params[:profession].reject(&:blank?)
       @profiles = profile
                     .includes(:ratings, user: [:manager, avatar_attachment: :blob])
-                    .where("profession ILIKE ANY (array[:profession])", profession: profile_params[:profession])
+                    .where("profession ILIKE ANY (array[:profession])", profession: profession)
     end
 
     if profile_params[:skills] != [""] && profile_params[:skills] != ""
