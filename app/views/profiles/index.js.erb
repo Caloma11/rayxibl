@@ -33,4 +33,10 @@
 
     trigger.insertAdjacentHTML("beforeend", template);
   }
+
+  if (<%= @filter_count.is_a?(Integer) ? @filter_count : 0 %> === 0) {
+    const filterCount = document.querySelector(".skill-pill.filter");
+
+    filterCount?.remove();
+  }
 })();
