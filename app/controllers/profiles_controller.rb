@@ -18,11 +18,15 @@ class ProfilesController < ApplicationController
       @jobs = current_user.manager.jobs
       @session_filter_params = session[:filter_params]
       filter_params = params[:profile]&.permit!&.to_h || session[:filter_params]
-      @filter_count = filter_params&.filter { |k, _| k != "clear" }
-                                   &.filter { |k, v| v != "" }
-                                   &.filter { |k, v| v != [""] }
-                                   &.keys&.count
 
+      @filter_count = if params[:profile] && params[:profile][:clear].present?
+        0
+      else
+        filter_params&.filter { |k, _| k != "clear" }
+                     &.filter { |k, v| v != "" }
+                     &.filter { |k, v| v != [""] }
+                     &.keys&.count
+      end
     else
       @profiles = Profile.none
       @jobs = Job.none

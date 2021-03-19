@@ -14,7 +14,7 @@
 	@extend .fixed, .h-100, .w-100, .mt-0, .pb-3, .mb-3;
 
 	overflow-y: scroll;
-	top: 16px;
+	top: 0;
 	left: 0;
 	background: white;
 	z-index: 1;
@@ -42,8 +42,8 @@
 	}
 
   .submit-wrapper {
-    position: fixed;
-    bottom: 50px;
+    // position: fixed;
+    // bottom: 50px;
     width: 100%;
     max-width: 100%;
     padding: 16px;
@@ -69,6 +69,8 @@
 	}
 
 	.advanced-content {
+    margin-bottom: 64px;
+
 		#job-application-trigger {
 			color: $blue-2;
 			transition: 0.25s ease;
@@ -155,6 +157,7 @@
       .content {
         overflow: visible !important;
         margin-bottom: 64px;
+        height: 100vh;
       }
 
       .advanced-content {
