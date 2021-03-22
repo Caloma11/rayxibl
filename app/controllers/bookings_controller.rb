@@ -58,7 +58,7 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     @booking.profile = @profile
     @network = current_user.manager.network
-    if @profile
+    if @profile.persisted?
       @conversation = current_user.conversation_with(@profile.user)
     end
     recognized = Rails.application.routes.recognize_path(request.referrer)
