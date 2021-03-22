@@ -41,7 +41,7 @@
         <div class="flex justify-content-between items-center flex-shrink-2">
           <!-- Start time and end time OR duration input -->
           <div class="bookingHours w-100">
-            <div class="bookingSpecific mw-184">
+            <div class="bookingSpecific w-184">
               <label class="block textGray nowrap">Hours per day</label>
               <div class="inputs flex items-center">
                 <%= f.input :start_time, label: false,
@@ -58,7 +58,7 @@
 
             <!-- Hidden duration -->
             <div class="bookingDuration none">
-              <%= f.input :duration, label: "Hours per day", label_html: { class: "block textLightBlack" }, input_html:{class: "w-100 mw-184"} %>
+              <%= f.input :duration, label: "Hours per day", label_html: { class: "block textLightBlack" }, input_html:{class: "w-100 w-184"} %>
             </div>
           </div>
           <!-- End of left side -->
@@ -79,7 +79,7 @@
 
           <div class="dates-input-wrapper min-w-0">
             <label for="dates" class="block textLightBlack">Dates</label>
-            <input id="job-datepicker" type="text" name="dates" class="w-100 datepicker border-box mw-184">
+            <input id="job-datepicker" type="text" name="dates" class="w-100 datepicker border-box w-184">
           </div>
 
           <div class="weekends-contain ml-2">
