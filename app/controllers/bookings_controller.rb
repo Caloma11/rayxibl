@@ -58,18 +58,19 @@ class BookingsController < ApplicationController
     @booking = Booking.new
     @booking.profile = @profile
     @network = current_user.manager.network
+    @conversation = current_user.conversation_with(@profile.user)
     recognized = Rails.application.routes.recognize_path(request.referrer)
-    @last_url = if recognized[:controller] == "profiles" && recognized[:action] == "show"
-                  profile_path(@profile)
-                elsif recognized[:controller] == "pages" || !@profile.persisted?
-                  dashboard_path
-                elsif recognized[:controller] == "profiles" && recognized[:action] == "index"
-                  profiles_path
-                elsif current_user.manager?
-                  schedule_path
-                else
-                  dashboard_path
-                end
+    if recognized[:controller] == "profiles" && recognized[:action] == "show"
+      @last_url =  profile_path(@profile)
+    elsif recognized[:controller] == "pages" || !@profile.persisted?
+      @last_url = dashboard_path
+    elsif recognized[:controller] == "profiles" && recognized[:action] == "index"
+      @last_url = profiles_path
+    elsif current_user.manager? && @conversation
+      @last_url = conversation_path(@conversation)
+    else
+      @last_url = dashboard_path
+    end
     authorize @booking
   end
 
