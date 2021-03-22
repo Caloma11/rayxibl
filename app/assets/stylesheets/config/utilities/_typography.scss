@@ -24,7 +24,7 @@
 }
 
 .textBlue {
-	color: $blue-2;
+	color: $blue-2 !important;
 }
 
 .textDarkGray {
@@ -94,5 +94,5 @@
 }
 
 .letter-spaced {
-  letter-spacing: 2px;
+	letter-spacing: 2px;
 }
