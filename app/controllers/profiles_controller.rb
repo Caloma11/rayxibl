@@ -1,5 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_profile, only: [:show, :edit, :update]
+  before_action :set_session_params, only: :index
   skip_before_action :authenticate_user!, only: [:show]
 
   def index
@@ -13,15 +14,19 @@ class ProfilesController < ApplicationController
     end
 
     unless params[:ob].present? && params[:ob] == "t"
-      @profiles = ProfileFilter.new(profile, params, current_user).call
+      @profiles = ProfileFilter.new(profile, params, current_user, session[:filter_params]).call
       @jobs = current_user.manager.jobs
-      @filter_count = params[:profile]&.permit!
-                                      &.to_h
-                                      &.filter { |k, _| k != "clear" }
-                                      &.filter { |k, v| v != "" }
-                                      &.filter { |k, v| v != [""] }
-                                      &.keys
-                                      &.count
+      @session_filter_params = session[:filter_params]
+      filter_params = params[:profile]&.permit!&.to_h || session[:filter_params]
+
+      @filter_count = if params[:profile] && params[:profile][:clear].present?
+        0
+      else
+        filter_params&.filter { |k, _| k != "clear" }
+                     &.filter { |k, v| v != "" }
+                     &.filter { |k, v| v != [""] }
+                     &.keys&.count
+      end
     else
       @profiles = Profile.none
       @jobs = Job.none
@@ -133,6 +138,20 @@ class ProfilesController < ApplicationController
 
   def user_params
     params.require(:profile).permit(profile_user: [:first_name, :last_name, :avatar])
+  end
+
+  def set_session_params
+    if params[:profile].present?
+      session[:filter_params] = params[:profile]
+    end
+
+    if params[:profile] && (params[:profile].values.flatten.all?(&:empty?) || params[:profile][:clear])
+      session[:filter_params] = nil
+    end
+
+    if !request.xhr?
+      session[:filter_params] = nil
+    end
   end
 
 end

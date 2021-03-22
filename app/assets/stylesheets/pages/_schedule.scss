@@ -14,13 +14,22 @@ $day-border: 1px solid #e8e9eb;
 			}
 		}
 
-		.filter-overlay {
-			@extend .bg-white;
+		#show-advanced {
+			transition: color 0.2s ease;
 
+			&.active {
+				color: rgba(20, 15, 38, 0.5) !important;
+			}
+		}
+
+		.filter-overlay {
+			@extend .bg-white, .scroll-y;
+
+			padding-top: calc(#{$spacing-3} + #{$spacing-4});
 			position: fixed;
 			width: 100%;
 			height: 100vh;
-			z-index: 1;
+			z-index: 3;
 			left: 0;
 			top: 0;
 
@@ -56,10 +65,10 @@ $day-border: 1px solid #e8e9eb;
 			.selector-wrapper {
 				@extend .shadow, .p-2, .rounded;
 
+				z-index: 3;
 				position: absolute;
 				bottom: -100px;
 				left: calc((100vw - 320px) / 2);
-				z-index: 1;
 				background: white;
 			}
 
@@ -85,10 +94,18 @@ $day-border: 1px solid #e8e9eb;
 
 			position: absolute;
 			overflow-y: scroll;
-			height: 100vh;
 			width: 100%;
 			background: white;
 			z-index: 1;
+
+			#booking_start_time,
+			#booking_end_time {
+				width: 80px;
+			}
+
+			.billable-wrapper {
+				@extend .mb-4;
+			}
 		}
 
 		.calendarContainer {
@@ -266,12 +283,26 @@ $day-border: 1px solid #e8e9eb;
 						background: $flat-orange-5;
 						border-top: 8px solid $flat-orange-3;
 						margin-right: -2px;
+						-ms-overflow-style: none; /* IE and Edge */
+						scrollbar-width: none; /* Firefox */
 
 						.event-details {
 							@extend .absolute;
 
+							white-space: nowrap;
 							background: $flat-orange-5;
 							z-index: 1;
+
+							&::-webkit-scrollbar {
+								display: none;
+							}
+						}
+
+						&.empty {
+							@extend .mb-0;
+
+							visibility: hidden;
+							user-select: none;
 						}
 
 						&.red {

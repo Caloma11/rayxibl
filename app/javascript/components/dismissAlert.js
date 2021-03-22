@@ -3,6 +3,9 @@ const initDismissAlert = () => {
 	alert?.addEventListener("click", e => {
 		alert.remove();
 	});
+  setTimeout(() => {
+    alert?.click();
+  }, 3000)
 };
 
 export { initDismissAlert };

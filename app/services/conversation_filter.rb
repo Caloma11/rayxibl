@@ -23,8 +23,9 @@ class ConversationFilter
       @conversations = @conversations.where("users.first_name ILIKE :name OR users.last_name ILIKE :name", name: "%#{params[:name]}%")
     end
 
-    if params[:profession] != ""
-      @conversations = @conversations.where("profiles.profession ILIKE :profession", profession: "%#{params[:profession]}%")
+    if params[:profession] != [""]
+      profession = params[:profession].reject(&:blank?)
+      @conversations = @conversations.where("profiles.profession ILIKE ANY (array[:profession])", profession: profession)
     end
 
     if params[:skills] != [""]

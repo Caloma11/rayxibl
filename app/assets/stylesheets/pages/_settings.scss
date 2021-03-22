@@ -3,29 +3,31 @@
 		font-size: 24px;
 	}
 
-    input.email {
-      @extend .mt-2;
-      height: 48px;
-      box-sizing: border-box;
-    }
+	input.email {
+		height: 48px;
+		box-sizing: border-box;
+	}
 
-  button {
-    outline: none;
-  }
+	button {
+		outline: none;
+	}
 
-
-  #invitation-add-btn {
-    position: absolute;
-    right: 4px;
-    top: 32px;
-  }
+	#invitation-add-btn {
+		position: absolute;
+		right: 4px;
+		top: 40px;
+	}
 
 	#content {
 		height: calc(90vh - 60px);
 	}
 
-  #sentEmails {
-    max-height: 300px;
-    overflow-y: scroll;
-  }
+	#sentEmails {
+		max-height: 300px;
+		overflow-y: scroll;
+	}
+
+	#bubble {
+		transform: scale(1.2);
+	}
 }

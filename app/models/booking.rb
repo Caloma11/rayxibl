@@ -9,7 +9,7 @@ class Booking < ApplicationRecord
 
   validates :title, :description, :start_date, :end_date, presence: true
   validates :price, :price_type, presence: true, if: -> { self.billable }
-  validates :price, numericality: { only_integer: true, greater_than: 0 }
+  validates :price, numericality: { only_integer: true, greater_than: 0 }, allow_nil: true
 
   validate :end_time_after_start_time
 
@@ -17,12 +17,14 @@ class Booking < ApplicationRecord
   enum status: STATUSES
 
   scope :today_and_after, -> { where("start_date >= ?", Date.today) }
-  scope :active, -> { where(status: [0, 1]) }
+  scope :archived, -> { where(archived: true) }
+  scope :active, -> { where(status: [0, 1, 2], archived: false) }
 
   before_save :determine_total_price
   after_create :create_widget
 
   before_update :ensure_unique_duration
+  before_update :archive!, if: -> { [3, "canceled"].include? status }
 
   %w[start end].each do |identifier|
     define_method :"parsed_#{identifier}_date" do
@@ -62,6 +64,7 @@ class Booking < ApplicationRecord
   end
 
   def pricing_text
+    return "-" unless price
     if [0, "per hour"].include? price_type
       "#{price * 8} per day"
     elsif [1, "per day"].include? price_type
@@ -102,5 +105,9 @@ class Booking < ApplicationRecord
     convo.save! unless convo.persisted?
 
     convo.messages.create!(booking: self, user: manager.user)
+  end
+
+  def archive!
+    self.archived = true
   end
 end

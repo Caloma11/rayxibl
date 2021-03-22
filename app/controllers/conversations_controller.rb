@@ -29,7 +29,11 @@ class ConversationsController < ApplicationController
       @conversations = ConversationFilter.new(@conversations, profile_params, current_user).call
     end
 
-    @unread_messages_count = @conversations&.map { |convo| convo.messages.unread.count }&.sum
+    @unread_messages_count = @conversations
+                              .joins(:messages)
+                              .where(messages: { read: false })
+                              .where.not(messages: { user: current_user })
+                              .count
 
     @conversations = @conversations.by_message_count
 
@@ -54,6 +58,17 @@ class ConversationsController < ApplicationController
 
     timestamp = params.try(:[], :conversation).try(:[], :timestamp)
     @messages = @conversation.messages.includes(:user, { booking: [:attachments_attachments, :profile, :manager] }).order(created_at: :DESC)
+
+
+
+    @back_path = case params[:from]
+    when "profs_index" then profiles_path
+    when "prof_show" then profile_path(@conversation.profile)
+    when "convo_index" then conversations_path
+    else
+      dashboard_path
+    end
+
 
     if timestamp
       @messages = @messages.where("created_at < ?", timestamp.to_date).limit(10)

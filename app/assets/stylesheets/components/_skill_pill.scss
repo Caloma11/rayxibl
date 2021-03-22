@@ -7,12 +7,18 @@
 }
 
 .skill-pill {
-	@extend .mr-3, .p-1, .mb-1;
+	@extend .mr-3, .mb-1, .rounded-md;
 
+	padding: calc(#{$base-spacing - 2px}) $base-spacing;
+	// TODO: Remove on another page
 	box-shadow: 0px 6px 10px rgba(50, 51, 94, 0.15);
-	border-radius: $radius-md;
 	font-weight: 600;
 	white-space: nowrap;
+	font-size: 12px;
+
+	&.filter {
+		box-shadow: unset;
+	}
 
 	&.blue {
 		background: $blue-2;

@@ -5,7 +5,7 @@ class Api::V1::NetworksController < ApplicationController
     filter_via_profile!
     filter_via_booking!
 
-    render json: @networks, each_serializer: ProfileSerializer
+    render json: @networks, manager_id: current_user.manager.id, each_serializer: ProfileSerializer
   end
 
   private
@@ -16,8 +16,8 @@ class Api::V1::NetworksController < ApplicationController
     booking_params = JSON.parse(params[:booking]).deep_symbolize_keys
 
     if booking_params
-      if booking_params[:status] != ""
-        status = booking_params[:status] == "3" ? [0, 1, 2] : booking_params[:status].to_i
+      if booking_params[:status] != []
+        status = booking_params[:status] == [3] ? [0, 1, 2] : booking_params[:status].map(&:to_i)
         @networks = @networks.joins(:bookings).where(bookings: { status: status })
       end
 
@@ -33,12 +33,13 @@ class Api::V1::NetworksController < ApplicationController
     profile_params = JSON.parse(params[:profile]).deep_symbolize_keys
 
     if profile_params
-      if profile_params[:name] != ""
-        @networks = @networks.joins(:user).where("users.first_name ILIKE :name OR users.last_name ILIKE :name", name: "%#{profile_params[:name]}%")
+      if profile_params[:name] != []
+        @networks = @networks.joins(:user)
+                             .where("users.first_name ILIKE ANY (array[:name]) OR users.first_name ILIKE ANY (array[:name])", name: profile_params[:name])
       end
 
-      if profile_params[:profession] != ""
-        @networks = @networks.where("profession ILIKE :profession", profession: "%#{profile_params[:profession]}%")
+      if profile_params[:profession] != []
+        @networks = @networks.where("profession ILIKE ANY (array[:profession])", profession: profile_params[:profession])
       end
 
       if profile_params[:skills] != ""

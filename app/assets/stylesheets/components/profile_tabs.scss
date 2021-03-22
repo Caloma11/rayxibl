@@ -2,7 +2,7 @@
 	@extend .mx-3, .py-1, .flex, .justify-content-around, .items-center, .rounded;
 
 	background-color: $blueish-gray;
-	height: 35px;
+	height: 48px;
 
 	.tab {
 		@extend .mx-1,
@@ -10,7 +10,8 @@
 			.justify-content-center,
 			.h-100,
 			.flex,
-			.items-center;
+			.items-center,
+			.border-box;
 		transition: ease 0.5s;
 
 		&.active {

@@ -40,6 +40,10 @@ import { initFormsOverlay } from "../components/formsOverlay";
 import { fetchMoreMessages } from "../components/fetchMoreMessages";
 import { invitationModal } from "../components/invitationPage";
 import { initPrefill } from "../components/widgetMessage";
+import { archive } from "../components/archive";
+import { initContinueReading } from "../components/continueReading";
+import { initSkillPillShow } from "../components/skillPillShow";
+// import { initSendMessage } from "../components/sendMessage";
 
 require("@rails/ujs").start();
 require("turbolinks").start();
@@ -89,7 +93,14 @@ document.addEventListener("turbolinks:load", () => {
 	initFormsOverlay();
 	fetchMoreMessages();
 	invitationModal();
-  initPrefill();
+	initPrefill();
+	archive();
+  initContinueReading();
+  // initSendMessage();
+  initSkillPillShow();
+
+  window.initContinueReading = initContinueReading;
+	window.archive = archive;
 	window.starRating = starRating;
 	// For bookings/index.js.erb
 	window.moreTogglerMultiple = moreTogglerMultiple;

@@ -1,16 +1,17 @@
 class ProfileFilter
   attr_reader :params, :profile, :current_user, :profile_params
 
-  def initialize(profile, params, current_user)
+  def initialize(profile, params, current_user, session_filters)
     @profile = profile
     @params = params
     @current_user = current_user
-    @profile_params = params[:profile]
+    @profile_params = params[:profile] || session_filters&.deep_transform_keys(&:to_sym)
+    @using_session = !params[:profile] && session_filters
   end
 
   def call
-    if params[:all]
-      profile.joins("FULL JOIN connections on connections.profile_id = profiles.id").includes(:ratings, user: [:manager, avatar_attachment: :blob]).where.not(connections: { company_id: current_user.company.id }).or(profile.joins("FULL JOIN connections on connections.profile_id = profiles.id").includes(:ratings, user: [:manager, avatar_attachment: :blob]).where(connections: { id: nil }))
+    if params[:all] && !@using_session
+      @profiles = profile.joins("FULL JOIN connections on connections.profile_id = profiles.id").includes(:ratings, user: [:manager, avatar_attachment: :blob]).where.not(connections: { company_id: current_user.company.id }).or(profile.joins("FULL JOIN connections on connections.profile_id = profiles.id").includes(:ratings, user: [:manager, avatar_attachment: :blob]).where(connections: { id: nil })).distinct
     elsif params[:job_id]
       @profiles = profile
       .joins(job_applications: :job)
@@ -38,13 +39,14 @@ class ProfileFilter
                     .where("users.first_name ILIKE :name OR users.last_name ILIKE :name", name: "%#{profile_params[:name]}%")
     end
 
-    if profile_params[:profession] != ""
+    if profile_params[:profession] != [""]
+      profession = profile_params[:profession].reject(&:blank?)
       @profiles = profile
                     .includes(:ratings, user: [:manager, avatar_attachment: :blob])
-                    .where("profession ILIKE :profession", profession: "%#{profile_params[:profession]}%")
+                    .where("profession ILIKE ANY (array[:profession])", profession: profession)
     end
 
-    if profile_params[:skills] != [""]
+    if profile_params[:skills] != [""] && profile_params[:skills] != ""
       skills = profile_params[:skills].reject(&:blank?)
       @profiles = profile
               .includes(:ratings, user: [:manager, avatar_attachment: :blob])
@@ -57,7 +59,7 @@ class ProfileFilter
                     .where("location ILIKE :location", location: "%#{profile_params[:location]}%")
     end
 
-    if profile_params[:expertise] != [""]
+    if profile_params[:expertise] != [""] && profile_params[:expertise] != ""
       expertises = profile_params[:expertise].reject(&:blank?)
       @profiles = profile
                     .includes(:ratings, user: [:manager, avatar_attachment: :blob])
@@ -80,4 +82,5 @@ class ProfileFilter
       @profiles = profile.joins(job_applications: :job).where(job_applications: { jobs: { id: job_ids } })
     end
   end
+
 end

@@ -1,14 +1,16 @@
 .jobs-new {
 	section {
 		.icon {
-			width: 16px;
-			height: 16px;
 
 			&.more {
 				width: 24px;
 				height: 24px;
 			}
 		}
+
+    textarea {
+      height: 80px;
+    }
 
 		.bookingHours {
 			@extend .mr-2;
@@ -19,9 +21,14 @@
 		&.content {
 			#new_job {
 				.separator {
-					@extend .pt-3;
-
-					border-top: 1px solid #f4f6f9;
+					@extend .py-3;
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          z-index: 19;
+          background-color: white;
+					border-top: 2px solid #f4f6f9;
 				}
 
 				#job_weekends {
@@ -30,7 +37,7 @@
 
 				button[type="submit"] {
 					@extend .w-100;
-
+          height: 48px;
 					img {
 						height: 24px;
 					}
@@ -45,6 +52,27 @@
 		}
 	}
 
+
+  .choose-file {
+    border: 1px solid $flat-gray-3;
+    padding: 8px 24px;
+    cursor: pointer;
+    background: white;
+    border-radius: 8px;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: 2px;
+    height: 32px;
+    img {
+      @extend .mr-2;
+      height: 24px;
+      width: 24px;
+    }
+
+    @extend .mt-3;
+  }
+
 	.weekends-contain {
 		margin-top: calc(#{$spacing-2} + #{$spacing-3});
 	}
@@ -55,3 +83,17 @@
 		}
 	}
 }
+
+  @media (min-width: 600px) {
+    .jobs-new {
+      margin-bottom: 0 !important;
+      .separator {
+        position: initial !important;
+      }
+
+      .attachments {
+        margin-bottom: 32px;
+      }
+    }
+  }
+

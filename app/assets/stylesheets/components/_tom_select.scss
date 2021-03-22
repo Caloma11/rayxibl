@@ -1,10 +1,19 @@
 .items.ts-input {
-	@extend .py-0, .px-2, .flex, .items-center;
+	@extend .py-0, .px-2, .flex, .items-center, .rounded;
 
 	background: $blueish-gray !important;
 	border: 0;
 	box-shadow: unset;
-	height: 40px !important;
+	height: 48px !important;
+
+	&.big {
+		height: 80px !important;
+  }
+
+	&.focus {
+		outline: $blue auto 1px;
+		background: white;
+	}
 
 	.item {
 		@extend .shadow, .py-1;
@@ -13,5 +22,9 @@
 		padding-left: calc(#{$base-spacing} + 2px);
 		padding-right: calc(#{$base-spacing} + 2px);
 		background: white !important;
+
+		a.remove {
+			border-left: none;
+		}
 	}
 }

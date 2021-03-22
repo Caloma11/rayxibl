@@ -1,53 +1,57 @@
 <div id="freelancer">
   <div class="shadow-alt rounded p-3 mb-3">
-    <h3 class="mt-0 mb-1">Bookings</h3>
-    <p class="subtitle m-0"><%= pluralize @bookings.count, "booking" %> across <%= pluralize @bookings.distinct.count("manager_id"), "client" %></p>
+    <% if @bookings_count.positive? %>
+      <h3 class="mt-0 mb-1 textMd">Bookings</h3>
+    <% else %>
+      <h3 class="mt-0 mb-4 textMd textBlue">
+        Your bookings will appear here
+      </h3>
+    <% end %>
+    <% if @bookings_count.positive? %>
+      <p class="subtitle m-0 textSm"><%= pluralize @bookings.count, "booking" %> across <%= pluralize @bookings.distinct.count("manager_id"), "client" %></p>
+    <% end %>
 
-    <div class="card-container flex items-center justify-content-between">
-      <div class="flex items-center">
-        <div class="card accepted">
-          <%= image_tag "icons/checkmark", alt: "active bookings" %>
+    <% if @bookings_count.positive? %>
+      <%= link_to bookings_path(status: 1), class: "card-container flex items-center justify-content-between" do %>
+        <div class="flex items-center">
+          <div class="card accepted">
+            <%= image_tag "icons/checkmark", alt: "active bookings" %>
+          </div>
+          <div class="ml-2">
+            <h4 class="m-0 textBetween">Accepted</h4>
+            <p class="textSm m-0"><%= pluralize @bookings.accepted.count, "booking" %></p>
+          </div>
         </div>
-        <div class="ml-2">
-          <h4 class="m-0">Accepted</h4>
-          <p class="subtitle m-0"><%= pluralize @bookings.accepted.count, "booking" %></p>
-        </div>
-      </div>
-      <%= link_to bookings_path(status: 1) do %>
-        <%= image_tag "icons/right-arrow.svg", alt: "accepted bookings" %>
+        <%= image_tag "icons/right-arrow.svg", alt: "accepted bookings", width: 12, height: 12 %>
       <% end %>
-    </div>
 
-    <div class="card-container flex items-center justify-content-between">
-      <div class="flex items-center">
-        <div class="card pending">
-          <%= image_tag "icons/pending.svg", alt: "pending bookings" %>
+      <%= link_to bookings_path(status: 0), class: "card-container flex items-center justify-content-between" do %>
+        <div class="flex items-center">
+          <div class="card pending">
+            <%= image_tag "icons/pending.svg", alt: "pending bookings" %>
+          </div>
+          <div class="ml-2">
+            <h4 class="m-0 textBetween">Pending</h4>
+            <p class="textSm m-0"><%= pluralize @bookings.pending.count, "booking" %></p>
+          </div>
         </div>
-        <div class="ml-2">
-          <h4 class="m-0">Pending</h4>
-          <p class="subtitle m-0"><%= pluralize @bookings.pending.count, "booking" %></p>
-        </div>
-      </div>
-      <%= link_to bookings_path(status: 0) do %>
-        <%= image_tag "icons/right-arrow.svg", alt: "pending bookings" %>
+        <%= image_tag "icons/right-arrow.svg", alt: "pending bookings", width: 12, height: 12 %>
       <% end %>
-    </div>
 
-    <div class="card-container flex items-center justify-content-between">
-      <div class="flex items-center">
-        <div class="card canceled">
-          <%= image_tag "icons/cross-white.svg", alt: "canceled bookings" %>
+      <%= link_to bookings_path(status: 3), class: "card-container flex items-center justify-content-between" do %>
+        <div class="flex items-center">
+          <div class="card canceled">
+            <%= image_tag "icons/cross-white.svg", alt: "canceled bookings" %>
+          </div>
+          <div class="ml-2">
+            <h4 class="m-0 textBetween">Canceled</h4>
+            <p class="textSm m-0"><%= pluralize @bookings.canceled.count, "booking" %></p>
+          </div>
         </div>
-        <div class="ml-2">
-          <h4 class="m-0">Canceled</h4>
-          <p class="subtitle m-0"><%= pluralize @bookings.canceled.count, "booking" %></p>
-        </div>
-      </div>
-      <%= link_to bookings_path(status: 3) do %>
-        <%= image_tag "icons/right-arrow.svg", alt: "canceled bookings" %>
+        <%= image_tag "icons/right-arrow.svg", alt: "canceled bookings", width: 12, height: 12 %>
       <% end %>
-    </div>
+    <% end %>
 
-    <%= link_to "View all (#{@bookings.count})", bookings_path, class: "btn btn-primary text-center" %>
+    <%= link_to "View all (#{@bookings_count})", bookings_path, class: "btn btn-primary text-center mx-2 mb-2" %>
   </div>
 </div>

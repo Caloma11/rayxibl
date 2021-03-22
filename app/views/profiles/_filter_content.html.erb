@@ -12,7 +12,9 @@
       <%= f.input :name, required: false,
                   wrapper_html: { class: "flex flex-column mb-3" } %>
       <%= f.input :profession, required: false,
-                  wrapper_html: { class: "flex flex-column mb-3" } %>
+                  wrapper_html: { class: "flex flex-column mb-3" },
+                  collection: Profile.pluck(:profession).map(&:capitalize).uniq.sort,
+                  input_html: { multiple: true } %>
       <%= f.input :skills, required: false,
                   wrapper_html: { class: "flex flex-column mb-3" },
                   input_html: { multiple: true },
@@ -41,13 +43,14 @@
           </section>
         </div>
       </section>
-
-      <div class="mt-5 mb-3 mx-3 px-3 flex justify-content-between">
-        <button type="submit" name="profile[clear]" value="true" id="clear" class="btn btn-float red">Clear</button>
-        <%# DUMMY BUTTON FOR NOW %>
-        <button class="btn btn-float" style="user-select: none">Saved</button>
+      <div class="submit-wrapper">
+        <div class="m4-5 mb-3 mx-3 px-3 flex justify-content-between">
+          <button type="submit" name="profile[clear]" value="true" id="clear" class="btn btn-float red">Clear</button>
+          <%# DUMMY BUTTON FOR NOW %>
+          <button class="btn btn-float" style="user-select: none">Saved</button>
+        </div>
+        <%= f.submit "Show results", class: "uppercase btn btn-primary w-100 py-3 height-unset" %>
       </div>
-      <%= f.submit "Show results", class: "uppercase btn btn-primary w-100 py-3 height-unset" %>
     <% end %>
   </section>
 </div>

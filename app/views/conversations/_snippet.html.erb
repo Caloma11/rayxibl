@@ -1,4 +1,4 @@
-<%= link_to conversation_path(conversation, anchor: "message-#{conversation.messages.last&.id}"), class: "no-decoration textBlack convo-snippet", data: { conversation_id: conversation.id } do %>
+<%= link_to conversation_path(conversation, anchor: "message-#{conversation.messages.last&.id}", from: "convo_index"), class: "no-decoration textBlack convo-snippet", data: { conversation_id: conversation.id } do %>
   <div class="my-3">
     <div class="convo-snippet-content-wrapper">
       <div class="flex">
@@ -28,7 +28,7 @@
       <% unread_count ||= conversation.messages.unread_user_scoped_count(current_user) %>
       <div class="flex flex-column justify-content-<%= unread_count.positive? ? "between" : "end" %> items-end right">
         <% if unread_count.positive? %>
-          <span class="notification no-absolute mr-3"><%= unread_count %></span>
+          <span class="notification no-absolute mr-3"><%= unread_count.to_s.rjust(2, "0") %></span>
         <% end %>
         <% if conversation&.last_message %>
           <span class="time"><%= conversation.last_message&.timestamp %></span>

@@ -1,10 +1,10 @@
 export const PRICE_TYPES = [
-	{ text: "", value: -1 },
 	{ text: "Per hour", value: 0 },
 	{ text: "Per day", value: 1 },
 	{ text: "Fixed price", value: 2 }
 ];
 export const TIME_LIST = [
+	"",
 	"00:00",
 	"01:00",
 	"02:00",
@@ -30,6 +30,7 @@ export const TIME_LIST = [
 	"22:00",
 	"23:00"
 ];
+export const DURATION_LIST = new Array(8).fill(1).map((ele, i) => ele + i);
 export const EXPERTISES = [
 	"",
 	"junior",
@@ -39,7 +40,12 @@ export const EXPERTISES = [
 	"senior",
 	"pro"
 ];
-export const STATUSES = ["", "pending", "accepted", "rejected", "all"];
+export const STATUSES = [
+	{ text: "pending", value: 0 },
+	{ text: "accepted", value: 1 },
+	{ text: "rejected", value: 2 },
+	{ text: "all", value: 3 }
+];
 
 export const MONTHS = [
 	"January",

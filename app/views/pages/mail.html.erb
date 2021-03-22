@@ -3,14 +3,14 @@
     <%= link_to new_user_session_path do %>
       <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
     <% end %>
-    <p class="textDarkGray uppercase">Sign up</p>
+    <p class="textDarkGray uppercase"><%= params[:pr] ? 'Forgot password' : 'Sign up' %></p>
     <button style="width: 16px; height: 16px;"> </button>
   </section>
 
   <section id="content" class="bg-white rounded-lg shadow-alt mx-3 p-4 flex flex-column justify-content-center items-center">
     <%= image_tag "icons/new-mail.svg", alt: "new mail image", width: 300 %>
     <h1 class="mt-0 textDarkOne">You've got mail</h1>
-    <p class="textLightBlack text-center">You should have received an email with a unique link to sign in</p>
+    <p class="textLightBlack text-center">You should have received an email with a unique link to <%= params[:pr] ? 'reset your password' : 'sign in' %></p>
   </section>
 
   <section></section>

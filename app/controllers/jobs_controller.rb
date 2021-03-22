@@ -60,6 +60,8 @@ class JobsController < ApplicationController
                   dashboard_path
                 elsif recognized[:controller] == "profiles"
                   profiles_path
+                else
+                  profiles_path
                 end
 
     authorize @job

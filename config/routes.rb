@@ -8,7 +8,7 @@ Rails.application.routes.draw do
 
   mount ActionCable.server => "/cable"
 
-  devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations', invitations: 'users/invitations', omniauth_callbacks: "callbacks" }
+  devise_for :users, controllers: { registrations: 'registrations', confirmations: 'confirmations', invitations: 'users/invitations', omniauth_callbacks: "callbacks", passwords: "passwords" }
 
   get "/dashboard", to: "pages#dashboard"
 
@@ -17,6 +17,7 @@ Rails.application.routes.draw do
 
   get "/mail", to: "pages#mail", as: :mail
   get "/policy", to: "pages#policy", as: :policy
+  get "/privacy", to: "pages#policy", as: :privacy
   get "/edit_password", to: "users#edit_password", as: :edit_password
   patch "/update_password", to: "users#update_password", as: :update_password
   patch "/users/update", to: "users#update", as: :user_update
@@ -53,7 +54,7 @@ Rails.application.routes.draw do
 
   resources :managers, except: %i[destroy]
   resources :conversations, only: %i[index show] do
-    resources :messages, only: %i[create]
+    resources :messages, only: %i[new create]
   end
 
   resources :job_applications, only: %i[] do

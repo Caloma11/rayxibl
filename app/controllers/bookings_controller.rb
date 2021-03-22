@@ -26,8 +26,14 @@ class BookingsController < ApplicationController
 
     @bookings = @bookings.group_by { |booking| booking.start_date.beginning_of_week }.sort_by { |day| day }.to_h
     if current_user.manager?
-      @archived_bookings = current_user.manager.bookings.where(status: [2, 3])
+      @archived_bookings = current_user.manager.bookings.archived
+
+      if params[:status]
+        status = params[:status] == "-1" ? (0..3).to_a : params[:status].to_i
+        @archived_bookings = @archived_bookings.where(status: status)
+      end
     end
+
 
     @filter_count = params[:booking]&.permit!
                                       &.to_h
@@ -44,7 +50,11 @@ class BookingsController < ApplicationController
   end
 
   def new
+    @reassign = params[:reassign] == "true"
     @select = params[:select] == "true"
+    if params[:parent_id]
+      @parent_booking = Booking.find(params[:parent_id])
+    end
     @booking = Booking.new
     @booking.profile = @profile
     @network = current_user.manager.network
@@ -55,11 +65,16 @@ class BookingsController < ApplicationController
                   dashboard_path
                 elsif recognized[:controller] == "profiles" && recognized[:action] == "index"
                   profiles_path
+                elsif current_user.manager?
+                  schedule_path
+                else
+                  dashboard_path
                 end
     authorize @booking
   end
 
   def create
+    @reassign = params[:reassign] == "true"
     @booking = Booking.new(booking_params)
     @booking.manager = current_user.manager
     @select = params[:select] == "true"
@@ -70,8 +85,22 @@ class BookingsController < ApplicationController
       set_profile
       @booking.profile = @profile
     end
+
     authorize @booking
+
     if @booking.save
+      if @reassign && params[:parent_id]
+        @parent_booking = Booking.find(params[:parent_id])
+        @parent_booking.canceled!
+
+        # This will find the Convo between Manager & original booking's Freelancer
+        @conversation = Conversation.find_by(manager: current_user.manager, profile: @parent_booking.profile)
+
+        # This path is specifically (and currently only) used for re-assigning bookings
+        redirect_to new_conversation_message_path(@conversation, parent_booking_id: @booking.id)
+        return
+      end
+
       redirect_to bookings_path
     else
       @network = current_user.manager.network

@@ -2,20 +2,20 @@
   <%= simple_form_for current_user, url: user_update_path, remote: true, html: { id: "edit_user", class: "border-box px-3 w-100" } do |f| %>
     <%= f.input :preferred_currency, required: false,
                 label: "Default currency",
-                label_html: { class: "uppercase mb-1 textLightBlack textBetween" },
+                label_html: { class: "uppercase block textLightBlack textBetween mb-3" },
                 collection: Users::Constants::CURRENCIES,
                 wrapper_html: { class: "flex flex-column mb-3" } %>
   <% end %>
 
 
   <%= simple_form_for :invitation, url: user_invitation_path(inviter: "manager", invitee: "manager"), method: :post, remote: true, html: {class: "w-100 px-3 border-box simple_form invitation"} do |f| %>
-        <div class="form-group relative">
-          <%= f.input :email, placeholder: "Email address..", label: "Manage users", input_html: { class: "relative w-100", name: "user[email]"  }, wrapper_html: { class: "w-100" }, label_html: { class: "uppercase mb-1 textLightBlack textBetween"}, required: false %>
-          <%= button_tag type: "submit" do %>
-            <%= image_tag "icons/person-add.svg", alt: "alttext", id: "invitation-add-btn", width: 28, height: 28, class: "mt-1" %>
-          <% end %>
-        </div>
+    <div class="form-group relative">
+      <%= f.input :email, placeholder: "Email address..", label: "Manage users", input_html: { class: "relative w-100", name: "user[email]" }, wrapper_html: { class: "w-100" }, label_html: { class: "block uppercase mb-3 textLightBlack textBetween"}, required: false %>
+      <%= button_tag type: "submit" do %>
+        <%= image_tag "icons/person-add.svg", alt: "alttext", id: "invitation-add-btn", width: 20, height: 28, class: "mt-1 mr-2" %>
       <% end %>
+    </div>
+  <% end %>
 
   <div id="sentEmails" class="w-100 border-box px-3">
     <% @emails.each do |email| %>
@@ -24,8 +24,8 @@
   </div>
 
 
-  <h1 class="textBlue">Email us at <%= mail_to "info@flxibl.io", "info@flxibl.io", class: "textBlue" %></h1>
-  <%= image_tag "message-bubble.svg", alt: "bubbles" %>
+  <h2 class="mb-0 textBlue">Email us at <%= mail_to "info@flxibl.io", "info@flxibl.io", class: "textBlue" %></h2>
+  <%= image_tag "message-bubble-blue.svg", alt: "bubbles", width: 300, height: 300, id: "bubble" %>
   <%= link_to "Update your password", edit_password_path, class: "textBlue uppercase mb-3" %>
   <%= link_to "Delete your account", user_delete_path, method: :delete, class: "textPink uppercase", data: { confirm: "Are you sure you want to delete your account?" } %>
 </div>

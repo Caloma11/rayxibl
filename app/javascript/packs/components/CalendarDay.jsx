@@ -13,7 +13,7 @@ const SATURDAY_CLASS_NAMES = "dark-border-left";
 const SUNDAY_CLASS_NAMES = "dark-border-right";
 
 const determineColor = status => {
-	if (status === "rejected") {
+	if (["rejected", "canceled"].includes(status)) {
 		return "red";
 	} else if (status === "accepted") {
 		return "green";
@@ -42,6 +42,8 @@ export const CalendarDay = forwardRef(
 		const maxPossibleLength = useRef(null);
 		const moreThanOneWeek = useRef(false);
 		const durationRef = useRef(1);
+		const bookingEndDateRef = useRef(null);
+		const dayRef = useRef(null);
 		// Checks if today, if so, use `"today"` as a class to color the background differently
 		const todayClassName = today ? "today" : "";
 		// Checks if date is weekend, for styling
@@ -75,11 +77,14 @@ export const CalendarDay = forwardRef(
 		};
 
 		useEffect(() => {
-			calendarContainerRef?.current.addEventListener("scroll", e => {
+			calendarContainerRef?.current.addEventListener("scroll", () => {
 				if (eventRef.current) {
 					const { x } = eventRef.current.getBoundingClientRect();
 					const details = eventRef.current.querySelector(".event-details");
-					const activeWidth = parseInt(details.style.width.match(/\d+/)[0], 10);
+					const renderedWidth = details.style.width.match(/\d+/);
+					const activeWidth = renderedWidth
+						? parseInt(renderedWidth[0], 10)
+						: 0;
 
 					if (x <= 90) {
 						const currentWidth = DAY_WIDTH * durationRef.current - 4;
@@ -88,9 +93,26 @@ export const CalendarDay = forwardRef(
 							details.style.left = `${90 - x + 8}px`;
 
 							if (moreThanOneWeek.current) {
-								details.style.width = `${
-									maxPossibleLength.current - (90 - x) - 8
-								}px`;
+								let dynamicWidth = maxPossibleLength.current;
+
+								// If event date ends after shown last day
+								const days = document.querySelectorAll(".day");
+								const lastVisibleDay = moment(
+									days[days.length - 1].dataset.formattedDay,
+									"DD-MM-YYYY"
+								);
+								if (!bookingEndDateRef.current.isBefore(lastVisibleDay)) {
+									const dayDiff = bookingEndDateRef.current.diff(
+										lastVisibleDay,
+										"days"
+									);
+									const subtractor = DAY_WIDTH * dayDiff;
+
+									dynamicWidth -= subtractor;
+								}
+
+								dynamicWidth = dynamicWidth - (90 - x) - 8;
+								details.style.width = `${dynamicWidth}px`;
 							} else {
 								details.style.width = `${currentWidth - (90 - x) - 8}px`;
 							}
@@ -104,10 +126,35 @@ export const CalendarDay = forwardRef(
 			});
 		}, []);
 
+		useEffect(() => {
+			if (dayRef.current) {
+				const eventsWithinADay = dayRef.current.querySelectorAll(".event");
+				if (eventsWithinADay.length > 1) {
+					const [first, second] = eventsWithinADay;
+					dayRef.current.insertBefore(second, first);
+				}
+
+				const previousDayCell = dayRef.current.previousElementSibling;
+				if (previousDayCell) {
+					const previousDayEventCount = previousDayCell.querySelectorAll(
+						".event"
+					).length;
+					if (previousDayEventCount > 1 && eventsWithinADay.length === 1) {
+						dayRef.current.insertAdjacentHTML(
+							"afterbegin",
+							`<div class="event empty" style="height: 52px; width: 82px"></div>`
+						);
+					}
+				}
+			}
+		}, []);
+
 		return (
 			<div
 				className={`day ${todayClassName} ${weekend} ${friday} ${saturday} ${sunday}`}
 				onClick={() => handleDayClick({ week, day })}
+				data-formatted-day={dayOfWeek.format("DD-MM-YYYY")}
+				ref={dayRef}
 			>
 				{eventDateBooleans.map((a, i) => {
 					if (!a.some(ele => ele)) return null;
@@ -134,6 +181,7 @@ export const CalendarDay = forwardRef(
 						/* Generate MomentJS object of a booking's end date */
 					}
 					const momentEnd = moment(booking.endDate);
+					bookingEndDateRef.current = momentEnd;
 					{
 						/* Calculate the date difference (in days) of the booking's duration */
 					}
@@ -165,7 +213,7 @@ export const CalendarDay = forwardRef(
 					}
 
 					durationRef.current = eventDuration;
-					const maxWidth = DAY_WIDTH * eventDuration - 4;
+					let maxWidth = DAY_WIDTH * eventDuration - 4;
 
 					return (
 						<div

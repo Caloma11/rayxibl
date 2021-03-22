@@ -26,11 +26,25 @@
 
   if (trigger && <%= @filter_count.is_a?(Integer) ? @filter_count : 0 %> > 0) {
     const template = `
-      <span class="skill-pill blue m-0 filter-count">
+      <span class="skill-pill filter blue m-0 filter-count">
         <%= @filter_count.to_s.rjust(2, "0") %>
       </span>
     `;
 
-    trigger.insertAdjacentHTML("beforeend", template);
+    const filterCount = document.querySelector(".skill-pill.filter");
+
+    if (filterCount) {
+      filterCount.innerText = "<%= @filter_count.to_s.rjust(2, "0") %>"
+    } else {
+      trigger.insertAdjacentHTML("beforeend", template);
+    }
+  }
+
+
+
+  if (<%= @filter_count.is_a?(Integer) ? @filter_count : 0 %> === 0) {
+    const filterCount = document.querySelector(".skill-pill.filter");
+
+    filterCount?.remove();
   }
 })();
