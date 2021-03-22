@@ -172,7 +172,7 @@ export const CalendarDay = forwardRef(
 						a[0] ? START_EVENT_CLASS_NAMES : ""
 					} ${a[2] ? END_EVENT_CLASS_NAMES : ""} ${determineColor(
 						booking.status
-					)}`;
+					)} ${booking.weekends ? "" : "no-weekends"}`;
 					{
 						/* Generate MomentJS object of a booking's start date */
 					}
@@ -215,11 +215,28 @@ export const CalendarDay = forwardRef(
 					durationRef.current = eventDuration;
 					let maxWidth = DAY_WIDTH * eventDuration - 4;
 
+					const borderWidth = Math.floor((booking.durationInHours / 8) * 100);
+					let borderTopLeftRadius = 0;
+					let borderTopRightRadius = 0;
+
+					if (a[0]) {
+						borderTopLeftRadius = 8;
+					}
+
+					if (a[2] && booking.durationInHours === 8) {
+						borderTopRightRadius = 8;
+					}
+
 					return (
 						<div
 							key={i}
 							className={eventClassName}
-							style={{ height: 44 }}
+							style={{
+								height: 44,
+								"--border-width": `${borderWidth}%`,
+								"--border-top-left-radius": `${borderTopLeftRadius}px`,
+								"--border-top-right-radius": `${borderTopRightRadius}px`
+							}}
 							onClick={e => handleEventClick(e, booking.id)}
 							ref={eventClassName.includes("event-start") ? eventRef : null}
 						>
@@ -228,7 +245,7 @@ export const CalendarDay = forwardRef(
 									className="event-details"
 									style={{
 										width: maxWidth,
-										height: 40
+										height: 34
 									}}
 								>
 									<p className="title">
