@@ -20,7 +20,13 @@ class ProfileFilter
       .includes(:ratings, user: [:manager, avatar_attachment: :blob ])
       .where(job_applications: { job_id: params[:job_id] })
     elsif profile_params
-      @profiles = profile.includes(:ratings, user: [:manager, avatar_attachment: :blob])
+      if params[:all]
+        @profiles = profile
+                      .includes(:ratings, user: [:manager, avatar_attachment: :blob])
+                      .where.not(id: current_user.manager.network.pluck(:id))
+      else
+        @profiles = profile.includes(:ratings, user: [:manager, avatar_attachment: :blob])
+      end
 
       filter_via_button
     elsif params[:ids]
@@ -35,7 +41,7 @@ class ProfileFilter
 
   def filter_via_button
     if profile_params[:name] != ""
-      @profiles = profile
+      @profiles = @profiles
                     .joins(:user)
                     .includes(:ratings, user: [:manager, avatar_attachment: :blob])
                     .where("users.first_name ILIKE :name OR users.last_name ILIKE :name", name: "%#{profile_params[:name]}%")
@@ -43,27 +49,27 @@ class ProfileFilter
 
     if profile_params[:profession] != [""]
       profession = profile_params[:profession].reject(&:blank?)
-      @profiles = profile
+      @profiles = @profiles
                     .includes(:ratings, user: [:manager, avatar_attachment: :blob])
                     .where("profession ILIKE ANY (array[:profession])", profession: profession)
     end
 
     if profile_params[:skills] != [""] && profile_params[:skills] != ""
       skills = profile_params[:skills].reject(&:blank?)
-      @profiles = profile
-              .includes(:ratings, user: [:manager, avatar_attachment: :blob])
-              .tagged_with(skills, any: true)
+      @profiles = @profiles
+                    .includes(:ratings, user: [:manager, avatar_attachment: :blob])
+                    .tagged_with(skills, any: true)
     end
 
     if profile_params[:location] != ""
-      @profiles = profile
+      @profiles = @profiles
                     .includes(:ratings, user: [:manager, avatar_attachment: :blob])
                     .where("location ILIKE :location", location: "%#{profile_params[:location]}%")
     end
 
     if profile_params[:expertise] != [""] && profile_params[:expertise] != ""
       expertises = profile_params[:expertise].reject(&:blank?)
-      @profiles = profile
+      @profiles = @profiles
                     .includes(:ratings, user: [:manager, avatar_attachment: :blob])
                     .where(expertise: expertises)
     end
@@ -81,7 +87,7 @@ class ProfileFilter
     job_ids = profile_params[:job_id].split(",")
 
     if job_ids.length.positive?
-      @profiles = profile.joins(job_applications: :job).where(job_applications: { jobs: { id: job_ids } })
+      @profiles = @profiles.joins(job_applications: :job).where(job_applications: { jobs: { id: job_ids } })
     end
   end
 
