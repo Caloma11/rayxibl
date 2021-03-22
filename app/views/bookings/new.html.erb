@@ -31,7 +31,7 @@
           <input type="hidden" name="parent_id" value="<%= params[:parent_id] %>">
         <% end %>
         <% if @reassign %>
-          <input type="hidden" name="reassign" value=<%= @reassign %> id="reassign" />
+          <input type="hidden" name="reassign" value="<%= @reassign %>" id="reassign" />
         <% end %>
         <% if @select %>
           <%= f.input :profile_id,
@@ -55,7 +55,7 @@
         <div class="flex justify-content-between items-end flex-shrink-2 mb-3">
           <!-- Start time and end time OR duration input -->
           <div class="bookingHours w-100">
-            <div class="bookingSpecific <%= 'none' if @parent_booking&.duration %>">
+            <div class="bookingSpecific mw-184 <%= 'none' if @parent_booking&.duration %>">
               <label class="block mb-1 textLightBlack textBetween">Hours per day</label>
               <div class="inputs flex items-center">
                 <%= f.input :start_time,
@@ -72,7 +72,7 @@
             </div>
 
             <!-- Hidden duration -->
-            <div class="bookingDuration <%= 'none' if !@parent_booking || @parent_booking&.start_time %>">
+            <div class="bookingDuration mw-184 <%= 'none' if !@parent_booking || @parent_booking&.start_time %>">
               <%= f.input :duration,
                           collection: (1..8),
                           label_html: { class: "block mb-1 textLightBlack textBetween" },
@@ -96,7 +96,7 @@
 
           <div class="dates-input-wrapper">
             <label for="dates" class="block mb-1 textLightBlack textBetween">Dates</label>
-            <input id="new-booking-datepickr" type="text" name="dates" class="mb-2 w-100 datepicker">
+            <input id="new-booking-datepickr" type="text" name="dates" class="mb-2 w-100 datepicker mw-184">
           </div>
 
           <div class="mt-3">
