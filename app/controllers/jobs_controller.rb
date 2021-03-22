@@ -12,12 +12,10 @@ class JobsController < ApplicationController
 
     if params[:applied] == "true"
       @jobs = @jobs.joins(:job_applications).where("job_applications.profile_id = :id", id: current_user.profile.id)
-    else
-      @jobs = @jobs
     end
 
     if current_user.manager?
-      @jobs = @jobs.includes(manager: { user: { avatar_attachment: :blob } }).active
+      @jobs = @jobs.includes(manager: { user: { avatar_attachment: :blob } })
     else
       @jobs = @jobs.includes(:manager).active
     end
