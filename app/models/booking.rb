@@ -74,6 +74,14 @@ class Booking < ApplicationRecord
     end
   end
 
+  def duration_in_hours
+    if duration
+      duration
+    else
+      ((end_time - start_time) / 1.hour).round
+    end
+  end
+
   def parsed_short_time
     "#{start_time&.strftime("%H:%M")} - #{end_time&.strftime("%H:%M")}"
   end
