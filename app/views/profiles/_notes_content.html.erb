@@ -38,7 +38,7 @@
   </div>
 </div>
 
-<% if user_signed_in? && current_user.manager? %>
+<% if user_signed_in? && current_user.manager? && current_user.manager.booked_profiles.include?(@profile) %>
   <div class="form-wrapper px-3 pb-3">
     <p class="text-center uppercase mt-0 mb-3 textBetween textLightBlack semi-bold">Star ratings are visible on <%= @profile.user.first_name %>'s profile</p>
     <div id="rating-form-container">
