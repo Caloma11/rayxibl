@@ -50,7 +50,8 @@ export const CalendarProfileFilter = ({
 	bookings,
 	handleSubmit,
 	setFilterCount,
-	setShow
+	setShow,
+	professions
 }) => {
 	const [name, setName] = useState([]);
 	const [profession, setProfession] = useState([]);
@@ -123,9 +124,10 @@ export const CalendarProfileFilter = ({
 				createOnBlur: true,
 				create: true
 			});
-			professionTom.on("item_add", e =>
-				setProfession(prev => [...new Set([...prev, `%${e}%`])])
-			);
+			professionTom.on("item_add", e => {
+				setProfession(prev => [...new Set([...prev, `%${e}%`])]);
+				professionTom.control_input.value = "";
+			});
 			professionTom.on("item_remove", e =>
 				setProfession(prev => prev.filter(ele => ele !== `%${e}%`))
 			);
@@ -157,7 +159,13 @@ export const CalendarProfileFilter = ({
 						name="profile[profession]"
 						multiple
 						defaultValue={profession}
-					></select>
+					>
+						{professions.map((text, i) => (
+							<option key={i} value={text}>
+								{text}
+							</option>
+						))}
+					</select>
 				</div>
 				<div className="flex justify-content-center">
 					<button

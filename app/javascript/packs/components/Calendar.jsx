@@ -21,6 +21,7 @@ const Calendar = () => {
 	const [loading, setLoading] = useState(true);
 	const [profiles, setProfiles] = useState([]);
 	const [bookings, setBookings] = useState([]);
+	const [professions, setProfessions] = useState([]);
 	const [data, setData] = useState(initialDays);
 	// Start to be used after reaching the next month
 	const [monthOffset, setMonthOffset] = useState(1);
@@ -257,6 +258,7 @@ const Calendar = () => {
 						.flat()
 						.map(({ id, title }) => ({ id, title }))
 				);
+				setProfessions(data.map(pr => pr.profession));
 			} catch (error) {
 				console.log(error);
 			}
@@ -347,7 +349,11 @@ const Calendar = () => {
 					setYear={setYear}
 					ref={{ moveMonthRef, jumpRef }}
 				/>
-				<CalendarFilter setProfiles={setProfiles} bookings={bookings} />
+				<CalendarFilter
+					setProfiles={setProfiles}
+					bookings={bookings}
+					professions={professions}
+				/>
 			</div>
 			<div
 				className={`calendarContainer ${showForm ? "none" : ""}`}

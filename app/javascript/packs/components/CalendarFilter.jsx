@@ -4,7 +4,7 @@ import { CalendarProfileFilter } from "./CalendarProfileFilter";
 import filterSvg from "../images/filter.svg";
 import crossDarkSvg from "../images/cross-dark.svg";
 
-export const CalendarFilter = ({ bookings, setProfiles }) => {
+export const CalendarFilter = ({ bookings, setProfiles, professions }) => {
 	const [show, setShow] = useState(false);
 	const [filterCount, setFilterCount] = useState(0);
 
@@ -48,6 +48,7 @@ export const CalendarFilter = ({ bookings, setProfiles }) => {
 							setShow={setShow}
 							bookings={bookings}
 							handleSubmit={handleProfileSubmit}
+							professions={professions}
 						/>
 					</section>
 				</div>
