@@ -2,13 +2,18 @@ class JobsController < ApplicationController
   skip_before_action :authenticate_user!, only: [:show]
 
   def index
+    skip_policy_scope
 
+    if current_user.freelancer?
+      @jobs = Job.outside_connections(current_user.profile)
+    else
+      @jobs = current_user.manager.jobs
+    end
 
     if params[:applied] == "true"
-      skip_policy_scope
-      @jobs = Job.joins(:job_applications).where("job_applications.profile_id = :id", id: current_user.profile.id)
+      @jobs = @jobs.joins(:job_applications).where("job_applications.profile_id = :id", id: current_user.profile.id)
     else
-      @jobs = policy_scope(Job)
+      @jobs = @jobs
     end
 
     if current_user.manager?
