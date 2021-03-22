@@ -58,7 +58,7 @@
     <% if !user_signed_in? %>
       <% false %>
     <% elsif current_user.manager? %>
-      <%= link_to profiles_path(job_id: @job.id), class: "btn btn-secondary mt-4 mb-3 mx-3" do %>
+      <%= link_to profiles_path(job_id: @job.id), class: "btn btn-primary mt-4 mb-3 mx-3" do %>
         <div class="flex justify-content-center items-center">
           <%= image_tag "icons/people.svg", alt: "people", width: 24, height: 24, class: "mr-3" %>
           <span class="textWhite">View applicants (<%= @job.job_applications.count %>)</span>
@@ -100,9 +100,9 @@
     <% end %>
   </section>
 
-  <section class="text-block mx-3 mb-3 uppercase">
-    <p class="mb-3"><strong class="textDarkGray">experience level:</strong> <%= @job.expertise %> </p>
-    <p class="mb-3"><strong class="textDarkGray">budget:</strong> <%= @job.rate %> <%= @job.price_type %></p>
+  <section class="textBetween text-block mx-3 mb-3 uppercase">
+    <p class="mb-3">experience level: <%= @job.expertise %> </p>
+    <p class="mb-3">budget: <%= currency_mapper(current_user.preferred_currency) %><%= @job.rate %> <%= @job.price_type %></p>
     <p>
       <%= @job.start_date&.strftime("%d %b") %> <strong class="textDarkGray">-</strong> <%= @job.end_date&.strftime("%d %b") %>,
       <% if @job.start_time && @job.end_time %>
@@ -111,6 +111,7 @@
         <%= @job.duration %> hours / day
       <% end %>
     </p>
+    <p class="textBlue semi-bold"><%= image_tag "icons/map-pin.svg", alt: "Map pin", width: 20, height: 20, class: "vertical-align-middle mr-2" %><%= @job.location %></p>
     <div class="skills mt-4">
       <p class="subtitle mb-0">Key Skills</p>
       <div class="skill-pills mb-3 px-0">
@@ -123,6 +124,13 @@
 
   <section class="mx-3">
     <p class="textGray"><%= @job.description %></p>
+    <div class="flex flex-column">
+      <% @job.attachments.each do |a| %>
+        <%= link_to rails_blob_path(a, disposition: "attachment"), class: "choose-file block mb-1 textLightBlack textBetween text-center uppercase" do %>
+          <%= image_tag "icons/download-gray.svg", alt: "download attachment" %> <%= a.blob.filename %>
+        <% end %>
+      <% end %>
+    </div>
   </section>
 </div>
 
