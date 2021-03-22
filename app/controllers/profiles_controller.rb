@@ -103,6 +103,7 @@ class ProfilesController < ApplicationController
       current_user.update(user_params[:profile_user])
       redirect_to profile_path(@profile)
     else
+      binding.pry
       render 'edit'
     end
   end
