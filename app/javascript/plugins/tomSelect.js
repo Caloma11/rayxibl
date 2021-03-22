@@ -31,7 +31,10 @@ export const initTomSelect = () => {
 		customizeTs(ts);
 	}
 
-	if (profileProfession) {
+	if (
+		profileProfession &&
+		!profileProfession.classList.contains("no-tomselect")
+	) {
 		const ts = new TomSelect(profileProfession, config);
 		customizeTs(ts);
 	}
