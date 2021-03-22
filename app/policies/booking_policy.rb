@@ -18,7 +18,11 @@ class BookingPolicy < ApplicationPolicy
   end
 
   def create?
-    user.manager? && user.find_connection(record.profile.user)
+    if record.profile
+      user.manager? && user.find_connection(record.profile.user)
+    else
+      user.manager?
+    end
   end
 
   def edit?
