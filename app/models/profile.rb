@@ -4,7 +4,7 @@ class Profile < ApplicationRecord
   acts_as_taggable_on :skills
 
   belongs_to :user
-  has_many :connections
+  has_many :connections, dependent: :destroy
   has_many :companies, through: :connections
   # Grabs a list of clients
   has_many :managers, through: :companies

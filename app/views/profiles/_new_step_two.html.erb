@@ -1,5 +1,5 @@
   <!-- Step 2 -->
-  <div class="step-2 flex flex-column h-100 justify-content-between">
+  <div class="step-2 pt-5 flex flex-column h-100 justify-content-between">
     <div class="step-content h-100 mb-5">
       <%= simple_form_for Profile.new, url: profiles_path(step: "step_two", profile_id: @profile.id) do |f| %>
         <%= f.input :overview, as: :text, label: "Professional Summary", required: true, label_html: { class: "textGray mt-3 block" }, input_html: { class: "w-100 h-100 mt-2 border-box lg" }, wrapper_html: { class: "px-3"}  %>
