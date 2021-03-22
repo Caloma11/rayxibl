@@ -97,6 +97,8 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    @links = @profile.profile_attachments.where.not(url: nil)
+    @documents = @profile.profile_attachments.where(url: nil)
     if @profile.update(profile_params)
       current_user.update(user_params[:profile_user])
       redirect_to profile_path(@profile)
