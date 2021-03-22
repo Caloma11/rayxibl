@@ -112,7 +112,7 @@ export const BookingFormDates = ({
 							className="w-100"
 							value={duration}
 							onChange={e => setDuration(e.target.value)}
-							style={{ width: 180 }}
+							style={{ width: 144 }}
 						>
 							{DURATION_LIST.map(ele => (
 								<option value={ele} key={ele}>
