@@ -127,7 +127,12 @@
     <div class="flex flex-column">
       <% @job.attachments.each do |a| %>
         <%= link_to rails_blob_path(a, disposition: "attachment"), class: "choose-file block mb-1 textLightBlack textBetween text-center uppercase" do %>
-          <%= image_tag "icons/download-gray.svg", alt: "download attachment" %> <%= a.blob.filename %>
+          <%= image_tag "icons/download-gray.svg", alt: "download attachment" %>
+          <% if a.blob.filename.to_s.size > 20 %>
+            <%= a.blob.filename.to_s.truncate(20) %>
+          <% else %>
+            <%= a.blob.filename %>
+          <% end %>
         <% end %>
       <% end %>
     </div>
