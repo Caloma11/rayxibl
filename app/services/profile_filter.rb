@@ -11,7 +11,9 @@ class ProfileFilter
 
   def call
     if params[:all] && !@using_session
-      @profiles = profile.joins("FULL JOIN connections on connections.profile_id = profiles.id").includes(:ratings, user: [:manager, avatar_attachment: :blob]).where.not(connections: { company_id: current_user.company.id }).or(profile.joins("FULL JOIN connections on connections.profile_id = profiles.id").includes(:ratings, user: [:manager, avatar_attachment: :blob]).where(connections: { id: nil })).distinct
+      @profiles = profile
+                    .includes(:ratings, user: [:manager, avatar_attachment: :blob])
+                    .where.not(id: current_user.manager.network.pluck(:id))
     elsif params[:job_id]
       @profiles = profile
       .joins(job_applications: :job)
