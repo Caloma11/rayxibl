@@ -5,26 +5,42 @@
 	}
 
 	#booking_duration {
-		width: 200px;
+		width: 144px;
 	}
 
 	.bookingDuration {
-		width: 214px;
+		width: 144px;
+	}
+
+	.bookingSpecific,
+	.bookingDuration {
+		margin-right: calc(#{$spacing-3} + #{$base-spacing});
+	}
+
+	.dates-input-wrapper {
+		width: 144px;
 	}
 
 	#tabs {
 		@extend .rounded, .border-box;
 
-		height: 40px;
+		height: 48px;
 
 		.tab {
+			@extend .textBetween;
+
 			padding-top: unset !important;
 			padding-bottom: unset !important;
+			color: #898994;
 
 			&.active {
-				@extend .rounded;
+				@extend .rounded, .textDarkOne;
 			}
 		}
+	}
+
+	#time-container {
+		width: 144px;
 	}
 
 	.booking_attachments {
