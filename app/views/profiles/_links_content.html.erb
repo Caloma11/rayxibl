@@ -1,13 +1,13 @@
 <div class="px-3">
   <% unless @links.empty? %>
-    <h3 class=""><small class="textGray">LINKS</small></h3>
+    <p class="textGray uppercase semi-bold textLightBlack textSm">LINKS</p>
     <% @links.each do |link| %>
       <%= link_to link.title&.capitalize, sanitize_url(link.url), target: :_blank, class: "btn btn-secondary mb-3"  %>
     <% end %>
   <% end %>
 
   <% unless @documents.empty? %>
-    <h3 class=""><small class="textGray">DOCUMENTS</small></h3>
+    <p class="textGray uppercase semi-bold textLightBlack textSm">DOCUMENTS</p>
     <% @documents.each do |link| %>
       <%= link_to link.title&.capitalize, download_attachment_path(link), method: :post, class: "btn btn-secondary mb-3" %>
     <% end %>

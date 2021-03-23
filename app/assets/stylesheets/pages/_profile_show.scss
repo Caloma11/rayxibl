@@ -27,11 +27,9 @@
 	bottom: 32px;
 	h1 {
 		font-size: 24px;
-		@extend .mb-0;
-		@extend .mt-2;
 	}
 	.rating-size {
-		@extend .textBetween, .semi-bold;
+		@extend .semi-bold;
 
 		margin-left: 4px;
 		color: #6c7b8a;
@@ -59,17 +57,15 @@
 		border-radius: 8px;
 		text-align: center;
 		font-size: 12px;
-		height: 60px;
+		height: 48px;
 	}
 
 	a {
 		img {
 			@extend .mr-2;
-			height: 32px;
-			width: 32px;
 		}
 
-		a::first-child {
+		&::first-child {
 			color: white;
 		}
 

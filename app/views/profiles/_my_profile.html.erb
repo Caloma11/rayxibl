@@ -12,12 +12,12 @@
 
   <!-- Name and description -->
   <div class="profileHeader">
-    <div class="profileHeaderLeft">
-      <h1><%= @profile.user.display_name %></h1>
-      <p class="textLightBlack"><%= @profile.profession %>, <%= @profile.location %></p>
+    <div class="profileHeaderLeft my-3">
+      <h1 class="mt-0 mb-2"><%= @profile.user.display_name %></h1>
+      <p class="textLightBlack my-0"><%= @profile.profession %>, <%= @profile.location %></p>
     </div>
-    <div class="profileHeaderRight">
-      <div class="flex items-center justify-content-end mt-3">
+    <div class="profileHeaderRight my-3">
+      <div class="flex items-center justify-content-end">
         <div class="stars">
           <%= render partial: "ratings/content", locals: { profile: @profile } %>
         </div>
@@ -30,17 +30,15 @@
   <!-- Share button -->
   <div class="profileButtons flex justify-content-around p-3">
     <%= link_to "#", class: "btn-lg px-0 btn-primary share-link", data: { url: "https://www.flxibl.io/profiles/#{@profile.id}", title: "#{@profile.display_name}'s' profile on flxibl", text: @profile.overview.truncate(120) }  do %>
-        <%= image_tag "icons/share-white.svg", alt: "Share profile" %>
-        <p class="textWhite">SHARE</p>
+      <%= image_tag "icons/share-white.svg", alt: "Share profile", width: 24, height: 24 %>
+      <p class="textWhite">SHARE</p>
     <% end %>
-      <div class="spacer">
+    <div class="spacer"></div>
 
-      </div>
-
-  <!-- Edit Button -->
+    <!-- Edit Button -->
 
     <%= link_to edit_profile_path(@profile), class: "btn-lg px-0 btn-white" do %>
-      <%= image_tag "icons/edit.svg", alt: "edit" %> EDIT
+      <%= image_tag "icons/edit.svg", alt: "edit", width: 24, height: 24 %> EDIT
     <% end %>
   </div>
 
@@ -48,7 +46,7 @@
   <!-- Skills -->
   <div class="container">
     <div class="profileSection  p-3" id="skills">
-      <h3 class="small mb-2 mt-0 semi-bold textBetween textLightBlack">KEY SKILLS</h3>
+      <h3 class="small mb-2 mt-0 semi-bold textSm textLightBlack">KEY SKILLS</h3>
       <div class="flex justify-content-start skill-pills mb-2">
         <% @profile.skill_list.each do |skill| %>
           <span class="skill-pill"><%= skill %></span>
@@ -59,9 +57,9 @@
     <!-- Tabs -->
 
     <div class="profileTabs" id="tabs">
-      <%= link_to "About", profile_path(@profile, tab: 'about', anchor: 'skills'), id: "about-tab", class: "tab #{'active' if params[:tab] == 'about' || !params[:tab] }", remote: true %>
-      <%= link_to "Links", profile_path(@profile, tab: 'links', anchor: 'skills'), id: "link-tab", class: "tab #{'active' if params[:tab] == 'links' }", remote: true %>
-      <%= link_to "Ratings (#{@ratings&.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), id: "note-tab", class: "tab #{'active' if params[:tab] == 'notes' }", remote: true %>
+      <%= link_to "About", profile_path(@profile, tab: 'about', anchor: 'skills'), id: "about-tab", class: "tab textBetween #{'active' if params[:tab] == 'about' || !params[:tab] }", remote: true %>
+      <%= link_to "Links", profile_path(@profile, tab: 'links', anchor: 'skills'), id: "link-tab", class: "tab textBetween #{'active' if params[:tab] == 'links' }", remote: true %>
+      <%= link_to "Ratings (#{@ratings&.count})", profile_path(@profile, tab: 'notes', anchor: 'skills'), id: "note-tab", class: "tab textBetween #{'active' if params[:tab] == 'notes' }", remote: true %>
     </div>
 
     <div class="p-3" id="tab-content">

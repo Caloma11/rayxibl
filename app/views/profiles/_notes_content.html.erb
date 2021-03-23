@@ -2,10 +2,9 @@
   <% if user_signed_in? && current_user.manager? %>
     <div class="bg-blueish-gray px-3 pt-1">
       <h3 class="textLightBlack textBetween semi-bold">ONLY VISIBLE TO YOUR TEAM</h3>
-      <%= link_to "Write a Review", "#note_content", class: "btn btn-note py-3"  %>
 
       <% @notes.each do |note| %>
-        <div class="flex justify-content-between p-3">
+        <div class="flex justify-content-between">
           <div class="flex">
             <% if note.manager.user.avatar.attached? %>
               <%= image_tag note.manager.user.avatar, alt: "alttext", class: "profileAvatar rounded-circle", height: 32, width: 32  %>
@@ -22,10 +21,10 @@
       <% end %>
 
       <!-- Note form ( might change )-->
-      <div id="writeYourNote" class="p-3">
+      <div id="writeYourNote" class="mt-3">
         <%= simple_form_for [@profile, Note.new], remote: true, class: "w-100" do |f| %>
           <%= f.input :content, as: :text, label: false, input_html: { class: "w-100"} %>
-          <%= f.submit :Submit, class: "border-gray mt-2" %>
+          <%= f.submit :Submit, class: "border-gray my-2" %>
         <% end %>
       </div>
     </div>
