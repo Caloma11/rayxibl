@@ -31,7 +31,7 @@ class Message < ApplicationRecord
   def notify_new_message(current_user)
     body = {
       new_text_content: content,
-      count: self.class.unread_user_scoped_count(current_user),
+      count: self.class.unread_user_scoped_count(current_user).to_s.rjust(2, "0"),
       conversation_id: conversation.id,
       timestamp: created_at.strftime("%I:%M %p")
     }
