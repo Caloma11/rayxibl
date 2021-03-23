@@ -12,12 +12,12 @@
 
   <!-- Name and description -->
   <div class="profileHeader">
-    <div class="profileHeaderLeft">
-      <h1><%= @profile.user.display_name %></h1>
-      <p class="textLightBlack"><%= @profile.profession %>, <%= @profile.location %></p>
+    <div class="profileHeaderLeft my-3">
+      <h1 class="mt-0 mb-2"><%= @profile.user.display_name %></h1>
+      <p class="textLightBlack my-0"><%= @profile.profession %>, <%= @profile.location %></p>
     </div>
-    <div class="profileHeaderRight">
-      <div class="flex items-center justify-content-end mt-3">
+    <div class="profileHeaderRight my-3">
+      <div class="flex items-center justify-content-end">
         <div class="stars">
           <%= render partial: "ratings/content", locals: { profile: @profile } %>
         </div>
