@@ -56,10 +56,10 @@
 
   <!-- Add or Book button -->
   <div class="profileButtons flex justify-content-around px-3">
-  <% if !user_signed_in? %>
-    <%= link_to new_user_session_path, class: "action-link flex items-center w-100 btn btn-primary textWhite py-3" do %>
-      LOGIN TO BOOK <%= @profile.user&.first_name&.upcase %>
-    <% end %>
+    <% if !user_signed_in? %>
+      <%= link_to new_user_session_path, class: "action-link flex items-center w-100 btn btn-primary textWhite py-3" do %>
+        LOGIN TO BOOK <%= @profile.user&.first_name&.upcase %>
+      <% end %>
     <% elsif current_user&.manager? %>
       <% if @connection %>
         <%= link_to new_profile_booking_path(@profile), class: "btn-lg px-0 btn-primary" do %>
@@ -72,9 +72,7 @@
           <p class="textWhite">ADD</p>
         <% end %>
       <% end %>
-      <div class="spacer">
-
-      </div>
+      <div class="spacer"></div>
 
       <!-- Message Button -->
       <% conversation ||= current_user.conversation_with(@profile.user) %>
@@ -87,12 +85,8 @@
           <%= image_tag "icons/message.svg", alt: "message", width: 18, height: 18 %> MESSAGE
         <% end %>
       <% end %>
-
-
-  <% end %>
-
+    <% end %>
   </div>
-
 
   <!-- Skills -->
   <div class="container">
