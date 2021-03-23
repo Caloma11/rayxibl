@@ -62,14 +62,13 @@
     <% end %>
     <% elsif current_user&.manager? %>
       <% if @connection %>
-        <%#= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
-        <%= link_to new_profile_booking_path(@profile), class: "mr-3", class: "btn-lg px-0 btn-primary" do %>
-          <%= image_tag "icons/schedule-white.svg", alt: "Book user", width: 24, height: 24 %>
+        <%= link_to new_profile_booking_path(@profile), class: "btn-lg px-0 btn-primary" do %>
+          <%= image_tag "icons/schedule-white.svg", alt: "Book user", width: 18, height: 18 %>
           <p class="textWhite">BOOK</p>
         <% end %>
       <% else %>
         <%= link_to ajax_profile_connections_path(@profile) ,class: "mr-3 btn-lg px-0 btn-primary", method: :post, remote: true  do %>
-          <%= image_tag "icons/user-plus.svg", alt: "Add user", width: 24, height: 24 %>
+          <%= image_tag "icons/user-plus.svg", alt: "Add user", width: 18, height: 18 %>
           <p class="textWhite">ADD</p>
         <% end %>
       <% end %>
@@ -81,11 +80,11 @@
       <% conversation ||= current_user.conversation_with(@profile.user) %>
       <% if conversation %>
         <%= link_to conversation_path(conversation, anchor: "message-#{conversation.messages.last&.id}", from: "prof_show"), class: "btn-lg px-0 btn-white" do %>
-          <%= image_tag "icons/message.svg", alt: "message" %> MESSAGE
+          <%= image_tag "icons/message.svg", alt: "message", width: 18, height: 18 %> MESSAGE
         <% end %>
       <% else %>
         <%= link_to profile_conversations_path(@profile, conversation: { profile_id: @profile.id }, from: "prof_show"), method: :post, class: "btn-lg px-0 btn-white" do %>
-          <%= image_tag "icons/message.svg", alt: "message" %> MESSAGE
+          <%= image_tag "icons/message.svg", alt: "message", width: 18, height: 18 %> MESSAGE
         <% end %>
       <% end %>
 
