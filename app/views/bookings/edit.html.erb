@@ -1,5 +1,5 @@
 <div class="booking-edit <%= 'manager' if current_user.manager? %>">
-  <section class="mx-3 mt-4 flex justify-content-between items-center">
+  <section class="mx-3 mt-4 mb-2 flex justify-content-between items-center">
     <%= link_to @last_url do %>
       <%= image_tag "icons/left-arrow.svg", alt: "back", class: "icon", height: 16, width: 16 %>
     <% end %>
@@ -39,7 +39,7 @@
       </div>
     <% end %>
   </section>
-  <section class="mt-3">
+  <section>
     <div class="flex items-center mx-3">
       <% if @booking.profile.user.avatar.attached? %>
         <%= image_tag @booking.profile.user.avatar.service_url, alt: "Avatar", class: "avatar avatar-square booking rounded" %>
@@ -47,8 +47,8 @@
         <%= image_tag "https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_160x56dp.png", alt: "Avatar", class: "avatar avatar-square booking rounded" %>
       <% end %>
       <div class="ml-3">
-        <p class="mt-0 mb-1 bold"><%= @booking.profile.user.display_name %></p>
-        <span class="textBetween textLightBlack">
+        <p class="my-0 mb-1 bold"><%= @booking.profile.user.display_name %></p>
+        <span class="textBetween semi-bold textLightBlack">
           <%= @booking.profile.profession %>, <%= @booking.profile.location %>
         </span>
       </div>
@@ -68,19 +68,21 @@
                     label_html: { class: "block mb-1 textLightBlack textBetween" },
                     wrapper_html: { class: "flex flex-column mb-3" },
                     input_html: { class: "with-min-height" } %>
-        <div class="flex justify-content-between items-end mb-3">
+        <div class="flex justify-content-center items-end mb-3">
           <div class="bookingSpecific flex flex-column <%= 'none' if @booking&.duration %>">
             <label class="block mb-1 textLightBlack textBetween">Hours per day</label>
-            <div class="inputs flex justify-content-between items-center" style="width: 200px;">
+            <div class="inputs flex justify-content-between items-center" id="time-container">
               <%= f.input :start_time, label: false,
                           collection: Booking::TIME_LIST,
                           label_html: { class: "block mb-1 textLightBlack textBetween" },
-                          input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @booking.start_time&.strftime("%H:%M") } %>
+                          input_html: { class: "w-100", list: "time-options", autocomplete: false, value: @booking.start_time&.strftime("%H:%M") },
+                          wrapper: false %>
               <span class="self-centered mx-2"> - </span>
               <%= f.input :end_time, label: false,
                           collection: Booking::TIME_LIST,
                           label_html: { class: "block mb-1 textLightBlack textBetween" },
-                          input_html: { class: "w-100", autocomplete: false, value: @booking.end_time&.strftime("%H:%M") } %>
+                          input_html: { class: "w-100", autocomplete: false, value: @booking.end_time&.strftime("%H:%M") },
+                          wrapper: false %>
             </div>
           </div>
           <div class="bookingDuration <%= 'none' unless @booking&.duration %>">
