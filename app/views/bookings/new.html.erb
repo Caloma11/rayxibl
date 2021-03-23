@@ -1,5 +1,5 @@
 <div id="bookings-new">
-  <section class="mx-3 mt-4 flex justify-content-between items-center">
+  <section class="mx-3 mt-4 mb-2 flex justify-content-between items-center">
     <%= link_to(@last_url) do %>
       <%= image_tag "icons/cross.svg", alt: "exit", class: "icon", height: 16, width: 16 %>
     <% end %>
@@ -8,15 +8,15 @@
   </section>
 
   <% unless @select %>
-    <section class="flex items-center p-3">
+    <section class="flex items-center mx-3">
       <% if @profile.user.avatar.attached? %>
         <%= image_tag @profile.user.avatar.service_url, alt: "Avatar", class: "avatar avatar-square booking rounded" %>
       <% else %>
         <%= image_tag "https://png.pngtree.com/png-clipart/20190520/original/pngtree-vector-users-icon-png-image_4144740.jpg", alt: "Avatar", class: "avatar avatar-square booking rounded" %>
       <% end %>
       <div class="ml-3">
-        <p class="mt-0 mb-1 bold"><%= @profile.display_name %></p>
-        <span class="textBetween textLightBlack">
+        <p class="my-0 mb-1 bold"><%= @profile.display_name %></p>
+        <span class="textBetween semi-bold textLightBlack">
           <%= @profile.profession %>, <%= @profile.location %>
         </span>
       </div>
@@ -24,9 +24,9 @@
   <% end %>
 
   <div id="new-booking" class="flex justify-content-center px-3">
-    <div class="bookingCard">
+    <div class="bookingCard w-100">
       <% url = @select ? profile_bookings_path("no_profile", select: true) : profile_bookings_path(@profile) %>
-      <%= simple_form_for [Profile.new, @booking], url: url do |f| %>
+      <%= simple_form_for [Profile.new, @booking], url: url, html: { class: "mt-3" } do |f| %>
         <% if params[:parent_id] %>
           <input type="hidden" name="parent_id" value="<%= params[:parent_id] %>">
         <% end %>
@@ -43,7 +43,7 @@
         <% end %>
 
         <%= f.input :title,
-                    label: "Project / Client",
+                    label: "Project/Client",
                     label_html: { class: "block mb-1 textLightBlack textBetween" },
                     input_html: { value: @parent_booking&.title, class: "w-100" },
                     wrapper_html: { class: "mb-3" } %>
@@ -52,12 +52,12 @@
                     input_html: { value: @parent_booking&.description, class: "w-100" },
                     wrapper_html: { class: "mb-3" } %>
 
-        <div class="flex justify-content-between items-end flex-shrink-2 mb-3">
+        <div class="flex justify-content-center items-end mb-3">
           <!-- Start time and end time OR duration input -->
           <div class="bookingHours w-100">
             <div class="bookingSpecific w-184 <%= 'none' if @parent_booking&.duration %>">
               <label class="block mb-1 textLightBlack textBetween">Hours per day</label>
-              <div class="inputs flex items-center">
+              <div class="inputs flex items-center" id="time-container">
                 <%= f.input :start_time,
                             label: false,
                             as: :string,
@@ -92,14 +92,14 @@
         </div>
 
         <!-- Dates input -->
-        <div class="flex items-center justify-content-between mb-3">
+        <div class="flex items-center dates-selector mb-3">
 
           <div class="dates-input-wrapper">
             <label for="dates" class="block mb-1 textLightBlack textBetween">Dates</label>
             <input id="new-booking-datepickr" type="text" name="dates" class="mb-2 w-100 datepicker w-184">
           </div>
 
-          <div class="mt-3">
+          <div class="mt-3 ml-4">
             <%= render partial: "shared/checkbox", locals: { label: "Incl. weekends", name: "booking[weekends]", active: @booking.weekends, id: "booking_weekends" } %>
           </div>
         </div>

@@ -1,11 +1,4 @@
 #bookings-new {
-	.profileAvatar {
-		height: 32px;
-		width: 32px;
-		background-size: cover;
-		background-position: center;
-	}
-
 	#booking-price {
 		max-width: 100px !important;
 	}
@@ -13,6 +6,24 @@
 	.dates-selector {
 		.weekends-contain {
 			margin-top: calc(#{$spacing-2} + #{$spacing-3});
+		}
+	}
+
+	#tabs {
+		@extend .rounded, .border-box;
+
+		height: 48px;
+
+		.tab {
+			@extend .textBetween;
+
+			padding-top: unset !important;
+			padding-bottom: unset !important;
+			color: #898994;
+
+			&.active {
+				@extend .rounded, .textDarkOne;
+			}
 		}
 	}
 
