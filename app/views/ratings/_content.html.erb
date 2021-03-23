@@ -1,4 +1,4 @@
-<div class="flex items-center">
+<div class="flex items-center mb-3">
   <% profile.average_rating.to_i.times do %>
     <%= render partial: "ratings/colored_star" %>
   <% end %>
@@ -6,7 +6,7 @@
     <%= render partial: "ratings/star" %>
   <% end %>
 
-  <span class="rating-size">(<%= profile.ratings.size %>)</span>
+  <span class="rating-size textSm">(<%= profile.ratings.size %>)</span>
 </div>
 
-<p class="textGray uppercase semi-bold text-center textSm"><%= profile.expertise %> level</p>
+<p class="textLightBlack mb-0 uppercase semi-bold text-center textSm"><%= profile.expertise %> level</p>

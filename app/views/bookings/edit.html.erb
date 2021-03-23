@@ -103,7 +103,7 @@
         <div class="flex items-center dates-selector mb-3">
           <div class="dates-input-wrapper">
             <% if current_user.freelancer? %>
-              <input id="" value='<%= "#{@booking&.start_date&.strftime("%b %d")} - #{@booking&.end_date&.strftime("%b %d")}" %>' type="text" name="dates" class="w-100">
+              <input value='<%= "#{@booking&.start_date&.strftime("%b %d")} - #{@booking&.end_date&.strftime("%b %d")}" %>' type="text" name="dates" class="w-100">
             <% else %>
               <input id="edit-booking-datepicker" value='<%= "#{@booking&.start_date&.strftime("%b %d")} - #{@booking&.end_date&.strftime("%b %d")}" %>' type="text" name="dates" class="w-100 datepicker">
             <% end %>

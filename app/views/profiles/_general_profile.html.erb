@@ -39,12 +39,12 @@
 
   <!-- Name and description -->
   <div class="profileHeader">
-    <div class="profileHeaderLeft">
-      <h1><%= @profile.user.display_name %></h1>
-      <p class="textLightBlack"><%= @profile.profession %>, <%= @profile.location %></p>
+    <div class="profileHeaderLeft my-3">
+      <h1 class="mt-0 mb-2"><%= @profile.user.display_name %></h1>
+      <p class="textLightBlack my-0"><%= @profile.profession %>, <%= @profile.location %></p>
     </div>
-    <div class="profileHeaderRight">
-      <div class="flex items-center justify-content-end mt-3">
+    <div class="profileHeaderRight my-3">
+      <div class="flex items-center justify-content-end">
         <div class="stars">
           <%= render partial: "ratings/content", locals: { profile: @profile } %>
         </div>
@@ -64,12 +64,12 @@
       <% if @connection %>
         <%#= link_to "Remove from your network", connection_path(current_user.find_connection(@profile.user)), class: "mr-3", method: :delete %>
         <%= link_to new_profile_booking_path(@profile), class: "mr-3", class: "btn-lg px-0 btn-primary" do %>
-          <%= image_tag "icons/schedule-white.svg", alt: "Book user" %>
+          <%= image_tag "icons/schedule-white.svg", alt: "Book user", width: 24, height: 24 %>
           <p class="textWhite">BOOK</p>
         <% end %>
       <% else %>
         <%= link_to ajax_profile_connections_path(@profile) ,class: "mr-3 btn-lg px-0 btn-primary", method: :post, remote: true  do %>
-          <%= image_tag "icons/user-plus.svg", alt: "Add user" %>
+          <%= image_tag "icons/user-plus.svg", alt: "Add user", width: 24, height: 24 %>
           <p class="textWhite">ADD</p>
         <% end %>
       <% end %>
@@ -98,7 +98,7 @@
   <!-- Skills -->
   <div class="container">
     <div class="profileSection p-3" id="skills">
-      <h3 class="small mb-2 mt-0 semi-bold textBetween textLightBlack">KEY SKILLS</h3>
+      <h3 class="small mb-2 mt-0 semi-bold textSm textLightBlack">KEY SKILLS</h3>
       <div class="flex justify-content-start skill-pills mb-2">
         <% @profile.skill_list.each do |skill| %>
           <span class="skill-pill"><%= skill %></span>
