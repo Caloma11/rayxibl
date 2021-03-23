@@ -116,8 +116,9 @@ export const BookingForm = ({ setShowForm, formDetails }) => {
 							name="booking[description]"
 							value={description}
 							onChange={e => setDescription(e.target.value)}
-							rows={5}
-							className={"description" in errors ? "error" : ""}
+							className={`${
+								"description" in errors ? "error" : ""
+							} with-min-height`}
 						></textarea>
 					</div>
 					<BookingFormDates
